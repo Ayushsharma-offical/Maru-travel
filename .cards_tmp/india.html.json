@@ -1,0 +1,78 @@
+{
+ "cards": [
+  {
+   "title": "MT Golden Triangle Tour",
+   "route": "-D-e-l-h-i- -→- -A-g-r-a- -→- -J-a-i-p-u-r- -→- -D-e-l-h-i-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "Golden Triangle with Varanasi, Aurangabad & Mumbai",
+   "route": "-D-e-l-h-i- -→- -J-a-i-p-u-r- -→- -A-g-r-a- -→- -V-a-r-a-n-a-s-i- -→- -A-u-r-a-n-g-a-b-a-d- -→- -M-u-m-b-a-i-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "MT Buddhist with Taj and Nepal Tour",
+   "route": "-D-e-l-h-i- -→- -A-g-r-a- -→- -V-a-r-a-n-a-s-i- -→- -B-o-d-h-g-a-y-a- -→- -N-e-p-a-l-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "MT Classical Indo Nepal",
+   "route": "-D-e-l-h-i- -→- -J-a-i-p-u-r- -→- -A-g-r-a- -→- -K-h-a-j-u-r-a-h-o- -→- -V-a-r-a-n-a-s-i- -→- -N-e-p-a-l-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "MT Classical Tour",
+   "route": "-D-e-l-h-i- -→- -J-a-i-p-u-r- -→- -A-g-r-a- -→- -K-h-a-j-u-r-a-h-o- -→- -V-a-r-a-n-a-s-i- -→- -D-e-l-h-i-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "Golden Triangle with Ranthambore",
+   "route": "-D-e-l-h-i- -→- -J-a-i-p-u-r- -→- -A-b-h-a-n-e-r-i- -→- -R-a-n-t-h-a-m-b-o-r-e- -→- -F-a-t-e-h-p-u-r- -S-i-k-r-i- -→- -A-g-r-a- -→- -D-e-l-h-i-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "Honeymoon Trip in Kerala",
+   "route": "-C-o-c-h-i-n- -→- - -M-u-n-n-a-r- -–- -P-e-r-i-y-a-r- -→- - -A-l-l-e-p-p-e-y- - -→- - -M-a-r-a-r-i-k-u-l-a-m- - -→- - -K-o-v-a-l-a-m- - -→- - -T-r-i-v-a-n-d-r-u-m-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "Kashmir with Golden Triangle Tour",
+   "route": "-D-e-l-h-i- -→- -S-r-i-n-a-g-a-r- -→- -P-a-h-a-l-g-a-m- -→- -G-u-l-m-a-r-g- -→- -A-g-r-a- -→- -J-a-i-p-u-r- -→- -D-e-l-h-i-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "Rajasthan Forts and Palaces Tour",
+   "route": "-D-e-l-h-i- - -→- - -M-a-n-d-a-w-a- - -→- - -B-i-k-a-n-e-r- - -→- - -J-a-i-s-a-l-m-e-r- - -→- - -J-o-d-h-p-u-r- -–- -R-a-n-a-k-p-u-r- - -→- - -U-d-a-i-p-u-r- - -→- - -P-u-s-h-k-a-r- - -→- - -J-a-i-p-u-r- -–- -F-a-t-e-h-p-u-r- -S-i-k-r-i- - -→- - -A-g-r-a- -–- -D-e-l-h-i-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "South India Vacation Tour",
+   "route": "-C-h-e-n-n-a-i- -→- -P-o-n-d-i-c-h-e-r-r-y- -→- -T-a-n-j-o-r-e- -→- -T-r-i-c-h-y- -→- -M-a-d-u-r-a-i- -→- -P-e-r-i-y-a-r- -→- -C-o-c-h-i-n- -→- -A-l-l-e-p-y- -→- -K-o-v-a-l-a-m- -→- -T-r-i-v-e-n-d-r-u-m-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "Kerala Spice Tour",
+   "route": "-C-o-c-h-i-n- - -→- - -M-u-n-n-a-r- - -→- - -P-e-r-i-y-a-r- - -→- - -A-l-l-e-p-p-e-y- - -→- - -K-o-v-a-l-a-m- -→- - -T-r-i-v-e-n-d-r-u-m-",
+   "btn": "View Itinerary"
+  },
+  {
+   "title": "Srinagar with Leh Ladakh Tour",
+   "route": "-D-e-l-h-i- -–- -S-r-i-n-a-g-a-r- -–- -P-a-h-a-l-g-a-m- -–- -K-a-r-g-i-l- -–- -L-e-h- -–-–- -N-u-b-r-a- -–- -N-u-b-r-a- -V-a-l-l-e-y- -→- - -P-a-n-g-o-n-g- -L-a-k-e- -–- -L-e-h- - -→- - -D-e-l-h-i-",
+   "btn": "View Itinerary"
+  }
+ ],
+ "durs": [
+  "04 Nights / 05 Days",
+  "08 Nights / 09 Days",
+  "11 Nights / 12 Days",
+  "10 Nights / 11 Days",
+  "07 Nights / 08 Days",
+  "07 Nights / 08 Days",
+  "12 Night / 13 Days",
+  "06 Nights / 07 Days",
+  "14 Nights/ 15 Days",
+  "13 Nights / 14 Days",
+  "07 Nights / 08 Days",
+  "10 Nights / 11 Days"
+ ]
+}

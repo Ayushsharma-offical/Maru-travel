@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India Luxury Tours | Maru Travel India</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/india_tours.css">
+  <link rel="stylesheet" href="css/itinerary_3d.css">
+      <link rel="icon" type="image/png" sizes="512x512" href="favicon (2).png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="i18n.js"></script>
+  <script src="tours_ko.js"></script>
+  <script src="maru-chatbot.js"></script>
+  
+  <style>
+/* ─── VARIABLES ─────────────────────────────────────── */
+:root{
+  --orange:#ec6707;
+  --dark:#1c2b3a;
+  --cream:#f8f4ef;
+  --gold:#c9a84c;
+  --red-dark:#8B1A14;
+}
+
+/* ─── HEADER SYSTEM ─────────────────────── */
+:root {
+  --cream: #FCF8EF;
+  --cream-deep: #F5EBD6;
+  --navy: #25375B;
+  --navy-deep: #1C2C4A;
+  --navy-soft: #45557C;
+  --copper-dark: #6B4429;
+  --copper-mid: #C6835A;
+  --copper-light: #F5B478;
+  --gold: #F1C88C;
+  --shadow-warm: rgba(22, 35, 63, 0.12);
+}
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0; z-index: 1000;
+  width: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 800px 220px at 8% -30%, rgba(245,180,120,0.22), transparent 60%),
+    linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+  box-shadow: 0 8px 20px -12px var(--shadow-warm);
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== FLIGHT CURVES – Navy Color ===== */
+.flight-layer {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease, max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 200px;
+}
+
+@keyframes flyPath {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+.plane-icon {
+  position: absolute;
+  top: 0; left: 0;
+  offset-rotate: auto;
+  animation: flyPath linear infinite;
+  z-index: 1;
+  pointer-events: none;
+  transition: filter .3s, opacity 0.3s ease;
+}
+
+/* Plane 1 – Navy color */
+.plane-icon.p1 {
+  width: 22px; height: 22px;
+  offset-path: path('M 20 130 C 220 145, 420 35, 640 52 S 980 5, 1080 22');
+  animation-duration: 8s;
+  filter: drop-shadow(0 4px 6px rgba(37,55,91,0.4));
+}
+
+/* Plane 2 – Navy color */
+.plane-icon.p2 {
+  width: 15px; height: 15px;
+  offset-path: path('M 260 8 C 420 40, 560 95, 780 88 S 1080 60, 1250 95');
+  animation-duration: 11s;
+  animation-delay: -3s;
+  opacity: 0.75;
+  filter: drop-shadow(0 3px 5px rgba(37,55,91,0.35));
+}
+
+.site-header:hover .plane-icon {
+  filter: drop-shadow(0 6px 10px rgba(37,55,91,0.55));
+}
+
+/* ===== POLISH / SHEEN ===== */
+.polish { position: relative; overflow: hidden; isolation: isolate; }
+.polish::before {
+  content: "";
+  position: absolute;
+  top: -60%; left: -40%;
+  width: 45%; height: 220%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.85) 50%, transparent 100%);
+  transform: translateX(-220%) rotate(8deg);
+  transition: transform .65s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.polish:hover::before { transform: translateX(420%) rotate(8deg); }
+
+/* ===== TOP UTILITY STRIP ===== */
+.util-strip {
+  position: relative; z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 0 28px 0 0;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06), inset 0 1px 0 rgba(0,0,0,0.3);
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.4s ease;
+  max-height: 60px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+/* ===== MULTILINGUAL MARQUEE ===== */
+.marquee-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  cursor: default;
+  --mx: 50%;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: marqueeScroll 60s linear infinite;
+  will-change: transform;
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-track span {
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0 22px;
+  color: rgba(255,255,255,0.12);
+  transition: color 0s;
+  position: relative;
+  background: transparent;
+  background: radial-gradient(
+    circle 80px at var(--smx, -200px) 50%,
+    rgba(200, 80, 20, 0.9) 0%,
+    rgba(212, 160, 20, 0.6) 30%,
+    rgba(255,255,255,0.10) 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.marquee-wrap.light-theme .marquee-track span {
+  color: rgba(37,55,91,0.08); /* faint navy */
+  background: radial-gradient(
+    circle 80px at var(--smx, -200px) 50%,
+    rgba(200, 80, 20, 0.9) 0%,
+    rgba(212, 160, 20, 0.6) 30%,
+    rgba(37,55,91,0.08) 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+.lang-toggle {
+  display: flex;
+  position: relative;
+  background: rgba(255,255,255,0.10);
+  border-radius: 30px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+
+/* Sliding glowing knob */
+.lang-toggle::before {
+  content: "";
+  position: absolute;
+  top: 3px; bottom: 3px; left: 3px;
+  width: calc(50% - 3px);
+  background: linear-gradient(145deg, rgba(255,255,255,0.28), rgba(255,255,255,0.10));
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5);
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+.lang-toggle:has(#opt-ko.active)::before {
+  transform: translateX(100%);
+}
+
+.lang-toggle span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 75px;
+  padding: 5px 0;
+  font-size: 11px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.3s;
+  user-select: none;
+}
+.lang-toggle span.active {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+.lang-toggle span .flag {
+  display: flex;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+.lang-toggle span .flag svg { width: 100%; height: 100%; display: block; }
+
+
+.login-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 16px;
+  border-radius: 18px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.4px;
+  color: #2C1608;
+  text-decoration: none;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--copper-mid) 55%, var(--copper-dark) 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -2px 3px rgba(90,50,20,0.4);
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 13px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -2px 3px rgba(90,50,20,0.4);
+}
+
+/* ===== BRAND ROW ===== */
+.brand-row {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 28px 7px;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.4s ease;
+  max-height: 120px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.logo-mark { display: flex; align-items: center; }
+
+.logo-mark img {
+  height: 80px; width: auto; display: block;
+  filter: drop-shadow(0 4px 8px rgba(22,35,63,0.18));
+  mix-blend-mode: multiply;
+  background: transparent;
+  transition: transform .3s ease;
+}
+.logo-mark img:hover { transform: scale(1.02); }
+
+/* ===== REGION TABS ===== */
+.region-tabs {
+  display: flex; align-items: center; gap: 0;
+  padding: 4px 8px;
+  background: linear-gradient(180deg, #F3E5C9, #E9D6AE);
+  border-radius: 20px;
+  box-shadow: inset 0 1px 4px rgba(107,68,41,0.2), inset 0 -1px 0 rgba(255,255,255,0.6);
+}
+
+/* ================= EPIC END MESSAGE ================= */
+.end-message {
+  position: relative;
+  text-align: center;
+  padding: 80px 20px 60px;
+  margin-top: 30px;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 24px;
+  isolation: isolate;
+  border: 1px solid rgba(201,168,76,0.3);
+}
+/* Sweeping shine overlay */
+.end-message::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(105deg, transparent 30%, rgba(201,168,76,0.12) 50%, transparent 70%);
+  animation: sweepShine 4s linear infinite;
+  z-index: 0; pointer-events: none;
+}
+@keyframes sweepShine { to { left: 160%; } }
+/* Soft radial glow behind globe */
+.end-message::after {
+  content: '';
+  position: absolute;
+  top: 50px; left: 50%; transform: translateX(-50%);
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, rgba(198,131,90,0.08) 50%, transparent 75%);
+  border-radius: 50%;
+  z-index: 0; pointer-events: none;
+  animation: glowBreath 4s ease-in-out infinite alternate;
+}
+@keyframes glowBreath {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+  100% { transform: translateX(-50%) scale(1.3); opacity: 1; }
+}
+
+/* Floating particle emojis */
+.end-particles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.ep {
+  position: absolute;
+  left: var(--x); top: var(--y);
+  font-size: 1.4rem;
+  opacity: 0.25;
+  animation: floatParticle var(--d) infinite alternate ease-in-out;
+}
+@keyframes floatParticle {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.2; }
+  100% { transform: translateY(-25px) rotate(20deg) scale(1.2); opacity: 0.45; }
+}
+
+/* Orbit system */
+.end-orbit-system {
+  position: relative;
+  width: 220px; height: 220px;
+  margin: 0 auto 40px;
+}
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px dashed rgba(180, 140, 60, 0.3);
+  animation: spinOrbit linear infinite;
+}
+.orbit-1 { margin: 20px; animation-duration: 8s; }
+.orbit-2 { margin: 5px; animation-direction: reverse; animation-duration: 14s; }
+.orbit-3 { margin: 40px; animation-duration: 10s; }
+
+@keyframes spinOrbit { to { transform: rotate(360deg); } }
+
+.orbit-dot {
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%);
+  width: 26px; height: 26px;
+  background: rgba(201,168,76,0.15);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  border: 1px solid rgba(201,168,76,0.4);
+  box-shadow: 0 0 8px rgba(201,168,76,0.3);
+}
+.orbit-dot::after { content: var(--icon); }
+
+/* Center globe */
+.end-globe {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #c9a84c, #8B1A14, #4a1010);
+  box-shadow:
+    0 0 0 12px rgba(201, 168, 76, 0.1),
+    0 0 0 24px rgba(201, 168, 76, 0.05),
+    0 0 40px rgba(201, 168, 76, 0.3),
+    inset 0 0 30px rgba(0,0,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+  animation: globePulse 3s infinite ease-in-out;
+}
+.globe-inner {
+  font-size: 2.5rem;
+  color: rgba(255,255,255,0.9);
+  animation: spinOrbit 20s linear infinite;
+}
+@keyframes globePulse {
+  0%, 100% { box-shadow: 0 0 0 12px rgba(201,168,76,0.1), 0 0 0 24px rgba(201,168,76,0.05), 0 0 40px rgba(201,168,76,0.3), inset 0 0 30px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 0 0 18px rgba(201,168,76,0.15), 0 0 0 36px rgba(201,168,76,0.07), 0 0 60px rgba(201,168,76,0.5), inset 0 0 30px rgba(0,0,0,0.3); }
+}
+
+/* Text */
+.end-text { position: relative; z-index: 2; }
+.end-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #8B1A14, #c9a84c, #8B1A14);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+  animation: shimmerText 3s linear infinite;
+}
+@keyframes shimmerText { to { background-position: 200% center; } }
+
+.end-message h3 {
+  font-family: 'Playfair Display', serif;
+  color: #1a3560;
+  font-size: 2.4rem;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.end-message h3 span {
+  background: linear-gradient(90deg, #8B1A14, #c9a84c, #8B1A14);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 3s linear infinite;
+}
+.end-message > .end-text > p {
+  color: #555;
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+}
+.end-message > .end-text > p em { color: #8B1A14; font-style: normal; font-weight: 600; }
+
+/* CTA buttons */
+.end-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.end-btn-primary {
+  background: linear-gradient(135deg, #c9a84c, #f1c88c);
+  color: #1a1a1a;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+}
+.end-btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 10px 30px rgba(201,168,76,0.5); }
+.end-btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+}
+.end-btn-whatsapp:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 10px 30px rgba(37,211,102,0.5); }
+
+/* Stats row */
+.end-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 16px;
+  padding: 20px 30px;
+  backdrop-filter: blur(10px);
+  max-width: 480px;
+  margin: 0 auto;
+}
+.end-stat { flex: 1; text-align: center; }
+.end-stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #8B1A14;
+  font-family: 'Jost', sans-serif;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.end-stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+.end-stat-divider { width: 1px; height: 40px; background: rgba(201,168,76,0.3); margin: 0 10px; }
+
+.region-tabs a {
+  padding: 6px 14px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 1px;
+  color: var(--navy-soft);
+  text-decoration: none;
+  border-radius: 15px;
+  transition: color .2s, transform .2s;
+}
+
+.region-tabs a.active {
+  color: #2C1608;
+  background: linear-gradient(180deg, #FFFDF8, #F1DDB2);
+  box-shadow: 0 2px 6px rgba(107,68,41,0.28), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.region-tabs a:not(.active):hover { color: var(--copper-dark); transform: translateY(-1px); }
+.region-tabs a.active:hover { transform: translateY(-1px); box-shadow: 0 4px 9px rgba(107,68,41,0.32), inset 0 1px 0 rgba(255,255,255,0.9); }
+
+/* ===== NAV BAR ===== */
+.site-header nav {
+  position: relative; z-index: 2;
+  display: flex; justify-content: center; align-items: center;
+  padding: 0 28px;
+  min-height: 48px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FCF8EF 100%);
+  border-top: 1px solid rgba(37,55,91,0.08);
+  box-shadow: inset 0 2px 4px -2px rgba(37,55,91,0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header nav .marquee-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  overflow: hidden;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.site-header nav .marquee-wrap.right {
+  left: auto;
+  right: 0;
+  mask-image: linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.site-header nav .marquee-wrap.right .marquee-track {
+  animation: marqueeScrollReverse 35s linear infinite;
+}
+
+@keyframes marqueeScrollReverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.site-header nav .nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+.site-header nav a {
+  position: relative;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.8px;
+  color: var(--navy);
+  text-decoration: none;
+  padding: 3px 5px 6px;
+  border-radius: 5px;
+  transition: color .2s;
+}
+
+.site-header nav a.current { color: var(--copper-dark); }
+
+.site-header nav a.current::after {
+  content: "";
+  position: absolute; left: 5px; right: 5px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--copper-mid), var(--gold));
+  box-shadow: 0 1px 4px rgba(198,131,90,0.5);
+}
+
+.site-header nav a:hover { color: var(--copper-dark); }
+
+/* ===== RIDGE DIVIDER – Navy ===== */
+.ridge {
+  display: block; width: 100%; height: 12px; position: relative; z-index: 2;
+  transition: opacity 0.3s ease, max-height 0.4s ease;
+  max-height: 12px;
+  opacity: 1;
+}
+
+/* ─── SMOOTH SCROLL SHRINKING EFFECT ─────────────────────── */
+.site-header.scrolled {
+  background: rgba(252, 248, 239, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(22, 35, 63, 0.16);
+}
+
+.site-header.scrolled .util-strip,
+.site-header.scrolled .brand-row,
+.site-header.scrolled .ridge,
+.site-header.scrolled .flight-layer,
+.site-header.scrolled .plane-icon {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  pointer-events: none;
+}
+
+.site-header.scrolled nav {
+  padding: 0 28px;
+  border-top: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .brand-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .site-header nav { flex-wrap: wrap; justify-content: center; gap: 14px 20px; padding: 10px 28px; }
+  .site-header nav .nav-links { gap: 14px 20px; justify-content: center; flex-wrap: wrap; }
+  .site-header nav .marquee-wrap { display: none; }
+}
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ HEADER ═══════════════════════════════════════ -->
+<header class="site-header">
+
+  <!-- Flight curves SVG – NAVY COLOR -->
+  <svg class="flight-layer" viewBox="0 0 1400 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="flightGrad" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#25375B" stop-opacity="0.0"/>
+        <stop offset="18%"  stop-color="#25375B" stop-opacity="0.5"/>
+        <stop offset="55%"  stop-color="#45557C" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#25375B" stop-opacity="0.0"/>
+      </linearGradient>
+      <linearGradient id="flightGrad2" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#25375B" stop-opacity="0.0"/>
+        <stop offset="30%"  stop-color="#25375B" stop-opacity="0.4"/>
+        <stop offset="60%"  stop-color="#45557C" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#25375B" stop-opacity="0.0"/>
+      </linearGradient>
+      <filter id="curveShadow" x="-20%" y="-50%" width="140%" height="200%">
+        <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#25375B" flood-opacity="0.3"/>
+      </filter>
+    </defs>
+
+    <path d="M -20 128 C 200 145, 400 25, 640 48 S 1000 -8, 1420 20"
+          fill="none"
+          stroke="url(#flightGrad)"
+          stroke-width="2"
+          stroke-dasharray="1 8"
+          stroke-linecap="round"
+          filter="url(#curveShadow)"/>
+
+    <path d="M 240 4 C 400 38, 540 92, 780 84 S 1100 58, 1400 96"
+          fill="none"
+          stroke="url(#flightGrad2)"
+          stroke-width="1.5"
+          stroke-dasharray="1 7"
+          stroke-linecap="round"
+          opacity="0.7"/>
+  </svg>
+
+  <!-- Animated Planes – NAVY COLOR -->
+  <svg class="plane-icon p1" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="planeGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#1C2C4A"/>
+      </linearGradient>
+    </defs>
+    <path d="M2 19 L28 10 L20 17 L30 17 L34 20 L20 20 L27 27 L21 26 L14 21 L4 24 Z" fill="url(#planeGrad)"/>
+  </svg>
+
+  <svg class="plane-icon p2" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="planeGrad2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#25375B"/>
+      </linearGradient>
+    </defs>
+    <path d="M2 19 L28 10 L20 17 L30 17 L34 20 L20 20 L27 27 L21 26 L14 21 L4 24 Z" fill="url(#planeGrad2)"/>
+  </svg>
+
+  <!-- TOP UTILITY STRIP -->
+  <div class="util-strip">
+    <!-- MULTILINGUAL SCROLLING MARQUEE -->
+    <div class="marquee-wrap" id="marqueeWrap">
+      <div class="marquee-track" id="marqueeTrack">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Utazás</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Haiku</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>Maru Seyahat</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Utazás</span><span>Maru Voyage</span><span>Travel</span><span>마루 트래블</span><span>Maru Travel</span><span>マル・トラベル</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Viajes</span><span>مارو ٹریول</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Utazás</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Haiku</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>Maru Seyahat</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Utazás</span><span>Maru Voyage</span><span>Travel</span><span>마루 트래블</span><span>Maru Travel</span><span>マル・トラベル</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Viajes</span><span>مارو ٹریول</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <div class="lang-toggle">
+
+      <span class="active polish" id="opt-en" onclick="changeLanguage('en')">
+        <span class="flag">
+          <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="36" fill="#012169"/>
+            <path d="M0 0 L60 36 M60 0 L0 36" stroke="#FFFFFF" stroke-width="7"/>
+            <path d="M0 0 L60 36 M60 0 L0 36" stroke="#C8102E" stroke-width="3"/>
+            <path d="M30 0 V36 M0 18 H60" stroke="#FFFFFF" stroke-width="11"/>
+            <path d="M30 0 V36 M0 18 H60" stroke="#C8102E" stroke-width="6.5"/>
+          </svg>
+        </span>
+        EN
+      </span>
+      <span class="polish" id="opt-ko" onclick="changeLanguage('ko')">
+        <span class="flag">
+          <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="36" fill="#FFFFFF"/>
+            <circle cx="30" cy="18" r="9" fill="#C60C30"/>
+            <path d="M30 9 A9 4.5 0 0 1 30 18 A9 4.5 0 0 0 30 27 A9 9 0 0 1 30 9 Z" fill="#003478"/>
+            <g stroke="#000000" stroke-width="1.4">
+              <line x1="6" y1="6" x2="14" y2="6"/><line x1="6" y1="8.4" x2="14" y2="8.4"/><line x1="6" y1="10.8" x2="14" y2="10.8"/>
+              <line x1="46" y1="6" x2="54" y2="6"/><line x1="46" y1="8.4" x2="54" y2="8.4"/><line x1="46" y1="10.8" x2="50" y2="10.8"/><line x1="52" y1="10.8" x2="54" y2="10.8"/>
+              <line x1="6" y1="25.2" x2="14" y2="25.2"/><line x1="6" y1="27.6" x2="10" y2="27.6"/><line x1="12" y1="27.6" x2="14" y2="27.6"/><line x1="6" y1="30" x2="14" y2="30"/>
+              <line x1="46" y1="25.2" x2="54" y2="25.2"/><line x1="46" y1="27.6" x2="54" y2="27.6"/><line x1="46" y1="30" x2="50" y2="30"/><line x1="52" y1="30" x2="54" y2="30"/>
+            </g>
+          </svg>
+        </span>
+        한국어
+      </span>
+    </div>
+    <a href="https://maru-travel-app.vercel.app/" target="_blank" class="login-btn polish">⇥ <span data-i18n="nav.login">Login</span></a>
+  </div>
+
+  <!-- BRAND ROW -->
+  <div class="brand-row">
+    <div class="logo-mark">
+      <a href="index.html">
+        <img src="images/website_assests/Maru Travel Logo al.png" alt="Maru Travel – Curating Exceptional Journeys">
+      </a>
+    </div>
+
+    <div class="region-tabs">
+      <a href="india.html" class="active polish" data-i18n="dest.india">India</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.nepal">Nepal</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.bhutan">Bhutan</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.srilanka">Sri Lanka</a>
+    </div>
+  </div>
+
+  <!-- NAV BAR -->
+  <nav>
+    <!-- Left marquee -->
+    <div class="marquee-wrap light-theme">
+      <div class="marquee-track">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <!-- Right marquee (reverse direction) -->
+    <div class="marquee-wrap light-theme right">
+      <div class="marquee-track">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <!-- Centered nav links -->
+    <div class="nav-links" style="display: flex; gap: 32px;">
+      <a href="index.html" class="polish" data-i18n="nav.home">Home</a>
+      <a href="about_us.html" class="polish" data-i18n="nav.about">About Us</a>
+      <a href="what_we_do.html" class="polish" data-i18n="nav.what">What We Do</a>
+      <a href="index.html#tours" class="polish" data-i18n="nav.tours">Our Expertises</a>
+      <a href="index.html#explore" class="polish current" data-i18n="nav.explore">Explore With Us</a>
+      <a href="index.html#trains" class="polish" data-i18n="nav.trains">Luxury Trains</a>
+      <a href="contact.html" class="polish" data-i18n="nav.contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- RIDGE DIVIDER – Navy -->
+  <svg class="ridge" viewBox="0 0 1200 12" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="ridgeGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#1C2C4A"/>
+        <stop offset="40%"  stop-color="#25375B"/>
+        <stop offset="70%"  stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#25375B"/>
+      </linearGradient>
+    </defs>
+    <polygon
+      points="0,12 0,7 80,2 160,9 260,1 360,7 460,3 560,10 660,2 760,6 860,1 960,9 1060,3 1160,7 1200,2 1200,12"
+      fill="url(#ridgeGrad)"/>
+  </svg>
+
+</header>
+
+<div class="breadcrumb">
+    <div class="container" id="breadcrumbText">Home / India / Tour</div>
+</div>
+
+<div class="itinerary-page-bg">
+<div class="container main-itinerary-container">
+
+    <div style="margin-top: 20px; margin-bottom: 10px;">
+        <a href="india.html" class="back-btn-small"><i class="fas fa-arrow-left"></i> <span data-i18n="itin.back">Back to Tours</span></a>
+    </div>
+
+    <!-- TOP SECTION: Slider + Info -->
+    <div class="itinerary-top-card glass-panel">
+        <div class="top-left-slider" style="position:relative; overflow:hidden;">
+            <div id="sliderArrows" style="display:none;">
+                <button onclick="prevImage()" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.5); color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer; z-index:10;"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextImage()" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.5); color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer; z-index:10;"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <img src="images/india_tours/ojmt4z1kk7m9vl1fgfdfc3odh4vr_amer full.jpg" alt="Tour Image" class="main-slider-img" id="tourImage" style="transition: opacity 0.8s ease-in-out; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="top-right-info">
+            <h1 id="tourTitle" class="gradient-text-gold">Tour Title</h1>
+            <div class="location-row">
+                <i class="fas fa-map-marker-alt"></i> <span id="tourRoute">Route</span>
+            </div>
+            <div class="duration-row" id="tourDuration">Duration</div>
+            <div class="destinations-row">
+                <strong data-i18n="itin.destinations">Destinations:</strong>
+                <p id="tourDestinations">Destinations list</p>
+            </div>
+            <button class="enquiry-btn-modern" onclick="openEnquiryModal()" data-i18n="itin.enquire">Enquire Now</button>
+        </div>
+    </div>
+
+    <!-- ITINERARY TIMELINE -->
+    <div class="itinerary-details-wrapper glass-panel">
+        <div class="itinerary-header-row">
+            <h2 data-i18n="itin.itinerary">Itinerary</h2>
+            <button class="download-itin-btn" onclick="openDownloadModal()">
+                <i class="fas fa-file-word"></i> <span data-i18n="itin.download">Download Itinerary</span>
+            </button>
+        </div>
+
+        <div class="timeline-modern">
+            <div class="timeline-line"></div>
+            <div class="timeline-car" id="travelCar">
+                <i class="fas fa-car-side"></i>
+            </div>
+                        <div id="daysContainer">
+                <!-- Days rendered by JS -->
+            </div>
+        </div>
+        
+        <div id="faqContainer"></div>
+        
+        <div class="end-message">
+
+          <!-- Floating particles -->
+          <div class="end-particles">
+            <span class="ep" style="--x:10%;--y:20%;--d:3s;">✈</span>
+            <span class="ep" style="--x:85%;--y:15%;--d:4s;">🏔</span>
+            <span class="ep" style="--x:20%;--y:75%;--d:2.5s;">🌺</span>
+            <span class="ep" style="--x:75%;--y:70%;--d:3.5s;">⭐</span>
+            <span class="ep" style="--x:50%;--y:10%;--d:5s;">🗺</span>
+            <span class="ep" style="--x:92%;--y:50%;--d:2s;">🌙</span>
+            <span class="ep" style="--x:5%;--y:55%;--d:4.5s;">✨</span>
+          </div>
+
+          <!-- Orbiting ring system -->
+          <div class="end-orbit-system">
+            <div class="orbit-ring orbit-1">
+              <div class="orbit-dot" style="--icon:'✈'"></div>
+            </div>
+            <div class="orbit-ring orbit-2">
+              <div class="orbit-dot" style="--icon:'🏯'"></div>
+            </div>
+            <div class="orbit-ring orbit-3">
+              <div class="orbit-dot" style="--icon:'🌸'"></div>
+            </div>
+            <!-- Center globe -->
+            <div class="end-globe">
+              <div class="globe-inner">
+                <i class="fas fa-globe-asia"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text content -->
+          <div class="end-text">
+            <div class="end-badge" data-i18n="itin.complete">✦ JOURNEY COMPLETE ✦</div>
+            <h3 data-i18n="itin.thanks">Thank you for Exploring<br><span>with Maru Travel!</span></h3>
+            <p data-i18n="itin.lookforward">We look forward to creating <em>unforgettable memories</em> with you.</p>
+
+            <div class="end-actions">
+              <button onclick="openEnquiryModal()" class="end-btn-primary" data-i18n="itin.plan">
+                <i class="fas fa-paper-plane"></i> Plan My Journey
+              </button>
+              <a href="https://wa.me/919891587778" target="_blank" class="end-btn-whatsapp" data-i18n="itin.chat">
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+              </a>
+            </div>
+
+            <!-- Spinning stats row -->
+            <div class="end-stats">
+              <div class="end-stat">
+                <div class="end-stat-num" data-target="30">0</div>
+                <div class="end-stat-label" data-i18n="itin.years">Years of Excellence</div>
+              </div>
+              <div class="end-stat-divider"></div>
+              <div class="end-stat">
+                <div class="end-stat-num" data-target="5000">0</div>
+                <div class="end-stat-label" data-i18n="itin.happy">Happy Travellers</div>
+              </div>
+              <div class="end-stat-divider"></div>
+              <div class="end-stat">
+                <div class="end-stat-num" data-target="50">0</div>
+                <div class="end-stat-label">Destinations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- ================= DOWNLOAD LEAD MODAL ================= -->
+<div class="enquiry-modal" id="downloadModal">
+  <div class="download-modal-content">
+    <button class="close-modal" onclick="closeDownloadModal()">&times;</button>
+    <div class="download-modal-icon">
+      <i class="fas fa-file-word"></i>
+    </div>
+    <h2 data-i18n="itin.download">Download Itinerary</h2>
+    <p class="desc" data-i18n="itin.dl_desc">Please share your details and we will send the itinerary to your email too.</p>
+    <form id="downloadForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="3889993e-1c36-4fa4-9472-59ec18163192">
+      <input type="hidden" name="subject" value="New Itinerary Download Request">
+      <input type="hidden" name="from_name" value="Maru Travel Website">
+      <input type="hidden" name="to_email" value="tejinder@marutravel.in">
+      <input type="hidden" name="redirect" value="">
+
+      <div class="download-form-fields">
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> <span data-i18n="form.name">Full Name</span> *</label>
+          <input type="text" id="dl_name" name="name" data-i18n-placeholder="form.ph_name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> <span data-i18n="form.email">Email Address</span> *</label>
+          <input type="email" id="dl_email" name="email" data-i18n-placeholder="form.ph_email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-phone"></i> <span data-i18n="form.mobile">Mobile Number</span> *</label>
+          <input type="tel" id="dl_mobile" name="mobile" data-i18n-placeholder="form.ph_mobile" placeholder="+91 9891587778" required>
+        </div>
+        <input type="hidden" id="dl_tour" name="Tour_Requested" value="">
+      </div>
+      <button type="submit" class="download-submit-btn">
+        <i class="fas fa-download"></i> <span data-i18n="itin.dl_submit">Submit & Download PDF</span>
+      </button>
+      <div id="dl_result" style="display:none; color:#28a745; margin-top:10px; font-weight:bold;">Sending...</div>
+    </form>
+    <p class="safe-secure"><i class="fas fa-lock"></i> <span data-i18n="form.safe">Your info is safe with us</span></p>
+  </div>
+</div>
+
+<!-- ================= ENQUIRY FORM MODAL ================= -->
+<div class="enquiry-modal" id="enquiryModal">
+  <div class="enquiry-content">
+    <div class="enquiry-left"></div>
+    <div class="enquiry-right">
+      <button class="close-modal" style="top:25px; right:25px; z-index:9999; color: #333;" onclick="closeEnquiryModal()">&times;</button>
+      <h2 data-i18n="form.help">Let us Help!</h2>
+      <p class="desc" data-i18n="form.help_desc">We make sure you get your desired travel services with minimal efforts.</p>
+      <form id="enquiryForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="3889993e-1c36-4fa4-9472-59ec18163192">
+        <input type="hidden" name="subject" value="New Tour Enquiry">
+        <input type="hidden" name="from_name" value="Maru Travel Website">
+        <input type="hidden" name="to_email" value="tejinder@marutravel.in">
+        <input type="hidden" name="redirect" value="">
+        <input type="hidden" id="enq_tour" name="Tour_Requested" value="">
+
+        <div class="form-grid">
+          <div class="form-group"><label data-i18n="form.name">Name</label><input type="text" name="name" data-i18n-placeholder="form.ph_name" placeholder="Full Name" required></div>
+          <div class="form-group"><label data-i18n="form.phone">Phone</label><input type="text" name="phone" data-i18n-placeholder="form.ph_phone" placeholder="99xxxx7x5" required></div>
+          <div class="form-group"><label data-i18n="form.location">Location</label><input type="text" name="location" data-i18n-placeholder="form.ph_city" placeholder="Your City"></div>
+          <div class="form-group"><label data-i18n="form.destination">Destination</label><input type="text" name="destination" data-i18n-placeholder="form.ph_dest" placeholder="E.g. Manali"></div>
+          <div class="form-group"><label data-i18n="form.travelers">No. Of Travelers</label><input type="number" name="travelers" data-i18n-placeholder="form.ph_num" placeholder="Number"></div>
+          <div class="form-group"><label data-i18n="form.travel_date">Date Of Travel</label><input type="date" name="travel_date"></div>
+          <div class="form-group"><label data-i18n="form.hotel_type">Hotel Type</label><select name="hotel_type"><option data-i18n="star.3">3 Star</option><option data-i18n="star.4">4 Star</option><option data-i18n="star.5">5 Star</option><option data-i18n="star.lux">Luxury</option></select></div>
+          <div class="form-group"><label data-i18n="form.theme">Theme</label><select name="theme"><option data-i18n="theme.spiritual">Spiritual</option><option data-i18n="theme.adventure">Adventure</option><option data-i18n="theme.honeymoon">Honeymoon</option><option data-i18n="theme.wildlife">Wildlife</option></select></div>
+        </div>
+        <div class="form-actions" style="margin-top:20px;">
+          <button type="submit" class="btn-email" style="border:none; cursor:pointer; font-family:inherit; font-size:1rem;">&#9993; <span data-i18n="form.submit">Submit Enquiry</span></button>
+          <a href="https://wa.me/919891587778" target="_blank" class="btn-whatsapp">&#9742; WhatsApp</a>
+        </div>
+        <div id="enq_result" style="display:none; color:#28a745; margin-top:10px; font-weight:bold; text-align:center;">Sending...</div>
+        <div class="safe-secure" style="text-align:center; margin-top:15px;">&#10004; <span data-i18n="form.secure">We Are Safe And Secure</span></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+<script>
+
+const tourFiles = {
+  tour1: 'downloads/MT_Golden_Triangle_Tour.pdf',
+  tour2: 'downloads/Golden_Triangle_Varanasi_Mumbai.pdf',
+  tour3: 'downloads/MT_Buddhist_Nepal_Tour.pdf',
+  tour4: 'downloads/MT_Classical_Indo_Nepal.pdf',
+  tour5: 'downloads/MT_Classical_Tour.pdf',
+  tour6: 'pdfs/Golden Triangle with Ranthambore.pdf',
+  tour7: 'pdfs/Honeymoon in Kerala.pdf',
+  tour8: 'pdfs/Kashmir with Golden Triangel Tour.pdf',
+  tour9: 'pdfs/Rajasthan Forts and Palaces Tour.pdf',
+  tour10: 'pdfs/South India Vacation Tour.pdf',
+  tour11: 'pdfs/Spice Kerala Spice Tour.pdf',
+  tour12: 'pdfs/Srinagar with Leh Ladakh Tour.pdf',
+  nepal1: 'pdfs/Honeymoon in Nepal and Bhutan Tour.pdf',
+  nepal2: 'pdfs/KPC Nepal 07 Nights Tour .pdf',
+  bhutan1: 'pdfs/Bhutan Tour.pdf',
+  srilanka1: 'pdfs/Classical Srilanka Tour.pdf'
+};
+
+const toursData = {
+  tour1: {
+    title: "MT Golden Triangle Tour",
+    duration: "04 Nights / 05 Days",
+    route: "Delhi to Agra to Jaipur to Delhi",
+    destinations: "Delhi, Agra, Jaipur",
+    img: "images/india_tours/MT Golden Triangle/swaminarayan_akshardham_mandir.webp",
+    images: [
+      "images/india_tours/MT Golden Triangle/swaminarayan_akshardham_mandir.webp",
+      "images/india_tours/MT Golden Triangle/On Frontpage.jpg",
+      "images/india_tours/MT Golden Triangle/India Gate Delhi.jpg",
+      "images/india_tours/MT Golden Triangle/86_339.jpg"
+    ],
+    days: [
+      { d: "Day 1", title: "Arrival Delhi", text: "<p>Warm welcome by our airport representative/guide on arrival; assistance transferring to hotel. Dinner and overnight stay at hotel.</p>" },
+      { d: "Day 2", title: "Delhi - Agra (By Surface)", text: "<p>After breakfast, New Delhi sightseeing - Akshardham, President House, Parliament House - tandoori lunch at a local restaurant, then drive to Agra and view the Taj Mahal at sunset. Dinner and overnight at hotel in Agra.</p>" },
+      { d: "Day 3", title: "Agra - Fatehpur Sikri - Jaipur (By Surface)", text: "<p>After breakfast, drive to Jaipur, en route visiting Agra Fort and Fatehpur Sikri, lunch at Lake View restaurant, Sikri. Dinner and overnight at hotel in Jaipur.</p>" },
+      { d: "Day 4", title: "Jaipur Sightseeing", text: "<p>Full day exploring the Pink City - Amber Fort by jeep, Hawa Mahal, City Palace, Jantar Mantar, Birla Mandir, plus henna, lassi and rickshaw ride. Lunch and dinner at hotel.</p>" },
+      { d: "Day 5", title: "Jaipur - Delhi (By Flight) - Departure", text: "<p>Packed breakfast, transfer to Jaipur airport, flight to Delhi. On arrival, sightseeing - Agrasen ki Baoli, India Gate, Gandhi Smriti, Raj Ghat, Qutab Minar - Korean lunch at Gung, Green Park. Transfer to international airport for departure flight.</p>" }
+    ],
+    faqs: [
+      { q: "What is the best time to do this tour?", a: "The best time is between October and March when the weather is pleasant in Delhi, Agra, and Jaipur." },
+      { q: "Is the Taj Mahal open every day?", a: "No, the Taj Mahal is closed every Friday for prayers. We plan the itinerary around this." },
+      { q: "Are flights included?", a: "The domestic flight from Jaipur to Delhi is included. International flights are not." }
+    ]
+  },
+  tour2: {
+    title: "Golden Triangle Tour with Varanasi, Aurangabad & Mumbai",
+    duration: "08 Nights / 09 Days",
+    route: "Delhi to Jaipur to Agra to Varanasi to Aurangabad to Mumbai",
+    destinations: "Delhi, Jaipur, Agra, Varanasi, Aurangabad, Mumbai",
+    img: "images/india_tours/Golden Triangel with Varanasi and Auragabad/amer-fort-jaipur.jpg",
+    images: [
+      "images/india_tours/Golden Triangel with Varanasi and Auragabad/amer-fort-jaipur.jpg",
+      "images/india_tours/Golden Triangel with Varanasi and Auragabad/Taj-Mahal.jpg.webp",
+      "images/india_tours/Golden Triangel with Varanasi and Auragabad/Ganga-Aarti-Varanasi.jpg",
+      "images/india_tours/Golden Triangel with Varanasi and Auragabad/AJANTA.jpg",
+      "images/india_tours/Golden Triangel with Varanasi and Auragabad/City palace Jaipur.jpg"
+    ],
+    days: [
+      { d: "Day 1", title: "Arrival Delhi (By Flight)", text: "<p>Arrive Indira Gandhi International Airport, met by representative, transfer to hotel. (Meals: B, L, D)</p>" },
+      { d: "Day 2", title: "Delhi - Jaipur (By Surface)", text: "<p>New Delhi sightseeing (India Gate, President House drive-past, Raj Ghat), lunch at local restaurant, continue to Jaipur, dinner and overnight. (B, L, D)</p>" },
+      { d: "Day 3", title: "In Jaipur", text: "<p>Full day Jaipur sightseeing - Amer Fort City Palace, Hawa Mahal, Birla Mandir, henna/lassi/rickshaw. Dinner and overnight at Jaipur. (B, L, D)</p>" },
+      { d: "Day 4", title: "Jaipur - Agra (By Surface, ~4h30)", text: "<p>Check in, lunch, afternoon sightseeing - Taj Mahal (built by Shah Jahan for Mumtaz Mahal; closed Fridays) and Agra Fort (UNESCO site, Khas Mahal, Diwan-e-Aam). Dinner and overnight at Agra. (B, L, D)</p>" },
+      { d: "Day 5", title: "Agra - Varanasi (Vande Bharat Express, 06:00-13:00)", text: "<p>Early transfer to Agra Cantt station, train to Varanasi. Check in, visit Sarnath (Dhamekh Stupa, Deer Park, museum - closed Fridays), evening Ganga Aarti at the ghats. Dinner and overnight. (B, L, D)</p>" },
+      { d: "Day 6", title: "Varanasi - Mumbai (By Flight, 16:10-18:25)", text: "<p>Early visit to the Ganges, rest, afternoon flight to Mumbai, check in, dinner and overnight. (B, L, D)</p>" },
+      { d: "Day 7", title: "Mumbai - Aurangabad (By Flight, 06:10-07:20)", text: "<p>Early flight, then Ajanta Caves (30 rock-cut Buddhist caves, 2nd century BCE, UNESCO site, closed Mondays/public holidays). Lunch, dinner, overnight. (B, L, D)</p>" },
+      { d: "Day 8", title: "Aurangabad - Ellora Caves - Daulatabad Fort - Prozone Mall", text: "<p>Ellora Caves (Buddhist/Hindu/Jain rock-cut architecture, closed Tuesdays/public holidays), Daulatabad Fort, evening at Prozone Mall. Overnight at hotel.</p>" },
+      { d: "Day 9", title: "Aurangabad - Mumbai (By Flight) - Departure", text: "<p>Early flight to Mumbai, final sightseeing - Gateway of India, Taj Mahal Palace Hotel nearby. After dinner, transfer to Mumbai International Airport for departure.</p>" }
+    ],
+    faqs: [
+      { q: "Are the Ajanta & Ellora caves open all days?", a: "Ajanta Caves are closed on Mondays, and Ellora Caves are closed on Tuesdays. Our schedule accounts for this." },
+      { q: "Is the Vande Bharat Express comfortable?", a: "Yes, it is India's premium semi-high-speed train offering a very comfortable and fast journey." }
+    ]
+  },
+  tour3: {
+    title: "MT Buddhist with Taj and Nepal Tour",
+    duration: "11 Nights / 12 Days",
+    route: "Delhi to Agra to Varanasi to Bodhgaya to Rajgir to Vaishali to Kushinagar to Shravasti to Lumbini to Pokhara to Kathmandu",
+    destinations: "Delhi, Agra, Varanasi, Bodhgaya, Vaishali, Kushinagar, Shravasti, Lumbini, Pokhara, Kathmandu",
+    img: "images/india_tours/MT Bhuddhist with Agra Taj/Agra Fort.jpg",
+    images: [
+      "images/india_tours/MT Bhuddhist with Agra Taj/Agra Fort.jpg",
+      "images/india_tours/MT Bhuddhist with Agra Taj/Budha.jpg",
+      "images/india_tours/MT Bhuddhist with Agra Taj/Khajuraho.jpg",
+      "images/india_tours/MT Bhuddhist with Agra Taj/Taj mahal2.jpg",
+      "images/india_tours/MT Bhuddhist with Agra Taj/Varanasi Ghat.jpg"
+    ],
+    days: [
+      { d: "Day 1", title: "Delhi Arrival", text: "<p>Warm welcome by airport representative, transfer to hotel, dinner and overnight.</p>" },
+      { d: "Day 2", title: "Delhi - Agra - Delhi (Same Day Tour)", text: "<p>Drive to Agra, visit Taj Mahal, lunch at Hotel Grand Mercure, Agra Fort tour, return to Delhi. Dinner en route at 19 Hole, Noida. Overnight in Delhi.</p>" },
+      { d: "Day 3", title: "Delhi - Varanasi (By Flight)", text: "<p>Delhi sightseeing - India Gate, National Museum, Raj Ghat, Lotus Temple, Qutab Minar - Korean lunch at Gung, Green Park, dinner at Bizzo, Aerocity. Evening flight 6E-6258 (20:45-22:05) to Varanasi. Overnight.</p>" },
+      { d: "Day 4", title: "Varanasi - Bodhgaya (By Surface)", text: "<p>Sunrise at the ghats, Sarnath sightseeing and museum, lunch at Fern, Sarnath, drive to Gaya. Overnight in Bodhgaya.</p>" },
+      { d: "Day 5", title: "Bodhgaya", text: "<p>Full day Bodhgaya sightseeing, two visits to Mahabodhi Temple (evening and next early morning). Dinner and overnight.</p>" },
+      { d: "Day 6", title: "Bodhgaya - Vaishali", text: "<p>Drive to Rajgir, lunch at Rajgir Residency, continue to Vaishali. Dinner and overnight.</p>" },
+      { d: "Day 7", title: "Vaishali - Kushinagar", text: "<p>Drive to Kushinagar, lunch at Hotel Imperial Kushinagar, sightseeing. Dinner and overnight.</p>" },
+      { d: "Day 8", title: "Kushinagar - Shravasti", text: "<p>Drive to Shravasti, lunch at Hotel Shravasti Residency, sightseeing. Dinner and overnight.</p>" },
+      { d: "Day 9", title: "Shravasti - Lumbini", text: "<p>Drive to Lumbini, lunch at Hotel Kasai. Dinner and overnight.</p>" },
+      { d: "Day 10", title: "Lumbini - Pokhara", text: "<p>Morning sightseeing in Lumbini (Buddha's birthplace), transfer to airport, flight to Pokhara. Check in.</p>" },
+      { d: "Day 11", title: "Pokhara - Kathmandu", text: "<p>Morning Pokhara sightseeing, transfer to airport, flight to Kathmandu. Check in.</p>" },
+      { d: "Day 12", title: "Leave Kathmandu", text: "<p>City tour - Pashupatinath Temple, Boudhanath Temple, Thamel - lunch, transfer to international airport for departure.</p>" }
+    ],
+    faqs: [
+      { q: "Do I need a separate visa for Nepal?", a: "Yes, non-Indian nationals require a visa for Nepal, which can often be obtained on arrival at Kathmandu airport." },
+      { q: "What is the physical fitness level required?", a: "This is a moderate tour. It involves walking at archaeological sites and temples, but no strenuous trekking." }
+    ]
+  },
+  tour4: {
+    title: "MT Classical Indo Nepal",
+    duration: "10 Nights / 11 Days",
+    route: "Delhi to Jaipur to Fatehpur Sikri to Agra to Orcha to Khajuraho to Varanasi to Chitwan to Pokhara to Kathmandu",
+    destinations: "Delhi, Jaipur, Agra, Khajuraho, Varanasi, Nepal",
+    img: "images/india_tours/rfl9dd8z5ujzhvoae6w34r9lzoco_1547644254_The_Mehrangarh_fort.webp",
+    days: [
+      { d: "Day 1", title: "Arrival Delhi", text: "<p>Warm welcome by airport representative, transfer to hotel, dinner and overnight.</p>" },
+      { d: "Day 2", title: "Delhi - Jaipur (By Surface)", text: "<p>Check in, lunch, afternoon sightseeing - Amber Fort by jeep, Hawa Mahal, City Palace, Jantar Mantar, Birla Mandir. Dinner and overnight in Jaipur.</p>" },
+      { d: "Day 3", title: "Jaipur - Abhaneri - Fatehpur Sikri - Agra (By Surface)", text: "<p>Drive to Agra via Abhaneri and Fatehpur Sikri, lunch at local restaurant. Dinner and overnight in Agra.</p>" },
+      { d: "Day 4", title: "Agra Sightseeing", text: "<p>Taj Mahal in the morning, Agra Fort (UNESCO site). Lunch and dinner at hotel, overnight in Agra.</p>" },
+      { d: "Day 5", title: "Agra - Jhansi (By Train) - Orcha - Khajuraho", text: "<p>Early transfer to Agra Cantt station, train to Jhansi (07:55-10:45), Orcha sightseeing, lunch at local restaurant, continue to Khajuraho, evening yoga class. Overnight in Khajuraho.</p>" },
+      { d: "Day 6", title: "Khajuraho - Varanasi (By Flight)", text: "<p>Morning Khajuraho temple tour, flight to Varanasi, evening Aarti pooja by rickshaw and boat ride on the Ganges. Dinner and overnight.</p>" },
+      { d: "Day 7", title: "Varanasi Sightseeing", text: "<p>Sunrise boat ride, rest, Sarnath and museum visit, yoga session. Dinner and overnight - Nepal partner takes over program from here.</p>" },
+      { d: "Day 8", title: "Varanasi - Kathmandu - Bharatpur - Chitwan", text: "<p>Flight Varanasi-Kathmandu (08:50-09:50) connecting to Bharatpur (11:15-11:40), Tharu dance show. Hotel lunch and dinner.</p>" },
+      { d: "Day 9", title: "Chitwan - Pokhara (By Surface)", text: "<p>Early boat safari, jeep safari, drive to Pokhara, boating on Fewa Lake (1 hour), free time by the lake. Korean lunch, hotel dinner.</p>" },
+      { d: "Day 10", title: "Pokhara - Kathmandu (By Flight)", text: "<p>Sunrise views, sightseeing at Devi's Falls, Tibetan Refugee Camp, trek to Shanti Stupa, flight to Kathmandu (14:40-15:05). Sightseeing at Bhaktapur/Thamel, Korean dinner. Overnight in Kathmandu.</p>" },
+      { d: "Day 11", title: "Leave Kathmandu", text: "<p>Durbar Square and Boudhanath sightseeing, lunch, transfer to international airport for departure.</p>" }
+    ],
+    faqs: [
+      { q: "Are jungle safaris safe in Chitwan?", a: "Absolutely. You will be accompanied by experienced naturalists and guides during boat and jeep safaris." },
+      { q: "Can we see Mount Everest from Pokhara?", a: "While Everest isn't visible from Pokhara, you get stunning, close-up views of the Annapurna and Machhapuchhre (Fishtail) ranges." }
+    ]
+  },
+  tour5: {
+    title: "MT Classical Tour",
+    duration: "07 Nights / 08 Days",
+    route: "Delhi to Jaipur to Abhaneri to Agra to Orcha to Khajuraho to Varanasi to Delhi",
+    destinations: "Delhi, Jaipur, Agra, Orcha, Khajuraho, Varanasi",
+    img: "images/india_tours/MT Classical Tour/Amer-Fort-photo-1.jpg",
+    images: [
+      "images/india_tours/MT Classical Tour/Amer-Fort-photo-1.jpg",
+      "images/india_tours/MT Classical Tour/khajuraho (1).jpg",
+      "images/india_tours/MT Classical Tour/sarnath- Varanasi.jpg",
+      "images/india_tours/MT Classical Tour/presidents-house-a- Delhi.webp"
+    ],
+    days: [
+      { d: "Day 1", title: "Arrival Delhi", text: "<p>Warm welcome by airport representative, transfer to hotel, dinner and overnight.</p>" },
+      { d: "Day 2", title: "Delhi - Jaipur (By Surface)", text: "<p>Check in, lunch, afternoon sightseeing - Amber Fort by jeep, Hawa Mahal, City Palace, Jantar Mantar, Birla Mandir. Dinner and overnight in Jaipur.</p>" },
+      { d: "Day 3", title: "Jaipur - Abhaneri - Fatehpur Sikri - Agra (By Surface)", text: "<p>Drive to Agra via Abhaneri and Fatehpur Sikri, lunch at local restaurant. Dinner and overnight in Agra.</p>" },
+      { d: "Day 4", title: "Agra Sightseeing", text: "<p>Taj Mahal in the morning, Agra Fort (UNESCO site). Lunch and dinner at hotel, overnight in Agra.</p>" },
+      { d: "Day 5", title: "Agra - Jhansi (By Train) - Orcha - Khajuraho", text: "<p>Early transfer to Agra Cantt station, train to Jhansi (07:55-10:45), Orcha sightseeing, lunch, continue to Khajuraho, evening yoga class. Overnight in Khajuraho.</p>" },
+      { d: "Day 6", title: "Khajuraho - Varanasi (By Flight)", text: "<p>Morning tour of the East and West temple groups, flight to Varanasi, check in, lunch and rest, evening Ganga Aarti ceremony at the ghats and boat ride on the Ganges. Dinner and overnight.</p>" },
+      { d: "Day 7", title: "Varanasi - Delhi (By Flight)", text: "<p>Early sunrise boat tour, breakfast, checkout, Sarnath and museum visit, lunch at local restaurant, flight to Delhi. Dinner at a Delhi restaurant, overnight.</p>" },
+      { d: "Day 8", title: "Delhi Sightseeing & Departure", text: "<p>Final Delhi sightseeing - Akshardham, India Gate, Gandhi Smriti, President House, Parliament House, Qutab Minar - Korean lunch at Gung, Green Park. Transfer to international airport for departure.</p>" }
+    ],
+    faqs: [
+      { q: "Does the tour include guides?", a: "Yes, professional English-speaking (or language of choice) guides are provided at all major sightseeing locations." },
+      { q: "What kind of hotels are used?", a: "We primarily use premium 4-star and 5-star properties, ensuring luxury and comfort throughout your journey." }
+    ]
+  },
+  "tour6": {
+    "title": "Golden Triangle with Ranthambore",
+    "duration": "07 Nights / 08 Days",
+    "route": "Delhi to Jaipur to Abhaneri to Ranthambore to Fatehpur Sikri to Agra to Delhi",
+    "destinations": "Delhi, Jaipur, Abhaneri, Ranthambore, Fatehpur Sikri, Agra, Delhi",
+    "img": "images/india_tours/Golden Triangle with Ranthambore/15.52.00.jpg",
+    "images": [
+        "images/india_tours/Golden Triangle with Ranthambore/15.52.00.jpg",
+        "images/india_tours/Golden Triangle with Ranthambore/Fatehpur-Sikri_600.jpg",
+        "images/india_tours/Golden Triangle with Ranthambore/Fathepur Sikri.jpg",
+        "images/india_tours/Golden Triangle with Ranthambore/images.jpg",
+        "images/india_tours/Golden Triangle with Ranthambore/Taj Mahal.jpg",
+        "images/india_tours/Golden Triangle with Ranthambore/Taj Mahal2.jpg",
+        "images/india_tours/Golden Triangle with Ranthambore/Visit-in-Ranthambore.jpg",
+        "images/india_tours/Golden Triangle with Ranthambore/Ranthambore.jpeg"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrival Delhi (By Flight)",
+            "m": "",
+            "desc": "You will get a warm welcome by our airport representative / Guide on your arrival at Airport; He will be assisting you for the transfer to the hotel. Dinner and overnight stay at hotel."
+        },
+        {
+            "d": "Day 02",
+            "title": "Delhi – Jaipur (By Surface – 260kms & 06hrs)",
+            "m": "",
+            "desc": "After Buffet breakfast at Hotel, Half day City tour of Delhi visiting India Gate, President house, Government building from outside. Also visit to Agrasen ki Baoli-Delhi & move for lunch at local restaurant."
+        },
+        {
+            "d": "Day 03",
+            "title": "Jaipur City Tour",
+            "m": "",
+            "desc": "Enjoy morning yoga session at the hotel. Post breakfast proceed for full day city tour visit Amber Fort [Uphill by Elephant/Downhill by Jeep] En-route photo stop at Hawa Mahal. Return back to hotel for lunch, photo stop at Jal Mahal."
+        },
+        {
+            "d": "Day 04",
+            "title": "Jaipur – Ranthambore (By Surface – 260kms & 06hrs)",
+            "m": "",
+            "desc": "Post breakfast check-out from the hotel and proceed to Ranthambore. Upon arrival Later check – in at Hotel. Dinner and overnight stay at hotel."
+        },
+        {
+            "d": "Day 05",
+            "title": "Ranthambore",
+            "m": "",
+            "desc": "Early morning enjoy Game Drive in Ranthambore National Park Shared basis on Open  Canter. Return to Hotel for Buffet breakfast."
+        },
+        {
+            "d": "Day 06",
+            "title": "Ranthambore- Abhaneri- Fatehpur Sikri-Agra (By Surface 295 Kms/ 5.5 hrs drive)",
+            "m": "",
+            "desc": "After buffet breakfast at hotel, checkout from hotel. Start your drive to Agra Enroute visit Abhaneri and visit stepwell and Fatehpur Sikri sightseeing. Lunch in local restaurant in Fatehpur sikri. Continue your drive to Agra."
+        },
+        {
+            "d": "Day 07",
+            "title": "Agra – Delhi (By Surface – 210kms & 5hrs)",
+            "m": "",
+            "desc": "After Buffet breakfast at hotel. Start with sightseeing of UNESCO World Heritage Centre -Taj Mahal & Agra Fort."
+        },
+        {
+            "d": "Day 08",
+            "title": "Delhi City Tour - Departure",
+            "m": "",
+            "desc": "Post breakfast check-out from the hotel , Start your sightseeing of Qutub Minar &  Lotus Temple . Lunch at local restaurant."
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by AC vehicle",
+        "English speaking guide during sightseeing",
+        "All toll taxes, parking, state taxes and driver allowance"
+    ],
+    "faqs": [
+        {
+            "q": "What is the best time to visit?",
+            "a": "October to March is ideal as the weather is pleasant."
+        },
+        {
+            "q": "Are the monuments open every day?",
+            "a": "Most are open daily, but Taj Mahal is closed on Fridays."
+        },
+        {
+            "q": "Does the tour include guides?",
+            "a": "Yes, professional English-speaking (or language of choice) guides are provided."
+        }
+    ]
+},
+  "tour7": {
+    "title": "Honeymoon Trip in Kerala",
+    "duration": "12 Night / 13 Days",
+    "route": "Cochin to  Munnar – Periyar to  Alleppey  to  Mararikulam  to  Kovalam  to  Trivandrum",
+    "destinations": "Cochin,  Munnar – Periyar,  Alleppey ,  Mararikulam ,  Kovalam ,  Trivandrum",
+    "img": "images/india_tours/Honeymoon in Kerala/alleppey-tourism.jpg",
+    "images": [
+        "images/india_tours/Honeymoon in Kerala/alleppey-tourism.jpg",
+        "images/india_tours/Honeymoon in Kerala/cochin-kerala.jpg",
+        "images/india_tours/Honeymoon in Kerala/Cochin.jpg",
+        "images/india_tours/Honeymoon in Kerala/Kovlam.jpg",
+        "images/india_tours/Honeymoon in Kerala/Thekkad.jpg",
+        "images/india_tours/Honeymoon in Kerala/Munnar-Places.webp"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrive at Cochin",
+            "m": "",
+            "desc": "Arrive at Cochin International Airport. Following customs, immigration formalities and baggage collection, our representative will meet you as you exit the arrival terminal building after which you would be transferred to your hotel."
+        },
+        {
+            "d": "Day 02",
+            "title": "Cochin",
+            "m": "",
+            "desc": "Morning enjoy half day sightseeing tour of Cochin. The tour allows you to explore the charming fort Cochin, visit Jewish Synagogue, Dutch Palace, Jew Town, and St Francis church. Fort Kochi is a small village located near the larger city of Kochi."
+        },
+        {
+            "d": "Day 03",
+            "title": "Cochin to Munnar (125 / 04 Hrs )",
+            "m": "",
+            "desc": "Morning by surface leave for Munnar Munnar is a haven of peace and harmony. This incredibly beautiful hill town is positioned at a height of 6000ft in the Idukki district."
+        },
+        {
+            "d": "Day 04",
+            "title": "Munnar",
+            "m": "",
+            "desc": "Morning visit Eravikulam National Park. The park is an ideal place for seeing the biodiversity of high elevation shola-grassland ecosystem. Visitors are taken to Rajamalai in forest department vehicles and given an opportunity to see all this."
+        },
+        {
+            "d": "Day 05",
+            "title": "Munnar to Periyar (100 Kms / 03 Hrs)",
+            "m": "",
+            "desc": "Morning by surface leave for Periyar , The Periyar Wildlife Sanctuary is situated on the banks of the Periyar Lake - an artificial lake, at Thekkady."
+        },
+        {
+            "d": "Day 06",
+            "title": "Periyar",
+            "m": "",
+            "desc": "Morning visit to Periyar National Park Tourists come to the National Park to view the Indian elephants in the act of ablution and playfulness by the Periyar lake."
+        },
+        {
+            "d": "Day 07",
+            "title": "Periyar to Alleppey (127 Kms / 05 Hrs)",
+            "m": "",
+            "desc": "Morning by surface leave for Alleppey Later embark houseboat followed by lunch at house boat. These houseboats or Kettuvallams as they are traditionally called were at one time the mode of transportation for man and goods."
+        },
+        {
+            "d": "Day 08",
+            "title": "Alleppey – Mararikulam (20 Kms /45 Min)",
+            "m": "",
+            "desc": "Morning disembark houseboat and enjoy a walk around the village - “Alleppey on Foot”."
+        },
+        {
+            "d": "Day 09",
+            "title": "Mararikulam",
+            "m": "",
+            "desc": "Learn from our master Yoga teacher giving you expert guidance, this ancient science of wellness acquires a new dimension. One of the best things about yoga is that almost anyone can do it regardless of age."
+        },
+        {
+            "d": "Day 10",
+            "title": "Mararikulam to Kovalam (178 Km/04 Hrs)",
+            "m": "",
+            "desc": "Morning by surface drive to Kovalam , Arrive at Kovalam and transfer to the hotel. Kovalam is an internationally renowned beach with three adjacent crescent beaches. It has been a favourite haunt of tourists, especially Europeans, since the 1930s."
+        },
+        {
+            "d": "Day 11",
+            "title": "Kovalam",
+            "m": "",
+            "desc": "Early morning you may experience yoga session on the beach. Kovalam is also a getaway destination for those in search of an Ayurvedic haven away from the cacophony of city life. The experience is personal and unique."
+        },
+        {
+            "d": "Day 12",
+            "title": "Kovalam – Day excursion of Padmanabhapuram Palace and Kanyakumari",
+            "m": "",
+            "desc": "In the morning proceed for the day excursion to Padmanabhapuram Palace and Kanyakumari (184 Km both ways). Padmanabhapuram Palace, regarded as Asia's largest wooden palace located at Thiruvananthapuram in Kerala."
+        },
+        {
+            "d": "Day 13",
+            "title": "Kovalam to Trivandrum and Departure",
+            "m": "",
+            "desc": "Morning after breakfast, transfer to Trivandrum Airport and connect to onward flight journey."
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by AC vehicle",
+        "English speaking guide during sightseeing",
+        "All toll taxes, parking, state taxes and driver allowance"
+    ],
+    "faqs": [
+        {
+            "q": "What is the best time to visit?",
+            "a": "October to March is ideal as the weather is pleasant."
+        },
+        {
+            "q": "Are the monuments open every day?",
+            "a": "Most are open daily, but Taj Mahal is closed on Fridays."
+        },
+        {
+            "q": "Does the tour include guides?",
+            "a": "Yes, professional English-speaking (or language of choice) guides are provided."
+        }
+    ]
+},
+  "tour8": {
+    "title": "Kashmir with Golden Triangle Tour",
+    "duration": "06 Nights / 07 Days",
+    "route": "Delhi to Srinagar to Pahalgam to Gulmarg to Agra to Jaipur to Delhi",
+    "destinations": "Delhi, Srinagar, Pahalgam, Gulmarg, Agra, Jaipur, Delhi",
+    "img": "images/india_tours/Kashmir with Golden Triangel Tour/amer-fort-jaipur.jpg",
+    "images": [
+        "images/india_tours/Kashmir with Golden Triangel Tour/amer-fort-jaipur.jpg",
+        "images/india_tours/Kashmir with Golden Triangel Tour/Chand-Baori-Abhaneri.jpg",
+        "images/india_tours/Kashmir with Golden Triangel Tour/Delhi-Qutub-Minar.jpg",
+        "images/india_tours/Kashmir with Golden Triangel Tour/Gulmarg.jpg",
+        "images/india_tours/Kashmir with Golden Triangel Tour/Pahalgam.jpg",
+        "images/india_tours/Kashmir with Golden Triangel Tour/vegetable-market-srinagar.jpg",
+        "images/india_tours/Kashmir with Golden Triangel Tour/Gulmarg.webp",
+        "images/india_tours/Kashmir with Golden Triangel Tour/Srinagar.webp",
+        "images/india_tours/Kashmir with Golden Triangel Tour/Taj-Mahal.jpg.webp"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrive Delhi (By Flight)",
+            "m": "",
+            "desc": "Upon arrival at Delhi airport, meet assist and transfer to hotel India’s capital and a major gateway to the country, contemporary Delhi is a bustling metropolis, which successfully combines in its folds - the ancient with the modern."
+        },
+        {
+            "d": "Day 02",
+            "title": "Delhi / Srinagar (By Flight)",
+            "m": "",
+            "desc": "Early breakfast at hotel Have breakfast at the hotel and depart for the airport, take a flight to Srinagar (flying about 1 hr 30 minutes) On arrival in Srinagar, You will be greeted & start drive to Srinagar for 35 minutes."
+        },
+        {
+            "d": "Day 03",
+            "title": "Srinagar – Pahalgam - Srinagar",
+            "m": "",
+            "desc": "After breakfast, Checkout from Houseboat. Drive to Pahalgam for Same day excursion. Pahalgam is a hill station in the north Indian state of Jammu and Kashmir."
+        },
+        {
+            "d": "Day 04",
+            "title": "Srinagar – Gulmarg – Srinagar",
+            "m": "",
+            "desc": "After breakfast full day excursion of Gulmarg - the most beautiful summer resort in the valley. Gulmarg is the crowning glory of Jammu & Kashmir and is located 2,650 meters above sea level. Known as the “Meadow of Flowers”, it boasts of the worlds."
+        },
+        {
+            "d": "Day 05",
+            "title": "Srinagar – Delhi(Flight)  - Agra ( Surface 200 kms/ 4 hrs approx..)",
+            "m": "",
+            "desc": "Breakfast at hotel. Early in the morning enjoy the beauty of Dal Lake that God has graced this city with which is often compared to Venice."
+        },
+        {
+            "d": "Day 06",
+            "title": "Agra/Jaipur by Surface (Approx 255 Kms / 4.5 Hrs)",
+            "m": "",
+            "desc": "Breakfast at hotel. Morning Half day sightseeing of Taj Mahal & Agra Fort. Visiting Taj Mahal“The embodiment of all things pure”, said Rudyard Kipling on Taj Mahal’s beauty and that is no wordplay as the Taj is undoubtedly a pure epitome of beauty."
+        },
+        {
+            "d": "Day 07",
+            "title": "Jaipur/Delhi by Surface (Approx 260 Kms / 5 Hrs)",
+            "m": "",
+            "desc": "After early Breakfast. Proceed for sightseeing tour of City Palace & Amer fort – (Jeep ride) City Palace complex was conceived and built by Maharaja Sawai Jai Singh II, the founder of Jaipur."
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by AC vehicle",
+        "English speaking guide during sightseeing",
+        "All toll taxes, parking, state taxes and driver allowance"
+    ],
+    "faqs": [
+        {
+            "q": "What is the best time to visit?",
+            "a": "October to March is ideal as the weather is pleasant."
+        },
+        {
+            "q": "Are the monuments open every day?",
+            "a": "Most are open daily, but Taj Mahal is closed on Fridays."
+        },
+        {
+            "q": "Does the tour include guides?",
+            "a": "Yes, professional English-speaking (or language of choice) guides are provided."
+        }
+    ]
+},
+  "tour9": {
+    "title": "Rajasthan Forts and Palaces Tour",
+    "duration": "14 Nights/ 15 Days",
+    "route": "Delhi  to  Mandawa  to  Bikaner  to  Jaisalmer  to  Jodhpur – Ranakpur  to  Udaipur  to  Pushkar  to  Jaipur – Fatehpur Sikri  to  Agra – Delhi",
+    "destinations": "Delhi ,  Mandawa ,  Bikaner ,  Jaisalmer ,  Jodhpur – Ranakpur ,  Udaipur ,  Pushkar ,  Jaipur – Fatehpur Sikri ,  Agra – Delhi",
+    "img": "images/india_tours/Rajasthan Forts and Palaces Tour/amer-fort-jaipur.jpg",
+    "images": [
+        "images/india_tours/Rajasthan Forts and Palaces Tour/amer-fort-jaipur.jpg",
+        "images/india_tours/Rajasthan Forts and Palaces Tour/Bikaner,_Rajasthan.jpg",
+        "images/india_tours/Rajasthan Forts and Palaces Tour/Camel.jpg",
+        "images/india_tours/Rajasthan Forts and Palaces Tour/Camel2.jpg",
+        "images/india_tours/Rajasthan Forts and Palaces Tour/Delhi-Qutub-Minar.jpg",
+        "images/india_tours/Rajasthan Forts and Palaces Tour/first.jpg",
+        "images/india_tours/Rajasthan Forts and Palaces Tour/scaled.jpg",
+        "images/india_tours/Rajasthan Forts and Palaces Tour/Taj Mahal.jpg",
+        "images/india_tours/Rajasthan Forts and Palaces Tour/udaiur.jpg"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrive Delhi by Flight",
+            "m": "",
+            "desc": "Arrive at Delhi’s Airport. Welcome to India! and transferred to hotel for check in. Delhi, India’s capital territory, is a massive metropolitan area in the country’s north."
+        },
+        {
+            "d": "Day 02",
+            "title": "Delhi- Mandawa (257 Kms. /06 Hrs. drive)",
+            "m": "",
+            "desc": "Breakfast at hotel, Drive to Mandawa, on arrival at Mandawa, Check in to Hotel. Visit the Mandawa Fort - Mandawa Fort is an important heritage site of Shekhawati."
+        },
+        {
+            "d": "Day 03",
+            "title": "Mandawa-Bikaner (190 Kms. /04 Hrs. drive)",
+            "m": "",
+            "desc": "Breakfast at hotel, Drive to Bikaner, Visit the Junagarh Fort (1571-1611 AD) constructed of red sandstone and marble with kiosks and balconies embellishing the structure at intervals. On arrival at Bikaner, Check in to hotel. Overnight stay at hotel."
+        },
+        {
+            "d": "Day 04",
+            "title": "Bikaner - Jaisalmer (Approx. 330 Kms / 06 Hrs.)",
+            "m": "",
+            "desc": "Breakfast at hotel, drive through the desert and proceed for Jaisalmer. Very often one can see along the road to Jaisalmer some of the antelopes of this region. Blackbuck and fast running Chinkara are the most common among them."
+        },
+        {
+            "d": "Day 05",
+            "title": "Jaisalmer",
+            "m": "",
+            "desc": "Breakfast at hotel, Sightseeing in Jaisalmer. There will have a walk through the old city and visit the carved havellis, fort, Jain temple and Gadisar Lake. In the afternoon will drive around 40 km."
+        },
+        {
+            "d": "Day 06",
+            "title": "Jaisalmer- Osian- Jodhpur (Approx. 280 Kms / 05 Hrs.)",
+            "m": "",
+            "desc": "Breakfast at hotel, drive to Jodhpur via Osian. Osian is a great center of Hindu and Jain religions. The oldest Temple here was constructed in 1178 AD. In Jodhpur you will visit the Mehrangarh Fort (majestic fort)."
+        },
+        {
+            "d": "Day 07",
+            "title": "Jodhpur- Ranakpur- Udaipur (250 Kms. /5 ½ Hrs.)",
+            "m": "",
+            "desc": "Breakfast at hotel, Drive to Udaipur, en-route visit Ranakpur Jain Temple, This 15th-century temple, dedicated to Lord Rishabdeva, is renowned for its intricate marble carvings and stunning architecture."
+        },
+        {
+            "d": "Day 08",
+            "title": "Udaipur",
+            "m": "",
+            "desc": "Breakfast at hotel, Sightseeing of Udaipur, Visit the City Palace, a sprawling complex of palaces built over 400 years. Explore the palace’s various courtyards, rooms, and museums, including the Crystal Gallery and the Peacock Courtyard."
+        },
+        {
+            "d": "Day 09",
+            "title": "Udaipur-Pushkar (Approx. 280 Kms / 06 Hrs.)",
+            "m": "",
+            "desc": "This morning, have breakfast and then leave for Pushkar to enjoy the last set of attractions during your tour of Rajasthan. On reaching Pushkar, check in at the hotel and freshen up. After that, your guide will take you sightseeing around the place."
+        },
+        {
+            "d": "Day 10",
+            "title": "Pushkar-Jaipur (Approx. 141 Kms / 02 Hrs. 30 Min)",
+            "m": "",
+            "desc": "Leave for Jaipur in the morning, after breakfast. You then check in to your hotel room and spend the rest of the day at your own leisure. Later, in the evening/night, you come back to the room and stay overnight."
+        },
+        {
+            "d": "Day 11",
+            "title": "Jaipur",
+            "m": "",
+            "desc": "Breakfast at hotel, then proceed for sightseeing visiting Amer Fort - 11 Kms from Jaipur is Amber, the ancient capital of Jaipur state construction of the Fort Palace was constructed in 1652 by Raja Mansingh and it was later extended & completed by..."
+        },
+        {
+            "d": "Day 12",
+            "title": "Jaipur-Abhneri-Fatehpursikri-Agra (Approx. 240 Kms / 5 Hrs)",
+            "m": "",
+            "desc": "Breakfast at hotel, then drive to Agra, En-route visit Abhaneri and Fatehpur Sikri- 37 Km, The deserted city of sandstone built by the Emperor."
+        },
+        {
+            "d": "Day 13",
+            "title": "Agra-Delhi(Approx. 240 Kms / 4 Hrs)",
+            "m": "",
+            "desc": "Breakfast at hotel, then drive to Delhi."
+        },
+        {
+            "d": "Day 14",
+            "title": "Delhi",
+            "m": "",
+            "desc": "After breakfast and energize yourself for a day full of excitement and fun. Then, enjoy your day with a sightseeing tour around this beautiful city. Start your tour with a visit to Laxmi Narayan Temple, which is well-known as the Birla Mandir."
+        },
+        {
+            "d": "Day 15",
+            "title": "Leave Delhi",
+            "m": "",
+            "desc": "After breakfast proceed to Delhi airport to board flight for onward destination. *****Tour Ends******"
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by AC vehicle",
+        "English speaking guide during sightseeing",
+        "All toll taxes, parking, state taxes and driver allowance"
+    ],
+    "faqs": [
+        {
+            "q": "What is the best time to visit?",
+            "a": "October to March is ideal as the weather is pleasant."
+        },
+        {
+            "q": "Are the monuments open every day?",
+            "a": "Most are open daily, but Taj Mahal is closed on Fridays."
+        },
+        {
+            "q": "Does the tour include guides?",
+            "a": "Yes, professional English-speaking (or language of choice) guides are provided."
+        }
+    ]
+},
+  "tour10": {
+    "title": "South India Vacation Tour",
+    "duration": "13 Nights / 14 Days",
+    "route": "Chennai to Pondicherry to Tanjore to Trichy to Madurai to Periyar to Cochin to Allepy to Kovalam to Trivendrum",
+    "destinations": "Chennai, Pondicherry, Tanjore, Trichy, Madurai, Periyar, Cochin, Allepy, Kovalam, Trivendrum",
+    "img": "images/india_tours/South India Vacation Tour/alleppey-tourism.jpg",
+    "images": [
+        "images/india_tours/South India Vacation Tour/alleppey-tourism.jpg",
+        "images/india_tours/South India Vacation Tour/auroville-puducherry.jpg",
+        "images/india_tours/South India Vacation Tour/Chennai.jpg",
+        "images/india_tours/South India Vacation Tour/Cochin.jpg",
+        "images/india_tours/South India Vacation Tour/Places0.jpg",
+        "images/india_tours/South India Vacation Tour/Tangore_1.jpg",
+        "images/india_tours/South India Vacation Tour/Thekkad.jpg"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrival in Chennai",
+            "m": "",
+            "desc": "You will get a warm welcome by our airport representative / Guide on your arrival at Airport; He will be assisting you for the transfer to the hotel. Dinner and overnight stay at hotel."
+        },
+        {
+            "d": "Day 02",
+            "title": "Chennai",
+            "m": "",
+            "desc": "Chennai, the capital city, popularly regarded as the ‘Gateway to the South represents a culture that is distinctly different from that of northern India. After breakfast visit, Fort St."
+        },
+        {
+            "d": "Day 03",
+            "title": "Chennai-Pondicherry(approx 161 kms / 03 Hrs)",
+            "m": "",
+            "desc": "Morning drive to Pondicherry enroute visiting The  city  of  Mahabalipuram, famous for the seven pagodas. Here  on the  seashore  is an interesting group of ancient rock temples which  are the  examples of  Dravidian style of Architecture."
+        },
+        {
+            "d": "Day 04",
+            "title": "Pondicherry-Thanjore (approx 200 kms / 04 hrs)",
+            "m": "",
+            "desc": "Morning after breakfast visit Pondicherry city, the capital of French India before independence,  Pondicherry  traces its  origin  to  Saint  Agasthya, the revered sage of the south and excavations near-by reveal that a Roman settlement existed here..."
+        },
+        {
+            "d": "Day 05",
+            "title": "Thanjore-Trichy",
+            "m": "",
+            "desc": "After breakfast half day visit to Trichy (approx 50 kms / 30 minutes one way). The  Rock-Fort  is   the landmark of Trichy. A climb of 434 steps leads to the ancient   temple of Ganapati on top and a further climb to a Shiva temple."
+        },
+        {
+            "d": "Day 06",
+            "title": "Trichy-Madurai (approx 182 kms / 05 hrs)",
+            "m": "",
+            "desc": "After breakfast at the hotel drive to Madurai, on arrival check in the hotel. Afternoon visit the famous Meenakshi Temple dedicated to the  consort of   Lord Shiva  with  its towering gopurams (rising high above the  surrounding country  side)."
+        },
+        {
+            "d": "Day 07",
+            "title": "Madurai-Periyar (approx 170 kms / 04 hrs)",
+            "m": "",
+            "desc": "Morning drive to Periyar. The earliest sanctuary to be set up in 1934, it extends to 777  square kms & forms part of the high mountain ranges, the Western Ghats. Wild life  can  be  seen while cruising on Periyar Lake in  a  motor  boat."
+        },
+        {
+            "d": "Day 08",
+            "title": "Periyar-Cochin (approx 160 kms / 04 Hrs)",
+            "m": "",
+            "desc": "After breakfast drive to Cochin, on arrival check in the hotel, Overnight in the hotel"
+        },
+        {
+            "d": "Day 09",
+            "title": "Cochin",
+            "m": "",
+            "desc": "Morning after breakfast city tour of the Cochin ity. Cochin is the natural harbour created by the famed underwater Malabar mud-banks whose quality ensures that the rougher the seas are outside the calmer the waters are within the Harbour."
+        },
+        {
+            "d": "Day 10",
+            "title": "Cochin-Alleppey (approx 60 kms / 01 Hrs)",
+            "m": "",
+            "desc": "After breakfast drive to Alleppey and board the houseboatd. The coastal town of Alleppey on the Arabian Sea is the Venice of the East, for the numerous canals that meander through the town Overnight stay in the hotel"
+        },
+        {
+            "d": "Day 11",
+            "title": "Alleppey-Kovalam(approx 160 kms / 3.5 Hrs)",
+            "m": "",
+            "desc": "After breakfast de-board the houseboat at Thottapally and drive to Kovalam, on arrival check in the hotel, rest of the day is free Overnight stay in the hotel."
+        },
+        {
+            "d": "Day 12",
+            "title": "Kovalam",
+            "m": "",
+            "desc": "After breakfast full day excursion to Kanya kumari enroute visiting Padmanabhapuram Palace, on arrival at Kanyakumari visit the Vivekananda Rock, the national monument dedicated to Swami Vivekananda."
+        },
+        {
+            "d": "Day 13",
+            "title": "Kovalam",
+            "m": "",
+            "desc": ""
+        },
+        {
+            "d": "Day at leisure. Overnight stay in the hotel",
+            "title": "",
+            "m": "",
+            "desc": ""
+        },
+        {
+            "d": "Day 14",
+            "title": "Kovalam-Trivandrum airport Drop.",
+            "m": "",
+            "desc": "After breakfast transfer to Trivandrum Airport to board the flight for onward destination"
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by AC vehicle",
+        "English speaking guide during sightseeing",
+        "All toll taxes, parking, state taxes and driver allowance"
+    ],
+    "faqs": [
+        {
+            "q": "What is the best time to visit?",
+            "a": "October to March is ideal as the weather is pleasant."
+        },
+        {
+            "q": "Are the monuments open every day?",
+            "a": "Most are open daily, but Taj Mahal is closed on Fridays."
+        },
+        {
+            "q": "Does the tour include guides?",
+            "a": "Yes, professional English-speaking (or language of choice) guides are provided."
+        }
+    ]
+},
+  "tour11": {
+    "title": "Kerala Spice Tour",
+    "duration": "07 Nights / 08 Days",
+    "route": "Cochin  to  Munnar  to  Periyar  to  Alleppey  to  Kovalam to  Trivendrum",
+    "destinations": "Cochin ,  Munnar ,  Periyar ,  Alleppey ,  Kovalam,  Trivendrum",
+    "img": "images/india_tours/Spice Kerala Spice Tour/alleppey-tourism.jpg",
+    "images": [
+        "images/india_tours/Spice Kerala Spice Tour/alleppey-tourism.jpg",
+        "images/india_tours/Spice Kerala Spice Tour/cochin-kerala.jpg",
+        "images/india_tours/Spice Kerala Spice Tour/Cochin.jpg",
+        "images/india_tours/Spice Kerala Spice Tour/Kovlam.jpg",
+        "images/india_tours/Spice Kerala Spice Tour/Thekkad.jpg",
+        "images/india_tours/Spice Kerala Spice Tour/Munnar-Places.webp"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrive at Cochin Airport",
+            "m": "",
+            "desc": "Arrive at Cochin International Airport. Following customs, immigration formalities and baggage collection, our representative will meet you as you exit the arrival terminal building after which you would be transferred to your hotel."
+        },
+        {
+            "d": "Day 02",
+            "title": "Cochin",
+            "m": "",
+            "desc": "After Buffet Breakfast at hotel. Morning enjoy half day sightseeing tour of Cochin. The tour allows you to explore the charming fort Cochin, visit Jewish Synagogue, Dutch Palace, Jew Town, and St Francis church."
+        },
+        {
+            "d": "Day 03",
+            "title": "Cochin- Munnar (125 kms / 04 Hrs)",
+            "m": "",
+            "desc": "After Buffet Breakfast at hotel. Morning by surface leave for Munnar. Munnar is a haven of peace and harmony. This incredibly beautiful hill town is positioned at a height of 6000ft in the Idukki district."
+        },
+        {
+            "d": "Day 04",
+            "title": "Munnar-Periyar (100 Kms / 03 Hrs)",
+            "m": "",
+            "desc": "After Buffet Breakfast at hotel. Morning visit Eravikulam National Park. The park is an ideal place for seeing the biodiversity of high elevation shola-grassland ecosystem."
+        },
+        {
+            "d": "Day 05",
+            "title": "Periyar - Alleppey (127 Kms / 04 Hrs)",
+            "m": "",
+            "desc": "After Buffet Breakfast at hotel. Morning visit to Periyar National Park Tourists come to the National Park to view the Indian elephants in the act of ablution and playfulness by the Periyar lake."
+        },
+        {
+            "d": "Day 06",
+            "title": "Alleppey – Kovalam (158 Kms / 05 Hrs)",
+            "m": "",
+            "desc": "After Buffet Breakfast at houseboat , Disembark from houseboat and by surface drive to Kovalam. Arrive at Kovalam and transfer to the hotel. Kovalam is an internationally renowned beach with three adjacent crescent beaches."
+        },
+        {
+            "d": "Day 07",
+            "title": "Kovalam",
+            "m": "",
+            "desc": "After Buffet Breakfast at hotel. Early morning you may experience yoga session on the beach. Kovalam is also a getaway destination for those in search of an Ayurvedic haven away from the cacophony of city life. The experience is personal and unique."
+        },
+        {
+            "d": "Day 08",
+            "title": "Kovalam – Trivandrum Airport Drop",
+            "m": "",
+            "desc": "Morning after breakfast, drive to Trivandrum. Afternoon visit for local shopping tour & later transfer to Trivandrum Airport and connect to onward flight journey."
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by AC vehicle",
+        "English speaking guide during sightseeing",
+        "All toll taxes, parking, state taxes and driver allowance"
+    ],
+    "faqs": [
+        {
+            "q": "What is the best time to visit?",
+            "a": "October to March is ideal as the weather is pleasant."
+        },
+        {
+            "q": "Are the monuments open every day?",
+            "a": "Most are open daily, but Taj Mahal is closed on Fridays."
+        },
+        {
+            "q": "Does the tour include guides?",
+            "a": "Yes, professional English-speaking (or language of choice) guides are provided."
+        }
+    ]
+},
+  "tour12": {
+    "title": "Srinagar with Leh Ladakh Tour",
+    "duration": "10 Nights / 11 Days",
+    "route": "Delhi – Srinagar – Pahalgam – Kargil – Leh –– Nubra – Nubra Valley to  Pangong Lake – Leh  to  Delhi",
+    "destinations": "Delhi – Srinagar – Pahalgam – Kargil – Leh –– Nubra – Nubra Valley,  Pangong Lake – Leh ,  Delhi",
+    "img": "images/india_tours/Srinagar with Leh Ladakh Tour/Gulmarg.jpg",
+    "images": [
+        "images/india_tours/Srinagar with Leh Ladakh Tour/Gulmarg.jpg",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/images nu.jpg",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/images.jpg",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/kargil-war.jpg",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/Pahalgam.jpg",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/Pan_Lake.jpg",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/vegetable-market-srinagar.jpg",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/Gulmarg.webp",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/Nubra .webp",
+        "images/india_tours/Srinagar with Leh Ladakh Tour/Srinagar.webp"
+    ],
+    "days": [
+        {
+            "d": "Day 1",
+            "title": "Delhi - Srinagar",
+            "m": "",
+            "desc": "On arrival at the Srinagar Airport, you will be welcomed by our representative who will assist and escort you to your waiting vehicle. From the airport it is a 35 minutes’ drive through the heart of New Srinagar city."
+        },
+        {
+            "d": "Day 02",
+            "title": "Srinagar - Pahalgalm – Srinagar (60 Km / 2 Hrs)",
+            "m": "",
+            "desc": "After Breakfast drive to Pahalgam and full day excursion to Pahalgam 2440 Mtrs (vale of Kashmir) on the way visit Saffron fields,  Avantipur ruins and Anantnag sulpher spring. Pahalgam is the most famous place for Indian Film Industry."
+        },
+        {
+            "d": "Day 03",
+            "title": "Srinagar – Kargil (204 Kms)",
+            "m": "",
+            "desc": "After breakfast drive directly to Kargil & drive through Sonamarg. Situated at an altitude of 9000 Ft. Sonamarg – 84 Kms is also called as “The meadow of gold” has, as its backdrop, snowy mountains against a cerulean sky."
+        },
+        {
+            "d": "Day 04",
+            "title": "Kargil - Leh  (Approx. 234 Km)",
+            "m": "",
+            "desc": "After breakfast proceed for Leh. Enroute pass the confluence of Indus – Zanskar Rivers and the effects of Magnetic Hill (Defiance of the law of gravity)."
+        },
+        {
+            "d": "Day 05",
+            "title": "Leh",
+            "m": "",
+            "desc": "After breakfast full day visit to Samker Gompa & Leh Bazaar, Leh Monastry, Shanti Stupa and Leh Palace. Tson-Kha-Pa. The Sankar Gompa shares a distance of 2-3 km from the main town of Leh."
+        },
+        {
+            "d": "Day 06",
+            "title": "Leh – Nubra Valley",
+            "m": "",
+            "desc": "This morning drive to Nubra valley. On arrival check in camp. In Afternoon visit the popular Samasthanling Monastery at Sumoor followed by dinner and overnight camp."
+        },
+        {
+            "d": "Day 07",
+            "title": "Nubra Valley",
+            "m": "",
+            "desc": "Nubra Valley is a wonderful place. Nubra Valley has extremely cold tempertatures during the winter, but the scenario all around is so mesmerizing that it has become a favorite tourist spot in Jammu and Kashmir."
+        },
+        {
+            "d": "Day 08",
+            "title": "Nubra Valley – Pangong Lake",
+            "m": "",
+            "desc": "After early Breakfast drive to Pangong Lake. On arrival check in to the camp."
+        },
+        {
+            "d": "Day 09",
+            "title": "Pangong Lake - Leh",
+            "m": "",
+            "desc": "After breakfast drive to Leh. On arrival, check in hotel in afternoon. Take rest than evening is at leisure. Overnight stay at hotel in Leh."
+        },
+        {
+            "d": "Day 10",
+            "title": "Leh – Delhi By Flight",
+            "m": "",
+            "desc": "After breakfast drop at Leh airport for onward journey."
+        },
+        {
+            "d": "Day 11",
+            "title": "- Leave Delhi",
+            "m": "",
+            "desc": "After breakfast transferred to the international airport for your flight back home, marking the end of your wonderful journey through India"
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by AC vehicle",
+        "English speaking guide during sightseeing",
+        "All toll taxes, parking, state taxes and driver allowance"
+    ],
+    "faqs": [
+        {
+            "q": "What is the best time to visit?",
+            "a": "October to March is ideal as the weather is pleasant."
+        },
+        {
+            "q": "Are the monuments open every day?",
+            "a": "Most are open daily, but Taj Mahal is closed on Fridays."
+        },
+        {
+            "q": "Does the tour include guides?",
+            "a": "Yes, professional English-speaking (or language of choice) guides are provided."
+        }
+    ]
+  },
+  "nepal1": {
+    "title": "Honeymoon in Nepal & Bhutan Tour",
+    "duration": "09 Nights / 10 Days",
+    "route": "Kathmandu → Nagarkot → Pokhara → Kathmandu → Thimpu → Paro",
+    "destinations": "Kathmandu, Nagarkot, Pokhara, Thimpu, Paro",
+    "img": "images/nepal_tours/KTM.jpg",
+    "images": [
+        "images/nepal_tours/Bhutan.webp",
+        "images/nepal_tours/KTM 4.jpg",
+        "images/nepal_tours/KTM.jpg",
+        "images/nepal_tours/KTM2.jpg",
+        "images/nepal_tours/KTM5.avif",
+        "images/nepal_tours/nagarkot2.jpg",
+        "images/nepal_tours/Nagarkot3pg.jpg",
+        "images/nepal_tours/PKR.webp",
+        "images/nepal_tours/Thimp.avif",
+        "images/nepal_tours/thimpus.jpg",
+        "images/nepal_tours/THK.jpg"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrive at Kathmandu",
+            "desc": "Arrive at Tribhuvan International Airport. Transfer to your hotel."
+        },
+        {
+            "d": "Day 02",
+            "title": "Kathmandu Sightseeing",
+            "desc": "Full day sightseeing in Kathmandu visiting Pashupatinath Temple, Boudhanath Stupa, and Swayambhunath Stupa."
+        },
+        {
+            "d": "Day 03",
+            "title": "Kathmandu - Nagarkot",
+            "desc": "Drive to Nagarkot to enjoy sunset views over the Himalayas."
+        },
+        {
+            "d": "Day 04",
+            "title": "Nagarkot - Pokhara",
+            "desc": "Sunrise view from Nagarkot. Drive to Pokhara. Check-in at hotel."
+        },
+        {
+            "d": "Day 05",
+            "title": "Pokhara Sightseeing",
+            "desc": "Early morning drive to Sarangkot for sunrise. Later visit Bindabasini Temple, Davis Fall, Gupteshwor Cave."
+        },
+        {
+            "d": "Day 06",
+            "title": "Pokhara - Kathmandu",
+            "desc": "Drive back to Kathmandu. Evening free for shopping in Thamel."
+        },
+        {
+            "d": "Day 07",
+            "title": "Kathmandu - Paro - Thimpu",
+            "desc": "Fly to Paro, Bhutan. Transfer to Thimpu."
+        },
+        {
+            "d": "Day 08",
+            "title": "Thimpu Sightseeing",
+            "desc": "Explore Thimpu visiting Memorial Chorten, Tashichho Dzong, and Buddha Dordenma."
+        },
+        {
+            "d": "Day 09",
+            "title": "Thimpu - Paro",
+            "desc": "Drive back to Paro. Visit Taktsang Monastery (Tiger's Nest)."
+        },
+        {
+            "d": "Day 10",
+            "title": "Departure",
+            "desc": "Transfer to Paro Airport for your onward flight."
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast",
+        "Airport transfers and sightseeing by private vehicle",
+        "English speaking guide in Bhutan"
+    ],
+    "faqs": []
+},
+  "nepal2": {
+    "title": "KPC Nepal 07 Nights Tour",
+    "duration": "07 Nights / 08 Days",
+    "route": "Kathmandu → Chitwan → Pokhara → Kathmandu",
+    "destinations": "Kathmandu, Chitwan, Pokhara",
+    "img": "images/nepal_tours/PKR.webp",
+    "images": [
+        "images/nepal_tours/CHK.jpg",
+        "images/nepal_tours/CHK2.jpg",
+        "images/nepal_tours/KTM.jpg",
+        "images/nepal_tours/KTM2.jpg",
+        "images/nepal_tours/KTM5.avif",
+        "images/nepal_tours/nagarkot2.jpg",
+        "images/nepal_tours/Nagarkot3pg.jpg",
+        "images/nepal_tours/PKR.webp"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrival Kathmandu",
+            "desc": "Meeting assistance on arrival. Transfer to the Hotel."
+        },
+        {
+            "d": "Day 02",
+            "title": "Kathmandu",
+            "desc": "Morning half-day sightseeing of Kathmandu City & Swayambhunath. Afternoon free."
+        },
+        {
+            "d": "Day 03",
+            "title": "Kathmandu - Chitwan",
+            "desc": "Drive to Chitwan (145 kms/ 4-5 Hrs). Afternoon jungle activities."
+        },
+        {
+            "d": "Day 04",
+            "title": "Chitwan - Pokhara",
+            "desc": "Drive to Pokhara (150 kms/ 4-5 Hrs). Check-in at hotel. Evening walk around Fewa Lake."
+        },
+        {
+            "d": "Day 05",
+            "title": "Pokhara",
+            "desc": "Early morning drive to Sarangkot for sunrise. Later half-day city tour of Pokhara."
+        },
+        {
+            "d": "Day 06",
+            "title": "Pokhara - Kathmandu",
+            "desc": "Drive back to Kathmandu. Rest of the day free."
+        },
+        {
+            "d": "Day 07",
+            "title": "Kathmandu",
+            "desc": "Full day sightseeing of Patan & Bhaktapur."
+        },
+        {
+            "d": "Day 08",
+            "title": "Departure",
+            "desc": "Transfer to international airport for your departure flight."
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast",
+        "All jungle activities in Chitwan with all meals",
+        "Transfers and sightseeing by private AC vehicle"
+    ],
+    "faqs": []
+},
+  "bhutan1": {
+    "title": "Land of Thunder Dragon Bhutan Tour",
+    "duration": "03 Nights / 04 Days",
+    "route": "Paro → Thimphu → Punakha → Paro",
+    "destinations": "Paro, Thimphu, Punakha",
+    "img": "images/bhutan_tours/thimpus.jpg",
+    "images": [
+        "images/bhutan_tours/Bhutan.webp",
+        "images/bhutan_tours/Thimp.avif",
+        "images/bhutan_tours/thimpus.jpg",
+        "images/bhutan_tours/THK.jpg"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrive Paro - Thimphu",
+            "desc": "Arrive at Paro. Meet our representative and drive to Thimphu, the capital town of Bhutan. Check into the hotel and enjoy an exploratory walk around Thimphu's main street."
+        },
+        {
+            "d": "Day 02",
+            "title": "Thimphu Sightseeing - Punakha",
+            "desc": "Visit Textile Museum, Simply Bhutan Museum, and Buddha Point. Later drive to Punakha across Dochu-la pass for stunning Himalayan views."
+        },
+        {
+            "d": "Day 03",
+            "title": "Punakha - Paro",
+            "desc": "Visit Punakha Dzong, the most beautiful dzong in Bhutan. Then drive back to Paro and visit Ta Dzong (National Museum) and Rinpung Dzong."
+        },
+        {
+            "d": "Day 04",
+            "title": "Paro - Departure",
+            "desc": "After breakfast, transfer to Paro Airport for your onward flight."
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by private vehicle",
+        "English speaking guide in Bhutan"
+    ],
+    "faqs": [
+        {
+            "q": "Do I need a visa to visit Bhutan?",
+            "a": "Yes, all international tourists (except Indians, Bangladeshis, and Maldivians) require a visa which must be pre-arranged through a licensed tour operator."
+        },
+        {
+            "q": "What is the best time to visit Bhutan?",
+            "a": "The ideal time to visit is during spring (March to May) and autumn (September to November) when the weather is pleasant and skies are clear."
+        },
+        {
+            "q": "What currency is used in Bhutan?",
+            "a": "The Bhutanese Ngultrum (BTN) is the official currency. Indian Rupees (INR) are also widely accepted."
+        }
+    ]
+},
+  "srilanka1": {
+    "title": "Classical Sri Lanka Tour",
+    "duration": "06 Nights / 07 Days",
+    "route": "Colombo → Pinnawala → Kandy → Nuwara Eliya → Bentota → Colombo",
+    "destinations": "Colombo, Kandy, Nuwara Eliya, Bentota",
+    "img": "images/srilanka_tours/Sri-Lanka.jpg",
+    "images": [
+        "images/srilanka_tours/colombo-01jpg.jpg",
+        "images/srilanka_tours/Elephant.jpg",
+        "images/srilanka_tours/kandy_1254.jpg",
+        "images/srilanka_tours/nuwaraeliya.jpg",
+        "images/srilanka_tours/Pinnawala_56.jpg",
+        "images/srilanka_tours/Sri-Lanka.jpg",
+        "images/srilanka_tours/Tea_PLT.jpg"
+    ],
+    "days": [
+        {
+            "d": "Day 01",
+            "title": "Arrive at Colombo",
+            "desc": "Arrive in Colombo and transfer to your hotel. Relax and enjoy the rest of the day at your leisure."
+        },
+        {
+            "d": "Day 02",
+            "title": "Colombo - Pinnawala - Kandy",
+            "desc": "After breakfast, proceed to Kandy via the Pinnawala Elephant Orphanage. Check into the hotel in Kandy and visit the Temple of the Sacred Tooth Relic."
+        },
+        {
+            "d": "Day 03",
+            "title": "Kandy - Nuwara Eliya",
+            "desc": "Drive to Nuwara Eliya, the 'Little England' of Sri Lanka. En route visit a tea plantation and factory. Enjoy the cool climate and stunning scenery."
+        },
+        {
+            "d": "Day 04",
+            "title": "Nuwara Eliya - Bentota",
+            "desc": "Proceed to the coastal town of Bentota. Relax by the beach or enjoy water sports activities."
+        },
+        {
+            "d": "Day 05",
+            "title": "Bentota Sightseeing",
+            "desc": "Enjoy a full day of leisure in Bentota. Optional river safari on the Madu Ganga or visit a turtle hatchery."
+        },
+        {
+            "d": "Day 06",
+            "title": "Bentota - Colombo",
+            "desc": "Return to Colombo for a city tour. Visit Fort, Pettah, Galle Face Green, and do some shopping."
+        },
+        {
+            "d": "Day 07",
+            "title": "Departure",
+            "desc": "After breakfast, transfer to the airport for your onward flight."
+        }
+    ],
+    "inclusions": [
+        "Accommodation on twin sharing basis",
+        "Daily Breakfast at hotels",
+        "Transfers and sightseeing by private AC vehicle",
+        "English speaking chauffeur guide"
+    ],
+    "faqs": [
+        {
+            "q": "What is the best time to visit Sri Lanka?",
+            "a": "The best time is generally from December to March for the west and south coasts, and May to September for the east coast."
+        },
+        {
+            "q": "Do I need a visa?",
+            "a": "Yes, most nationalities need an ETA (Electronic Travel Authorization) to enter Sri Lanka, which can be applied for online."
+        }
+    ]
+}
+};
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const tourId = urlParams.get('id') || 'tour1';
+  const tour = toursData[tourId];
+
+  // Merge Korean translations when language is set to Korean (ko)
+  const mtLangNow = (function(){ try { return localStorage.getItem('mt_lang') || 'en'; } catch(e){ return 'en'; } })();
+  const useTour = (mtLangNow === 'ko' && typeof TOURS_KO !== 'undefined' && TOURS_KO[tourId])
+    ? Object.assign({}, toursData[tourId], TOURS_KO[tourId])
+    : toursData[tourId];
+
+  if(useTour) {
+      const tour = useTour;
+      document.getElementById('breadcrumbText').innerText = (mtLangNow === 'ko' ? '홈 / 인도 / ' : "Home / India / ") + tour.title;
+      document.getElementById('tourTitle').innerText = tour.title;
+      document.getElementById('tourRoute').innerText = tour.route.replace(/ to /g, ' → ');
+      document.getElementById('tourDuration').innerText = tour.duration;
+      document.getElementById('tourDestinations').innerText = tour.destinations;
+      
+      const imgEl = document.getElementById('tourImage');
+      let slideshowImages = (tour.images && tour.images.length > 0) ? tour.images : [tour.img];
+      let currentImgIdx = 0;
+      let slideInterval;
+      
+      function changeImage(newIdx) {
+          imgEl.style.opacity = 0;
+          setTimeout(() => {
+              currentImgIdx = newIdx;
+              imgEl.src = slideshowImages[currentImgIdx];
+              imgEl.style.opacity = 1;
+          }, 800);
+      }
+      
+      window.nextImage = function() {
+          clearInterval(slideInterval);
+          changeImage((currentImgIdx + 1) % slideshowImages.length);
+          startAutoSlide();
+      };
+      
+      window.prevImage = function() {
+          clearInterval(slideInterval);
+          changeImage((currentImgIdx - 1 + slideshowImages.length) % slideshowImages.length);
+          startAutoSlide();
+      };
+      
+      function startAutoSlide() {
+          if (slideshowImages.length > 1) {
+              document.getElementById('sliderArrows').style.display = 'block';
+              slideInterval = setInterval(() => {
+                  changeImage((currentImgIdx + 1) % slideshowImages.length);
+              }, 10000);
+          } else {
+              document.getElementById('sliderArrows').style.display = 'none';
+          }
+      }
+
+      imgEl.src = slideshowImages[0];
+      imgEl.style.opacity = 1;
+      startAutoSlide();
+
+      document.title = tour.title + " | Maru Travel India";
+
+      const lang = localStorage.getItem('mt_lang') || 'en';
+    const lbl = {
+      route: lang === 'ko' ? '경로' : 'Route',
+      duration: lang === 'ko' ? '기간' : 'Duration',
+      destinations: lang === 'ko' ? '목적지:' : 'Destinations:',
+      enquire: lang === 'ko' ? '문의하기' : 'Enquire Now',
+      download: lang === 'ko' ? '일정 다운로드' : 'Download Itinerary',
+      itinerary: lang === 'ko' ? '세부 일정' : 'Itinerary',
+      inclusions: lang === 'ko' ? '포함 사항' : 'Inclusions',
+      faq: lang === 'ko' ? '자주 묻는 질문' : 'Frequently Asked Questions',
+      contact: lang === 'ko' ? '이 투어에 관심이 있으신가요?' : 'Interested in this tour?',
+      contactSub: lang === 'ko' ? '맞춤 견적 및 세부 일정을 받으려면 문의하세요.' : 'Contact us to get a custom quote and detailed itinerary.',
+      contactBtn: lang === 'ko' ? '연락하기' : 'Get in Touch',
+      back: lang === 'ko' ? '← 투어 목록으로' : '← Back to Tours',
+    };
+    let daysHtml = '';
+      tour.days.forEach(function(day, index) {
+          daysHtml += '<div class="day-row ' + (index === 0 ? 'active' : '') + '" onmouseenter="moveCar(this)">' +
+            '<div class="day-col-left"><div class="day-number">' + day.d + '</div></div>' +
+            '<div class="day-col-right">' +
+              '<div class="timeline-dot"></div>' +
+              '<div class="day-content">' +
+                '<h3>' + day.title + '</h3>' +
+                '<div class="day-desc-hidden"><p>' + (day.text || day.desc || '') + '</p></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+      });
+      document.getElementById('daysContainer').innerHTML = daysHtml;
+
+      // Render FAQs
+      if(tour.faqs) {
+        let faqHtml = '<div class="faq-section"><h2 data-i18n="itin.faq">Frequently Asked Questions</h2>';
+        tour.faqs.forEach(function(faq, i) {
+          faqHtml += '<div class="faq-item" onclick="this.classList.toggle(\'open\')">' +
+            '<h4>' + faq.q + ' <i class="fas fa-chevron-down"></i></h4>' +
+            '<div class="faq-answer">' + faq.a + '</div>' +
+            '</div>';
+        });
+        faqHtml += '</div>';
+        document.getElementById('faqContainer').innerHTML = faqHtml;
+      }
+
+      if(typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(document.querySelectorAll(".day-content"), { max: 3, speed: 400, glare: true, "max-glare": 0.1 });
+        VanillaTilt.init(document.querySelectorAll(".itinerary-top-card"), { max: 2, speed: 500, glare: true, "max-glare": 0.05 });
+      }
+      
+      // Update hidden field in forms
+      document.getElementById('dl_tour').value = tour.title;
+      if(document.getElementById('enq_tour')) {
+        document.getElementById('enq_tour').value = tour.title;
+      }
+  }
+
+  function moveCar(dayRow) {
+      var car = document.getElementById('travelCar');
+      var containerTop = document.querySelector('.timeline-modern').getBoundingClientRect().top;
+      var rowTop = dayRow.getBoundingClientRect().top;
+      var offset = rowTop - containerTop + 20;
+      car.style.transform = "translateY(" + offset + "px)";
+      document.querySelectorAll('.day-row').forEach(function(row) {
+          if(row !== dayRow) row.classList.remove('active');
+      });
+      dayRow.classList.add('active');
+  }
+
+  setTimeout(function() {
+      var firstDay = document.querySelector('.day-row');
+      if(firstDay) moveCar(firstDay);
+  }, 100);
+
+  function openEnquiryModal() {
+    document.getElementById('enquiryModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeEnquiryModal() {
+    document.getElementById('enquiryModal').classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  // ====== DOWNLOAD MODAL ======
+  function openDownloadModal() {
+    document.getElementById('downloadModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDownloadModal() {
+    document.getElementById('downloadModal').classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
+
+  document.getElementById('downloadForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop normal form submit
+
+    const form = e.target;
+    const btn = form.querySelector('.download-submit-btn');
+    const resultDiv = document.getElementById('dl_result');
+    
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    btn.disabled = true;
+    resultDiv.style.display = 'block';
+    resultDiv.style.color = '#1a5276';
+    resultDiv.innerText = 'Sending details...';
+
+    const formData = new FormData(form);
+    
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(async (response) => {
+        if (response.status == 200) {
+            resultDiv.style.color = '#28a745';
+            resultDiv.innerText = 'Success! Downloading PDF...';
+            
+        // Trigger PDF Download
+        var fileUrl = tourFiles[tourId];
+        if(fileUrl) {
+          var a = document.createElement('a');
+          a.href = fileUrl;
+          a.download = tour.title.replace(/[^a-zA-Z0-9]/g, '_') + '.pdf';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+
+        setTimeout(() => {
+            closeDownloadModal();
+            form.reset();
+            btn.innerHTML = '<i class="fas fa-download"></i> Submit & Download PDF';
+            btn.disabled = false;
+            resultDiv.style.display = 'none';
+        }, 2000);
+    } else {
+        let json = await response.json();
+        throw new Error(json.message || "Something went wrong!");
+    }
+})
+.catch(error => {
+    resultDiv.style.color = 'red';
+    resultDiv.innerText = 'Error: ' + error.message;
+    btn.innerHTML = '<i class="fas fa-download"></i> Submit & Download PDF';
+    btn.disabled = false;
+});
+});
+
+document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+e.preventDefault(); // Stop normal form submit
+
+const form = e.target;
+const btn = form.querySelector('.btn-email');
+const resultDiv = document.getElementById('enq_result');
+
+btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+btn.disabled = true;
+resultDiv.style.display = 'block';
+resultDiv.style.color = '#1a5276';
+resultDiv.innerText = 'Sending enquiry...';
+
+const formData = new FormData(form);
+
+fetch(form.action, {
+    method: 'POST',
+    body: formData
+})
+.then(async (response) => {
+    if (response.status == 200) {
+        resultDiv.style.color = '#28a745';
+        resultDiv.innerText = 'Success! We will contact you soon.';
+        
+        setTimeout(() => {
+            closeEnquiryModal();
+            form.reset();
+            btn.innerHTML = '&#9993; Submit Enquiry';
+            btn.disabled = false;
+            resultDiv.style.display = 'none';
+        }, 2500);
+    } else {
+        let json = await response.json();
+        throw new Error(json.message || "Something went wrong!");
+    }
+})
+.catch(error => {
+    resultDiv.style.color = 'red';
+    resultDiv.innerText = 'Error: ' + error.message;
+    btn.innerHTML = '&#9993; Submit Enquiry';
+    btn.disabled = false;
+});
+});
+
+</script>
+
+<script>
+// Animated counter for end-message stats
+const animateCounters = () => {
+  document.querySelectorAll('.end-stat-num').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toLocaleString() + (target >= 1000 ? '+' : '+');
+    }, 16);
+  });
+};
+
+const endObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounters();
+      endObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+const endEl = document.querySelector('.end-message');
+if (endEl) endObserver.observe(endEl);
+</script>
+
+<script>
+(function () {
+  var header = document.querySelector('.site-header');
+  if (!header) return;
+  var onScroll = function () {
+    if (window.scrollY > 60) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
+
+
+
+
+
+

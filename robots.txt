@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /login*.html
+Disallow: /site_join*.html
+
+Sitemap: https://www.marutravel.in/sitemap.xml

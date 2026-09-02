@@ -1,0 +1,1397 @@
+/**
+ * =================================================================
+ *  MARU TRAVEL — CONCIERGE CHATBOT WIDGET
+ * =================================================================
+ *
+ *  A self-contained, dependency-free (besides Font Awesome, which
+ *  the host site already loads for the icons) floating chatbot
+ *  widget for marutravel.in.
+ *
+ *  WHAT THIS FILE DOES
+ *  --------------------------------------------------------------
+ *  1. Injects its own <style> block — no external CSS file needed.
+ *  2. Injects its own DOM (floating button + chat window).
+ *  3. Presents a categorized menu (About Us, Our Services,
+ *     Certifications, Why Choose Us, Mission & Vision,
+ *     Destinations, Booking & Contact) instead of one long flat
+ *     list — so the conversation feels guided, not overwhelming.
+ *  4. Simulates a short "typing…" delay before each bot reply so
+ *     the conversation feels natural rather than instant/robotic.
+ *  5. Remembers the open/closed state and message history for the
+ *     current browser session (sessionStorage) so navigating
+ *     between pages on the site doesn't reset the conversation.
+ *  6. Offers a "Didn't find your answer?" fallback that captures
+ *     name + phone/email + question, so leads are never lost.
+ *  7. Always keeps a persistent "Chat on WhatsApp" shortcut for
+ *     visitors who'd rather talk to a human right away.
+ *
+ *  HOW TO INSTALL
+ *  --------------------------------------------------------------
+ *  Add this line before the closing </body> tag of every page:
+ *
+ *      <script src="/maru-chatbot.js" defer></script>
+ *
+ *  Font Awesome must already be loaded on the page (the original
+ *  Maru Travel site already includes it). No other dependency is
+ *  required — this file is plain vanilla JavaScript.
+ *
+ *  HOW TO EDIT THE KNOWLEDGE BASE
+ *  --------------------------------------------------------------
+ *  Everything the bot "knows" lives in the CONFIG section below,
+ *  inside `MaruConfig.categories`. Each category is a named group
+ *  of question/answer pairs. To add a new question, copy an
+ *  existing `{ q: "...", a: "..." }` object inside the right
+ *  category and edit the text — no other code needs to change.
+ *
+ * =================================================================
+ */
+
+(function () {
+  "use strict";
+
+  /* ===============================================================
+   *  SECTION 1 — CONFIGURATION
+   *  All editable content (company info, contact details, and the
+   *  full FAQ knowledge base) lives here, separate from the logic
+   *  that renders it. Update this section to change what the bot
+   *  says without touching anything below it.
+   * =============================================================== */
+
+  var MaruConfig = {
+
+    /* ---- Brand basics -------------------------------------------------- */
+    brand: {
+      name: "Maru Travel",
+      tagline: "Curating Exceptional Journeys",
+      botName: "Maru Concierge",
+      botStatus: "Online & ready to help",
+      avatarIcon: "fa-concierge-bell",
+      accentGradientFrom: "#c9a84c",
+      accentGradientTo: "#b3923c",
+      headerGradientFrom: "#1c2b3a",
+      headerGradientTo: "#152342"
+    },
+
+    /* ---- Contact channels ------------------------------------------------
+     * Used both in answers and in the fixed "Chat on WhatsApp" bar and
+     * the contact-capture fallback flow.
+     * --------------------------------------------------------------- */
+    contact: {
+      whatsappNumber: "919891587778",
+      whatsappDisplay: "+91 98915 87778",
+      email: "tejinder@marutravel.in",
+      phoneDisplay: "+91 98915 87778",
+      addressLine1: "6A, First Floor, Uttam Nagar Main Rd,",
+      addressLine2: "Near Metro Pillar No. 666, New Delhi - 110059",
+      website: "http://localhost:8080/index.html",
+      aboutUsPage: "http://localhost:8080/about_us.html",
+      toursAnchor: "http://localhost:8080/index.html#tours",
+      trainsAnchor: "http://localhost:8080/index.html#trains",
+      destinationsAnchor: "http://localhost:8080/index.html#explore"
+    },
+
+    /* ---- Opening message shown the first time the chat window opens --- */
+    greeting:
+      "Namaste! \uD83D\uDE4F Welcome to Maru Travel. I'm the Maru Concierge — " +
+      "ask me anything about our company, our services, or how to plan your " +
+      "next trip. Pick a topic below to get started.",
+
+    /* ---- Small talk the bot recognizes before falling back to menu ---- */
+    smallTalk: [
+      {
+        triggers: ["hi", "hello", "hey", "namaste", "good morning", "good evening"],
+        reply: "Hello there! \uD83D\uDC4B How can I help you plan your journey today? Feel free to pick a topic below."
+      },
+      {
+        triggers: ["thank you", "thanks", "thank u", "thankyou"],
+        reply: "You're most welcome! Is there anything else you'd like to know about Maru Travel?"
+      },
+      {
+        triggers: ["bye", "goodbye", "see you"],
+        reply: "Thank you for chatting with Maru Travel! We look forward to planning your next journey. \uD83C\uDF0D"
+      }
+    ],
+
+    /* ---- Full categorized knowledge base -------------------------------
+     * Each category has:
+     *   id       - internal identifier
+     *   label    - shown on the menu button
+     *   icon     - Font Awesome class
+     *   intro    - short line shown when the category opens
+     *   questions[] - list of { q, a } pairs
+     * --------------------------------------------------------------- */
+    categories: [
+      {
+        id: "about",
+        label: "About Maru Travel",
+        icon: "fa-building",
+        intro: "Here's a bit about who we are and how we started.",
+        questions: [
+          {
+            q: "What is Maru Travel?",
+            a: "Maru Travel is a trusted destination management and travel " +
+               "solutions company specializing in both Inbound and Outbound " +
+               "Tourism. We craft customized travel experiences for leisure " +
+               "travelers, families, honeymooners, corporate clients, " +
+               "educational groups, and special interest tours."
+          },
+          {
+            q: "When was Maru Travel founded?",
+            a: "Maru Travel was founded in 2023 by Mr. Tejinder Pal Singh, " +
+               "built on more than 20 years of his professional experience " +
+               "in the global travel industry."
+          },
+          {
+            q: "Who is Mr. Tejinder Pal Singh?",
+            a: "Mr. Tejinder Pal Singh is the Founder & Managing Director of " +
+               "Maru Travel. Before starting Maru Travel, he held key " +
+               "positions at some of the travel industry's most respected " +
+               "multinational companies, including Thomas Cook, TCI, and " +
+               "other leading travel organizations."
+          },
+          {
+            q: "What inspired the creation of Maru Travel?",
+            a: "Mr. Singh's extensive industry knowledge, strong global " +
+               "network, and passion for delivering exceptional travel " +
+               "experiences inspired him to build a company that puts " +
+               "personalized service first — that company is Maru Travel."
+          },
+          {
+            q: "What kind of travelers do you work with?",
+            a: "We work with leisure travelers, families, honeymooners, " +
+               "corporate clients, educational groups, and special interest " +
+               "tour groups — essentially anyone looking for a well-planned, " +
+               "personalized journey."
+          },
+          {
+            q: "Which regions do you specialize in?",
+            a: "Our core expertise is across Asia, where we've built strong " +
+               "destination knowledge and reliable local partnerships. As " +
+               "part of our global expansion, we now also offer curated " +
+               "travel experiences throughout North America and South " +
+               "America."
+          }
+        ]
+      },
+
+      {
+        id: "services",
+        label: "Our Services",
+        icon: "fa-suitcase-rolling",
+        intro: "Here's everything we can take care of for your trip.",
+        questions: [
+          {
+            q: "What services does Maru Travel offer?",
+            a: "We offer a full suite of travel services: Inbound & " +
+               "Outbound Tour Packages, International & Domestic Holiday " +
+               "Packages, Flight Reservations, Hotel Bookings, Visa " +
+               "Assistance, Travel Insurance, Airport Transfers & Ground " +
+               "Transportation, Corporate & Group Travel, and Customized " +
+               "Travel Itineraries."
+          },
+          {
+            q: "Do you handle both inbound and outbound tours?",
+            a: "Yes — we design Inbound & Outbound Tour Packages, so " +
+               "whether travelers are coming into India or heading abroad, " +
+               "we can plan the full itinerary end to end."
+          },
+          {
+            q: "Can you book my flights and hotels?",
+            a: "Absolutely. We provide Flight Reservations and Hotel " +
+               "Bookings as part of our end-to-end trip-planning service, " +
+               "so you don't have to coordinate multiple vendors yourself."
+          },
+          {
+            q: "Do you help with visas?",
+            a: "Yes, Visa Assistance is one of our core services. We guide " +
+               "you through the documentation and application process for " +
+               "your destination."
+          },
+          {
+            q: "Do you offer travel insurance?",
+            a: "Yes, Travel Insurance is available as part of our travel " +
+               "solutions, so you can travel with extra peace of mind."
+          },
+          {
+            q: "Can you arrange airport transfers?",
+            a: "Yes — Airport Transfers & Ground Transportation are " +
+               "included in our services, so your journey is seamless from " +
+               "the moment you land."
+          },
+          {
+            q: "Do you handle corporate or group travel?",
+            a: "Yes, we manage Corporate & Group Travel, including " +
+               "coordinated logistics for larger groups and business " +
+               "delegations."
+          },
+          {
+            q: "Can you create a fully customized itinerary for me?",
+            a: "Yes — Customized Travel Itineraries are at the heart of " +
+               "what we do. Tell us your preferences, budget, and travel " +
+               "dates, and our team will design a personalized plan."
+          }
+        ]
+      },
+
+      {
+        id: "certifications",
+        label: "Certifications & Recognition",
+        icon: "fa-award",
+        intro: "A few of the credentials that back our promises.",
+        questions: [
+          {
+            q: "Is Maru Travel a certified travel company?",
+            a: "Yes. Maru Travel is recognized and certified by the " +
+               "International Air Transport Association (IATA), the " +
+               "Ministry of Tourism, Government of India, and Delhi " +
+               "Tourism as an Official Tourism Partner."
+          },
+          {
+            q: "What is your IATA certification?",
+            a: "We are certified by the International Air Transport " +
+               "Association (IATA), a globally recognized standard for " +
+               "travel agencies handling flight bookings and airline " +
+               "partnerships."
+          },
+          {
+            q: "Are you recognized by the Government of India?",
+            a: "Yes, we are recognized by the Ministry of Tourism, " +
+               "Government of India, reflecting our compliance with " +
+               "national tourism standards."
+          },
+          {
+            q: "What does the Delhi Tourism partnership mean?",
+            a: "We hold Official Tourism Partner status with Delhi " +
+               "Tourism, which recognizes our commitment to quality " +
+               "service and ethical business practices in the region."
+          },
+          {
+            q: "Why do these certifications matter to me as a traveler?",
+            a: "These recognitions reflect our commitment to quality, " +
+               "reliability, ethical business practices, and customer " +
+               "satisfaction — so you can book with confidence."
+          }
+        ]
+      },
+
+      {
+        id: "whyus",
+        label: "Why Choose Maru Travel?",
+        icon: "fa-star",
+        intro: "A quick summary of what sets us apart.",
+        questions: [
+          {
+            q: "How many years of experience does Maru Travel have?",
+            a: "Our leadership brings 20+ years of travel industry " +
+               "expertise, gained at major global travel organizations " +
+               "before founding Maru Travel."
+          },
+          {
+            q: "Is Maru Travel run by experienced professionals?",
+            a: "Yes — Maru Travel was founded by an experienced travel " +
+               "professional, Mr. Tejinder Pal Singh, who previously held " +
+               "senior roles at companies like Thomas Cook and TCI."
+          },
+          {
+            q: "Are you specialists in Asia travel?",
+            a: "Yes, we are specialists in destinations across Asia, with " +
+               "deep local knowledge and dependable on-ground partnerships " +
+               "throughout the region."
+          },
+          {
+            q: "Do you operate outside Asia as well?",
+            a: "Yes — as part of our global expansion, we are extending our " +
+               "travel solutions across North & South America, in " +
+               "addition to our core strength in Asia."
+          },
+          {
+            q: "Is Maru Travel a certified company?",
+            a: "Yes, we are a government-recognized and industry-certified " +
+               "company, backed by IATA, the Ministry of Tourism, and " +
+               "Delhi Tourism."
+          },
+          {
+            q: "Will my trip be personalized to my needs?",
+            a: "Yes — we provide personalized travel planning with " +
+               "competitive pricing, tailoring every itinerary to your " +
+               "preferences rather than offering one-size-fits-all " +
+               "packages."
+          },
+          {
+            q: "What kind of support can I expect during my trip?",
+            a: "We provide dedicated customer support from the planning " +
+               "stage all the way through to your return journey, so " +
+               "you're never left without help."
+          }
+        ]
+      },
+
+      {
+        id: "missionvision",
+        label: "Our Mission & Vision",
+        icon: "fa-bullseye",
+        intro: "What drives Maru Travel every day.",
+        questions: [
+          {
+            q: "What is Maru Travel's mission?",
+            a: "Our mission is to deliver exceptional travel experiences " +
+               "through personalized service, expert guidance, and " +
+               "innovative travel solutions that inspire confidence and " +
+               "create unforgettable memories."
+          },
+          {
+            q: "What is Maru Travel's vision?",
+            a: "Our vision is to become a globally trusted travel company, " +
+               "recognized for excellence, integrity, and customer " +
+               "satisfaction while connecting travelers to the world's " +
+               "most inspiring destinations."
+          }
+        ]
+      },
+
+      {
+        id: "destinations",
+        label: "Destinations We Cover",
+        icon: "fa-globe-asia",
+        intro: "Where we can take you, near and far.",
+        questions: [
+          {
+            q: "Which destinations do you cover?",
+            a: "Our core strength is across Asia including the Indian " +
+               "subcontinent, and we now also offer curated travel " +
+               "experiences throughout North America and South America as " +
+               "part of our global expansion."
+          },
+          {
+            q: "Do you offer luxury train journeys?",
+            a: "Yes, luxury train experiences (such as the Maharaja " +
+               "Express) are part of our curated offerings — you can view " +
+               "more under the Luxury Trains section of our website."
+          },
+          {
+            q: "Do you plan honeymoon trips?",
+            a: "Yes, honeymoon trips are one of our specialties, designed " +
+               "as a personalized, romantic itinerary for couples."
+          },
+          {
+            q: "Do you organize wildlife safaris?",
+            a: "Yes, wildlife safaris are among the special interest tours " +
+               "we curate, alongside cultural and adventure travel " +
+               "experiences."
+          }
+        ]
+      },
+
+      {
+        id: "booking",
+        label: "Booking & Contact",
+        icon: "fa-headset",
+        intro: "How to reach us and get your trip started.",
+        questions: [
+          {
+            q: "How can I contact Maru Travel?",
+            a: "You can reach us directly via WhatsApp at " +
+               "" + "+91 9891587778, or email us at tejinder@marutravel.in. " +
+               "You can also use the WhatsApp button at the top of this " +
+               "chat window."
+          },
+          {
+            q: "Where is your office located?",
+            a: "Our head office is at 6A, First Floor, Uttam Nagar Main " +
+               "Rd, Near Metro Pillar No. 666, New Delhi - 110059."
+          },
+          {
+            q: "How do I start planning a trip with you?",
+            a: "The fastest way is to message us on WhatsApp or email " +
+               "tejinder@marutravel.in with your preferred destination, " +
+               "travel dates, and number of travelers — our team will get " +
+               "back to you with a personalized itinerary."
+          },
+          {
+            q: "Do you provide corporate travel invoicing?",
+            a: "Yes, for Corporate & Group Travel we can coordinate " +
+               "invoicing and documentation suited to business travel " +
+               "requirements — just mention this when you reach out."
+          }
+        ]
+      }
+    ]
+  };
+
+  /* ===============================================================
+   *  SECTION 2 — STYLES
+   *  All widget CSS, scoped under the `.maru-chatbot` root so it
+   *  cannot leak into or be affected by the host page's styles.
+   * =============================================================== */
+
+  var STYLE_TEXT = [
+    ".maru-chatbot, .maru-chatbot * { box-sizing: border-box; }",
+
+    ".maru-chatbot {",
+    "  position: fixed;",
+    "  bottom: 24px;",
+    "  right: 24px;",
+    "  z-index: 999999;",
+    "  font-family: 'Manrope', 'Segoe UI', Arial, sans-serif;",
+    "}",
+
+    /* ---- Floating toggle button ---------------------------------- */
+    ".maru-chatbot-btn {",
+    "  width: 60px;",
+    "  height: 60px;",
+    "  border-radius: 50%;",
+    "  background: linear-gradient(135deg, " + MaruConfig.brand.accentGradientFrom + " 0%, " + MaruConfig.brand.accentGradientTo + " 100%);",
+    "  color: #fff;",
+    "  display: flex;",
+    "  align-items: center;",
+    "  justify-content: center;",
+    "  font-size: 24px;",
+    "  cursor: pointer;",
+    "  box-shadow: 0 10px 25px rgba(201,138,75,0.4);",
+    "  transition: all 0.3s ease;",
+    "  border: none;",
+    "  outline: none;",
+    "  position: relative;",
+    "}",
+    ".maru-chatbot-btn:hover {",
+    "  transform: scale(1.05);",
+    "  box-shadow: 0 12px 30px rgba(201,138,75,0.5);",
+    "}",
+    ".maru-chatbot-btn:active { transform: scale(0.96); }",
+
+    /* ---- Unread "ping" badge on the toggle button ------------------ */
+    ".maru-chatbot-badge {",
+    "  position: absolute;",
+    "  top: -4px;",
+    "  right: -4px;",
+    "  background: #e6483f;",
+    "  color: #fff;",
+    "  font-size: 11px;",
+    "  font-weight: 700;",
+    "  width: 20px;",
+    "  height: 20px;",
+    "  border-radius: 50%;",
+    "  display: flex;",
+    "  align-items: center;",
+    "  justify-content: center;",
+    "  border: 2px solid #fff;",
+    "  animation: maruPulse 1.6s ease-in-out infinite;",
+    "}",
+    ".maru-chatbot-badge.hidden { display: none; }",
+    "@keyframes maruPulse {",
+    "  0%   { box-shadow: 0 0 0 0 rgba(230,72,63,0.55); }",
+    "  70%  { box-shadow: 0 0 0 8px rgba(230,72,63,0); }",
+    "  100% { box-shadow: 0 0 0 0 rgba(230,72,63,0); }",
+    "}",
+
+    /* ---- Chat window ------------------------------------------------ */
+    ".maru-chatbot-window {",
+    "  position: absolute;",
+    "  bottom: 80px;",
+    "  right: 0;",
+    "  width: 370px;",
+    "  height: 580px;",
+    "  max-height: 74vh;",
+    "  background: #fff;",
+    "  border-radius: 16px;",
+    "  box-shadow: 0 15px 40px rgba(0,0,0,0.18);",
+    "  display: flex;",
+    "  flex-direction: column;",
+    "  overflow: hidden;",
+    "  opacity: 0;",
+    "  pointer-events: none;",
+    "  transform: translateY(20px) scale(0.98);",
+    "  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);",
+    "  border: 1px solid rgba(0,0,0,0.08);",
+    "}",
+    ".maru-chatbot-window.active {",
+    "  opacity: 1;",
+    "  pointer-events: all;",
+    "  transform: translateY(0) scale(1);",
+    "}",
+
+    /* ---- Header ------------------------------------------------------ */
+    ".maru-chatbot-header {",
+    "  background: linear-gradient(135deg, " + MaruConfig.brand.headerGradientFrom + " 0%, " + MaruConfig.brand.headerGradientTo + " 100%);",
+    "  padding: 16px 18px;",
+    "  color: #fff;",
+    "  display: flex;",
+    "  justify-content: space-between;",
+    "  align-items: center;",
+    "  flex-shrink: 0;",
+    "}",
+    ".maru-chatbot-header-info { display: flex; flex-direction: column; min-width: 0; }",
+    ".maru-chatbot-title {",
+    "  font-weight: 700;",
+    "  font-size: 16px;",
+    "  display: flex;",
+    "  align-items: center;",
+    "  gap: 8px;",
+    "  white-space: nowrap;",
+    "}",
+    ".maru-chatbot-title i { color: " + MaruConfig.brand.accentGradientFrom + "; }",
+    ".maru-chatbot-subtitle {",
+    "  font-size: 12px;",
+    "  color: rgba(255,255,255,0.7);",
+    "  margin-top: 2px;",
+    "  display: flex;",
+    "  align-items: center;",
+    "  gap: 5px;",
+    "}",
+    ".maru-status-dot {",
+    "  width: 7px; height: 7px; border-radius: 50%;",
+    "  background: #3ddc84; display: inline-block;",
+    "  box-shadow: 0 0 0 2px rgba(61,220,132,0.25);",
+    "}",
+    ".maru-chatbot-header-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }",
+    ".maru-chatbot-icon-btn {",
+    "  background: rgba(255,255,255,0.1);",
+    "  border: none;",
+    "  color: #fff;",
+    "  width: 28px;",
+    "  height: 28px;",
+    "  border-radius: 50%;",
+    "  cursor: pointer;",
+    "  display: flex;",
+    "  align-items: center;",
+    "  justify-content: center;",
+    "  transition: background 0.3s;",
+    "  font-size: 13px;",
+    "}",
+    ".maru-chatbot-icon-btn:hover { background: rgba(255,255,255,0.22); }",
+
+    /* ---- Persistent WhatsApp bar -------------------------------------- */
+    ".maru-chatbot-whatsapp {",
+    "  background: #25D366;",
+    "  color: #fff;",
+    "  text-decoration: none;",
+    "  padding: 11px 12px;",
+    "  display: flex;",
+    "  align-items: center;",
+    "  justify-content: center;",
+    "  gap: 8px;",
+    "  font-weight: 600;",
+    "  font-size: 13.5px;",
+    "  transition: background 0.3s;",
+    "  flex-shrink: 0;",
+    "}",
+    ".maru-chatbot-whatsapp:hover { background: #1ebe57; }",
+
+    /* ---- Body / message list -------------------------------------------- */
+    ".maru-chatbot-body {",
+    "  flex: 1;",
+    "  padding: 16px;",
+    "  overflow-y: auto;",
+    "  background: #f8f9fa;",
+    "  display: flex;",
+    "  flex-direction: column;",
+    "  gap: 10px;",
+    "  scroll-behavior: smooth;",
+    "}",
+    ".maru-chatbot-body::-webkit-scrollbar { width: 6px; }",
+    ".maru-chatbot-body::-webkit-scrollbar-thumb {",
+    "  background: rgba(0,0,0,0.15); border-radius: 3px;",
+    "}",
+
+    /* ---- Message bubbles --------------------------------------------- */
+    ".maru-chat-row { display: flex; flex-direction: column; max-width: 88%; animation: maruPopIn 0.28s ease; }",
+    ".maru-chat-row.bot  { align-self: flex-start; align-items: flex-start; }",
+    ".maru-chat-row.user { align-self: flex-end;  align-items: flex-end; }",
+    "@keyframes maruPopIn {",
+    "  0%   { opacity: 0; transform: translateY(6px) scale(0.97); }",
+    "  100% { opacity: 1; transform: translateY(0) scale(1); }",
+    "}",
+
+    ".maru-chat-bubble {",
+    "  padding: 11px 14px;",
+    "  border-radius: 14px;",
+    "  font-size: 13.5px;",
+    "  line-height: 1.55;",
+    "}",
+    ".maru-chat-bubble.bot {",
+    "  background: #fff;",
+    "  color: #303030;",
+    "  border-bottom-left-radius: 4px;",
+    "  box-shadow: 0 2px 6px rgba(0,0,0,0.05);",
+    "  border: 1px solid rgba(0,0,0,0.05);",
+    "}",
+    ".maru-chat-bubble.user {",
+    "  background: " + MaruConfig.brand.accentGradientFrom + ";",
+    "  color: #fff;",
+    "  border-bottom-right-radius: 4px;",
+    "  box-shadow: 0 2px 6px rgba(201,138,75,0.25);",
+    "}",
+    ".maru-chat-timestamp {",
+    "  font-size: 10px;",
+    "  color: #a9a9a9;",
+    "  margin-top: 3px;",
+    "  padding: 0 4px;",
+    "}",
+
+    /* ---- Typing indicator ------------------------------------------- */
+    ".maru-typing-row { align-self: flex-start; }",
+    ".maru-typing-bubble {",
+    "  background: #fff;",
+    "  border: 1px solid rgba(0,0,0,0.05);",
+    "  border-radius: 14px;",
+    "  border-bottom-left-radius: 4px;",
+    "  padding: 12px 16px;",
+    "  display: flex;",
+    "  align-items: center;",
+    "  gap: 4px;",
+    "  box-shadow: 0 2px 6px rgba(0,0,0,0.05);",
+    "}",
+    ".maru-typing-dot {",
+    "  width: 6px; height: 6px; border-radius: 50%;",
+    "  background: #c3c3c3;",
+    "  animation: maruTypingBounce 1.1s infinite ease-in-out;",
+    "}",
+    ".maru-typing-dot:nth-child(2) { animation-delay: 0.15s; }",
+    ".maru-typing-dot:nth-child(3) { animation-delay: 0.3s; }",
+    "@keyframes maruTypingBounce {",
+    "  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }",
+    "  30% { transform: translateY(-4px); opacity: 1; }",
+    "}",
+
+    /* ---- Option / quick-reply buttons --------------------------------- */
+    ".maru-chat-options {",
+    "  display: flex;",
+    "  flex-direction: column;",
+    "  gap: 8px;",
+    "  margin-top: 2px;",
+    "  width: 100%;",
+    "}",
+    ".maru-option-btn {",
+    "  background: #fff;",
+    "  border: 1px solid " + MaruConfig.brand.accentGradientFrom + ";",
+    "  color: " + MaruConfig.brand.accentGradientFrom + ";",
+    "  padding: 10px 14px;",
+    "  border-radius: 8px;",
+    "  font-size: 12.5px;",
+    "  font-weight: 600;",
+    "  cursor: pointer;",
+    "  text-align: left;",
+    "  transition: all 0.2s ease;",
+    "  font-family: inherit;",
+    "  display: flex;",
+    "  align-items: center;",
+    "  justify-content: space-between;",
+    "  gap: 8px;",
+    "}",
+    ".maru-option-btn:hover {",
+    "  background: " + MaruConfig.brand.accentGradientFrom + ";",
+    "  color: #fff;",
+    "}",
+    ".maru-option-btn i.leading { flex-shrink: 0; width: 16px; text-align: center; }",
+    ".maru-option-btn i.trailing { flex-shrink: 0; opacity: 0.6; font-size: 11px; }",
+
+    /* ---- Chip-style quick replies (yes/no, back-to-menu, etc.) ------- */
+    ".maru-chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }",
+    ".maru-chip-btn {",
+    "  background: #eef1f4;",
+    "  border: none;",
+    "  color: #3a3a3a;",
+    "  padding: 7px 12px;",
+    "  border-radius: 20px;",
+    "  font-size: 12px;",
+    "  font-weight: 600;",
+    "  cursor: pointer;",
+    "  font-family: inherit;",
+    "  transition: background 0.2s ease;",
+    "}",
+    ".maru-chip-btn:hover { background: #e2e6ea; }",
+    ".maru-chip-btn.primary {",
+    "  background: " + MaruConfig.brand.accentGradientFrom + ";",
+    "  color: #fff;",
+    "}",
+    ".maru-chip-btn.primary:hover { background: " + MaruConfig.brand.accentGradientTo + "; }",
+
+    /* ---- Fallback contact-capture form --------------------------------- */
+    ".maru-lead-form {",
+    "  background: #fff;",
+    "  border: 1px solid rgba(0,0,0,0.06);",
+    "  border-radius: 12px;",
+    "  padding: 12px;",
+    "  display: flex;",
+    "  flex-direction: column;",
+    "  gap: 8px;",
+    "  width: 100%;",
+    "  box-shadow: 0 2px 6px rgba(0,0,0,0.05);",
+    "}",
+    ".maru-lead-form label {",
+    "  font-size: 11px;",
+    "  font-weight: 700;",
+    "  color: #666;",
+    "  text-transform: uppercase;",
+    "  letter-spacing: 0.4px;",
+    "}",
+    ".maru-lead-form input, .maru-lead-form textarea {",
+    "  width: 100%;",
+    "  border: 1px solid #ddd;",
+    "  border-radius: 8px;",
+    "  padding: 9px 10px;",
+    "  font-size: 13px;",
+    "  font-family: inherit;",
+    "  outline: none;",
+    "  transition: border-color 0.2s ease;",
+    "  resize: vertical;",
+    "}",
+    ".maru-lead-form input:focus, .maru-lead-form textarea:focus {",
+    "  border-color: " + MaruConfig.brand.accentGradientFrom + ";",
+    "}",
+    ".maru-lead-form .maru-lead-error {",
+    "  font-size: 11px;",
+    "  color: #d64545;",
+    "  display: none;",
+    "}",
+    ".maru-lead-form .maru-lead-error.visible { display: block; }",
+    ".maru-lead-submit {",
+    "  background: " + MaruConfig.brand.accentGradientFrom + ";",
+    "  color: #fff;",
+    "  border: none;",
+    "  border-radius: 8px;",
+    "  padding: 10px;",
+    "  font-weight: 700;",
+    "  font-size: 13px;",
+    "  cursor: pointer;",
+    "  font-family: inherit;",
+    "  transition: background 0.2s ease;",
+    "}",
+    ".maru-lead-submit:hover { background: " + MaruConfig.brand.accentGradientTo + "; }",
+
+    /* ---- Search box at top of menu ------------------------------------- */
+    ".maru-search-wrap {",
+    "  padding: 10px 14px 0 14px;",
+    "  flex-shrink: 0;",
+    "  background: #f8f9fa;",
+    "}",
+    ".maru-search-input {",
+    "  width: 100%;",
+    "  border: 1px solid #e2e2e2;",
+    "  border-radius: 20px;",
+    "  padding: 9px 14px 9px 34px;",
+    "  font-size: 12.5px;",
+    "  font-family: inherit;",
+    "  outline: none;",
+    "  background: #fff url(data:image/svg+xml;utf8,) no-repeat;",
+    "  position: relative;",
+    "}",
+    ".maru-search-box { position: relative; }",
+    ".maru-search-box i {",
+    "  position: absolute; left: 12px; top: 50%;",
+    "  transform: translateY(-50%);",
+    "  color: #aaa; font-size: 12px;",
+    "}",
+
+    /* ---- Footer ------------------------------------------------------- */
+    ".maru-chatbot-footer {",
+    "  padding: 10px;",
+    "  background: #fff;",
+    "  border-top: 1px solid #eee;",
+    "  text-align: center;",
+    "  font-size: 10.5px;",
+    "  color: #aaa;",
+    "  flex-shrink: 0;",
+    "}",
+
+    /* ---- Empty / no-results state --------------------------------------- */
+    ".maru-empty-state {",
+    "  text-align: center;",
+    "  color: #999;",
+    "  font-size: 12.5px;",
+    "  padding: 18px 10px;",
+    "}",
+
+    /* ---- Responsive ----------------------------------------------------- */
+    "@media (max-width: 480px) {",
+    "  .maru-chatbot-window {",
+    "    bottom: 78px;",
+    "    right: 12px;",
+    "    width: calc(100vw - 24px);",
+    "    height: 72vh;",
+    "  }",
+    "  .maru-chatbot { right: 14px; bottom: 18px; }",
+    "}",
+
+    /* ---- Reduced motion accessibility ------------------------------------ */
+    "@media (prefers-reduced-motion: reduce) {",
+    "  .maru-chatbot-btn, .maru-chatbot-window, .maru-chat-row, .maru-typing-dot, .maru-chatbot-badge {",
+    "    animation: none !important;",
+    "    transition: none !important;",
+    "  }",
+    "}"
+  ].join("\n");
+
+  /* ===============================================================
+   *  SECTION 3 — STATE
+   *  A small in-memory + sessionStorage-backed state object so the
+   *  conversation survives page navigation within the same tab.
+   * =============================================================== */
+
+  var STORAGE_KEY = "maruChatbotState_v1";
+
+  var State = {
+    isOpen: false,
+    hasGreeted: false,
+    history: [],          // [{ type: 'bot'|'user', text: '...' , time: 'HH:MM' }]
+    currentCategoryId: null,
+    unread: false
+  };
+
+  /**
+   * Persist the current state to sessionStorage so a page reload or
+   * navigation to another page on the same site keeps the chat
+   * history intact for this browser tab.
+   */
+  function saveState() {
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(State));
+    } catch (err) {
+      // sessionStorage may be unavailable (private browsing, etc.) —
+      // fail silently, the widget still works without persistence.
+    }
+  }
+
+  /**
+   * Restore state saved earlier in this browser tab's session, if any.
+   */
+  function loadState() {
+    try {
+      var raw = window.sessionStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        State.isOpen = false; // never auto-reopen on page load
+        State.hasGreeted = parsed.hasGreeted || false;
+        State.history = parsed.history || [];
+        State.currentCategoryId = parsed.currentCategoryId || null;
+        State.unread = false;
+      }
+    } catch (err) {
+      // Ignore corrupted or missing storage.
+    }
+  }
+
+  /* ===============================================================
+   *  SECTION 4 — SMALL HELPERS
+   * =============================================================== */
+
+  /**
+   * Returns the current time formatted as HH:MM (24-hour clock).
+   */
+  function nowTime() {
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var hh = h < 10 ? "0" + h : "" + h;
+    var mm = m < 10 ? "0" + m : "" + m;
+    return hh + ":" + mm;
+  }
+
+  /**
+   * Basic HTML-escaping so anything derived from user input (e.g. the
+   * lead-capture form) can never break the DOM structure or inject
+   * markup.
+   */
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  /**
+   * Very small helper to create a DOM element with attributes and
+   * children in one call, used throughout the render functions below
+   * to keep markup construction readable.
+   */
+  function el(tag, attrs, children) {
+    var node = document.createElement(tag);
+    attrs = attrs || {};
+    for (var key in attrs) {
+      if (!attrs.hasOwnProperty(key)) continue;
+      if (key === "class") {
+        node.className = attrs[key];
+      } else if (key === "html") {
+        node.innerHTML = attrs[key];
+      } else if (key.indexOf("on") === 0 && typeof attrs[key] === "function") {
+        node.addEventListener(key.slice(2).toLowerCase(), attrs[key]);
+      } else {
+        node.setAttribute(key, attrs[key]);
+      }
+    }
+    children = children || [];
+    for (var i = 0; i < children.length; i++) {
+      if (children[i]) node.appendChild(children[i]);
+    }
+    return node;
+  }
+
+  /**
+   * Finds a category object by its id.
+   */
+  function getCategory(id) {
+    for (var i = 0; i < MaruConfig.categories.length; i++) {
+      if (MaruConfig.categories[i].id === id) return MaruConfig.categories[i];
+    }
+    return null;
+  }
+
+  /**
+   * Searches every question across every category for a case
+   * insensitive substring match — powers the search box.
+   */
+  function searchQuestions(term) {
+    var results = [];
+    var needle = term.trim().toLowerCase();
+    if (!needle) return results;
+    MaruConfig.categories.forEach(function (cat) {
+      cat.questions.forEach(function (item) {
+        if (item.q.toLowerCase().indexOf(needle) !== -1 ||
+            item.a.toLowerCase().indexOf(needle) !== -1) {
+          results.push({ category: cat, item: item });
+        }
+      });
+    });
+    return results;
+  }
+
+  /**
+   * Checks free-text user input against the small-talk table and
+   * returns a matching reply string, or null if nothing matched.
+   */
+  function matchSmallTalk(text) {
+    var lower = text.trim().toLowerCase();
+    for (var i = 0; i < MaruConfig.smallTalk.length; i++) {
+      var entry = MaruConfig.smallTalk[i];
+      for (var j = 0; j < entry.triggers.length; j++) {
+        if (lower.indexOf(entry.triggers[j]) !== -1) {
+          return entry.reply;
+        }
+      }
+    }
+    return null;
+  }
+
+  /* ===============================================================
+   *  SECTION 5 — DOM REFERENCES (populated once the widget is built)
+   * =============================================================== */
+
+  var DOM = {
+    root: null,
+    toggleBtn: null,
+    badge: null,
+    windowEl: null,
+    bodyEl: null,
+    searchInput: null,
+    closeBtn: null,
+    minimizeBtn: null
+  };
+
+  /* ===============================================================
+   *  SECTION 6 — BUILDING THE WIDGET DOM
+   * =============================================================== */
+
+  /**
+   * Injects the <style> block into <head>. Runs once.
+   */
+  function injectStyles() {
+    var styleEl = document.createElement("style");
+    styleEl.setAttribute("data-maru-chatbot-styles", "true");
+    styleEl.appendChild(document.createTextNode(STYLE_TEXT));
+    document.head.appendChild(styleEl);
+  }
+
+  /**
+   * Builds the static shell of the widget (toggle button + window
+   * frame with header/whatsapp-bar/body/footer) and appends it to
+   * <body>. The message list inside the body is populated separately
+   * by renderGreeting()/renderMenu() etc.
+   */
+  function buildWidgetShell() {
+    var root = el("div", { class: "maru-chatbot" });
+
+    /* ---- Floating toggle button -------------------------------- */
+    var badge = el("span", { class: "maru-chatbot-badge hidden" }, [
+      document.createTextNode("1")
+    ]);
+    var toggleBtn = el(
+      "button",
+      {
+        class: "maru-chatbot-btn",
+        "aria-label": "Open " + MaruConfig.brand.botName + " chat",
+        type: "button"
+      },
+      [el("i", { class: "fas fa-comment-dots" }), badge]
+    );
+
+    /* ---- Chat window shell --------------------------------------- */
+    var titleRow = el("div", { class: "maru-chatbot-title" }, [
+      el("i", { class: "fas " + MaruConfig.brand.avatarIcon }),
+      document.createTextNode(" " + MaruConfig.brand.botName)
+    ]);
+    var subtitleRow = el("div", { class: "maru-chatbot-subtitle" }, [
+      el("span", { class: "maru-status-dot" }),
+      document.createTextNode(MaruConfig.brand.botStatus)
+    ]);
+    var headerInfo = el("div", { class: "maru-chatbot-header-info" }, [
+      titleRow,
+      subtitleRow
+    ]);
+
+    var minimizeBtn = el(
+      "button",
+      {
+        class: "maru-chatbot-icon-btn",
+        "aria-label": "Minimize chat",
+        type: "button"
+      },
+      [el("i", { class: "fas fa-minus" })]
+    );
+    var closeBtn = el(
+      "button",
+      {
+        class: "maru-chatbot-icon-btn",
+        "aria-label": "Close chat",
+        type: "button"
+      },
+      [el("i", { class: "fas fa-times" })]
+    );
+    var headerActions = el("div", { class: "maru-chatbot-header-actions" }, [
+      minimizeBtn,
+      closeBtn
+    ]);
+
+    var header = el("div", { class: "maru-chatbot-header" }, [
+      headerInfo,
+      headerActions
+    ]);
+
+    var whatsappLink = el(
+      "a",
+      {
+        class: "maru-chatbot-whatsapp",
+        href: "https://wa.me/" + MaruConfig.contact.whatsappNumber,
+        target: "_blank",
+        rel: "noopener"
+      },
+      [
+        el("i", { class: "fab fa-whatsapp" }),
+        document.createTextNode(" Chat directly on WhatsApp")
+      ]
+    );
+
+    var searchInput = el("input", {
+      class: "maru-search-input",
+      type: "text",
+      placeholder: "Search a question…",
+      "aria-label": "Search frequently asked questions"
+    });
+    var searchWrap = el("div", { class: "maru-search-wrap" }, [
+      el("div", { class: "maru-search-box" }, [
+        el("i", { class: "fas fa-search" }),
+        searchInput
+      ])
+    ]);
+
+    var bodyEl = el("div", {
+      class: "maru-chatbot-body",
+      id: "maruChatbotBody"
+    });
+
+    var footer = el("div", { class: "maru-chatbot-footer" }, [
+      document.createTextNode("Powered by " + MaruConfig.brand.name)
+    ]);
+
+    var windowEl = el(
+      "div",
+      { class: "maru-chatbot-window", id: "maruChatbotWindow" },
+      [header, whatsappLink, searchWrap, bodyEl, footer]
+    );
+
+    root.appendChild(windowEl);
+    root.appendChild(toggleBtn);
+    document.body.appendChild(root);
+
+    /* Save references for later use. */
+    DOM.root = root;
+    DOM.toggleBtn = toggleBtn;
+    DOM.badge = badge;
+    DOM.windowEl = windowEl;
+    DOM.bodyEl = bodyEl;
+    DOM.searchInput = searchInput;
+    DOM.closeBtn = closeBtn;
+    DOM.minimizeBtn = minimizeBtn;
+  }
+
+  /* ===============================================================
+   *  SECTION 7 — MESSAGE RENDERING
+   * =============================================================== */
+
+  /**
+   * Appends a bot text bubble to the conversation, records it in
+   * State.history (unless `record` is explicitly false), and scrolls
+   * the body to the bottom.
+   */
+  function appendBotBubble(text, record) {
+    var row = el("div", { class: "maru-chat-row bot" }, [
+      el("div", { class: "maru-chat-bubble bot", html: escapeHtml(text) }),
+      el("div", { class: "maru-chat-timestamp" }, [
+        document.createTextNode(nowTime())
+      ])
+    ]);
+    DOM.bodyEl.appendChild(row);
+    scrollToBottom();
+    if (record !== false) {
+      State.history.push({ type: "bot", text: text, time: nowTime() });
+      saveState();
+    }
+  }
+
+  /**
+   * Appends a user text bubble to the conversation (used when the
+   * visitor clicks a question, types free text, or submits the lead
+   * form).
+   */
+  function appendUserBubble(text, record) {
+    var row = el("div", { class: "maru-chat-row user" }, [
+      el("div", { class: "maru-chat-bubble user", html: escapeHtml(text) }),
+      el("div", { class: "maru-chat-timestamp" }, [
+        document.createTextNode(nowTime())
+      ])
+    ]);
+    DOM.bodyEl.appendChild(row);
+    scrollToBottom();
+    if (record !== false) {
+      State.history.push({ type: "user", text: text, time: nowTime() });
+      saveState();
+    }
+  }
+
+  /**
+   * Shows an animated "typing…" bubble, then calls `callback` after a
+   * short randomized delay and removes the indicator. This is what
+   * makes bot replies feel conversational instead of instantaneous.
+   */
+  function showTypingThen(callback) {
+    var dots = el("div", { class: "maru-typing-bubble" }, [
+      el("span", { class: "maru-typing-dot" }),
+      el("span", { class: "maru-typing-dot" }),
+      el("span", { class: "maru-typing-dot" })
+    ]);
+    var row = el("div", { class: "maru-chat-row bot maru-typing-row" }, [dots]);
+    DOM.bodyEl.appendChild(row);
+    scrollToBottom();
+
+    var delay = 450 + Math.floor(Math.random() * 400);
+    window.setTimeout(function () {
+      if (row.parentNode) row.parentNode.removeChild(row);
+      callback();
+    }, delay);
+  }
+
+  /**
+   * Scrolls the message list to the latest message.
+   */
+  function scrollToBottom() {
+    window.requestAnimationFrame(function () {
+      DOM.bodyEl.scrollTop = DOM.bodyEl.scrollHeight;
+    });
+  }
+
+  /**
+   * Removes any currently-rendered option/chip/form block so a new
+   * one can be rendered in its place. We tag the "live" interactive
+   * block with data-maru-live="1" so it's easy to find and clear.
+   */
+  function clearLiveBlock() {
+    var existing = DOM.bodyEl.querySelector('[data-maru-live="1"]');
+    if (existing && existing.parentNode) {
+      existing.parentNode.removeChild(existing);
+    }
+  }
+
+  /* ===============================================================
+   *  SECTION 8 — MENU / CATEGORY / ANSWER RENDERING
+   * =============================================================== */
+
+  /**
+   * Renders the main category menu as a stack of option buttons.
+   */
+  function renderMainMenu() {
+    clearLiveBlock();
+    var wrap = el("div", {
+      class: "maru-chat-options",
+      "data-maru-live": "1"
+    });
+
+    MaruConfig.categories.forEach(function (cat) {
+      var btn = el(
+        "button",
+        { class: "maru-option-btn", type: "button" },
+        [
+          el("span", {}, [
+            el("i", { class: "fas " + cat.icon + " leading" }),
+            document.createTextNode(" " + cat.label)
+          ]),
+          el("i", { class: "fas fa-chevron-right trailing" })
+        ]
+      );
+      btn.addEventListener("click", function (categoryId) {
+        return function () {
+          openCategory(categoryId);
+        };
+      }(cat.id));
+      wrap.appendChild(btn);
+    });
+
+    // Always offer the fallback / talk-to-human option at the bottom.
+    var helpBtn = el(
+      "button",
+      { class: "maru-option-btn", type: "button" },
+      [
+        el("span", {}, [
+          el("i", { class: "fas fa-comment-medical leading" }),
+          document.createTextNode(" I have a different question")
+        ]),
+        el("i", { class: "fas fa-chevron-right trailing" })
+      ]
+    );
+    helpBtn.addEventListener("click", function () {
+      appendUserBubble("I have a different question");
+      showTypingThen(renderLeadCapture);
+    });
+    wrap.appendChild(helpBtn);
+
+    DOM.bodyEl.appendChild(wrap);
+    scrollToBottom();
+  }
+
+  /**
+   * Opens a category: shows an intro bot line, then lists its
+   * questions, then a "back to main menu" chip.
+   */
+  function openCategory(categoryId) {
+    var cat = getCategory(categoryId);
+    if (!cat) return;
+
+    State.currentCategoryId = categoryId;
+    saveState();
+
+    appendUserBubble(cat.label);
+    showTypingThen(function () {
+      appendBotBubble(cat.intro);
+      renderQuestionList(cat);
+    });
+  }
+
+  /**
+   * Renders the list of questions within a category as option
+   * buttons, plus a chip row to go back to the main menu.
+   */
+  function renderQuestionList(cat) {
+    clearLiveBlock();
+    var wrap = el("div", {
+      class: "maru-chat-options",
+      "data-maru-live": "1"
+    });
+
+    cat.questions.forEach(function (item) {
+      var btn = el(
+        "button",
+        { class: "maru-option-btn", type: "button" },
+        [
+          el("span", {}, [document.createTextNode(item.q)]),
+          el("i", { class: "fas fa-chevron-right trailing" })
+        ]
+      );
+      btn.addEventListener("click", function (questionItem) {
+        return function () {
+          openAnswer(cat, questionItem);
+        };
+      }(item));
+      wrap.appendChild(btn);
+    });
+
+    var chipRow = el("div", { class: "maru-chip-row" }, [
+      backToMenuChip()
+    ]);
+    wrap.appendChild(chipRow);
+
+    DOM.bodyEl.appendChild(wrap);
+    scrollToBottom();
+  }
+
+  /**
+   * Displays the answer to a single question, then offers
+   * "was this helpful" follow-up chips.
+   */
+  function openAnswer(cat, item) {
+    appendUserBubble(item.q);
+    showTypingThen(function () {
+      appendBotBubble(item.a);
+      renderPostAnswerChips(cat);
+    });
+  }
+
+  /**
+   * After every answer we show three quick chips: more questions in
+   * the same category, back to the main menu, or talk to a human on
+   * WhatsApp. This keeps the conversation moving without forcing the
+   * visitor to type anything.
+   */
+  function renderPostAnswerChips(cat) {
+    clearLiveBlock();
+    var wrap = el("div", {
+      class: "maru-chip-row",
+      "data-maru-live": "1"
+    });
+
+    var moreBtn = el("button", { class: "maru-chip-btn primary", type: "button" }, [
+      document.createTextNode("More on " + cat.label)
+    ]);
+    moreBtn.addEventListener("click", function () {
+      appendUserBubble("More on " + cat.label);
+      showTypingThen(function () {
+        renderQuestionList(cat);
+      });
+    });
+
+    var whatsappBtn = el("button", { class: "maru-chip-btn", type: "button" }, [
+      document.createTextNode("Talk to a human")
+    ]);
+    whatsappBtn.addEventListener("click", function () {
+      window.open("https://wa.me/" + MaruConfig.contact.whatsappNumber, "_blank");
+    });
+
+    wrap.appendChild(moreBtn);
+    wrap.appendChild(backToMenuChip());
+    wrap.appendChild(whatsappBtn);
+
+    DOM.bodyEl.appendChild(wrap);
+    scrollToBottom();
+  }
+
+  /**
+   * Builds a reusable "Back to main menu" chip button.
+   */
+  function backToMenuChip() {
+    var chip = el("button", { class: "maru-chip-btn", type: "button" }, [
+      document.createTextNode("\u2190 Main menu")
+    ]);
+    chip.addEventListener("click", function () {
+      appendUserBubble("Back to main menu");
+      State.currentCategoryId = null;
+      saveState();
+      showTypingThen(function () {
+        appendBotBubble("Sure — here's the main menu again. What would you like to know?");
+        renderMainMenu();
+      });
+    });
+    return chip;
+  }
+
+  /* ===============================================================
+   *  SECTION 9 — SEARCH
+   * ======================

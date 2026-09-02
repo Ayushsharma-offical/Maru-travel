@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India Luxury Tours | Maru Travel India</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/india_tours.css">
+      <link rel="icon" type="image/png" sizes="512x512" href="favicon (2).png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="i18n.js"></script>
+  <script src="tours_ko.js"></script>
+  <script src="maru-chatbot.js"></script>
+  
+  <style>
+/* ─── VARIABLES ─────────────────────────────────────── */
+:root{
+  --orange:#ec6707;
+  --dark:#1c2b3a;
+  --cream:#f8f4ef;
+  --gold:#c9a84c;
+  --red-dark:#8B1A14;
+}
+
+/* ─── HEADER SYSTEM ─────────────────────── */
+:root {
+  --cream: #FCF8EF;
+  --cream-deep: #F5EBD6;
+  --navy: #25375B;
+  --navy-deep: #1C2C4A;
+  --navy-soft: #45557C;
+  --copper-dark: #6B4429;
+  --copper-mid: #C6835A;
+  --copper-light: #F5B478;
+  --gold: #F1C88C;
+  --shadow-warm: rgba(22, 35, 63, 0.12);
+}
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0; z-index: 1000;
+  width: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 800px 220px at 8% -30%, rgba(245,180,120,0.22), transparent 60%),
+    linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+  box-shadow: 0 8px 20px -12px var(--shadow-warm);
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== FLIGHT CURVES – Navy Color ===== */
+.flight-layer {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease, max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 200px;
+}
+
+@keyframes flyPath {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+.plane-icon {
+  position: absolute;
+  top: 0; left: 0;
+  offset-rotate: auto;
+  animation: flyPath linear infinite;
+  z-index: 1;
+  pointer-events: none;
+  transition: filter .3s, opacity 0.3s ease;
+}
+
+/* Plane 1 – Navy color */
+.plane-icon.p1 {
+  width: 22px; height: 22px;
+  offset-path: path('M 20 130 C 220 145, 420 35, 640 52 S 980 5, 1080 22');
+  animation-duration: 8s;
+  filter: drop-shadow(0 4px 6px rgba(37,55,91,0.4));
+}
+
+/* Plane 2 – Navy color */
+.plane-icon.p2 {
+  width: 15px; height: 15px;
+  offset-path: path('M 260 8 C 420 40, 560 95, 780 88 S 1080 60, 1250 95');
+  animation-duration: 11s;
+  animation-delay: -3s;
+  opacity: 0.75;
+  filter: drop-shadow(0 3px 5px rgba(37,55,91,0.35));
+}
+
+.site-header:hover .plane-icon {
+  filter: drop-shadow(0 6px 10px rgba(37,55,91,0.55));
+}
+
+/* ===== POLISH / SHEEN ===== */
+.polish { position: relative; overflow: hidden; isolation: isolate; }
+.polish::before {
+  content: "";
+  position: absolute;
+  top: -60%; left: -40%;
+  width: 45%; height: 220%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.85) 50%, transparent 100%);
+  transform: translateX(-220%) rotate(8deg);
+  transition: transform .65s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.polish:hover::before { transform: translateX(420%) rotate(8deg); }
+
+/* ===== TOP UTILITY STRIP ===== */
+.util-strip {
+  position: relative; z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 0 28px 0 0;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06), inset 0 1px 0 rgba(0,0,0,0.3);
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.4s ease;
+  max-height: 60px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+/* ===== MULTILINGUAL MARQUEE ===== */
+.marquee-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  cursor: default;
+  --mx: 50%;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: marqueeScroll 60s linear infinite;
+  will-change: transform;
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-track span {
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0 22px;
+  color: rgba(255,255,255,0.12);
+  transition: color 0s;
+  position: relative;
+  background: transparent;
+  background: radial-gradient(
+    circle 80px at var(--smx, -200px) 50%,
+    rgba(200, 80, 20, 0.9) 0%,
+    rgba(212, 160, 20, 0.6) 30%,
+    rgba(255,255,255,0.10) 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.marquee-wrap.light-theme .marquee-track span {
+  color: rgba(37,55,91,0.08); /* faint navy */
+  background: radial-gradient(
+    circle 80px at var(--smx, -200px) 50%,
+    rgba(200, 80, 20, 0.9) 0%,
+    rgba(212, 160, 20, 0.6) 30%,
+    rgba(37,55,91,0.08) 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+.lang-toggle {
+  display: flex;
+  position: relative;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 3px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.lang-toggle::before {
+  content: "";
+  position: absolute;
+  top: 2px; bottom: 2px; left: 2px;
+  width: calc(50% - 2px);
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.lang-toggle:has(#opt-ko.active)::before {
+  transform: translateX(100%);
+}
+
+.lang-toggle span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 50px;
+  padding: 4px 0;
+  font-size: 10px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.3s;
+  user-select: none;
+}
+
+.lang-toggle span.active {
+  color: var(--dark);
+}
+
+.lang-toggle span .flag {
+  display: flex;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.lang-toggle span .flag svg { width: 100%; height: 100%; display: block; }
+
+
+.login-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 16px;
+  border-radius: 18px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.4px;
+  color: #2C1608;
+  text-decoration: none;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--copper-mid) 55%, var(--copper-dark) 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -2px 3px rgba(90,50,20,0.4);
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 13px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -2px 3px rgba(90,50,20,0.4);
+}
+
+/* ===== BRAND ROW ===== */
+.brand-row {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 28px 7px;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.4s ease;
+  max-height: 120px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.logo-mark { display: flex; align-items: center; }
+
+.logo-mark img {
+  height: 80px; width: auto; display: block;
+  filter: drop-shadow(0 4px 8px rgba(22,35,63,0.18));
+  mix-blend-mode: multiply;
+  background: transparent;
+  transition: transform .3s ease;
+}
+.logo-mark img:hover { transform: scale(1.02); }
+
+/* ===== REGION TABS ===== */
+.region-tabs {
+  display: flex; align-items: center; gap: 0;
+  padding: 4px 8px;
+  background: linear-gradient(180deg, #F3E5C9, #E9D6AE);
+  border-radius: 20px;
+  box-shadow: inset 0 1px 4px rgba(107,68,41,0.2), inset 0 -1px 0 rgba(255,255,255,0.6);
+}
+
+.region-tabs a {
+  padding: 6px 14px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 1px;
+  color: var(--navy-soft);
+  text-decoration: none;
+  border-radius: 15px;
+  transition: color .2s, transform .2s;
+}
+
+.region-tabs a.active {
+  color: #2C1608;
+  background: linear-gradient(180deg, #FFFDF8, #F1DDB2);
+  box-shadow: 0 2px 6px rgba(107,68,41,0.28), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.region-tabs a:not(.active):hover { color: var(--copper-dark); transform: translateY(-1px); }
+.region-tabs a.active:hover { transform: translateY(-1px); box-shadow: 0 4px 9px rgba(107,68,41,0.32), inset 0 1px 0 rgba(255,255,255,0.9); }
+
+/* ===== NAV BAR ===== */
+.site-header nav {
+  position: relative; z-index: 2;
+  display: flex; justify-content: center; align-items: center;
+  padding: 0 28px;
+  min-height: 48px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FCF8EF 100%);
+  border-top: 1px solid rgba(37,55,91,0.08);
+  box-shadow: inset 0 2px 4px -2px rgba(37,55,91,0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header nav .marquee-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  overflow: hidden;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.site-header nav .marquee-wrap.right {
+  left: auto;
+  right: 0;
+  mask-image: linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.site-header nav .marquee-wrap.right .marquee-track {
+  animation: marqueeScrollReverse 35s linear infinite;
+}
+
+@keyframes marqueeScrollReverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.site-header nav .nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+.site-header nav a {
+  position: relative;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.8px;
+  color: var(--navy);
+  text-decoration: none;
+  padding: 3px 5px 6px;
+  border-radius: 5px;
+  transition: color .2s;
+}
+
+.site-header nav a.current { color: var(--copper-dark); }
+
+.site-header nav a.current::after {
+  content: "";
+  position: absolute; left: 5px; right: 5px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--copper-mid), var(--gold));
+  box-shadow: 0 1px 4px rgba(198,131,90,0.5);
+}
+
+.site-header nav a:hover { color: var(--copper-dark); }
+
+/* ===== RIDGE DIVIDER – Navy ===== */
+.ridge {
+  display: block; width: 100%; height: 12px; position: relative; z-index: 2;
+  transition: opacity 0.3s ease, max-height 0.4s ease;
+  max-height: 12px;
+  opacity: 1;
+}
+
+/* ─── SMOOTH SCROLL SHRINKING EFFECT ─────────────────────── */
+.site-header.scrolled {
+  background: rgba(252, 248, 239, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(22, 35, 63, 0.16);
+}
+
+.site-header.scrolled .util-strip,
+.site-header.scrolled .brand-row,
+.site-header.scrolled .ridge,
+.site-header.scrolled .flight-layer,
+.site-header.scrolled .plane-icon {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  pointer-events: none;
+}
+
+.site-header.scrolled nav {
+  padding: 0 28px;
+  border-top: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .brand-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .site-header nav { flex-wrap: wrap; justify-content: center; gap: 14px 20px; padding: 10px 28px; }
+  .site-header nav .nav-links { gap: 14px 20px; justify-content: center; flex-wrap: wrap; }
+  .site-header nav .marquee-wrap { display: none; }
+}
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ HEADER ═══════════════════════════════════════ -->
+<header class="site-header">
+
+  <!-- Flight curves SVG – NAVY COLOR -->
+  <svg class="flight-layer" viewBox="0 0 1400 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="flightGrad" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#25375B" stop-opacity="0.0"/>
+        <stop offset="18%"  stop-color="#25375B" stop-opacity="0.5"/>
+        <stop offset="55%"  stop-color="#45557C" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#25375B" stop-opacity="0.0"/>
+      </linearGradient>
+      <linearGradient id="flightGrad2" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#25375B" stop-opacity="0.0"/>
+        <stop offset="30%"  stop-color="#25375B" stop-opacity="0.4"/>
+        <stop offset="60%"  stop-color="#45557C" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#25375B" stop-opacity="0.0"/>
+      </linearGradient>
+      <filter id="curveShadow" x="-20%" y="-50%" width="140%" height="200%">
+        <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#25375B" flood-opacity="0.3"/>
+      </filter>
+    </defs>
+
+    <path d="M -20 128 C 200 145, 400 25, 640 48 S 1000 -8, 1420 20"
+          fill="none"
+          stroke="url(#flightGrad)"
+          stroke-width="2"
+          stroke-dasharray="1 8"
+          stroke-linecap="round"
+          filter="url(#curveShadow)"/>
+
+    <path d="M 240 4 C 400 38, 540 92, 780 84 S 1100 58, 1400 96"
+          fill="none"
+          stroke="url(#flightGrad2)"
+          stroke-width="1.5"
+          stroke-dasharray="1 7"
+          stroke-linecap="round"
+          opacity="0.7"/>
+  </svg>
+
+  <!-- Animated Planes – NAVY COLOR -->
+  <svg class="plane-icon p1" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="planeGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#1C2C4A"/>
+      </linearGradient>
+    </defs>
+    <path d="M2 19 L28 10 L20 17 L30 17 L34 20 L20 20 L27 27 L21 26 L14 21 L4 24 Z" fill="url(#planeGrad)"/>
+  </svg>
+
+  <svg class="plane-icon p2" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="planeGrad2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#25375B"/>
+      </linearGradient>
+    </defs>
+    <path d="M2 19 L28 10 L20 17 L30 17 L34 20 L20 20 L27 27 L21 26 L14 21 L4 24 Z" fill="url(#planeGrad2)"/>
+  </svg>
+
+  <!-- TOP UTILITY STRIP -->
+  <div class="util-strip">
+    <!-- MULTILINGUAL SCROLLING MARQUEE -->
+    <div class="marquee-wrap" id="marqueeWrap">
+      <div class="marquee-track" id="marqueeTrack">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Utazás</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Haiku</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>Maru Seyahat</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Utazás</span><span>Maru Voyage</span><span>Travel</span><span>마루 트래블</span><span>Maru Travel</span><span>マル・トラベル</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Viajes</span><span>مارو ٹریول</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Utazás</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Haiku</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>Maru Seyahat</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Utazás</span><span>Maru Voyage</span><span>Travel</span><span>마루 트래블</span><span>Maru Travel</span><span>マル・トラベル</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Viajes</span><span>مارو ٹریول</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <div class="lang-toggle">
+
+      <span class="active polish" id="opt-en" onclick="changeLanguage('en')">
+        <span class="flag">
+          <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="36" fill="#012169"/>
+            <path d="M0 0 L60 36 M60 0 L0 36" stroke="#FFFFFF" stroke-width="7"/>
+            <path d="M0 0 L60 36 M60 0 L0 36" stroke="#C8102E" stroke-width="3"/>
+            <path d="M30 0 V36 M0 18 H60" stroke="#FFFFFF" stroke-width="11"/>
+            <path d="M30 0 V36 M0 18 H60" stroke="#C8102E" stroke-width="6.5"/>
+          </svg>
+        </span>
+        EN
+      </span>
+      <span class="polish" id="opt-ko" onclick="changeLanguage('ko')">
+        <span class="flag">
+          <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="36" fill="#FFFFFF"/>
+            <circle cx="30" cy="18" r="9" fill="#C60C30"/>
+            <path d="M30 9 A9 4.5 0 0 1 30 18 A9 4.5 0 0 0 30 27 A9 9 0 0 1 30 9 Z" fill="#003478"/>
+            <g stroke="#000000" stroke-width="1.4">
+              <line x1="6" y1="6" x2="14" y2="6"/><line x1="6" y1="8.4" x2="14" y2="8.4"/><line x1="6" y1="10.8" x2="14" y2="10.8"/>
+              <line x1="46" y1="6" x2="54" y2="6"/><line x1="46" y1="8.4" x2="54" y2="8.4"/><line x1="46" y1="10.8" x2="50" y2="10.8"/><line x1="52" y1="10.8" x2="54" y2="10.8"/>
+              <line x1="6" y1="25.2" x2="14" y2="25.2"/><line x1="6" y1="27.6" x2="10" y2="27.6"/><line x1="12" y1="27.6" x2="14" y2="27.6"/><line x1="6" y1="30" x2="14" y2="30"/>
+              <line x1="46" y1="25.2" x2="54" y2="25.2"/><line x1="46" y1="27.6" x2="54" y2="27.6"/><line x1="46" y1="30" x2="50" y2="30"/><line x1="52" y1="30" x2="54" y2="30"/>
+            </g>
+          </svg>
+        </span>
+        한국어
+      </span>
+    </div>
+    <a href="https://maru-travel-app.vercel.app/" target="_blank" class="login-btn polish">⇥ <span data-i18n="nav.login">Login</span></a>
+  </div>
+
+  <!-- BRAND ROW -->
+  <div class="brand-row">
+    <div class="logo-mark">
+      <a href="index.html">
+        <img src="images/website_assests/Maru Travel Logo al.png" alt="Maru Travel – Curating Exceptional Journeys">
+      </a>
+    </div>
+
+    <div class="region-tabs">
+      <a href="india.html" class="active polish" data-i18n="dest.india">India</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.nepal">Nepal</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.bhutan">Bhutan</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.srilanka">Sri Lanka</a>
+    </div>
+  </div>
+
+  <!-- NAV BAR -->
+  <nav>
+    <!-- Left marquee -->
+    <div class="marquee-wrap light-theme">
+      <div class="marquee-track">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <!-- Right marquee (reverse direction) -->
+    <div class="marquee-wrap light-theme right">
+      <div class="marquee-track">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <!-- Centered nav links -->
+    <div class="nav-links" style="display: flex; gap: 32px;">
+      <a href="index.html" class="polish" data-i18n="nav.home">Home</a>
+      <a href="about_us.html" class="polish" data-i18n="nav.about">About Us</a>
+      <a href="what_we_do.html" class="polish" data-i18n="nav.what">What We Do</a>
+      <a href="index.html#tours" class="polish" data-i18n="nav.tours">Our Expertises</a>
+      <a href="index.html#explore" class="polish current" data-i18n="nav.explore">Explore With Us</a>
+      <a href="index.html#trains" class="polish" data-i18n="nav.trains">Luxury Trains</a>
+      <a href="contact.html" class="polish" data-i18n="nav.contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- RIDGE DIVIDER – Navy -->
+  <svg class="ridge" viewBox="0 0 1200 12" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="ridgeGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#1C2C4A"/>
+        <stop offset="40%"  stop-color="#25375B"/>
+        <stop offset="70%"  stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#25375B"/>
+      </linearGradient>
+    </defs>
+    <polygon
+      points="0,12 0,7 80,2 160,9 260,1 360,7 460,3 560,10 660,2 760,6 860,1 960,9 1060,3 1160,7 1200,2 1200,12"
+      fill="url(#ridgeGrad)"/>
+  </svg>
+
+</header>
+
+  <!-- LUXURY INFO SECTION -->
+  <section class="india-hero">
+    <div class="india-hero-left">
+      <h1>Discover India</h1>
+      <p>A nation of pleasant contrasts, India was home to the world's oldest civilizations which flourish in its valleys. Home to exotic wildlife, mighty mountains, unending plains and immense rivers, India offers splendid experiences for every traveller.</p>
+      <p>India lives in rugged villages as well as bustling metropolitan such as Delhi and Mumbai which is a perfect blend of old – shopping bazaars, narrow streets, centuries-old monuments and contemporary skyscrapers.</p>
+      
+      <div class="india-stats">
+        <div class="stat-box">
+          <strong>Capital</strong>
+          <span>New Delhi</span>
+        </div>
+        <div class="stat-box">
+          <strong>Best Time To Visit</strong>
+          <span>October to March</span>
+        </div>
+        <div class="stat-box">
+          <strong>Currency</strong>
+          <span>Indian Rupee (INR)</span>
+        </div>
+        <div class="stat-box">
+          <strong>Major Attractions</strong>
+          <span>Taj Mahal, Rajasthan, Kerala</span>
+        </div>
+      </div>
+    </div>
+    <div class="india-hero-right">
+      <div class="india-image-collage">
+        <img src="images/new_assets/Taj Mahal.jpg" alt="Taj Mahal">
+        <img src="images/india_tours/wfrgzavchvcwa8gcgmslw05wh9yj_Rajasthan-International-Folk-Festival.webp" alt="Rajasthan Festival">
+      </div>
+  </section>
+
+  <!-- ===== INDIA TOURS SECTION ===== -->
+  <section class="india-tours-section">
+    <div class="tours-section-header">
+      <h2>Explore Our Tours</h2>
+      <p>Handcrafted journeys across India's most iconic destinations</p>
+    </div>
+    <div class="india-tour-grid">
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour1'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/MT Golden Triangle/swaminarayan_akshardham_mandir.webp" alt="Tour 1">
+          <div class="tour-duration-badge">04 Nights / 05 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">MT Golden Triangle Tour</h3>
+          <div class="tour-route">Delhi → Agra → Jaipur → Delhi</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+
+      <!-- Tour 2 -->
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour2'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/Golden Triangel with Varanasi and Auragabad/amer-fort-jaipur.jpg" alt="Tour 2">
+          <div class="tour-duration-badge">08 Nights / 09 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">Golden Triangle with Varanasi, Aurangabad & Mumbai</h3>
+          <div class="tour-route">Delhi → Jaipur → Agra → Varanasi → Aurangabad → Mumbai</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+
+      <!-- Tour 3 -->
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour3'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/MT Bhuddhist with Agra Taj/Budha.jpg" alt="Tour 3">
+          <div class="tour-duration-badge">11 Nights / 12 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">MT Buddhist with Taj and Nepal Tour</h3>
+          <div class="tour-route">Delhi → Agra → Varanasi → Bodhgaya → Nepal</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+
+      <!-- Tour 4 -->
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour4'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/MT Classical Indo Nepal/Amer-Fort-photo-1.jpg" alt="Tour 4">
+          <div class="tour-duration-badge">10 Nights / 11 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">MT Classical Indo Nepal</h3>
+          <div class="tour-route">Delhi → Jaipur → Agra → Khajuraho → Varanasi → Nepal</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+
+      <!-- Tour 5 -->
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour5'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/MT Classical Tour/khajuraho (1).jpg" alt="Tour 5">
+          <div class="tour-duration-badge">07 Nights / 08 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">MT Classical Tour</h3>
+          <div class="tour-route">Delhi → Jaipur → Agra → Khajuraho → Varanasi → Delhi</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+
+
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour6'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/Golden Triangle with Ranthambore/15.52.00.jpg" alt="Golden Triangle with Ranthambore">
+          <div class="tour-duration-badge">07 Nights / 08 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">Golden Triangle with Ranthambore</h3>
+          <div class="tour-route">Delhi &#10132; Jaipur &#10132; Abhaneri &#10132; Ranthambore &#10132; Fatehpur Sikri &#10132; Agra &#10132; Delhi</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour7'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/Honeymoon in Kerala/Cochin.jpg" alt="Honeymoon Trip in Kerala">
+          <div class="tour-duration-badge">12 Night / 13 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">Honeymoon Trip in Kerala</h3>
+          <div class="tour-route">Cochin &#10132;  Munnar – Periyar &#10132;  Alleppey  &#10132;  Mararikulam  &#10132;  Kovalam  &#10132;  Trivandrum</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour8'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/Kashmir with Golden Triangel Tour/Srinagar.webp" alt="Kashmir with Golden Triangle Tour">
+          <div class="tour-duration-badge">06 Nights / 07 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">Kashmir with Golden Triangle Tour</h3>
+          <div class="tour-route">Delhi &#10132; Srinagar &#10132; Pahalgam &#10132; Gulmarg &#10132; Agra &#10132; Jaipur &#10132; Delhi</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour9'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/Rajasthan Forts and Palaces Tour/Bikaner,_Rajasthan.jpg" alt="Rajasthan Forts and Palaces Tour">
+          <div class="tour-duration-badge">14 Nights/ 15 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">Rajasthan Forts and Palaces Tour</h3>
+          <div class="tour-route">Delhi  &#10132;  Mandawa  &#10132;  Bikaner  &#10132;  Jaisalmer  &#10132;  Jodhpur – Ranakpur  &#10132;  Udaipur  &#10132;  Pushkar  &#10132;  Jaipur – Fatehpur Sikri  &#10132;  Agra – Delhi</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour10'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/South India Vacation Tour/Chennai.jpg" alt="South India Vacation Tour">
+          <div class="tour-duration-badge">13 Nights / 14 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">South India Vacation Tour</h3>
+          <div class="tour-route">Chennai &#10132; Pondicherry &#10132; Tanjore &#10132; Trichy &#10132; Madurai &#10132; Periyar &#10132; Cochin &#10132; Allepy &#10132; Kovalam &#10132; Trivendrum</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour11'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/Spice Kerala Spice Tour/alleppey-tourism.jpg" alt="Kerala Spice Tour">
+          <div class="tour-duration-badge">07 Nights / 08 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">Kerala Spice Tour</h3>
+          <div class="tour-route">Cochin  &#10132;  Munnar  &#10132;  Periyar  &#10132;  Alleppey  &#10132;  Kovalam &#10132;  Trivendrum</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+      <div class="tour-card" onclick="window.location.href='tour_itinerary.html?id=tour12'">
+        <div class="tour-img-wrap">
+          <img class="tour-img" src="images/india_tours/Srinagar with Leh Ladakh Tour/Gulmarg.jpg" alt="Srinagar with Leh Ladakh Tour">
+          <div class="tour-duration-badge">10 Nights / 11 Days</div>
+        </div>
+        <div class="tour-body">
+          <h3 class="tour-name">Srinagar with Leh Ladakh Tour</h3>
+          <div class="tour-route">Delhi – Srinagar – Pahalgam – Kargil – Leh –– Nubra – Nubra Valley &#10132;  Pangong Lake – Leh  &#10132;  Delhi</div>
+          <button class="tour-btn">View Itinerary</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+  <!-- MODALS CONTAINER -->
+  <div id="modalContainer"></div>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Tour Data
+    const toursData = {
+      tour1: {
+        title: "MT Golden Triangle Tour",
+        route: "Delhi → Agra → Jaipur → Delhi",
+        img: "images/india_tours/MT Golden Triangle/swaminarayan_akshardham_mandir.webp",
+        days: [
+          { d: "Day 1 – Arrival Delhi", t: "Warm welcome by our airport representative/guide on arrival; assistance transferring to hotel. Dinner and overnight stay at hotel.", m: ['D'] },
+          { d: "Day 2 – Delhi – Agra", t: "After breakfast, New Delhi sightseeing — Akshardham, President House, Parliament House. Tandoori lunch at a local restaurant, then drive to Agra and view the Taj Mahal at sunset. Dinner and overnight at hotel in Agra.", m: ['B', 'L', 'D'] },
+          { d: "Day 3 – Agra – Fatehpur Sikri – Jaipur", t: "After breakfast, drive to Jaipur, en route visiting Agra Fort and Fatehpur Sikri, lunch at Lake View restaurant, Sikri. Dinner and overnight at hotel in Jaipur.", m: ['B', 'L', 'D'] },
+          { d: "Day 4 – Jaipur Sightseeing", t: "Full day exploring the Pink City — Amber Fort by jeep, Hawa Mahal, City Palace, Jantar Mantar, Birla Mandir, plus henna, lassi and rickshaw ride. Lunch and dinner at hotel.", m: ['B', 'L', 'D'] },
+          { d: "Day 5 – Jaipur – Delhi – Departure", t: "Packed breakfast, transfer to Jaipur airport, flight to Delhi. On arrival, sightseeing — Agrasen ki Baoli, India Gate, Gandhi Smriti, Raj Ghat, Qutab Minar. Korean lunch at Gung, Green Park. Transfer to international airport for departure flight.", m: ['B', 'L'] }
+        ]
+      },
+      tour2: {
+        title: "Golden Triangle with Varanasi, Aurangabad & Mumbai",
+        route: "Delhi → Jaipur → Agra → Varanasi → Aurangabad → Mumbai",
+        img: "images/india_tours/Golden Triangel with Varanasi and Auragabad/amer-fort-jaipur.jpg",
+        days: [
+          { d: "Day 1 – Arrival Delhi", t: "Arrive Indira Gandhi International Airport, met by representative, transfer to hotel.", m: ['B', 'L', 'D'] },
+          { d: "Day 2 – Delhi – Jaipur", t: "New Delhi sightseeing (India Gate, President House drive-past, Raj Ghat), lunch at local restaurant, continue to Jaipur, dinner and overnight.", m: ['B', 'L', 'D'] },
+          { d: "Day 3 – In Jaipur", t: "Full day Jaipur sightseeing — Amer Fort, City Palace, Hawa Mahal, Birla Mandir, henna/lassi/rickshaw. Dinner and overnight at Jaipur.", m: ['B', 'L', 'D'] },
+          { d: "Day 4 – Jaipur – Agra", t: "Check in, lunch, afternoon sightseeing — Taj Mahal and Agra Fort. Dinner and overnight at Agra.", m: ['B', 'L', 'D'] },
+          { d: "Day 5 – Agra – Varanasi", t: "Early transfer to Agra Cantt station, train to Varanasi. Check in, visit Sarnath, evening Ganga Aarti at the ghats.", m: ['B', 'L', 'D'] },
+          { d: "Day 6 – Varanasi – Mumbai", t: "Early visit to the Ganges, rest, afternoon flight to Mumbai, check in, dinner and overnight.", m: ['B', 'L', 'D'] },
+          { d: "Day 7 – Mumbai – Aurangabad", t: "Early flight, then Ajanta Caves (30 rock-cut Buddhist caves, 2nd century BCE, UNESCO site). Lunch, dinner, overnight.", m: ['B', 'L', 'D'] },
+          { d: "Day 8 – Aurangabad – Ellora Caves", t: "Ellora Caves, Daulatabad Fort, evening at Prozone Mall. Overnight at hotel.", m: ['B', 'L', 'D'] },
+          { d: "Day 9 – Aurangabad – Mumbai – Departure", t: "Early flight to Mumbai, final sightseeing — Gateway of India. After dinner, transfer to Mumbai International Airport for departure.", m: ['B', 'L', 'D'] }
+        ]
+      },
+      tour3: {
+        title: "MT Buddhist with Taj and Nepal Tour",
+        route: "Delhi → Agra → Varanasi → Bodhgaya → Nepal",
+        img: "images/india_tours/MT Bhuddhist with Agra Taj/Budha.jpg",
+        days: [
+          { d: "Day 1 – Delhi Arrival", t: "Warm welcome by airport representative, transfer to hotel, dinner and overnight." },
+          { d: "Day 2 – Delhi – Agra – Delhi", t: "Drive to Agra, visit Taj Mahal, lunch at Hotel Grand Mercure, Agra Fort tour, return to Delhi. Dinner en route at 19 Hole, Noida.", m: ['L', 'D'] },
+          { d: "Day 3 – Delhi – Varanasi", t: "Delhi sightseeing — India Gate, National Museum, Raj Ghat, Lotus Temple. Evening flight to Varanasi." },
+          { d: "Day 4 – Varanasi – Bodhgaya", t: "Sunrise at the ghats, Sarnath sightseeing and museum, drive to Gaya. Overnight in Bodhgaya." },
+          { d: "Day 5 – Bodhgaya", t: "Full day Bodhgaya sightseeing, two visits to Mahabodhi Temple. Dinner and overnight.", m: ['D'] },
+          { d: "Day 6 – Bodhgaya – Vaishali", t: "Drive to Rajgir, continue to Vaishali. Dinner and overnight.", m: ['D'] },
+          { d: "Day 7 – Vaishali – Kushinagar", t: "Drive to Kushinagar, lunch at Hotel Imperial Kushinagar, sightseeing.", m: ['L'] },
+          { d: "Day 8 – Kushinagar – Shravasti", t: "Drive to Shravasti, sightseeing. Dinner and overnight.", m: ['D'] },
+          { d: "Day 9 – Shravasti – Lumbini", t: "Drive to Lumbini, lunch at Hotel Kasai. Dinner and overnight.", m: ['L', 'D'] },
+          { d: "Day 10 – Lumbini – Pokhara", t: "Morning sightseeing in Lumbini (Buddha's birthplace), flight to Pokhara. Check in." },
+          { d: "Day 11 – Pokhara – Kathmandu", t: "Morning Pokhara sightseeing, flight to Kathmandu. Check in." },
+          { d: "Day 12 – Leave Kathmandu", t: "City tour — Pashupatinath Temple, Boudhanath Temple, Thamel — lunch, transfer to international airport for departure.", m: ['L'] }
+        ]
+      },
+      tour4: {
+        title: "MT Classical Indo Nepal",
+        route: "Delhi → Jaipur → Agra → Khajuraho → Varanasi → Nepal",
+        img: "images/india_tours/MT Classical Indo Nepal/Amer-Fort-photo-1.jpg",
+        days: [
+          { d: "Day 1 – Arrival Delhi", t: "Warm welcome by airport representative, transfer to hotel, dinner and overnight.", m: ['D'] },
+          { d: "Day 2 – Delhi – Jaipur", t: "Check in, lunch, afternoon sightseeing — Amber Fort by jeep, Hawa Mahal, City Palace, Jantar Mantar, Birla Mandir.", m: ['L'] },
+          { d: "Day 3 – Jaipur – Fatehpur Sikri – Agra", t: "Drive to Agra via Abhaneri and Fatehpur Sikri, lunch at local restaurant. Dinner and overnight in Agra.", m: ['L', 'D'] },
+          { d: "Day 4 – Agra Sightseeing", t: "Taj Mahal in the morning, Agra Fort (UNESCO site). Lunch and dinner at hotel, overnight in Agra.", m: ['L', 'D'] },
+          { d: "Day 5 – Agra – Jhansi – Khajuraho", t: "Early train to Jhansi, Orcha sightseeing, continue to Khajuraho, evening yoga class." },
+          { d: "Day 6 – Khajuraho – Varanasi", t: "Morning Khajuraho temple tour, flight to Varanasi, evening Aarti pooja by rickshaw and boat ride." },
+          { d: "Day 7 – Varanasi Sightseeing", t: "Sunrise boat ride, rest, Sarnath and museum visit, yoga session. Nepal partner takes over program from here." },
+          { d: "Day 8 – Varanasi – Kathmandu – Chitwan", t: "Flight Varanasi–Kathmandu connecting to Bharatpur, Tharu dance show." },
+          { d: "Day 9 – Chitwan – Pokhara", t: "Early boat safari, jeep safari, drive to Pokhara, boating on Fewa Lake." },
+          { d: "Day 10 – Pokhara – Kathmandu", t: "Sunrise views, sightseeing at Devi's Falls, flight to Kathmandu. Sightseeing at Bhaktapur/paper factory/Thamel." },
+          { d: "Day 11 – Leave Kathmandu", t: "Durbar Square and Boudhanath sightseeing, transfer to international airport for departure." }
+        ]
+      },
+      tour5: {
+        title: "MT Classical Tour",
+        route: "Delhi → Jaipur → Agra → Khajuraho → Varanasi → Delhi",
+        img: "images/india_tours/MT Classical Tour/khajuraho (1).jpg",
+        days: [
+          { d: "Day 1 – Arrival Delhi", t: "Warm welcome by airport representative, transfer to hotel, dinner and overnight.", m: ['D'] },
+          { d: "Day 2 – Delhi – Jaipur", t: "Check in, lunch, afternoon sightseeing — Amber Fort by jeep, Hawa Mahal, City Palace.", m: ['L'] },
+          { d: "Day 3 – Jaipur – Fatehpur Sikri – Agra", t: "Drive to Agra via Abhaneri and Fatehpur Sikri, lunch at local restaurant.", m: ['L'] },
+          { d: "Day 4 – Agra Sightseeing", t: "Taj Mahal in the morning, Agra Fort (UNESCO site). Lunch and dinner at hotel.", m: ['L', 'D'] },
+          { d: "Day 5 – Agra – Jhansi – Khajuraho", t: "Train to Jhansi, Orcha sightseeing, continue to Khajuraho, evening yoga class." },
+          { d: "Day 6 – Khajuraho – Varanasi", t: "Morning tour of the East and West temple groups, flight to Varanasi, evening Ganga Aarti ceremony." },
+          { d: "Day 7 – Varanasi – Delhi", t: "Early sunrise boat tour, Sarnath visit, flight to Delhi." },
+          { d: "Day 8 – Delhi Sightseeing & Departure", t: "Final Delhi sightseeing — Akshardham, India Gate, Gandhi Smriti, President House, Qutab Minar. Transfer to airport." }
+        ]
+      }
+    };
+
+    function openModal(tourId) {
+      const data = window.mtModalData ? window.mtModalData(tourId, toursData[tourId]) : toursData[tourId];
+      let html = `
+        <div class="tour-modal show" id="activeModal">
+          <div class="tour-modal-content">
+            <div class="modal-close" onclick="closeModal()">×</div>
+            
+            <div class="modal-left">
+              <img src="${data.img}" alt="${data.title}">
+              <div class="modal-left-content">
+                <h2>${data.title}</h2>
+                <p>${data.route}</p>
+              </div>
+            </div>
+
+            <div class="modal-right" onscroll="updateTimeline(this)">
+              <div class="timeline-container">
+                <div class="timeline-progress" id="timelineProgress"></div>
+      `;
+
+      data.days.forEach((day) => {
+        let badgesHtml = '';
+        if(day.m) {
+          badgesHtml = '<div class="meal-badges">';
+          if(day.m.includes('B')) badgesHtml += '<span class="meal-badge b">Breakfast</span>';
+          if(day.m.includes('L')) badgesHtml += '<span class="meal-badge l">Lunch</span>';
+          if(day.m.includes('D')) badgesHtml += '<span class="meal-badge d">Dinner</span>';
+          badgesHtml += '</div>';
+        }
+
+        html += `
+          <div class="itinerary-day">
+            <div class="day-title">${day.d}</div>
+            <div class="day-desc">${day.t}</div>
+            ${badgesHtml}
+          </div>
+        `;
+      });
+
+      html += `
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('modalContainer').innerHTML = html;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('activeModal');
+      if(modal) {
+        modal.classList.remove('show');
+        setTimeout(() => {
+          document.getElementById('modalContainer').innerHTML = '';
+          document.body.style.overflow = 'auto';
+        }, 400);
+      }
+    }
+
+    // Elegant animated timeline line
+    function updateTimeline(el) {
+      const progress = el.querySelector('#timelineProgress');
+      if(!progress) return;
+      
+      const scrollHeight = el.scrollHeight - el.clientHeight;
+      const scrollTop = el.scrollTop;
+      let percent = 0;
+      if (scrollHeight > 0) {
+        percent = scrollTop / scrollHeight;
+      }
+      
+      // Calculate max height based on container
+      const containerHeight = el.querySelector('.timeline-container').clientHeight;
+      progress.style.height = (percent * containerHeight) + 'px';
+    }
+  </script>
+
+  <!-- MARQUEE SPOTLIGHT EFFECT -->
+  <script>
+  (function () {
+    const wraps = document.querySelectorAll('.marquee-wrap');
+    
+    wraps.forEach(function(wrap) {
+      const track = wrap.querySelector('.marquee-track');
+      if (!track) return;
+      
+      wrap.addEventListener('mousemove', function (e) {
+        const wrapRect = wrap.getBoundingClientRect();
+        const cursorX = e.clientX - wrapRect.left;
+        
+        const style = window.getComputedStyle(track);
+        const matrix = new DOMMatrix(style.transform);
+        const trackOffset = matrix.m41; // translateX value in px
+        
+        const trackCursorX = cursorX - trackOffset;
+        
+        const isLight = wrap.classList.contains('light-theme');
+        const baseColor = isLight ? 'rgba(37,55,91,0.08)' : 'rgba(255,255,255,0.07)';
+
+        track.querySelectorAll('span').forEach(function (span) {
+          const spanRect = span.getBoundingClientRect();
+          const localX = e.clientX - spanRect.left;
+          span.style.backgroundImage =
+            'radial-gradient(circle 100px at ' + localX + 'px 50%, ' +
+              'rgba(220, 60, 10, 1.0) 0%, ' +
+              'rgba(218, 165, 20, 0.85) 25%, ' +
+              'rgba(255, 200, 50, 0.3) 55%, ' +
+              baseColor + ' 80%)';
+        });
+      });
+
+      wrap.addEventListener('mouseleave', function () {
+        const isLight = wrap.classList.contains('light-theme');
+        const baseColor = isLight ? 'rgba(37,55,91,0.08)' : 'rgba(255,255,255,0.10)';
+        
+        track.querySelectorAll('span').forEach(function (span) {
+          span.style.backgroundImage =
+            'radial-gradient(circle 80px at -200px 50%, rgba(200,80,20,0.9) 0%, rgba(212,160,20,0.6) 30%, ' + baseColor + ' 70%)';
+        });
+      });
+    });
+  })();
+  </script>
+
+<script>
+(function () {
+  var header = document.querySelector('.site-header');
+  if (!header) return;
+  var onScroll = function () {
+    if (window.scrollY > 60) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
+
+

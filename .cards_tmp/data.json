@@ -1,0 +1,122 @@
+{
+ "india.html": [
+  {
+   "id": "1",
+   "title": "MT Golden Triangle Tour",
+   "route": "Delhi → Agra → Jaipur → Delhi",
+   "duration": "04 Nights / 05 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "2",
+   "title": "Golden Triangle with Varanasi, Aurangabad & Mumbai",
+   "route": "Delhi → Jaipur → Agra → Varanasi → Aurangabad → Mumbai",
+   "duration": "08 Nights / 09 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "3",
+   "title": "MT Buddhist with Taj and Nepal Tour",
+   "route": "Delhi → Agra → Varanasi → Bodhgaya → Nepal",
+   "duration": "11 Nights / 12 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "4",
+   "title": "MT Classical Indo Nepal",
+   "route": "Delhi → Jaipur → Agra → Khajuraho → Varanasi → Nepal",
+   "duration": "10 Nights / 11 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "5",
+   "title": "MT Classical Tour",
+   "route": "Delhi → Jaipur → Agra → Khajuraho → Varanasi → Delhi",
+   "duration": "07 Nights / 08 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "6",
+   "title": "Golden Triangle with Ranthambore",
+   "route": "Delhi &#10132; Jaipur &#10132; Abhaneri &#10132; Ranthambore &#10132; Fatehpur Sikri &#10132; Agra &#10132; Delhi",
+   "duration": "07 Nights / 08 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "7",
+   "title": "Honeymoon Trip in Kerala",
+   "route": "Cochin &#10132;  Munnar – Periyar &#10132;  Alleppey  &#10132;  Mararikulam  &#10132;  Kovalam  &#10132;  Trivandrum",
+   "duration": "12 Night / 13 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "8",
+   "title": "Kashmir with Golden Triangle Tour",
+   "route": "Delhi &#10132; Srinagar &#10132; Pahalgam &#10132; Gulmarg &#10132; Agra &#10132; Jaipur &#10132; Delhi",
+   "duration": "06 Nights / 07 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "9",
+   "title": "Rajasthan Forts and Palaces Tour",
+   "route": "Delhi  &#10132;  Mandawa  &#10132;  Bikaner  &#10132;  Jaisalmer  &#10132;  Jodhpur – Ranakpur  &#10132;  Udaipur  &#10132;  Pushkar  &#10132;  Jaipur – Fatehpur Sikri  &#10132;  Agra – Delhi",
+   "duration": "14 Nights/ 15 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "10",
+   "title": "South India Vacation Tour",
+   "route": "Chennai &#10132; Pondicherry &#10132; Tanjore &#10132; Trichy &#10132; Madurai &#10132; Periyar &#10132; Cochin &#10132; Allepy &#10132; Kovalam &#10132; Trivendrum",
+   "duration": "13 Nights / 14 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "11",
+   "title": "Kerala Spice Tour",
+   "route": "Cochin  &#10132;  Munnar  &#10132;  Periyar  &#10132;  Alleppey  &#10132;  Kovalam &#10132;  Trivendrum",
+   "duration": "07 Nights / 08 Days",
+   "btn": "View Itinerary"
+  },
+  {
+   "id": "12",
+   "title": "Srinagar with Leh Ladakh Tour",
+   "route": "Delhi – Srinagar – Pahalgam – Kargil – Leh –– Nubra – Nubra Valley &#10132;  Pangong Lake – Leh  &#10132;  Delhi",
+   "duration": "10 Nights / 11 Days",
+   "btn": "View Itinerary"
+  }
+ ],
+ "nepal.html": [
+  {
+   "id": "",
+   "title": "Honeymoon in Nepal & Bhutan Tour",
+   "route": "Kathmandu → Nagarkot → Pokhara → Thimpu → Paro",
+   "duration": "09 Nights / 10 Days",
+   "btn": ""
+  },
+  {
+   "id": "",
+   "title": "KPC Nepal 07 Nights Tour",
+   "route": "Kathmandu → Chitwan → Pokhara → Kathmandu",
+   "duration": "07 Nights / 08 Days",
+   "btn": ""
+  }
+ ],
+ "bhutan.html": [
+  {
+   "id": "",
+   "title": "Land of Thunder Dragon Bhutan Tour",
+   "route": "Paro → Thimphu → Punakha → Paro",
+   "duration": "03 Nights / 04 Days",
+   "btn": ""
+  }
+ ],
+ "srilanka.html": [
+  {
+   "id": "",
+   "title": "Classical Sri Lanka Tour",
+   "route": "Colombo → Pinnawala → Kandy → Nuwara Eliya → Bentota → Colombo",
+   "duration": "06 Nights / 07 Days",
+   "btn": ""
+  }
+ ]
+}

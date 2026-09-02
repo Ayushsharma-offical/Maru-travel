@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+    <title>Our Services | Maru Travel India</title>
+    <meta name="description" content="Discover our premium travel services including Luxury Train bookings, FIT & Group Tours, Incentive Travel, and specialized MICE arrangements across India.">
+    <meta name="keywords" content="Maru Travel services, FIT tours India, MICE India, incentive travel Delhi, group tours South Asia">
+    <meta property="og:title" content="Our Services | Maru Travel India">
+    <meta property="og:description" content="Discover our premium travel services including Luxury Train bookings, FIT & Group Tours, Incentive Travel, and specialized MICE arrangements across India.">
+    <meta property="og:image" content="https://www.marutravel.in/images/website_assests/Maru%20Travel%20Logo%20al.png">
+    <meta property="og:url" content="https://www.marutravel.in/what_we_do.html">
+    <meta name="twitter:card" content="summary_large_image">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&family=Great+Vibes&family=Pinyon+Script&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon (2).png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="i18n.js"></script>
+<style>
+/* CSS Reset and Base Styles for header/footer to match index.html */
+:root{
+  --orange:#ec6707;
+  --dark:#1c2b3a;
+  --cream:#f8f4ef;
+  --gold:#c9a84c;
+  --red-dark:#8B1A14;
+  /* New Tokens */
+  --sky-mist:#EAF2F8;
+  --sky-mist-2:#F4F8FB;
+  --marble:#FCFAF5;
+  --ink:#152342;
+  --ink-70:rgba(21,35,66,.7);
+  --ink-50:rgba(21,35,66,.5);
+  --horizon:#2E5C8A;
+  --gold-2:#E4B854;
+  --gold-soft:#EFD9A4;
+  --blush:#F4E6CB;
+  --line:rgba(21,35,66,.12);
+  --line-gold:rgba(198,153,47,.35);
+  --shadow-1: 0 20px 60px rgba(21,35,66,.10);
+  --shadow-2: 0 30px 80px rgba(21,35,66,.16);
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
+  --ff-script:'Pinyon Script', cursive;
+  --ff-display:'Playfair Display', serif;
+  --ff-body:'Manrope', sans-serif;
+  --ease-soft: cubic-bezier(.22,.61,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--sky-mist-2);
+  color:var(--ink);
+  font-family:var(--ff-body);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%; display:block;}
+
+h1,h2,h3{font-family:var(--ff-display);margin:0;font-weight:600;color:var(--ink); transition: all 0.4s ease;}
+h1:hover, h2:hover, h3:hover {
+  color: transparent;
+  background: linear-gradient(90deg, #8B1A14, var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  transform: scale(1.02);
+  text-shadow: 0 4px 15px rgba(198,153,47,0.3);
+}
+p{margin:0;}
+
+/* ─── HEADER SYSTEM FROM MARU_TRAVEL_HEADER (22).HTML ─────────────────────── */
+:root {
+  --cream: #FCF8EF;
+  --cream-deep: #F5EBD6;
+  --navy: #25375B;
+  --navy-deep: #1C2C4A;
+  --navy-soft: #45557C;
+  --copper-dark: #6B4429;
+  --copper-mid: #C6835A;
+  --copper-light: #F5B478;
+  --gold-h: #F1C88C;
+  --shadow-warm: rgba(22, 35, 63, 0.12);
+}
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0; z-index: 1000;
+  width: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 800px 220px at 8% -30%, rgba(245,180,120,0.22), transparent 60%),
+    linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+  box-shadow: 0 8px 20px -12px var(--shadow-warm);
+  transition: background 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.flight-layer {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 1;
+  transition: opacity 0.3s ease, max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+  max-height: 200px;
+}
+@keyframes flyPath { 0%{offset-distance:0%} 100%{offset-distance:100%} }
+.plane-icon {
+  position: absolute; top: 0; left: 0; offset-rotate: auto;
+  animation: flyPath linear infinite; z-index: 1; pointer-events: none;
+  transition: filter .3s, opacity 0.3s ease;
+}
+.plane-icon.p1 {
+  width: 22px; height: 22px;
+  offset-path: path('M 20 130 C 220 145, 420 35, 640 52 S 980 5, 1080 22');
+  animation-duration: 8s;
+  filter: drop-shadow(0 4px 6px rgba(37,55,91,0.4));
+}
+.plane-icon.p2 {
+  width: 15px; height: 15px;
+  offset-path: path('M 260 8 C 420 40, 560 95, 780 88 S 1080 60, 1250 95');
+  animation-duration: 11s; animation-delay: -3s; opacity: 0.75;
+  filter: drop-shadow(0 3px 5px rgba(37,55,91,0.35));
+}
+.site-header:hover .plane-icon { filter: drop-shadow(0 6px 10px rgba(37,55,91,0.55)); }
+
+.polish { position: relative; overflow: hidden; isolation: isolate; }
+.polish::before {
+  content: ""; position: absolute; top: -60%; left: -40%;
+  width: 45%; height: 220%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.85) 50%, transparent 100%);
+  transform: translateX(-220%) rotate(8deg); transition: transform .65s ease;
+  pointer-events: none; z-index: 1;
+}
+.polish:hover::before { transform: translateX(420%) rotate(8deg); }
+
+.util-strip {
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  padding: 0 28px 0 0;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06), inset 0 1px 0 rgba(0,0,0,0.3);
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, padding 0.4s ease;
+  max-height: 60px; opacity: 1; overflow: hidden;
+}
+
+/* ===== MULTILINGUAL MARQUEE ===== */
+.marquee-wrap {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  cursor: default;
+  --mx: 50%;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: marqueeScroll 60s linear infinite;
+  will-change: transform;
+}
+
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-track span {
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0 22px;
+  /* base: nearly invisible */
+  color: rgba(255,255,255,0.12);
+  transition: color 0s;
+  position: relative;
+  background: transparent;
+  /* spotlight via paint worklet fallback: radial mask on --mx */
+  background: radial-gradient(
+    circle 80px at var(--smx, -200px) 50%,
+    rgba(200, 80, 20, 0.9) 0%,
+    rgba(212, 160, 20, 0.6) 30%,
+    rgba(255,255,255,0.10) 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Light-theme override for nav marquees */
+.marquee-wrap.light-theme .marquee-track span {
+  color: rgba(37,55,91,0.08);
+  background: radial-gradient(
+    circle 80px at var(--smx, -200px) 50%,
+    rgba(200, 80, 20, 0.9) 0%,
+    rgba(212, 160, 20, 0.6) 30%,
+    rgba(37,55,91,0.08) 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.lang-toggle {
+  display: flex;
+  position: relative;
+  background: rgba(255,255,255,0.10);
+  border-radius: 30px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+
+/* Sliding glowing knob */
+.lang-toggle::before {
+  content: "";
+  position: absolute;
+  top: 3px; bottom: 3px; left: 3px;
+  width: calc(50% - 3px);
+  background: linear-gradient(145deg, rgba(255,255,255,0.28), rgba(255,255,255,0.10));
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5);
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+.lang-toggle:has(#opt-ko.active)::before {
+  transform: translateX(100%);
+}
+
+.lang-toggle span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 75px;
+  padding: 5px 0;
+  font-size: 11px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.3s;
+  user-select: none;
+}
+.lang-toggle span.active {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+.lang-toggle span .flag {
+  display: flex;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+.lang-toggle span .flag svg { width: 100%; height: 100%; display: block; }
+
+
+.login-btn {
+  display: flex; align-items: center; gap: 6px; padding: 6px 16px;
+  border-radius: 18px; font-size: 11px; font-weight: 600; letter-spacing: 0.4px;
+  color: #2C1608; text-decoration: none;
+  background: linear-gradient(180deg, var(--gold-h) 0%, var(--copper-mid) 55%, var(--copper-dark) 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -2px 3px rgba(90,50,20,0.4);
+  cursor: pointer; transition: transform .2s, box-shadow .2s;
+}
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 13px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -2px 3px rgba(90,50,20,0.4);
+}
+
+.brand-row {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 28px 7px;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, padding 0.4s ease;
+  max-height: 120px; opacity: 1; overflow: hidden;
+}
+.logo-mark { display: flex; align-items: center; }
+.logo-mark img {
+  height: 80px; width: auto; display: block;
+  filter: drop-shadow(0 4px 8px rgba(22,35,63,0.18));
+  mix-blend-mode: multiply; background: transparent; transition: transform .3s ease;
+}
+.logo-mark img:hover { transform: scale(1.02); }
+
+.region-tabs {
+  display: flex; align-items: center; gap: 0; padding: 4px 8px;
+  background: linear-gradient(180deg, #F3E5C9, #E9D6AE); border-radius: 20px;
+  box-shadow: inset 0 1px 4px rgba(107,68,41,0.2), inset 0 -1px 0 rgba(255,255,255,0.6);
+}
+.region-tabs a {
+  padding: 6px 14px; font-size: 10.5px; font-weight: 600; letter-spacing: 1px;
+  color: var(--navy-soft); text-decoration: none; border-radius: 15px;
+  transition: color .2s, transform .2s;
+}
+.region-tabs a.active {
+  color: #2C1608;
+  background: linear-gradient(180deg, #FFFDF8, #F1DDB2);
+  box-shadow: 0 2px 6px rgba(107,68,41,0.28), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.region-tabs a:not(.active):hover { color: var(--copper-dark); transform: translateY(-1px); }
+
+.site-header nav {
+  position: relative; z-index: 2;
+  display: flex; justify-content: center; align-items: center;
+  padding: 0 28px; min-height: 48px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FCF8EF 100%);
+  border-top: 1px solid rgba(37,55,91,0.08);
+  box-shadow: inset 0 2px 4px -2px rgba(37,55,91,0.05);
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.site-header nav .marquee-wrap {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 30%;
+  overflow: hidden; pointer-events: auto; display: flex; align-items: center;
+  mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+.site-header nav .marquee-wrap.right {
+  left: auto; right: 0;
+  mask-image: linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+.site-header nav .marquee-wrap.right .marquee-track {
+  animation: marqueeScrollReverse 35s linear infinite;
+}
+@keyframes marqueeScrollReverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.site-header nav .nav-links {
+  display: flex; gap: 32px; align-items: center; position: relative; z-index: 3;
+}
+.site-header nav a {
+  position: relative; font-size: 12px; font-weight: 600; letter-spacing: 0.8px;
+  color: var(--navy); text-decoration: none; padding: 3px 5px 6px;
+  border-radius: 5px; transition: color .2s;
+}
+.site-header nav a.current { color: var(--copper-dark); }
+.site-header nav a.current::after {
+  content: ""; position: absolute; left: 5px; right: 5px; bottom: 0;
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--copper-mid), var(--gold-h));
+  box-shadow: 0 1px 4px rgba(198,131,90,0.5);
+}
+.site-header nav a:hover { color: var(--copper-dark); }
+
+.ridge {
+  display: block; width: 100%; height: 12px; position: relative; z-index: 2;
+  transition: opacity 0.3s ease, max-height 0.4s ease;
+  max-height: 12px; opacity: 1;
+}
+
+/* ─── SCROLL SHRINK ─────────────────────────────────────── */
+.site-header.scrolled {
+  background: rgba(252,248,239,0.96);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(22,35,63,0.16);
+}
+.site-header.scrolled .util-strip,
+.site-header.scrolled .brand-row,
+.site-header.scrolled .ridge,
+.site-header.scrolled .flight-layer,
+.site-header.scrolled .plane-icon {
+  max-height: 0 !important; opacity: 0 !important;
+  padding-top: 0 !important; padding-bottom: 0 !important;
+  margin-top: 0 !important; margin-bottom: 0 !important;
+  pointer-events: none;
+}
+.site-header.scrolled nav {
+  padding: 10px 28px; border-top: none; background: transparent; box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .brand-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .site-header nav { flex-wrap: wrap; justify-content: center; gap: 14px 20px; padding: 10px 28px; }
+  .site-header nav .marquee-wrap { display: none; }
+}
+.header-bottom a::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:2px;background:var(--gold);transition:width .3s;
+}
+.header-bottom a:hover::after{width:100%}
+
+/* FOOTER STYLES */
+footer{background:var(--dark);color:#ccc;padding:80px 20px 20px;font-family:'Lato',sans-serif;}
+.footer-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;gap:50px;flex-wrap:wrap;}
+.footer-col{flex:1;min-width:250px;}
+.footer-brand .footer-logo{margin-bottom:20px;background:#fff;border-radius:12px;padding:10px;display:inline-block;}
+.footer-brand .footer-logo img{height:60px;}
+.footer-brand p{line-height:1.8;margin-bottom:20px;}
+.social-icons{display:flex;gap:15px;}
+.social-icons a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(255,255,255,.1);border-radius:50%;color:#fff;transition:all .3s;}
+.social-icons a:hover{background:var(--gold);transform:translateY(-3px);}
+.footer-col h4{font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:25px;position:relative;padding-bottom:10px;}
+.footer-col h4::after{content:'';position:absolute;left:0;bottom:0;width:40px;height:2px;background:var(--gold);}
+.footer-links ul{list-style:none;}
+.footer-links li{margin-bottom:12px;}
+.footer-links a{transition:color .3s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-contact p{display:flex;gap:15px;margin-bottom:20px;line-height:1.6;}
+.footer-contact i{color:var(--gold);margin-top:5px;}
+.footer-bottom{text-align:center;padding-top:30px;margin-top:50px;border-top:1px solid rgba(255,255,255,.1);font-size:14px;letter-spacing:1px;}
+
+/* COMMON SECTIONS */
+.eyebrow{
+  font-family:var(--ff-body);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.section{position:relative;padding:130px 0;}
+.section--tight{padding:100px 0;}
+.section-head{max-width:640px;margin:0 0 64px;}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+.section-head h2{font-size:clamp(32px,4vw,48px);margin-top:14px;line-height:1.1;}
+.section-head p{margin-top:20px;color:var(--ink-70);font-size:16.5px;max-width:56ch;}
+.section-head.center p{margin-left:auto;margin-right:auto;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+
+/* ============================================================
+   HERO — PINNED CANVAS SCRUB
+   ============================================================ */
+.hero{
+  position:relative;
+  height:250vh; /* Extra height for scrolling frames */
+  width:100%;
+  background:#0d1626;
+  margin-top: 95px; /* Slim header offset */
+}
+.hero__sticky {
+  position: sticky;
+  top: 95px; /* Slim header offset */
+  height: calc(100vh - 95px);
+  width: 100%;
+  overflow: hidden;
+}
+.hero__canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+}
+.hero__scrim{
+  position:absolute;inset:0;
+  background: linear-gradient(180deg, rgba(9,15,28,.35) 0%, rgba(9,15,28,0) 22%, rgba(9,15,28,0) 60%, rgba(9,15,28,.7) 100%);
+  pointer-events:none;
+}
+.hero__content{
+  position:absolute;
+  left:0;right:0;bottom:9%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  color:#fff;
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 1s var(--ease-soft), transform 1s var(--ease-soft);
+  padding:0 24px;
+}
+.hero__content.is-in{opacity:1;transform:translateY(0);}
+.hero__eyebrow{
+  color:var(--gold-2);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.hero__script{
+  font-family:var(--ff-script);
+  font-size:clamp(52px,8vw,96px);
+  line-height:1;
+  font-weight:400;
+  color:#fff;
+  text-shadow:0 8px 40px rgba(0,0,0,.35);
+  transition: all 0.5s ease;
+}
+.hero__script:hover {
+  color: transparent;
+  background: linear-gradient(90deg, #ff4e50, #f9d423);
+  -webkit-background-clip: text;
+  background-clip: text;
+  transform: scale(1.05) translateY(-5px);
+  text-shadow: 0 10px 30px rgba(255, 78, 80, 0.4);
+}
+.hero__sub{
+  margin-top:10px;
+  font-family:var(--ff-display);
+  font-style:italic;
+  font-weight:500;
+  font-size:clamp(16px,2vw,22px);
+  color:rgba(255,255,255,.86);
+  letter-spacing:.02em;
+}
+.hero__scrollcue{
+  position:absolute;
+  left:50%;bottom:34px;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:#fff;
+  font-size:11px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  opacity:.85;
+}
+.hero__scrollcue .stem{
+  width:1px;height:34px;
+  background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,0));
+  animation:stemPulse 2.2s ease-in-out infinite;
+}
+@keyframes stemPulse{
+  0%,100%{transform:scaleY(1);opacity:.6;}
+  50%{transform:scaleY(1.4);opacity:1;}
+}
+
+/* ============================================================
+   CERTIFIED — passport-stamp badges
+   ============================================================ */
+.certified{background:var(--sky-mist-2);}
+.stamp-row{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;}
+.stamp{
+  position:relative;background:var(--marble);border-radius:var(--radius-lg);
+  padding:44px 30px 36px;text-align:center;border:1px solid var(--line);
+  box-shadow:var(--shadow-1);transform-style:preserve-3d;will-change:transform;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.stamp:hover { transform: translateY(-10px) rotateX(5deg) rotateY(-5deg); box-shadow: var(--shadow-2); }
+.stamp__ring{
+  width:96px;height:96px;margin:0 auto 22px;border-radius:50%;
+  border:1.5px dashed var(--line-gold);display:flex;align-items:center;justify-content:center;
+  position:relative;transform:translateZ(40px);
+}
+.stamp__ring::before{
+  content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid var(--line-gold);
+}
+.stamp__ring svg{width:38px;height:38px;color:var(--gold);}
+.stamp h3{font-size:19px;transform:translateZ(30px);}
+.stamp p{margin-top:8px;font-size:13.5px;color:var(--ink-70);transform:translateZ(20px);}
+.stamp__glare{
+  position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(320px circle at 50% 0%, rgba(255,255,255,.55), transparent 60%);
+  opacity:0;transition:opacity .4s ease;pointer-events:none;
+}
+.stamp:hover .stamp__glare{opacity:1;}
+.certified__note{text-align:center;max-width:620px;margin:44px auto 0;color:var(--ink-70);font-size:15px;}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services{background:linear-gradient(180deg, var(--sky-mist-2) 0%, var(--sky-mist) 100%);position:relative;}
+.plane-drift{
+  position:absolute;top:56px;left:0;right:0;height:1px;pointer-events:none;overflow:visible;z-index:1;
+}
+.plane-drift svg{
+  position:absolute;top:-11px;width:34px;height:22px;color:var(--gold);opacity:.75;
+  filter:drop-shadow(0 6px 10px rgba(198,153,47,.25));
+  animation: driftRight 40s linear infinite;
+}
+@keyframes driftRight {
+  0% { transform: translateX(-5vw); }
+  100% { transform: translateX(105vw); }
+}
+.service-grid{
+  position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+}
+.service-card{
+  background:var(--marble);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:34px 28px;box-shadow:var(--shadow-1);position:relative;overflow:hidden;
+  transform-style:preserve-3d;will-change:transform;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, background 0.4s ease;
+}
+.service-card:hover { 
+  transform: scale(1.05) translateY(-10px) rotateX(4deg) rotateY(-4deg); 
+  box-shadow: var(--shadow-2), 0 15px 40px rgba(198,153,47,0.2); 
+  background: linear-gradient(145deg, #fff, var(--sky-mist));
+}
+.service-card:hover h3 {
+  color: var(--gold);
+}
+.service-card__icon{
+  width:52px;height:52px;border-radius:14px;background:linear-gradient(155deg, var(--blush), var(--sky-mist));
+  display:flex;align-items:center;justify-content:center;margin-bottom:22px;transform:translateZ(36px);
+  box-shadow:inset 0 0 0 1px var(--line-gold);
+}
+.service-card__icon svg{width:24px;height:24px;color:var(--horizon);}
+.service-card h3{font-size:19px;font-weight:600;line-height:1.3;transform:translateZ(26px);}
+.service-card .num{
+  position:absolute;top:26px;right:28px;font-family:var(--ff-display);
+  font-style:italic;font-size:13px;color:var(--line-gold);
+}
+.service-card__glare{
+  position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(320px circle at 50% 0%, rgba(255,255,255,.55), transparent 60%);
+  opacity:0;transition:opacity .4s ease;pointer-events:none;
+}
+.service-card:hover .service-card__glare{opacity:1;}
+
+/* ============================================================
+   WHY CHOOSE US — flight path
+   ============================================================ */
+.why{
+  background:linear-gradient(180deg, var(--sky-mist) 0%, var(--marble) 100%);
+  color:var(--ink);position:relative;overflow:hidden;
+}
+.why::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(700px circle at 85% 10%, rgba(198,153,47,.12), transparent 60%),
+             radial-gradient(600px circle at 5% 95%, rgba(46,92,138,.10), transparent 60%);
+  pointer-events:none;
+}
+.flight-wrap{position:relative;display:grid;grid-template-columns:64px 1fr;gap:0 34px;}
+.flight-track{
+  position:relative;width:2px;justify-self:center;
+  background-image:linear-gradient(rgba(21,35,66,.18) 60%, transparent 0%);
+  background-size:2px 14px;background-repeat:repeat-y;
+}
+#planeMarker{
+  position:absolute;left:50%;top:0;width:30px;height:30px;margin-left:-15px;
+  color:var(--gold);filter:drop-shadow(0 4px 10px rgba(198,153,47,.4));
+  transition: transform 0.2s ease-out;
+}
+.why-list{display:flex;flex-direction:column;gap:56px;padding:6px 0 10px;}
+.why-item{
+  display:flex;gap:20px;align-items:flex-start;opacity:0;transform:translateX(28px);
+  transition:all 0.6s var(--ease-soft);
+  padding: 15px;
+  border-radius: 12px;
+}
+.why-item:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateX(10px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(198,153,47,0.15);
+}
+.why-item:hover .why-item__icon {
+  background: var(--gold);
+  transform: rotate(360deg);
+  transition: all 0.6s ease;
+}
+.why-item:hover .why-item__icon svg {
+  color: #fff;
+}
+.why-item.is-in{opacity:1;transform:translateX(0);}
+.why-item__icon{
+  flex:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line-gold);
+  background:var(--marble);box-shadow:var(--shadow-1);display:flex;align-items:center;justify-content:center;
+}
+.why-item__icon svg{width:20px;height:20px;color:var(--gold);}
+.why-item h3{color:var(--ink);font-size:18px;font-weight:600;margin-bottom:4px;}
+
+/* ============================================================
+   MISSION / VISION
+   ============================================================ */
+.mv{background:var(--marble);}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+.mv-card{
+  position:relative;background:linear-gradient(165deg, #fff, var(--sky-mist-2));
+  border:1px solid var(--line);border-radius:var(--radius-lg);padding:46px 40px;
+  box-shadow:var(--shadow-1);transform-style:preserve-3d;will-change:transform;overflow:hidden;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+.mv-card:hover { transform: perspective(1000px) rotateX(4deg) rotateY(-4deg) translateY(-10px); box-shadow:var(--shadow-2); }
+.mv-card__mark{
+  font-family:var(--ff-script);font-size:120px;color:rgba(239, 217, 164, 0.4);
+  line-height:.6;position:absolute; right: -10px; bottom: 0px; z-index: 0; pointer-events: none;
+  transform:translateZ(10px) rotate(-15deg);
+}
+.mv-card .eyebrow{transform:translateZ(24px); position:relative; z-index: 1;}
+.mv-card h3{margin-top:10px;font-size:28px;transform:translateZ(24px);position:relative; z-index: 1;}
+.mv-card p{
+  margin-top:16px;color:var(--ink-70);font-size:15.5px;line-height:1.75;
+  transform:translateZ(18px);position:relative; z-index: 1;
+}
+
+/* ============================================================
+   CTA
+   ============================================================ */
+.cta{
+  position:relative;min-height:70vh;display:flex;align-items:center;justify-content:center;
+  padding:80px 24px;
+  background-image:url('images/website_assests/Luxury Tour.jpg');
+  background-size:cover; background-position:center; background-attachment:fixed;
+}
+.cta::before{
+  content:"";position:absolute;inset:0;background:rgba(21,35,66,.7);
+}
+.cta__content{position:relative;z-index:2;text-align:center;color:#fff;max-width:800px;}
+.cta__content h2{font-size:clamp(40px,5vw,64px);color:#fff;margin-bottom:24px;}
+.cta__content p{font-size:18px;line-height:1.8;color:rgba(255,255,255,.9);margin-bottom:40px;}
+.cta__content h3{font-family:var(--ff-script); font-size:48px; color:var(--gold-soft); font-weight:400;}
+
+/* Scroll Animations */
+.fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-up.is-in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+
+  <!-- Flight curves SVG – NAVY COLOR -->
+  <svg class="flight-layer" viewBox="0 0 1400 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="flightGrad" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#25375B" stop-opacity="0.0"/>
+        <stop offset="18%"  stop-color="#25375B" stop-opacity="0.5"/>
+        <stop offset="55%"  stop-color="#45557C" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#25375B" stop-opacity="0.0"/>
+      </linearGradient>
+      <linearGradient id="flightGrad2" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0%"   stop-color="#25375B" stop-opacity="0.0"/>
+        <stop offset="30%"  stop-color="#25375B" stop-opacity="0.4"/>
+        <stop offset="60%"  stop-color="#45557C" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#25375B" stop-opacity="0.0"/>
+      </linearGradient>
+      <filter id="curveShadow" x="-20%" y="-50%" width="140%" height="200%">
+        <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#25375B" flood-opacity="0.3"/>
+      </filter>
+    </defs>
+    <path d="M -20 128 C 200 145, 400 25, 640 48 S 1000 -8, 1420 20" fill="none" stroke="url(#flightGrad)" stroke-width="2" stroke-dasharray="1 8" stroke-linecap="round" filter="url(#curveShadow)"/>
+    <path d="M 240 4 C 400 38, 540 92, 780 84 S 1100 58, 1400 96" fill="none" stroke="url(#flightGrad2)" stroke-width="1.5" stroke-dasharray="1 7" stroke-linecap="round" opacity="0.7"/>
+  </svg>
+
+  <!-- Animated Planes – NAVY COLOR -->
+  <svg class="plane-icon p1" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="planeGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#1C2C4A"/>
+      </linearGradient>
+    </defs>
+    <path d="M2 19 L28 10 L20 17 L30 17 L34 20 L20 20 L27 27 L21 26 L14 21 L4 24 Z" fill="url(#planeGrad)"/>
+  </svg>
+
+  <svg class="plane-icon p2" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="planeGrad2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"   stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#25375B"/>
+      </linearGradient>
+    </defs>
+    <path d="M2 19 L28 10 L20 17 L30 17 L34 20 L20 20 L27 27 L21 26 L14 21 L4 24 Z" fill="url(#planeGrad2)"/>
+  </svg>
+
+  <!-- TOP UTILITY STRIP -->
+  <div class="util-strip">
+    <!-- MULTILINGUAL SCROLLING MARQUEE -->
+    <div class="marquee-wrap" id="marqueeWrap">
+      <div class="marquee-track" id="marqueeTrack">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Utazás</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Haiku</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>Maru Seyahat</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Utazás</span><span>Maru Voyage</span><span>Travel</span><span>마루 트래블</span><span>Maru Travel</span><span>マル・トラベル</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Viajes</span><span>مارو ٹریول</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Utazás</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Haiku</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>Maru Seyahat</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Utazás</span><span>Maru Voyage</span><span>Travel</span><span>마루 트래블</span><span>Maru Travel</span><span>マル・トラベル</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Viajes</span><span>مارو ٹریول</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <div class="lang-toggle">
+      <span class="active polish" id="opt-en" onclick="changeLanguage('en')">
+        <span class="flag">
+          <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="36" fill="#012169"/>
+            <path d="M0 0 L60 36 M60 0 L0 36" stroke="#FFFFFF" stroke-width="7"/>
+            <path d="M0 0 L60 36 M60 0 L0 36" stroke="#C8102E" stroke-width="3"/>
+            <path d="M30 0 V36 M0 18 H60" stroke="#FFFFFF" stroke-width="11"/>
+            <path d="M30 0 V36 M0 18 H60" stroke="#C8102E" stroke-width="6.5"/>
+          </svg>
+        </span>
+        EN
+      </span>
+      <span class="polish" id="opt-ko" onclick="changeLanguage('ko')">
+        <span class="flag">
+          <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="36" fill="#FFFFFF"/>
+            <circle cx="30" cy="18" r="9" fill="#C60C30"/>
+            <path d="M30 9 A9 4.5 0 0 1 30 27 A9 9 0 0 0 30 9 Z" fill="#003478"/>
+            <g stroke="#000000" stroke-width="1.4">
+              <line x1="6" y1="6" x2="14" y2="6"/><line x1="6" y1="8.4" x2="14" y2="8.4"/><line x1="6" y1="10.8" x2="14" y2="10.8"/>
+              <line x1="46" y1="6" x2="54" y2="6"/><line x1="46" y1="8.4" x2="54" y2="8.4"/><line x1="46" y1="10.8" x2="50" y2="10.8"/><line x1="52" y1="10.8" x2="54" y2="10.8"/>
+              <line x1="6" y1="25.2" x2="14" y2="25.2"/><line x1="6" y1="27.6" x2="10" y2="27.6"/><line x1="12" y1="27.6" x2="14" y2="27.6"/><line x1="6" y1="30" x2="14" y2="30"/>
+              <line x1="46" y1="25.2" x2="54" y2="25.2"/><line x1="46" y1="27.6" x2="54" y2="27.6"/><line x1="46" y1="30" x2="50" y2="30"/><line x1="52" y1="30" x2="54" y2="30"/>
+            </g>
+          </svg>
+        </span>
+        한국어
+      </span>
+    </div>
+    <a href="https://maru-travel-app.vercel.app/" target="_blank" class="login-btn polish">⇥ <span data-i18n="nav.login">Login</span></a>
+  </div>
+
+  <!-- BRAND ROW -->
+  <div class="brand-row">
+    <div class="logo-mark">
+      <a href="index.html">
+        <img src="images/website_assests/Maru Travel Logo al.png" alt="Maru Travel – Curating Exceptional Journeys">
+      </a>
+    </div>
+    <div class="region-tabs">
+      <a href="index.html#explore" class="active polish" data-i18n="dest.india">India</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.nepal">Nepal</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.bhutan">Bhutan</a>
+      <a href="index.html#explore" class="polish" data-i18n="dest.srilanka">Sri Lanka</a>
+    </div>
+  </div>
+
+  <!-- NAV BAR -->
+  <nav>
+    <!-- Left marquee -->
+    <div class="marquee-wrap light-theme">
+      <div class="marquee-track">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <!-- Right marquee (reverse direction) -->
+    <div class="marquee-wrap light-theme right">
+      <div class="marquee-track">
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+        <span>Maru Travel</span><span>마루 트래블</span><span>मारू ट्रेवल</span><span>マル・トラベル</span><span>Maru Seyahat</span><span>ماروترافل</span><span>Maru Voyage</span><span>Maru Viajes</span><span>Maru Reisen</span><span>Maru Viaggio</span><span>Maru Tur</span><span>מארו טראוול</span><span>Maru Du lịch</span><span>Мару Трэвел</span><span>马鲁旅行</span><span>Maru Ταξίδια</span><span>Maru Utazás</span><span>Maru Podróże</span><span>Maru Seyahat</span><span>ماروٹریول</span><span>Maru Safari</span><span>Maru Путовање</span><span>Maru Plavba</span><span>Maru Matka</span><span>Maru Matkustus</span><span>Maru Rejse</span><span>Maru Reis</span><span>Maru Viagem</span><span>Maru ভ্রমণ</span><span>மாரு பயணம்</span><span>మారు ట్రావెల్</span><span>ಮರು ಟ್ರಾವೆಲ್</span><span>മാരു ട്രാവൽ</span><span>Maru Voyage</span><span>马鲁旅行</span><span>Maru Reisen</span><span>маруТревел</span><span>Maru Tur</span>
+      </div>
+    </div>
+    <!-- Centered nav links -->
+    <div class="nav-links" style="display: flex; gap: 32px;">
+      <a href="index.html" class="polish" data-i18n="nav.home">Home</a>
+      <a href="about_us.html" class="polish" data-i18n="nav.about">About Us</a>
+      <a href="what_we_do.html" class="current polish" data-i18n="nav.what">What We Do</a>
+      <a href="index.html#tours" class="polish" data-i18n="nav.tours">Our Expertises</a>
+      <a href="index.html#explore" class="polish" data-i18n="nav.explore">Explore With Us</a>
+      <a href="index.html#trains" class="polish" data-i18n="nav.trains">Luxury Trains</a>
+      <a href="contact.html" class="polish" data-i18n="nav.contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- RIDGE DIVIDER – Navy -->
+  <svg class="ridge" viewBox="0 0 1200 12" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="ridgeGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"   stop-color="#1C2C4A"/>
+        <stop offset="40%"  stop-color="#25375B"/>
+        <stop offset="70%"  stop-color="#45557C"/>
+        <stop offset="100%" stop-color="#25375B"/>
+      </linearGradient>
+    </defs>
+    <polygon points="0,12 0,7 80,2 160,9 260,1 360,7 460,3 560,10 660,2 760,6 860,1 960,9 1060,3 1160,7 1200,2 1200,12" fill="url(#ridgeGrad)"/>
+  </svg>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__sticky">
+    <canvas class="hero__canvas" id="hero-canvas"></canvas>
+    <div class="hero__scrim"></div>
+    <div class="hero__content" id="hero-content">
+      <div class="hero__eyebrow" data-i18n="wwd.hero.sub">Discover Maru Travel</div>
+      <div class="hero__script" data-i18n="wwd.hero.title">What We Do</div>
+      <div class="hero__sub" data-i18n="wwd.hero.sub2">Experience the World with Confidence</div>
+    </div>
+    <div class="hero__scrollcue">
+      <div data-i18n="wwd.scroll">Scroll to Explore</div>
+      <div class="stem"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFIED -->
+<section class="section certified">
+  <div class="wrap">
+    <div class="section-head center fade-up">
+      <p class="eyebrow" data-i18n="wwd.cert.recog">Recognized Excellence</p>
+      <h2 data-i18n="wwd.cert.trusted">Certified & Trusted</h2>
+      <p data-i18n="wwd.cert.note">Maru Travel is committed to maintaining the highest standards of professionalism and service. We are proud to be recognized and certified by:</p>
+    </div>
+
+    <div class="stamp-row">
+      <div class="stamp">
+        <div class="stamp__ring"><i class="fas fa-plane" style="font-size:32px; color:var(--gold);"></i></div>
+        <h3 data-i18n="wwd.cert.iato">Indian Association of Tour Operators</h3>
+        <p data-i18n="wwd.cert.iato">IATO</p>
+        <div class="stamp__glare"></div>
+      </div>
+      <div class="stamp">
+        <div class="stamp__ring"><i class="fas fa-landmark" style="font-size:32px; color:var(--gold);"></i></div>
+        <h3 data-i18n="wwd.cert.tourism">Ministry of Tourism</h3>
+        <p data-i18n="wwd.cert.tourism.desc">Government of India</p>
+        <div class="stamp__glare"></div>
+      </div>
+      <div class="stamp">
+        <div class="stamp__ring"><i class="fas fa-map-marked-alt" style="font-size:32px; color:var(--gold);"></i></div>
+        <h3 data-i18n="wwd.cert.delhi">Delhi Tourism</h3>
+        <p data-i18n="wwd.cert.delhi.desc">Official Tourism Partner</p>
+        <div class="stamp__glare"></div>
+      </div>
+    </div>
+    <p class="certified__note fade-up" data-i18n="wwd.cert.note">These prestigious recognitions reflect our commitment to quality, reliability, ethical business practices, and customer satisfaction.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services">
+  <div class="plane-drift">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="section-head center fade-up">
+      <p class="eyebrow" data-i18n="wwd.srv.eyebrow">Comprehensive Solutions</p>
+      <h2 data-i18n="wwd.srv.title">Our Services</h2>
+    </div>
+
+    <div class="service-grid">
+      <!-- 9 Services -->
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-globe-asia"></i></div>
+        <div class="num">01</div>
+        <h3 data-i18n="wwd.srv.1">Inbound & Outbound Tour Packages</h3>
+        <div class="service-card__glare"></div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-umbrella-beach"></i></div>
+        <div class="num">02</div>
+        <h3 data-i18n="wwd.srv.2">International & Domestic Holiday Packages</h3>
+        <div class="service-card__glare"></div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-ticket-alt"></i></div>
+        <div class="num">03</div>
+        <h3 data-i18n="wwd.srv.3">Flight Reservations</h3>
+        <div class="service-card__glare"></div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-hotel"></i></div>
+        <div class="num">04</div>
+        <h3 data-i18n="wwd.srv.4">Hotel Bookings</h3>
+        <div class="service-card__glare"></div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-passport"></i></div>
+        <div class="num">05</div>
+        <h3 data-i18n="wwd.srv.5">Visa Assistance</h3>
+        <div class="service-card__glare"></div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="num">06</div>
+        <h3 data-i18n="wwd.srv.6">Travel Insurance</h3>
+        <div class="service-card__glare"></div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-car"></i></div>
+        <div class="num">07</div>
+        <h3 data-i18n="wwd.srv.7">Airport Transfers & Ground Transportation</h3>
+        <div class="service-card__glare"></div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-users"></i></div>
+        <div class="num">08</div>
+        <h3 data-i18n="wwd.srv.8">Corporate & Group Travel</h3>
+        <div class="service-card__glare"></div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-card__icon"><i class="fas fa-map"></i></div>
+        <div class="num">09</div>
+        <h3 data-i18n="wwd.srv.9">Customized Travel Itineraries</h3>
+        <div class="service-card__glare"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section why">
+  <div class="wrap">
+    <div class="section-head center fade-up">
+      <p class="eyebrow" data-i18n="wwd.why.eyebrow">The Maru Difference</p>
+      <h2 data-i18n="wwd.why.title">Why Choose Maru Travel?</h2>
+    </div>
+
+    <div class="flight-wrap">
+      <div class="flight-track">
+        <svg id="planeMarker" viewBox="0 0 24 24"><path fill="currentColor" d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"/></svg>
+      </div>
+
+      <div class="why-list">
+        <div class="why-item fade-up">
+          <div class="why-item__icon"><i class="fas fa-clock"></i></div>
+          <div><h3 data-i18n="wwd.why.1.title">20+ Years</h3><p data-i18n="wwd.why.1.desc">Of travel industry expertise.</p></div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-item__icon"><i class="fas fa-user-tie"></i></div>
+          <div><h3 data-i18n="wwd.why.2.title">Expert Leadership</h3><p data-i18n="wwd.why.2.desc">Founded by an experienced travel professional.</p></div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-item__icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div><h3 data-i18n="wwd.why.3.title">Asia Specialists</h3><p data-i18n="wwd.why.3.desc">Specialists in destinations across Asia.</p></div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-item__icon"><i class="fas fa-globe-americas"></i></div>
+          <div><h3 data-i18n="wwd.why.4.title">Global Reach</h3><p data-i18n="wwd.why.4.desc">Expanding travel solutions across North & South America.</p></div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-item__icon"><i class="fas fa-award"></i></div>
+          <div><h3 data-i18n="wwd.why.5.title">Certified Company</h3><p data-i18n="wwd.why.5.desc">Government-recognized and industry-certified.</p></div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-item__icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <div><h3 data-i18n="wwd.why.6.title">Personalized Planning</h3><p data-i18n="wwd.why.6.desc">Personalized travel planning with competitive pricing.</p></div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-item__icon"><i class="fas fa-headset"></i></div>
+          <div><h3 data-i18n="wwd.why.7.title">Dedicated Support</h3><p data-i18n="wwd.why.7.desc">Dedicated customer support from planning to your return journey.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION / VISION -->
+<section class="section mv">
+  <div class="wrap">
+    <div class="mv-grid">
+      <div class="mv-card fade-up">
+        <p class="eyebrow" data-i18n="wwd.mv.mission.eyebrow">Purpose</p>
+        <h3 data-i18n="wwd.mv.mission.title">Our Mission</h3>
+        <p data-i18n="wwd.mv.mission.desc">To deliver exceptional travel experiences through personalized service, expert guidance, and innovative travel solutions that inspire confidence and create unforgettable memories.</p>
+        <span class="mv-card__mark" data-i18n="wwd.mv.mission.title">Mission</span>
+      </div>
+      <div class="mv-card fade-up">
+        <p class="eyebrow" data-i18n="wwd.mv.vision.eyebrow">Future</p>
+        <h3 data-i18n="wwd.mv.vision.title">Our Vision</h3>
+        <p data-i18n="wwd.mv.vision.desc">To become a globally trusted travel company, recognized for excellence, integrity, and customer satisfaction while connecting travelers to the world's most inspiring destinations.</p>
+        <span class="mv-card__mark" data-i18n="wwd.mv.vision.title">Vision</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta__content fade-up">
+    <h3 data-i18n="wwd.cta.sub">Your Journey Begins Here</h3>
+    <h2 data-i18n="wwd.cta.title">Ready for the Extraordinary?</h2>
+    <p data-i18n="wwd.cta.desc">Let our experts design your perfect itinerary.</p>
+    <a href="index.html" class="btn" data-i18n="nav.explore">EXPLORE WITH US</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-col footer-brand">
+      <div class="footer-logo">
+        <img src="images/website_assests/Maru Travel Logo al.png" alt="Maru Travel">
+      </div>
+      <p data-i18n="footer.desc">Curating exceptional journeys across the Indian subcontinent. Experience the extraordinary with bespoke itineraries, luxury travel, and unforgettable memories.</p>
+      <div class="social-icons">
+        <a href="mailto:tejinder@marutravel.in"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col footer-links">
+      <h4 data-i18n="footer.links">Quick Links</h4>
+      <ul>
+        <li><a href="about_us.html" data-i18n="footer.about">About Us</a></li>
+        <li><a href="index.html#tours" data-i18n="footer.tours">Our Tours</a></li>
+        <li><a href="index.html#trains" data-i18n="footer.trains">Luxury Trains</a></li>
+        <li><a href="index.html#explore" data-i18n="footer.destinations">Destinations</a></li>
+        <li><a href="#" data-i18n="footer.terms">Travel Terms & Conditions</a></li>
+        <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col footer-contact">
+      <h4 data-i18n="footer.contact">Contact Us</h4>
+      <p>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>6A, First Floor, Uttam Nagar Main Rd,<br>Near Metro Pillar No. 666,<br>New Delhi - 110059</span>
+      </p>
+      <p>
+        <i class="fas fa-phone-alt"></i>
+        <span><span data-i18n="footer.director">Director: Tejinder Singh</span><br>+91 9891587778</span>
+      </p>
+      <p>
+        <i class="fas fa-envelope"></i>
+        <span>tejinder@marutravel.in</span>
+      </p>
+      <p>
+        <i class="fas fa-globe"></i>
+        <span>www.marutravel.in</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom" data-i18n="footer.copy">
+    Copyright &copy; 2026 Maru Travel India. All rights reserved. Designed for exceptional experiences.
+  </div>
+  </footer>
+
+<!-- CHATBOT SCRIPT -->
+<script src="maru-chatbot.js"></script>
+
+<script>
+// Canvas Scrub Animation
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+const frameCount = 10;
+const currentFrame = index => `images/frames/frame_0${String(index).padStart(2, '0')}.png`;
+
+const img = new Image();
+img.src = currentFrame(1);
+
+const heroSection = document.querySelector('.hero');
+const stickySection = document.querySelector('.hero__sticky');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight - 140; // Subtract header height
+  renderImage();
+}
+window.addEventListener('resize', resizeCanvas);
+
+img.onload = () => {
+  resizeCanvas();
+};
+
+function renderImage() {
+  if(!img.complete) return;
+  // Fit image cover
+  const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+  const w = img.width * scale;
+  const h = img.height * scale;
+  const x = (canvas.width - w) / 2;
+  const y = (canvas.height - h) / 2;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, x, y, w, h);
+}
+
+// Preload frames
+const images = [];
+for (let i = 1; i <= frameCount; i++) {
+  const iObj = new Image();
+  iObj.src = currentFrame(i);
+  images.push(iObj);
+}
+
+window.addEventListener('scroll', () => {
+  // Hero Scrub Logic
+  const scrollTop = window.scrollY;
+  const heroTop = heroSection.offsetTop;
+  const heroHeight = heroSection.offsetHeight;
+  const windowHeight = window.innerHeight;
+
+  // Calculate progress (0 to 1) within the hero section
+  let progress = (scrollTop - heroTop) / (heroHeight - windowHeight + 140);
+  if (progress < 0) progress = 0;
+  if (progress > 1) progress = 1;
+
+  const frameIndex = Math.min(
+    frameCount - 1,
+    Math.floor(progress * frameCount)
+  );
+
+  if (images[frameIndex]) {
+    img.src = images[frameIndex].src;
+    renderImage();
+  }
+
+  // Hero content fade-in
+  if (progress > 0.05) {
+    document.getElementById('hero-content').classList.add('is-in');
+  } else {
+    document.getElementById('hero-content').classList.remove('is-in');
+  }
+
+  // Why Choose Us Plane Tracker Logic
+  const track = document.querySelector('.flight-track');
+  const plane = document.getElementById('planeMarker');
+  const whyItems = document.querySelectorAll('.why-item');
+
+  if (track && plane) {
+    const trackRect = track.getBoundingClientRect();
+    const trackTop = trackRect.top + window.scrollY;
+    const trackHeight = track.offsetHeight;
+    const scrollPos = scrollTop + (windowHeight / 2); // Center of screen
+
+    let planeProgress = (scrollPos - trackTop) / trackHeight;
+    if (planeProgress < 0) planeProgress = 0;
+    if (planeProgress > 1) planeProgress = 1;
+
+    plane.style.transform = `translateY(${planeProgress * trackHeight}px) ${planeProgress === 1 ? 'rotate(90deg)' : ''}`;
+
+    // Animate Why Items
+    whyItems.forEach((item, index) => {
+      const itemRect = item.getBoundingClientRect();
+      if (itemRect.top < windowHeight * 0.8) {
+        item.classList.add('is-in');
+      }
+    });
+  }
+
+  // Generic fade-up elements
+  document.querySelectorAll('.fade-up').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < windowHeight * 0.85) {
+      el.classList.add('is-in');
+    }
+  });
+});
+
+// Trigger scroll initially to set initial states
+window.dispatchEvent(new Event('scroll'));
+
+// Track mouse for flight trails glow mask
+document.addEventListener('mousemove', e => {
+  const header = document.querySelector('.site-header');
+  if(header) {
+    const rect = header.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    header.style.setProperty('--mx', `${x}px`);
+    header.style.setProperty('--my', `${y}px`);
+  }
+});
+
+// Language toggle — use i18n.js (loaded in <head>)
+</script>
+
+<!-- MARQUEE SPOTLIGHT EFFECT -->
+<script>
+(function () {
+  // Handle ALL marquee wraps (including nav ones on both sides)
+  var wraps = document.querySelectorAll('.marquee-wrap');
+
+  wraps.forEach(function(wrap) {
+    var track = wrap.querySelector('.marquee-track');
+    if (!track) return;
+
+    var isLight = wrap.classList.contains('light-theme');
+    var baseColor = isLight ? 'rgba(37,55,91,0.08)' : 'rgba(255,255,255,0.07)';
+
+    wrap.addEventListener('mousemove', function (e) {
+      track.querySelectorAll('span').forEach(function (span) {
+        var localX = e.clientX - span.getBoundingClientRect().left;
+        span.style.backgroundImage =
+          'radial-gradient(circle 100px at ' + localX + 'px 50%, ' +
+            'rgba(220, 60, 10, 1.0) 0%, ' +
+            'rgba(218, 165, 20, 0.85) 25%, ' +
+            'rgba(255, 200, 50, 0.3) 55%, ' +
+            baseColor + ' 80%)';
+      });
+    });
+
+    wrap.addEventListener('mouseleave', function () {
+      track.querySelectorAll('span').forEach(function (span) {
+        span.style.backgroundImage =
+          isLight
+            ? 'radial-gradient(circle 80px at -200px 50%, rgba(200,80,20,0.9) 0%, rgba(212,160,20,0.6) 30%, rgba(37,55,91,0.08) 70%)'
+            : 'radial-gradient(circle 80px at -200px 50%, rgba(200,80,20,0.9) 0%, rgba(212,160,20,0.6) 30%, rgba(255,255,255,0.10) 70%)';
+      });
+    });
+  });
+})();
+</script>
+
+
+<script>
+(function () {
+  var header = document.querySelector('.site-header');
+  if (!header) return;
+  var onScroll = function () {
+    if (window.scrollY > 60) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
+
