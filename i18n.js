@@ -42,6 +42,7 @@ const TRANSLATIONS = {
     'tours.incentive': 'Incentive Travel',
     'tours.wildlife': 'Wildlife Tours',
     'tours.religious': 'Religious Tours',
+    'tours.weddings': 'Weddings & Events',
     'tours.honeymoon': 'Honeymoon Trips',
     'tours.festivals': 'Fairs & Festivals',
     'tours.btn': 'Exotic Experiences',

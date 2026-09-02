@@ -60,7 +60,7 @@
 .we-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   min-width: 210px;
@@ -7510,4 +7510,22 @@ $("#text_w20260505d8e84cf1a84ac").find("._table_responsive").addClass("table").w
     }
 </script>
 
+
+<script>
+document.querySelectorAll('.we-dropdown').forEach(function(drop) {
+  var menu = drop.querySelector('.we-dropdown-menu');
+  var timer;
+  drop.addEventListener('mouseenter', function() {
+    clearTimeout(timer);
+    menu.style.display = 'block';
+  });
+  drop.addEventListener('mouseleave', function() {
+    timer = setTimeout(function() { menu.style.display = 'none'; }, 150);
+  });
+  menu.addEventListener('mouseenter', function() { clearTimeout(timer); });
+  menu.addEventListener('mouseleave', function() {
+    timer = setTimeout(function() { menu.style.display = 'none'; }, 150);
+  });
+});
+</script>
 </body></html>

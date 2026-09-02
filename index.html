@@ -80,7 +80,7 @@ img{max-width:100%}
   position: fixed;
   top: 0; left: 0; right: 0; z-index: 1000;
   width: 100%;
-  overflow: hidden;
+  
   background:
     radial-gradient(ellipse 800px 220px at 8% -30%, rgba(245,180,120,0.22), transparent 60%),
     linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
@@ -990,7 +990,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 .we-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   min-width: 210px;
@@ -1165,10 +1165,10 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       <a href="#tours" class="polish" data-i18n="nav.tours">Our Expertises</a>
       <a href="#explore" class="polish" data-i18n="nav.explore">Explore With Us</a>
     <div class="we-dropdown">
-      <a href="weddings.html" class="polish" data-i18n="nav.events">Weddings &amp; Events</a>
+      <a href="weddings.html" class="polish" data-i18n="nav.events">WEDDINGS &amp; EVENTS</a>
       <div class="we-dropdown-menu">
-        <a href="weddings.html" class="polish" data-i18n="nav.dest_weddings">Destination Weddings</a>
-        <a href="weddings.html" class="polish" data-i18n="nav.corp_events">Corporate Events</a>
+        <a href="destination_weddings.html" class="polish" data-i18n="nav.dest_weddings">DESTINATION WEDDINGS</a>
+        <a href="corporate.html" class="polish" data-i18n="nav.corp_events">CORPORATE EVENTS</a>
       </div>
     </div>
       <a href="#trains" class="polish" data-i18n="nav.trains">Luxury Trains</a>
@@ -1369,7 +1369,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
     </div>
     <div class="tc-card" onclick="window.location.href='weddings.html'" style="cursor:pointer">
       <img src="images/website_assests/download.jpg" alt="Weddings &amp; Events" onerror="this.src='https://images.unsplash.com/photo-1583939411023-14783179e581?w=600&q=80'">
-      <div class="tc-label">Weddings &amp; Events</div>
+      <div class="tc-label polish" data-i18n="tours.weddings">Weddings &amp; Events</div>
     </div>
   </div>
 </section>
@@ -1603,6 +1603,24 @@ function changeLanguage(lang) {
 })();
 </script>
 
+
+<script>
+document.querySelectorAll('.we-dropdown').forEach(function(drop) {
+  var menu = drop.querySelector('.we-dropdown-menu');
+  var timer;
+  drop.addEventListener('mouseenter', function() {
+    clearTimeout(timer);
+    menu.style.display = 'block';
+  });
+  drop.addEventListener('mouseleave', function() {
+    timer = setTimeout(function() { menu.style.display = 'none'; }, 150);
+  });
+  menu.addEventListener('mouseenter', function() { clearTimeout(timer); });
+  menu.addEventListener('mouseleave', function() {
+    timer = setTimeout(function() { menu.style.display = 'none'; }, 150);
+  });
+});
+</script>
 </body>
 </html>
 

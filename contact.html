@@ -64,7 +64,7 @@ img{max-width:100%;display:block}
   position: fixed;
   top: 0; left: 0; right: 0; z-index: 1000;
   width: 100%;
-  overflow: hidden;
+  
   background:
     radial-gradient(ellipse 800px 220px at 8% -30%, rgba(245,180,120,0.22), transparent 60%),
     linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
@@ -641,7 +641,7 @@ footer {
 .we-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   min-width: 210px;
@@ -798,6 +798,13 @@ footer {
       <a href="what_we_do.html" class="polish" data-i18n="nav.what">What We Do</a>
       <a href="index.html#tours" class="polish" data-i18n="nav.tours">Our Expertises</a>
       <a href="index.html#explore" class="polish" data-i18n="nav.explore">Explore With Us</a>
+    <div class="we-dropdown">
+      <a href="weddings.html" class="polish" data-i18n="nav.events" >WEDDINGS &amp; EVENTS</a>
+      <div class="we-dropdown-menu">
+        <a href="destination.html" class="polish" data-i18n="nav.dest_weddings">DESTINATION WEDDINGS</a>
+        <a href="corporate.html" class="polish" data-i18n="nav.corp_events">CORPORATE EVENTS</a>
+      </div>
+    </div>
       <a href="index.html#trains" class="polish" data-i18n="nav.trains">Luxury Trains</a>
       <a href="contact.html" class="current polish" data-i18n="nav.contact">Contact</a>
     </div>
@@ -1091,6 +1098,24 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
+</script>
+
+<script>
+document.querySelectorAll('.we-dropdown').forEach(function(drop) {
+  var menu = drop.querySelector('.we-dropdown-menu');
+  var timer;
+  drop.addEventListener('mouseenter', function() {
+    clearTimeout(timer);
+    menu.style.display = 'block';
+  });
+  drop.addEventListener('mouseleave', function() {
+    timer = setTimeout(function() { menu.style.display = 'none'; }, 150);
+  });
+  menu.addEventListener('mouseenter', function() { clearTimeout(timer); });
+  menu.addEventListener('mouseleave', function() {
+    timer = setTimeout(function() { menu.style.display = 'none'; }, 150);
+  });
+});
 </script>
 </body>
 </html>
