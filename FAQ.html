@@ -24,7 +24,55 @@
 <meta name="msapplication-square310x310logo" content="https://cdn.imweb.me/thumbnail/20260426/a80fa8c8def6e.png">
 <meta property="og:type" content="website">
 <meta name="viewport" content="width=device-width,viewport-fit=cover,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes">
-<style>:root{--safe-bottom:env(safe-area-inset-bottom)}</style><meta name="naver-site-verification" content="010b7f61b839703232134bcaadf07e52c771ac68">
+<style>:root{--safe-bottom:env(safe-area-inset-bottom)}
+/* ── Weddings & Events Dropdown ── */
+.we-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.we-dropdown > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.we-dropdown > a::after {
+  content: '▾';
+  font-size: 10px;
+  opacity: 0.7;
+}
+.we-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  background: #1C2C4A;
+  border-top: 2px solid #d4af37;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+  z-index: 9999;
+  overflow: hidden;
+}
+.we-dropdown:hover .we-dropdown-menu { display: block; }
+.we-dropdown-menu a {
+  display: block;
+  padding: 11px 20px;
+  color: rgba(255,255,255,0.85) !important;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+.we-dropdown-menu a:last-child { border-bottom: none; }
+.we-dropdown-menu a:hover {
+  background: rgba(212,175,55,0.12);
+  color: #d4af37 !important;
+  padding-left: 26px;
+}
+
+</style><meta name="naver-site-verification" content="010b7f61b839703232134bcaadf07e52c771ac68">
 <meta name="google-site-verification" content="yQ6EeI20VRJkYoG5wH4gCz_L5BACf9HMTObTCFkrxng"><link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/minify_css/vendor_blue_10.css?1653367465">
 <link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/minify_css/vendor_red_10.css?1653367465">
 <!--[if lte IE 9]>

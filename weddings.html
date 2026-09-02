@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon (2).png">
+<title>Weddings & Events — Maru Travel India</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0e1a2b 0%, #1a2f50 40%, #2c1a0e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Lato', sans-serif;
+  }
+
+  /* Decorative floating petals */
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80px 80px at 10% 20%, rgba(220,160,60,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 120px 120px at 90% 80%, rgba(180,80,80,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 60px 60px at 50% 50%, rgba(200,140,80,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .mandala-ring {
+    position: absolute;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.18);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 40s linear infinite;
+  }
+  .mandala-ring:nth-child(2) {
+    width: 420px; height: 420px;
+    border-color: rgba(212,175,55,0.12);
+    animation-direction: reverse;
+    animation-duration: 30s;
+  }
+  .mandala-ring:nth-child(3) {
+    width: 620px; height: 620px;
+    border-color: rgba(212,175,55,0.08);
+    animation-duration: 55s;
+  }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  .card {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 60px 70px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 4px;
+    backdrop-filter: blur(18px);
+    max-width: 660px;
+    width: 90%;
+    box-shadow: 0 0 60px rgba(212,175,55,0.08), 0 30px 80px rgba(0,0,0,0.4);
+  }
+
+  /* Gold ornamental divider */
+  .ornament {
+    color: #d4af37;
+    font-size: 22px;
+    letter-spacing: 10px;
+    opacity: 0.7;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #d4af37;
+    opacity: 0.75;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(54px, 9vw, 82px);
+    color: #fff;
+    line-height: 1.1;
+    text-shadow:
+      0 0 40px rgba(212,175,55,0.55),
+      0 2px 8px rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+  }
+
+  .sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(212,175,55,0.8);
+    margin-bottom: 32px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 auto 32px;
+    max-width: 300px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+  }
+  .divider span {
+    color: #d4af37;
+    font-size: 16px;
+  }
+
+  .msg {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 1px solid rgba(212,175,55,0.5);
+    border-radius: 2px;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #d4af37;
+    background: rgba(212,175,55,0.06);
+  }
+
+  .back-btn {
+    position: relative;
+    z-index: 10;
+    margin-top: 36px;
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    transition: color 0.3s;
+  }
+  .back-btn:hover { color: #d4af37; }
+  .back-btn::before { content: '← '; }
+</style>
+</head>
+<body>
+  <div class="mandala-ring"></div>
+  <div class="mandala-ring"></div>
+  <div class="mandala-ring"></div>
+
+  <div class="card">
+    <span class="ornament">✦ ✦ ✦</span>
+    <p class="eyebrow">Maru Travel India Presents</p>
+    <h1>Weddings &amp; Events</h1>
+    <p class="sub">Destination Weddings &middot; Corporate Events</p>
+    <div class="divider"><span>&#10070;</span></div>
+    <p class="msg">
+      We are crafting something truly extraordinary —<br>
+      a world where every celebration becomes a timeless memory.<br>
+      Our bespoke wedding &amp; events service is coming soon.
+    </p>
+    <span class="badge">Coming Soon</span>
+  </div>
+
+  <a href="index.html" class="back-btn">Back to Home</a>
+</body>
+</html>

@@ -959,6 +959,54 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
   .footer-container{grid-template-columns:1fr}
 }
 
+
+/* ── Weddings & Events Dropdown ── */
+.we-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.we-dropdown > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.we-dropdown > a::after {
+  content: '▾';
+  font-size: 10px;
+  opacity: 0.7;
+}
+.we-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  background: #1C2C4A;
+  border-top: 2px solid #d4af37;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+  z-index: 9999;
+  overflow: hidden;
+}
+.we-dropdown:hover .we-dropdown-menu { display: block; }
+.we-dropdown-menu a {
+  display: block;
+  padding: 11px 20px;
+  color: rgba(255,255,255,0.85) !important;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+.we-dropdown-menu a:last-child { border-bottom: none; }
+.we-dropdown-menu a:hover {
+  background: rgba(212,175,55,0.12);
+  color: #d4af37 !important;
+  padding-left: 26px;
+}
+
 </style>
 </head>
 <body>
@@ -1102,6 +1150,13 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       <a href="what_we_do.html" class="polish" data-i18n="nav.what">What We Do</a>
       <a href="#tours" class="polish" data-i18n="nav.tours">Our Expertises</a>
       <a href="#explore" class="polish" data-i18n="nav.explore">Explore With Us</a>
+      <div class="we-dropdown">
+        <a href="weddings.html" class="polish">Weddings &amp; Events</a>
+        <div class="we-dropdown-menu">
+          <a href="weddings.html">Destination Weddings</a>
+          <a href="weddings.html">Corporate Events</a>
+        </div>
+      </div>
       <a href="#trains" class="polish" data-i18n="nav.trains">Luxury Trains</a>
       <a href="contact.html" class="polish" data-i18n="nav.contact">Contact</a>
     </div>
@@ -1298,9 +1353,9 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       <img src="images/new_assets/honeymoon.jpg" alt="Honeymoon Trips">
       <div class="tc-label" data-i18n="tours.honeymoon">Honeymoon Trips</div>
     </div>
-    <div class="tc-card">
-      <img src="images/website_assests/Fair and Festival.jpg" alt="Fairs & Festivals">
-      <div class="tc-label" data-i18n="tours.festivals">Fairs & Festivals</div>
+    <div class="tc-card" onclick="window.location.href='weddings.html'" style="cursor:pointer">
+      <img src="images/website_assests/indian_wedding.jpg" alt="Weddings &amp; Events" onerror="this.src='https://images.unsplash.com/photo-1583939411023-14783179e581?w=600&q=80'">
+      <div class="tc-label">Weddings &amp; Events</div>
     </div>
   </div>
 </section>
