@@ -30,53 +30,67 @@
 
 <meta name="viewport" content="width=device-width,viewport-fit=cover,initial-scale=1.0,minimum-scale=0,maximum-scale=10,user-scalable=yes">
 <style>:root{--safe-bottom:env(safe-area-inset-bottom)}
+
 /* ── Weddings & Events Dropdown ── */
 .we-dropdown {
   position: relative;
-  display: inline-block;
-}
-.we-dropdown > a {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+}
+.we-dropdown > a {
+  position: relative;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: var(--navy);
+  text-decoration: none;
+  padding: 3px 5px 6px;
+  border-radius: 5px;
+  transition: color .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 .we-dropdown > a::after {
-  content: '▾';
-  font-size: 10px;
-  opacity: 0.7;
+  content: '\25BE';
+  font-size: 9px;
+  opacity: 0.65;
+  margin-top: 1px;
 }
 .we-dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
-  min-width: 200px;
+  min-width: 210px;
   background: #1C2C4A;
   border-top: 2px solid #d4af37;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
   z-index: 9999;
   overflow: hidden;
 }
 .we-dropdown:hover .we-dropdown-menu { display: block; }
 .we-dropdown-menu a {
-  display: block;
-  padding: 11px 20px;
-  color: rgba(255,255,255,0.85) !important;
-  font-size: 13px;
-  letter-spacing: 0.3px;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+  display: block !important;
+  padding: 12px 22px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.8px !important;
+  color: rgba(255,255,255,0.82) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  transition: background 0.2s, color 0.2s, padding-left 0.2s !important;
+  text-transform: uppercase !important;
+  border-radius: 0 !important;
 }
-.we-dropdown-menu a:last-child { border-bottom: none; }
+.we-dropdown-menu a:last-child { border-bottom: none !important; }
 .we-dropdown-menu a:hover {
-  background: rgba(212,175,55,0.12);
+  background: rgba(212,175,55,0.13) !important;
   color: #d4af37 !important;
-  padding-left: 26px;
+  padding-left: 28px !important;
 }
-
 </style><meta name="naver-site-verification" content="010b7f61b839703232134bcaadf07e52c771ac68">
 <meta name="google-site-verification" content="yQ6EeI20VRJkYoG5wH4gCz_L5BACf9HMTObTCFkrxng"><link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/minify_css/vendor_blue_10.css?1653367465">
 <link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/minify_css/vendor_red_10.css?1653367465">
