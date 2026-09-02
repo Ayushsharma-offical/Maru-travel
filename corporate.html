@@ -424,7 +424,7 @@ img{max-width:100%; display:block;}
 
 /* ===== RIDGE DIVIDER â€“ Navy ===== */
 .ridge {
-  display: block; width: 100%; height: 12px; position: relative; z-index: 2;
+  display: block; width: 100%; height: 12px; position: relative; z-index: 1;
   transition: opacity 0.3s ease, max-height 0.4s ease;
   max-height: 12px;
   opacity: 1;
@@ -868,24 +868,270 @@ footer{background:var(--dark);color:#ccc;padding:80px 20px 20px;font-family:'Lat
 .ce-btn-fill{background:linear-gradient(135deg,#0095d5,#00c9ff);border:1px solid transparent;color:#fff;box-shadow:0 8px 20px rgba(0,150,213,0.35);}
 .ce-btn-fill:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,150,213,0.45);color:#fff;}
 @media(max-width:600px){.ce-cards{grid-template-columns:1fr;}}
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Corporate Events Coming Soon ── */
+.corp-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 140px 24px 80px;
+  overflow: hidden;
+  font-family: 'Jost', sans-serif;
+}
+/* Layered background */
+.corp-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('images/website_assests/corporate.jpg') center/cover no-repeat;
+  filter: brightness(0.35) saturate(0.7);
+  transform: scale(1.04);
+  animation: bgZoom 25s ease-in-out infinite alternate;
+}
+@keyframes bgZoom { from { transform: scale(1.04); } to { transform: scale(1.10); } }
+.corp-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(4,8,20,0.6) 0%, rgba(4,8,20,0.15) 40%, rgba(4,8,20,0.6) 100%),
+    linear-gradient(90deg, rgba(0,60,130,0.4) 0%, transparent 60%);
+}
+/* Grid lines */
+.corp-grid {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+/* Glowing orbs */
+.corp-orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(100px); pointer-events: none; z-index: 1;
+}
+.corp-orb-1 { width: 450px; height: 450px; top: -100px; right: -50px; background: rgba(0,100,255,0.12); }
+.corp-orb-2 { width: 550px; height: 550px; bottom: -150px; left: -100px; background: rgba(0,180,140,0.09); }
+.corp-orb-3 { width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(100,180,255,0.07); }
+
+/* Content */
+.corp-content {
+  position: relative; z-index: 10;
+  max-width: 860px; width: 100%;
+}
+/* "Launching Soon" calligraphy badge */
+.corp-calligraphy {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: rgba(180,220,255,0.75);
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+/* Top eyebrow */
+.corp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #5bc8ff;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+.corp-eyebrow::before, .corp-eyebrow::after {
+  content: ''; height: 1px; width: 40px;
+  background: linear-gradient(to right, transparent, #5bc8ff);
+}
+.corp-eyebrow::after { background: linear-gradient(to left, transparent, #5bc8ff); }
+
+/* Main heading - Cinzel serif */
+.corp-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  text-shadow: 0 0 60px rgba(91,200,255,0.3), 0 4px 20px rgba(0,0,0,0.5);
+}
+.corp-title-sub {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  color: #5bc8ff;
+  font-weight: 400;
+  letter-spacing: 12px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+/* Thin divider line */
+.corp-line {
+  width: 80px; height: 1px;
+  background: linear-gradient(to right, transparent, #5bc8ff, transparent);
+  margin: 0 auto 40px;
+}
+/* Glassmorphism card */
+.corp-glass {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(91,200,255,0.15);
+  border-radius: 20px;
+  padding: 44px 50px;
+  margin-bottom: 48px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 25px 50px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 0 40px rgba(91,200,255,0.05);
+}
+/* Stats row */
+.corp-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(91,200,255,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.corp-stat {
+  background: rgba(4,12,30,0.7);
+  padding: 28px 20px;
+  text-align: center;
+  transition: background 0.3s;
+}
+.corp-stat:hover { background: rgba(10,30,60,0.8); }
+.corp-stat-num {
+  font-family: 'Cinzel', serif;
+  font-size: 2.2rem;
+  color: #5bc8ff;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.corp-stat-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  font-weight: 400;
+}
+.corp-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.9;
+  text-align: center;
+  margin-top: 0;
+}
+/* Description */
+.corp-desc {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.55);
+  max-width: 600px;
+  margin: 0 auto 44px;
+  font-weight: 300;
+}
+/* Buttons */
+.corp-btns { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.corp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 42px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+.corp-btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(91,200,255,0.4);
+  color: rgba(91,200,255,0.85);
+}
+.corp-btn-ghost:hover {
+  background: rgba(91,200,255,0.08);
+  border-color: #5bc8ff;
+  color: #5bc8ff;
+  transform: translateY(-2px);
+}
+.corp-btn-solid {
+  background: linear-gradient(135deg, #0077cc 0%, #00aaff 100%);
+  border: 1px solid transparent;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0,120,220,0.4);
+}
+.corp-btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,120,220,0.5);
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .corp-stats { grid-template-columns: 1fr; }
+  .corp-glass { padding: 28px 20px; }
+  .corp-title { letter-spacing: 4px; }
+}
 </style>
-<main class="ce-page">
-  <div class="ce-bg"></div><div class="ce-overlay"></div><div class="ce-grid"></div>
-  <div class="ce-orb ce-orb-1"></div><div class="ce-orb ce-orb-2"></div>
-  <div class="ce-content">
-    <div class="ce-eyebrow">Launching Soon</div>
-    <h1 class="ce-title">CORPORATE<br><span>EVENTS</span></h1>
-    <p class="ce-subtitle">Elevate &middot; Engage &middot; Excel</p>
-    <div class="ce-cards">
-      <div class="ce-stat"><div class="ce-stat-icon">&#127970;</div><div class="ce-stat-num">500+</div><div class="ce-stat-label">Events Hosted</div></div>
-      <div class="ce-stat"><div class="ce-stat-icon">&#127758;</div><div class="ce-stat-num">30+</div><div class="ce-stat-label">Destinations</div></div>
-      <div class="ce-stat"><div class="ce-stat-icon">&#129395;</div><div class="ce-stat-num">10K+</div><div class="ce-stat-label">Guests Served</div></div>
+
+<main class="corp-hero">
+  <div class="corp-grid"></div>
+  <div class="corp-orb corp-orb-1"></div>
+  <div class="corp-orb corp-orb-2"></div>
+  <div class="corp-orb corp-orb-3"></div>
+
+  <div class="corp-content">
+
+    <div class="corp-calligraphy">— Launching Soon —</div>
+    <div class="corp-eyebrow">Maru Travel India Presents</div>
+
+    <h1 class="corp-title">Corporate</h1>
+    <h2 class="corp-title-sub">Events</h2>
+
+    <div class="corp-line"></div>
+
+    <div class="corp-glass">
+      <div class="corp-stats">
+        <div class="corp-stat">
+          <div class="corp-stat-num">500+</div>
+          <div class="corp-stat-label">Events Hosted</div>
+        </div>
+        <div class="corp-stat">
+          <div class="corp-stat-num">30+</div>
+          <div class="corp-stat-label">Destinations</div>
+        </div>
+        <div class="corp-stat">
+          <div class="corp-stat-num">10K+</div>
+          <div class="corp-stat-label">Delegates Served</div>
+        </div>
+      </div>
+      <p class="corp-tagline">"From boardroom to ballroom — we craft corporate experiences that inspire, connect, and elevate."</p>
     </div>
-    <p class="ce-text">We are building an exclusive corporate events platform — from high-powered conferences and team offsites to lavish award ceremonies and incentive travel. Something extraordinary is coming.</p>
-    <div>
-      <a href="index.html" class="ce-btn ce-btn-outline">&#8592; Return Home</a>
-      <a href="contact.html" class="ce-btn ce-btn-fill">Get in Touch &#8594;</a>
+
+    <p class="corp-desc">
+      We are building an exclusive platform for conferences, corporate retreats, incentive trips, product launches, and award galas across India's finest venues. Something truly extraordinary is on its way.
+    </p>
+
+    <div class="corp-btns">
+      <a href="index.html" class="corp-btn corp-btn-ghost">&#8592; Return Home</a>
+      <a href="contact.html" class="corp-btn corp-btn-solid">Request a Proposal &#8594;</a>
     </div>
+
   </div>
 </main>
 <footer>
