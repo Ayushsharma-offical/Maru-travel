@@ -842,6 +842,8 @@ footer{background:var(--dark);color:#ccc;padding:80px 20px 20px;font-family:'Lat
 </header>
 
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Vanilla Tilt for 3D Cards -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
 <style>
 /* ─── GLOBAL LIGHT THEME ─── */
@@ -881,24 +883,31 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
   max-width: 800px; width: 90%;
   box-shadow: 0 30px 60px rgba(44, 53, 34, 0.08), inset 0 0 20px rgba(255,255,255,1);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  position: relative; overflow: hidden;
 }
 .dw-glass-card.faded { opacity: 0; transform: translateY(-40px) scale(0.95); pointer-events: none; }
 
-/* Floating Glass Labels - Redesigned without emojis, pure aesthetic text */
+/* Floating Shapes inside Glass Card (Leaves & Hearts) */
+.dw-fl-shape { position: absolute; opacity: 0.15; animation: floatShape 8s ease-in-out infinite; z-index: -1; pointer-events: none; }
+@keyframes floatShape {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(15deg); }
+}
+.dw-sh-1 { top: 15%; left: 10%; width: 35px; animation-duration: 9s; opacity: 0.2; }
+.dw-sh-2 { bottom: 10%; right: 15%; width: 45px; animation-duration: 11s; animation-direction: reverse; opacity: 0.15; }
+.dw-sh-3 { top: 25%; right: 10%; width: 25px; animation-duration: 7s; }
+.dw-sh-4 { bottom: 20%; left: 20%; width: 30px; animation-duration: 10s; }
+
+/* Floating Glass Labels */
 .dw-float-label {
   position: absolute; background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(212,175,55,0.3); border-radius: 5px;
   padding: 18px 35px; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-  opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease;
-  pointer-events: none; z-index: 10;
+  opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; z-index: 10;
 }
-.dw-float-label span { 
-  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; 
-  font-size: 1.1rem; letter-spacing: 1px; color: var(--w-olive-dark); 
-}
-/* Specific positions */
+.dw-float-label span { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; font-size: 1.1rem; letter-spacing: 1px; color: var(--w-olive-dark); }
 .fl-1 { top: 25%; left: 8%; transform: translateX(-40px); }
 .fl-1.visible { opacity: 1; transform: translateX(0); }
 .fl-2 { top: 55%; right: 6%; transform: translateX(40px); }
@@ -911,29 +920,32 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 .dw-hero-cal { font-size: clamp(4rem, 8vw, 6.5rem); color: var(--w-gold); margin: 0; line-height: 0.8; transform: rotate(-3deg) translateY(15px); }
 .dw-hero-main { font-size: clamp(2.8rem, 6vw, 4.8rem); letter-spacing: 10px; margin: 0 0 25px 0; font-weight: 700; color: var(--w-olive-dark); }
 .dw-subtitle { font-size: clamp(1.2rem, 2vw, 1.4rem); color: #555; margin: 0 0 40px 0; font-style: italic; }
+
+/* Shimmer Button */
 .dw-btn {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 18px 40px; border-radius: 50px;
   font-size: 13px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; text-decoration: none;
-  background: linear-gradient(135deg, var(--w-olive-dark), var(--w-olive)); color: #fff;
+  background: var(--w-olive-dark); color: #fff;
   transition: all 0.4s ease; box-shadow: 0 10px 25px rgba(44,53,34,0.2); border: none; cursor: pointer; pointer-events: auto;
+  position: relative; overflow: hidden; z-index: 1;
+}
+.dw-btn::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-20deg); transition: 0s; z-index: -1;
 }
 .dw-btn:hover {
-  background: linear-gradient(135deg, var(--w-gold), #A9843B); transform: translateY(-3px); box-shadow: 0 15px 30px rgba(197,160,89,0.35);
+  background: var(--w-gold); transform: translateY(-3px); box-shadow: 0 15px 30px rgba(197,160,89,0.35); color: #fff;
 }
+.dw-btn:hover::before { left: 150%; transition: 0.8s ease-in-out; }
 
-/* ─── 2. QUOTE (Human Copy & Reliable Vanilla JS Reveal) ─── */
+/* ─── 2. QUOTE ─── */
 .dw-quote-sec {
-  background: var(--w-bg); padding: 180px 5%;
-  display: flex; align-items: center; justify-content: center; text-align: center;
+  background: var(--w-bg); padding: 180px 5%; display: flex; align-items: center; justify-content: center; text-align: center;
   position: relative; overflow: hidden; min-height: 600px;
 }
-/* Floating aesthetic images behind quote */
-.dw-quote-img {
-  position: absolute; object-fit: cover; border-radius: 10px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1); opacity: 0;
-  transition: all 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
+.dw-quote-img { position: absolute; object-fit: cover; border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); opacity: 0; transition: all 1.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .dw-quote-img.visible { opacity: 0.8; }
 .qi-1 { width: 220px; height: 280px; top: 50px; left: 8%; transform: rotate(-8deg) translateY(50px); }
 .qi-1.visible { transform: rotate(-8deg) translateY(0); }
@@ -944,47 +956,32 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 
 .dw-quote-mark {
   position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
-  font-family: 'Playfair Display', serif; font-size: 380px;
-  color: var(--w-gold); opacity: 0.06; line-height: 1; pointer-events: none; z-index: 0;
+  font-family: 'Playfair Display', serif; font-size: 380px; color: var(--w-gold); opacity: 0.06; line-height: 1; pointer-events: none; z-index: 0;
 }
 .dw-quote-text-wrap {
   position: relative; z-index: 2; max-width: 1050px;
   background: rgba(250, 249, 246, 0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  padding: 50px; border-radius: 20px;
-  opacity: 0; transform: translateY(40px); transition: all 1.5s ease 0.2s;
+  padding: 50px; border-radius: 20px; opacity: 0; transform: translateY(40px); transition: all 1.5s ease 0.2s;
 }
 .dw-quote-text-wrap.visible { opacity: 1; transform: translateY(0); }
-.dw-quote-p {
-  font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.5; font-weight: 500; font-style: italic;
-  margin: 0; color: var(--w-olive-dark);
-}
-.dw-quote-author {
-  margin-top: 30px; font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--w-gold); font-weight: 600;
-}
+.dw-quote-p { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.5; font-weight: 500; font-style: italic; margin: 0; color: var(--w-olive-dark); }
+.dw-quote-author { margin-top: 30px; font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; color: var(--w-gold); font-weight: 600; }
 
-/* ─── 3. DESTINATIONS (Pure Vanilla JS Stacking - 100% Reliable) ─── */
+/* ─── 3. DESTINATIONS ─── */
 .dw-dest-wrapper { height: 500vh; position: relative; background: var(--w-bg); width: 100%; }
 .dw-dest-sticky { position: sticky; top: 0; height: 100vh; width: 100vw; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-
-/* Panels stack on top of each other */
-.dw-dest-panel {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0 5%;
-  opacity: 0; pointer-events: none; transition: opacity 0.8s ease; z-index: 1;
-}
+.dw-dest-panel { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0 5%; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; z-index: 1; }
 .dw-dest-panel.active { opacity: 1; pointer-events: auto; z-index: 2; }
 .dw-panel-inner { display: flex; align-items: center; gap: 60px; max-width: 1200px; width: 100%; }
 
 /* Left: Images */
-.dw-circle-wrap { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; height: 600px; }
+.dw-circle-wrap { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; height: 600px; cursor: crosshair; }
 .dw-circle-main {
-  width: 420px; height: 550px; border-radius: 210px 210px 15px 15px; /* Elegant Arch */
-  object-fit: cover; box-shadow: 0 30px 60px rgba(44,53,34,0.15); position: relative; z-index: 2;
-  border: 1px solid rgba(197,160,89,0.3); flex-shrink: 0;
+  width: 420px; height: 550px; border-radius: 210px 210px 15px 15px; object-fit: cover; box-shadow: 0 30px 60px rgba(44,53,34,0.15);
+  position: relative; z-index: 2; border: 2px solid rgba(197,160,89,0.2); flex-shrink: 0;
   transform: translateY(40px) scale(0.95); transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .dw-dest-panel.active .dw-circle-main { transform: translateY(0) scale(1); }
-
 .dw-circle-sub {
   width: 250px; height: 250px; border-radius: 50%; object-fit: cover;
   position: absolute; bottom: 10px; right: 0; box-shadow: 0 20px 40px rgba(44,53,34,0.2);
@@ -993,13 +990,13 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 }
 .dw-dest-panel.active .dw-circle-sub { transform: translateX(0) rotate(0); }
 
-/* Right: Content */
-.dw-dest-content { 
-  flex: 1; padding: 20px;
-  transform: translateX(50px); opacity: 0; transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s;
-}
-.dw-dest-panel.active .dw-dest-content { transform: translateX(0); opacity: 1; }
+/* Hover effects for boundaries */
+.dw-circle-wrap:hover .dw-circle-main { border-color: var(--w-gold); box-shadow: 0 0 45px rgba(197,160,89,0.5); }
+.dw-circle-wrap:hover .dw-circle-sub { border-color: var(--w-olive); box-shadow: 0 0 35px rgba(91,110,65,0.4); transform: translateX(-10px) rotate(-5deg); }
 
+/* Right: Content */
+.dw-dest-content { flex: 1; padding: 20px; transform: translateX(50px); opacity: 0; transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s; }
+.dw-dest-panel.active .dw-dest-content { transform: translateX(0); opacity: 1; }
 .dw-dest-num { font-size: 15px; color: var(--w-gold); letter-spacing: 5px; margin-bottom: 20px; font-weight: 600; }
 .dw-dest-name { font-size: clamp(3.5rem, 5.5vw, 5.5rem); margin: 0 0 5px 0; line-height: 1; text-transform: uppercase; }
 .dw-dest-tag { font-size: 2.2rem; color: var(--w-olive); margin: 0 0 25px 0; line-height: 1.2; }
@@ -1012,17 +1009,28 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 .dw-progress-bar { position: absolute; bottom: 40px; left: 5%; right: 5%; height: 2px; background: rgba(44,53,34,0.1); z-index: 10; }
 .dw-progress-fill { height: 100%; background: var(--w-gold); width: 0%; transition: width 0.1s; }
 
-/* ─── 4. SERVICES ─── */
-.dw-srv-sec { background: var(--w-olive-light); padding: 120px 5%; position: relative; z-index: 2; }
-.dw-srv-head { text-align: center; margin-bottom: 80px; }
-.dw-srv-eyebrow { font-size: 14px; letter-spacing: 6px; text-transform: uppercase; color: var(--w-olive); margin-bottom: 20px; font-weight: 600; }
-.dw-srv-title { font-size: clamp(2.5rem, 4vw, 4rem); color: var(--w-olive-dark); margin: 0; }
-.dw-srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+/* ─── 4. SERVICES (Tilt + Olive Hover) ─── */
+.dw-srv-sec { background: var(--w-olive-light); padding: 150px 5%; position: relative; z-index: 2; overflow: hidden; }
+
+/* Background Calligraphy */
+.dw-bg-cal {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'Alex Brush', cursive; font-size: clamp(8rem, 20vw, 25rem); color: var(--w-olive-dark);
+  opacity: 0.04; white-space: nowrap; pointer-events: none; z-index: 0;
+}
+
+.dw-srv-head { text-align: center; margin-bottom: 80px; position: relative; z-index: 2; }
+.dw-srv-cal { font-size: 3rem; color: var(--w-gold); margin-bottom: -10px; }
+.dw-srv-title { font-size: clamp(3rem, 5vw, 4.5rem); color: var(--w-olive-dark); margin: 0 0 10px 0; letter-spacing: 2px; }
+.dw-srv-subtitle { font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase; color: var(--w-olive); font-weight: 500; }
+
+.dw-srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
 .dw-srv-card {
   background: var(--w-bg); padding: 50px 40px; border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(44,53,34,0.04); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(44,53,34,0.04); transition: background 0.4s ease, border-color 0.4s ease;
   position: relative; overflow: hidden; border: 1px solid rgba(197,160,89,0.15);
-  opacity: 0; transform: translateY(40px); /* Initial state for Vanilla JS reveal */
+  opacity: 0; transform: translateY(40px); cursor: pointer;
+  /* Vanilla Tilt styles handled by JS, but we set base transition */
 }
 .dw-srv-card.visible { opacity: 1; transform: translateY(0); }
 .dw-srv-card::after {
@@ -1030,21 +1038,24 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
   background: linear-gradient(90deg, var(--w-olive-dark), var(--w-gold));
   transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease;
 }
-.dw-srv-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(44,53,34,0.1); border-color: rgba(197,160,89,0.4); }
+/* Olive Hover Effects */
+.dw-srv-card:hover { background: var(--w-olive-dark); border-color: var(--w-gold); }
 .dw-srv-card:hover::after { transform: scaleX(1); }
-.dw-srv-num {
+.dw-srv-card .dw-srv-num {
   font-family: 'Playfair Display', serif; font-size: 3.5rem; color: transparent;
-  -webkit-text-stroke: 1px var(--w-gold); margin-bottom: 25px; font-weight: 700; opacity: 0.6;
+  -webkit-text-stroke: 1px var(--w-gold); margin-bottom: 25px; font-weight: 700; opacity: 0.6; transition: all 0.4s ease;
 }
 .dw-srv-card:hover .dw-srv-num { color: var(--w-gold); opacity: 1; -webkit-text-stroke: 0px; }
-.dw-srv-name { font-size: 1.6rem; color: var(--w-olive-dark); margin: 0 0 15px 0; font-weight: 600; }
-.dw-srv-desc { font-size: 16px; color: #666; line-height: 1.6; margin: 0; }
+.dw-srv-card .dw-srv-name { font-size: 1.6rem; color: var(--w-olive-dark); margin: 0 0 15px 0; font-weight: 600; transition: color 0.4s ease; }
+.dw-srv-card:hover .dw-srv-name { color: #fff; }
+.dw-srv-card .dw-srv-desc { font-size: 16px; color: #666; line-height: 1.6; margin: 0; transition: color 0.4s ease; }
+.dw-srv-card:hover .dw-srv-desc { color: rgba(255,255,255,0.8); }
 
 /* ─── 5. CTA ─── */
 .dw-cta { padding: 150px 5%; text-align: center; background: var(--w-bg); position: relative; overflow: hidden; }
 .dw-cta-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; opacity: 0; transform: translateY(30px); transition: all 1s ease; }
 .dw-cta-content.visible { opacity: 1; transform: translateY(0); }
-.dw-cta-cal { font-size: clamp(4rem, 6vw, 6.5rem); color: var(--w-gold); margin: 0 0 -15px 0; line-height: 1; }
+.dw-cta-cal { font-size: clamp(4.5rem, 7vw, 7.5rem); color: var(--w-gold); margin: 0 0 -20px 0; line-height: 1; }
 .dw-cta-title { font-size: clamp(3rem, 5vw, 4.5rem); color: var(--w-olive-dark); margin: 0 0 30px 0; }
 .dw-cta-sub { font-size: 1.3rem; color: #555; margin: 0 0 50px 0; font-style: italic; }
 
@@ -1054,8 +1065,7 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
   .dw-circle-main { width: 300px; height: 380px; }
   .dw-circle-sub { width: 160px; height: 160px; }
   .dw-venues-list { grid-template-columns: 1fr; text-align: left; display: inline-grid; }
-  .dw-quote-img { display: none; }
-  .fl-1, .fl-2, .fl-3 { display: none; }
+  .dw-quote-img, .dw-fl-shape, .fl-1, .fl-2, .fl-3 { display: none; }
 }
 </style>
 
@@ -1065,6 +1075,16 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
     <canvas id="dw-canvas"></canvas>
     <div class="dw-hero-overlay">
       <div class="dw-glass-card" id="dw-glass">
+        
+        <!-- Floating Leaves/Hearts Behind Text inside Glass -->
+        <!-- Gold Heart -->
+        <svg class="dw-fl-shape dw-sh-1" viewBox="0 0 24 24"><path fill="#C5A059" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <!-- Olive Leaf -->
+        <svg class="dw-fl-shape dw-sh-2" viewBox="0 0 24 24"><path fill="#5B6E41" d="M17.5,22C15.42,22 13.5,21 12,19.46C10.5,21 8.58,22 6.5,22C3.46,22 1,19.54 1,16.5C1,12.75 4,9 12,2C20,9 23,12.75 23,16.5C23,19.54 20.54,22 17.5,22M12,5.27C6.7,10.66 3,13.61 3,16.5C3,18.43 4.57,20 6.5,20C8.19,20 9.77,18.8 10.5,17.2L12,14L13.5,17.2C14.23,18.8 15.81,20 17.5,20C19.43,20 21,18.43 21,16.5C21,13.61 17.3,10.66 12,5.27Z"/></svg>
+        <!-- Gold Sparkle -->
+        <svg class="dw-fl-shape dw-sh-3" viewBox="0 0 24 24"><path fill="#C5A059" d="M12,2L14.9,9.1L22,12L14.9,14.9L12,22L9.1,14.9L2,12L9.1,9.1L12,2Z"/></svg>
+        <svg class="dw-fl-shape dw-sh-4" viewBox="0 0 24 24"><path fill="#5B6E41" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
         <div class="dw-eyebrow t-sans">Maru Travel India Presents</div>
         <h2 class="dw-hero-cal t-cal">Destination</h2>
         <h1 class="dw-hero-main t-serif t-gradient">WEDDINGS</h1>
@@ -1072,22 +1092,16 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
         <a href="contact.html" class="dw-btn">Begin Planning</a>
       </div>
       
-      <!-- Premium Text Labels (No Emojis) -->
-      <div class="dw-float-label fl-1" id="fl-1">
-        <span>"Where forever begins..."</span>
-      </div>
-      <div class="dw-float-label fl-2" id="fl-2">
-        <span>"Curated with absolute perfection."</span>
-      </div>
-      <div class="dw-float-label fl-3" id="fl-3">
-        <span>"A timeless celebration of love."</span>
-      </div>
+      <!-- Premium Text Labels -->
+      <div class="dw-float-label fl-1" id="fl-1"><span>"Where forever begins..."</span></div>
+      <div class="dw-float-label fl-2" id="fl-2"><span>"Curated with absolute perfection."</span></div>
+      <div class="dw-float-label fl-3" id="fl-3"><span>"A timeless celebration of love."</span></div>
 
     </div>
   </div>
 </section>
 
-<!-- 2. QUOTE (Humanized Copy & Vanilla Reveal) -->
+<!-- 2. QUOTE -->
 <section class="dw-quote-sec">
   <img src="images/website_assests/wedding/udaipur_haldi.jpg" class="dw-quote-img qi-1" alt="Haldi">
   <img src="images/website_assests/wedding/wedding_couple.jpg" class="dw-quote-img qi-2" alt="Couple">
@@ -1102,7 +1116,7 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
   </div>
 </section>
 
-<!-- 3. DESTINATIONS (100% Reliable Pure JS Crossfade) -->
+<!-- 3. DESTINATIONS -->
 <div class="dw-dest-wrapper" id="dw-dest-wrapper">
   <div class="dw-dest-sticky">
     
@@ -1212,38 +1226,41 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 
 <!-- 4. SERVICES -->
 <section class="dw-srv-sec">
+  <div class="dw-bg-cal">The Maru Experience</div>
+  
   <div class="dw-srv-head">
-    <div class="dw-srv-eyebrow t-sans">Our Expertise</div>
-    <h2 class="dw-srv-title t-serif t-gradient">Beautifully Planned, Exquisitely Executed</h2>
+    <div class="dw-srv-cal t-cal">The Maru Experience</div>
+    <h2 class="dw-srv-title t-serif t-gradient">Our Expertise</h2>
+    <p class="dw-srv-subtitle t-sans">Beautifully Planned. Exquisitely Executed.</p>
   </div>
   <div class="dw-srv-grid">
     
-    <div class="dw-srv-card v-reveal" style="transition-delay: 0s">
+    <div class="dw-srv-card v-reveal" style="transition-delay: 0s" data-tilt data-tilt-max="7" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
       <div class="dw-srv-num">01</div>
       <h3 class="dw-srv-name t-serif">Venue Selection</h3>
       <p class="dw-srv-desc t-sans">Find the perfect palace, resort, heritage property or luxury hotel for your celebration.</p>
     </div>
-    <div class="dw-srv-card v-reveal" style="transition-delay: 0.1s">
+    <div class="dw-srv-card v-reveal" style="transition-delay: 0.1s" data-tilt data-tilt-max="7" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
       <div class="dw-srv-num">02</div>
       <h3 class="dw-srv-name t-serif">Guest Management</h3>
       <p class="dw-srv-desc t-sans">Accommodation, airport transfers and seamless logistics across your entire event.</p>
     </div>
-    <div class="dw-srv-card v-reveal" style="transition-delay: 0.2s">
+    <div class="dw-srv-card v-reveal" style="transition-delay: 0.2s" data-tilt data-tilt-max="7" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
       <div class="dw-srv-num">03</div>
       <h3 class="dw-srv-name t-serif">Ceremonies</h3>
       <p class="dw-srv-desc t-sans">Curate traditional ceremonies, cultural experiences and truly memorable celebrations.</p>
     </div>
-    <div class="dw-srv-card v-reveal" style="transition-delay: 0.3s">
+    <div class="dw-srv-card v-reveal" style="transition-delay: 0.3s" data-tilt data-tilt-max="7" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
       <div class="dw-srv-num">04</div>
       <h3 class="dw-srv-name t-serif">Décor &amp; Styling</h3>
       <p class="dw-srv-desc t-sans">A wedding atmosphere entirely authentic to your personality, vision and culture.</p>
     </div>
-    <div class="dw-srv-card v-reveal" style="transition-delay: 0.4s">
+    <div class="dw-srv-card v-reveal" style="transition-delay: 0.4s" data-tilt data-tilt-max="7" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
       <div class="dw-srv-num">05</div>
       <h3 class="dw-srv-name t-serif">Food &amp; Hospitality</h3>
       <p class="dw-srv-desc t-sans">Curate exceptional menus, tastings and world-class hospitality for all your guests.</p>
     </div>
-    <div class="dw-srv-card v-reveal" style="transition-delay: 0.5s">
+    <div class="dw-srv-card v-reveal" style="transition-delay: 0.5s" data-tilt data-tilt-max="7" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.15">
       <div class="dw-srv-num">06</div>
       <h3 class="dw-srv-name t-serif">Travel &amp; Logistics</h3>
       <p class="dw-srv-desc t-sans">Complete management of transportation, arrivals, departures and destination logistics.</p>
@@ -1317,7 +1334,7 @@ document.addEventListener("DOMContentLoaded", () => {
   resize();
 })();
 
-/* Vanilla JS Intersection Observer for Reveals (100% Reliable compared to GSAP errors) */
+/* Vanilla JS Intersection Observer for Reveals */
 document.addEventListener('DOMContentLoaded', function() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1330,7 +1347,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.v-reveal, .dw-quote-img').forEach(el => observer.observe(el));
 });
 
-/* Vanilla JS Destinations Wheel (Flawless, No width calculation bugs) */
+/* Vanilla JS Destinations Wheel */
 (function(){
   const wrapper = document.getElementById('dw-dest-wrapper');
   const panels = document.querySelectorAll('.dw-dest-panel');
@@ -1341,31 +1358,28 @@ document.addEventListener('DOMContentLoaded', function() {
   function onScrollDest() {
     const rect = wrapper.getBoundingClientRect();
     const maxScroll = rect.height - window.innerHeight;
-    
-    // Calculate progress between 0 and 1
     let prog = -rect.top / maxScroll;
     prog = Math.max(0, Math.min(1, prog));
     
     if(progFill) progFill.style.width = (prog * 100) + '%';
     
-    // Determine active panel (0 to 4)
     let activeIdx = Math.min(panels.length - 1, Math.floor(prog * panels.length));
-    
     panels.forEach((panel, i) => {
-      if(i === activeIdx) {
-        panel.classList.add('active');
-      } else {
-        panel.classList.remove('active');
-      }
+      if(i === activeIdx) { panel.classList.add('active'); } else { panel.classList.remove('active'); }
     });
   }
 
   window.addEventListener('scroll', onScrollDest, {passive: true});
   onScrollDest(); // Init
 })();
+
+/* Initialize Vanilla Tilt if available */
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof VanillaTilt !== 'undefined') {
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+  }
+});
 </script>
-
-
 
 <footer>
   <div class="footer-container">
@@ -1534,4 +1548,5 @@ document.querySelectorAll('.we-dropdown').forEach(function(drop) {
 </script>
 </body>
 </html>
+
 
