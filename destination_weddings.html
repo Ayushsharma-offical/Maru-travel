@@ -1096,14 +1096,62 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 .dw-srv-card .dw-srv-desc { font-size: 16px; color: #666; line-height: 1.6; margin: 0; transition: color 0.4s ease; }
 .dw-srv-card:hover .dw-srv-desc { color: rgba(255,255,255,0.8); }
 
-/* ─── 5. CTA ─── */
-.dw-cta { padding: 150px 5%; text-align: center; background: var(--w-bg); position: relative; overflow: hidden; }
-.dw-cta-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; opacity: 0; transform: translateY(30px); transition: all 1s ease; }
-.dw-cta-content.visible { opacity: 1; transform: translateY(0); }
-.dw-cta-cal { font-size: clamp(4.5rem, 7vw, 7.5rem); color: var(--w-gold); margin: 0 0 -20px 0; line-height: 1; }
-.dw-cta-title { font-size: clamp(3rem, 5vw, 4.5rem); color: var(--w-olive-dark); margin: 0 0 30px 0; }
-.dw-cta-sub { font-size: 1.3rem; color: #555; margin: 0 0 50px 0; font-style: italic; }
+/* ─── 5. CTA (Grand Finale Upgrade) ─── */
+.dw-cta { 
+  padding: 200px 5%; text-align: center; 
+  background: linear-gradient(rgba(28, 35, 20, 0.88), rgba(28, 35, 20, 0.98)), url('images/website_assests/wedding/wedding_stage.jpg') center/cover fixed; 
+  position: relative; overflow: hidden; border-top: 3px solid var(--w-gold); 
+}
+.dw-cta-content { 
+  position: relative; z-index: 10; max-width: 900px; margin: 0 auto; 
+  padding: 60px 30px; background: rgba(0,0,0,0.25); 
+  border: 1px solid rgba(197,160,89,0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  opacity: 0; transform: translateY(40px) scale(0.95); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); 
+}
+.dw-cta-content.visible { opacity: 1; transform: translateY(0) scale(1); }
 
+/* Animated Rings */
+.cta-ring { position: absolute; border: 1px solid rgba(197,160,89,0.15); border-radius: 50%; pointer-events: none; z-index: 1; }
+.cr-1 { width: 1000px; height: 1000px; top: -300px; left: -200px; border-width: 2px; border-style: dashed; animation: spin 50s linear infinite; }
+.cr-2 { width: 800px; height: 800px; bottom: -200px; right: -200px; border-width: 1px; animation: spin 40s linear infinite reverse; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Floating Gold Particles */
+.dw-particles { position: absolute; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; }
+.dw-particles span {
+  position: absolute; display: block; width: 4px; height: 4px; 
+  background: var(--w-gold); border-radius: 50%;
+  box-shadow: 0 0 10px var(--w-gold), 0 0 20px var(--w-gold);
+  animation: floatUp infinite linear;
+}
+@keyframes floatUp {
+  0% { transform: translateY(110vh) scale(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+}
+.p1 { left: 10%; animation-duration: 15s; animation-delay: 0s; }
+.p2 { left: 25%; animation-duration: 22s; animation-delay: -5s; width: 6px; height: 6px; }
+.p3 { left: 45%; animation-duration: 12s; animation-delay: -2s; }
+.p4 { left: 65%; animation-duration: 18s; animation-delay: -8s; width: 3px; height: 3px; }
+.p5 { left: 85%; animation-duration: 25s; animation-delay: -12s; width: 7px; height: 7px; }
+.p6 { left: 20%; animation-duration: 14s; animation-delay: -3s; width: 5px; height: 5px; }
+.p7 { left: 55%; animation-duration: 26s; animation-delay: -10s; }
+.p8 { left: 90%; animation-duration: 16s; animation-delay: -7s; }
+
+/* Text & Buttons inside CTA */
+.dw-cta-cal { font-size: clamp(5rem, 8vw, 8rem); color: var(--w-gold); margin: 0 0 -20px 0; line-height: 1; text-shadow: 0 5px 20px rgba(0,0,0,0.6); }
+.dw-cta-title { font-size: clamp(3rem, 5vw, 4.8rem); margin: 0 0 30px 0; letter-spacing: 2px; }
+.cta-title-glow {
+  background: linear-gradient(45deg, #FFF 0%, var(--w-gold) 50%, #FFF 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-size: 200% auto; animation: shine 5s linear infinite;
+}
+.dw-cta-sub { font-size: 1.4rem; color: rgba(255,255,255,0.85); margin: 0 0 50px 0; font-style: italic; }
+.cta-btn { background: var(--w-gold) !important; color: #2C3522 !important; font-weight: 700 !important; border: none; box-shadow: 0 10px 30px rgba(197,160,89,0.3) !important; }
+.cta-btn:hover { background: #FFF !important; color: var(--w-gold) !important; box-shadow: 0 15px 40px rgba(255,255,255,0.4) !important; transform: translateY(-4px); }
+.cta-btn::before { background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent) !important; }
 @media(max-width: 900px){
   .dw-panel-inner { flex-direction: column; gap: 40px; text-align: center; }
   .dw-circle-wrap { height: auto; margin-bottom: 20px; }
@@ -1314,13 +1362,21 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
   </div>
 </section>
 
-<!-- 5. CTA -->
+<!-- 5. CTA (GRAND FINALE) -->
 <section class="dw-cta">
+  <!-- Magical Background Elements -->
+  <div class="cta-ring cr-1"></div>
+  <div class="cta-ring cr-2"></div>
+  <div class="dw-particles">
+    <span class="p1"></span><span class="p2"></span><span class="p3"></span><span class="p4"></span>
+    <span class="p5"></span><span class="p6"></span><span class="p7"></span><span class="p8"></span>
+  </div>
+
   <div class="dw-cta-content v-reveal">
     <h3 class="dw-cta-cal t-cal">Your Story</h3>
-    <h2 class="dw-cta-title t-serif t-gradient">YOUR DESTINATION. YOUR CELEBRATION.</h2>
+    <h2 class="dw-cta-title t-serif cta-title-glow">YOUR DESTINATION.<br>YOUR CELEBRATION.</h2>
     <p class="dw-cta-sub t-serif">Let us create a wedding that feels uniquely yours in every single detail.</p>
-    <a href="contact.html" class="dw-btn">Contact Our Planners</a>
+    <a href="contact.html" class="dw-btn cta-btn">Contact Our Planners</a>
   </div>
 </section>
 
@@ -1593,6 +1649,7 @@ document.querySelectorAll('.we-dropdown').forEach(function(drop) {
 </script>
 </body>
 </html>
+
 
 
 
