@@ -453,7 +453,7 @@ img{max-width:100%; display:block;}
 }
 
 .site-header.scrolled nav {
-  padding: 10px 28px; background: rgba(10,8,8,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  padding: 10px 28px; background: rgba(250, 249, 246, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 4px 20px rgba(0,0,0,0.05);
   border-top: none;
   background: transparent;
   box-shadow: none;
@@ -461,7 +461,7 @@ img{max-width:100%; display:block;}
 
 @media (max-width: 900px) {
   .brand-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .site-header nav { flex-wrap: wrap; justify-content: center; gap: 14px 20px; padding: 10px 28px; background: rgba(10,8,8,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .site-header nav { flex-wrap: wrap; justify-content: center; gap: 14px 20px; padding: 10px 28px; background: rgba(250, 249, 246, 0.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
   .site-header nav .nav-links { gap: 14px 20px; justify-content: center; flex-wrap: wrap; }
   .site-header nav .marquee-wrap { display: none; }
 }
@@ -841,444 +841,397 @@ footer{background:var(--dark);color:#ccc;padding:80px 20px 20px;font-family:'Lat
 
 </header>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
-/* ─── WEDDING PAGE GLOBAL ─── */
-body { background:#060202; color:#fffff0; font-family:'Jost',sans-serif; margin:0; overflow-x:hidden; }
+/* ─── GLOBAL LIGHT THEME ─── */
+:root {
+  --w-bg: #FAF9F6;          /* Creamy Off-White */
+  --w-olive-dark: #2C3522;  /* Dark Olive */
+  --w-olive: #5B6E41;       /* Medium Olive */
+  --w-olive-light: #E9EAE5; /* Very Light Olive / Sage */
+  --w-gold: #C5A059;        /* Soft Gold */
+  --w-text: #333333;        /* Dark Grey for readability */
+}
+body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-serif; margin: 0; overflow-x: hidden; }
 
-/* ─── 1. HERO ─── */
-.dw-hero { height:350vh; position:relative; }
-.dw-hero-sticky {
-  position:sticky; top:0; height:100vh; overflow:hidden; background:#000;
+/* Typography Classes */
+.t-cal { font-family: 'Alex Brush', cursive; font-weight: 400; }
+.t-serif { font-family: 'Playfair Display', serif; }
+.t-sans { font-family: 'Jost', sans-serif; }
+.t-gradient {
+  background: linear-gradient(45deg, var(--w-olive-dark), var(--w-gold), var(--w-olive));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shine 5s linear infinite;
 }
-#dw-canvas {
-  position:absolute; inset:0; width:100%; height:100%; display:block;
-}
-.dw-hero-grad {
-  position:absolute; inset:0;
-  background: linear-gradient(to bottom, rgba(6,2,2,0.3) 0%, rgba(6,2,2,0.05) 40%, rgba(6,2,2,0.75) 100%);
-  pointer-events:none;
-}
-.dw-hero-content {
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center; padding:20px;
+@keyframes shine { to { background-position: 200% center; } }
+
+/* ─── 1. HERO (Canvas + Light Glass) ─── */
+.dw-hero { height: 300vh; position: relative; }
+.dw-hero-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--w-bg); }
+#dw-canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.dw-hero-overlay {
+  position: absolute; inset: 0;
+  background: rgba(250, 249, 246, 0.2); /* very light overlay */
+  display: flex; align-items: center; justify-content: center; padding: 20px;
 }
 .dw-glass-card {
-  background:rgba(255,255,255,0.04);
-  backdrop-filter:blur(30px) saturate(1.4);
-  -webkit-backdrop-filter:blur(30px) saturate(1.4);
-  border:1px solid rgba(255,255,255,0.13);
-  border-radius:28px;
-  padding:64px 80px;
-  text-align:center;
-  max-width:720px; width:90%;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.25), inset 0 0 40px rgba(255,255,255,0.03);
-  transition:opacity 0.7s ease, transform 0.7s ease;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  padding: 60px 80px;
+  text-align: center;
+  max-width: 800px; width: 90%;
+  box-shadow: 0 30px 60px rgba(44, 53, 34, 0.08), inset 0 0 20px rgba(255,255,255,0.8);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
-.dw-glass-card.faded { opacity:0; transform:translateY(-40px) scale(0.97); pointer-events:none; }
+.dw-glass-card.faded { opacity: 0; transform: translateY(-40px) scale(0.95); pointer-events: none; }
 .dw-eyebrow {
-  font-size:11px; letter-spacing:5px; text-transform:uppercase;
-  color:#d4af37; margin-bottom:24px; opacity:0.9; font-family:'Jost',sans-serif;
+  font-size: 13px; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--w-olive); margin-bottom: 10px; font-weight: 600;
 }
-.dw-main-title {
-  font-family:'Cinzel',serif;
-  font-size:clamp(2.6rem,7vw,5.2rem);
-  letter-spacing:10px; color:#fff; margin:0 0 16px 0; line-height:1.05;
-  text-shadow:0 2px 30px rgba(0,0,0,0.5);
+.dw-hero-cal {
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  color: var(--w-gold); margin: 0; line-height: 0.8;
+  transform: rotate(-3deg) translateY(10px);
 }
-.dw-title-divider {
-  width:60px; height:1px;
-  background:linear-gradient(to right,transparent,#d4af37,transparent);
-  margin:0 auto 28px;
+.dw-hero-main {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 8px; margin: 0 0 25px 0; font-weight: 700;
+  color: var(--w-olive-dark);
 }
 .dw-subtitle {
-  font-family:'Cormorant Garamond',serif; font-style:italic;
-  font-size:clamp(1.2rem,2.5vw,1.7rem);
-  color:rgba(255,240,220,0.85); margin:0 0 44px 0; font-weight:300; line-height:1.55;
+  font-size: clamp(1.2rem, 2vw, 1.4rem); color: #555;
+  margin: 0 0 40px 0; font-style: italic; font-weight: 400;
 }
 .dw-btn {
-  display:inline-flex; align-items:center; gap:8px;
-  padding:15px 34px;
-  border-radius:50px;
-  font-family:'Jost',sans-serif; font-size:12px; font-weight:500;
-  letter-spacing:4px; text-transform:uppercase; text-decoration:none;
-  transition:all 0.35s ease; cursor:pointer;
-  background:transparent; border:1px solid rgba(212,175,55,0.5); color:#d4af37;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 16px 36px; border-radius: 50px;
+  font-size: 13px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; text-decoration: none;
+  background: var(--w-olive-dark); color: #fff;
+  border: 1px solid var(--w-olive-dark);
+  transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(44,53,34,0.15);
 }
 .dw-btn:hover {
-  background:#d4af37; color:#000; border-color:#d4af37;
-  box-shadow:0 8px 28px rgba(212,175,55,0.4); transform:translateY(-2px);
-}
-.dw-btn-solid { background:#d4af37; color:#000; border-color:#d4af37; }
-.dw-btn-solid:hover { background:#fff; border-color:#fff; box-shadow:0 8px 28px rgba(255,255,255,0.3); }
-
-/* Scroll line hint */
-.dw-scroll-hint {
-  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:10px; opacity:0.45;
-}
-.dw-scroll-hint span { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#fff; font-family:'Jost'; }
-.dw-scroll-line {
-  width:1px; height:40px;
-  background:linear-gradient(to bottom,#fff,transparent);
-  animation:dw-line 1.6s ease-in-out infinite;
-}
-@keyframes dw-line {
-  0%{transform:scaleY(0);transform-origin:top}
-  50%{transform:scaleY(1);transform-origin:top}
-  51%{transform:scaleY(1);transform-origin:bottom}
-  100%{transform:scaleY(0);transform-origin:bottom}
+  background: var(--w-gold); border-color: var(--w-gold);
+  transform: translateY(-3px); box-shadow: 0 15px 30px rgba(197,160,89,0.3);
 }
 
 /* ─── 2. QUOTE ─── */
 .dw-quote-sec {
-  background:linear-gradient(to bottom,#060202,#111);
-  padding:100px 5%; display:flex; align-items:center; justify-content:center; text-align:center;
+  background: var(--w-bg); padding: 120px 5%;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  position: relative;
+}
+.dw-quote-sec::before {
+  content: '✦'; position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+  color: var(--w-gold); font-size: 24px; opacity: 0.5;
 }
 .dw-quote-text {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.8rem,3.5vw,3rem);
-  color:rgba(255,240,210,0.8); line-height:1.5; max-width:800px;
-  font-weight:300; font-style:italic;
-  opacity:0; transform:translateY(30px);
-  transition:opacity 1.2s ease, transform 1.2s ease;
+  font-size: clamp(2rem, 4vw, 3.2rem); color: var(--w-olive-dark);
+  max-width: 900px; line-height: 1.4;
+  opacity: 0; transform: translateY(30px); transition: all 1s ease;
 }
-.dw-quote-text.visible { opacity:1; transform:translateY(0); }
+.dw-quote-text.visible { opacity: 1; transform: translateY(0); }
 
-/* ─── 3. DESTINATIONS STICKY WHEEL ─── */
-.dw-dest-wrapper { height:500vh; position:relative; background:#000; }
-.dw-dest-sticky {
-  position:sticky; top:0; height:100vh; overflow:hidden;
+/* ─── 3. CIRCLE DESTINATIONS WHEEL ─── */
+.dw-dest-wrapper { height: 500vh; background: var(--w-bg); position: relative; }
+.dw-dest-sticky { position: sticky; top: 0; height: 100vh; display: flex; overflow: hidden; width: 100vw; }
+.dw-dest-panel {
+  flex: 0 0 100vw; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 5%; position: relative;
 }
-/* Backgrounds */
-.dw-dest-bgs { position:absolute; inset:0; z-index:0; }
-.dw-dest-bg {
-  position:absolute; inset:0;
-  background-size:cover; background-position:center;
-  opacity:0; filter:brightness(0.4) saturate(0.7);
-  transform:scale(1.06);
-  transition:opacity 0.9s ease, filter 0.9s ease, transform 1.8s ease;
+.dw-panel-inner {
+  display: flex; align-items: center; gap: 60px; max-width: 1200px; width: 100%;
 }
-.dw-dest-bg.active {
-  opacity:1; filter:brightness(0.6) saturate(1.1); transform:scale(1);
+/* Left: Circle Images */
+.dw-circle-wrap {
+  flex: 1; position: relative; display: flex; align-items: center; justify-content: center;
+  height: 600px;
 }
-/* gradient overlay */
-.dw-dest-ov {
-  position:absolute; inset:0; z-index:1;
-  background:linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.88) 100%);
+.dw-circle-main {
+  width: 450px; height: 450px; border-radius: 50%;
+  object-fit: cover; box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  position: relative; z-index: 2;
 }
-/* Large ghost name left */
-.dw-bg-name {
-  position:absolute; left:3%; top:50%; transform:translateY(-50%);
-  z-index:2; font-family:'Cinzel',serif;
-  font-size:clamp(5rem,14vw,11rem);
-  font-weight:700; color:rgba(255,255,255,0.045);
-  letter-spacing:6px; pointer-events:none; user-select:none;
-  white-space:nowrap;
-  transition:all 0.8s ease;
+.dw-circle-sub {
+  width: 250px; height: 250px; border-radius: 50%;
+  object-fit: cover; position: absolute; bottom: 20px; right: 0;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 8px solid var(--w-bg);
+  z-index: 3;
 }
-/* Info cards container */
-.dw-cards-wrap {
-  position:absolute; right:5%; top:50%; transform:translateY(-50%);
-  z-index:3; width:min(520px,88vw);
-}
-.dw-dest-card {
-  position:absolute; top:0; right:0; width:100%;
-  opacity:0; transform:translateX(60px);
-  pointer-events:none;
-  transition:opacity 0.65s ease, transform 0.65s ease;
-}
-.dw-dest-card.active { opacity:1; transform:translateX(0); pointer-events:auto; }
-.dw-card-inner {
-  background:rgba(8,6,6,0.52);
-  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
-  border:1px solid rgba(255,255,255,0.07);
-  border-left:3px solid #d4af37;
-  border-radius:16px; padding:50px 44px;
-}
-.dw-card-num {
-  font-size:11px; letter-spacing:4px; text-transform:uppercase;
-  color:#d4af37; margin-bottom:20px; font-family:'Jost';
-}
-.dw-card-title {
-  font-family:'Cinzel',serif; font-size:2.8rem; letter-spacing:5px;
-  color:#fff; margin:0 0 8px 0; line-height:1;
-}
-.dw-card-tagline {
-  font-family:'Cormorant Garamond',serif; font-style:italic;
-  font-size:1.35rem; color:rgba(255,240,200,0.8);
-  margin:0 0 26px 0; font-weight:300;
-}
-.dw-card-desc {
-  font-family:'Jost'; font-size:14px; color:rgba(255,255,255,0.6);
-  line-height:1.8; margin:0 0 26px 0; font-weight:300;
-}
-.dw-venues-label {
-  font-size:10px; letter-spacing:4px; text-transform:uppercase;
-  color:#d4af37; font-family:'Jost'; margin-bottom:14px;
-}
-.dw-venues-list {
-  list-style:none; padding:0; margin:0 0 34px 0;
-  display:grid; grid-template-columns:1fr 1fr; gap:8px;
-}
-.dw-venues-list li {
-  font-family:'Jost'; font-size:13px; color:rgba(255,255,255,0.8);
-  padding-left:16px; position:relative;
-}
-.dw-venues-list li::before {
-  content:'✦'; position:absolute; left:0; color:#d4af37; font-size:9px; top:3px;
-}
-/* Nav dots */
-.dw-nav-dots {
-  position:absolute; left:calc(5% - 32px); top:50%; transform:translateY(-50%);
-  z-index:4; display:flex; flex-direction:column; gap:14px;
-}
-.dw-dot {
-  width:6px; height:6px; border-radius:50%;
-  background:rgba(255,255,255,0.2); cursor:pointer;
-  transition:all 0.35s ease;
-}
-.dw-dot.active { background:#d4af37; transform:scale(1.8); }
-/* Counter bottom */
-.dw-counter {
-  position:absolute; bottom:44px; left:5%; z-index:4;
-  display:flex; align-items:baseline; gap:6px;
-}
-.dw-counter .cn { font-family:'Cinzel',serif; font-size:3rem; color:#fff; line-height:1; }
-.dw-counter .cs { font-size:1rem; color:rgba(255,255,255,0.3); }
-.dw-counter .ct { font-size:0.9rem; color:rgba(255,255,255,0.35); font-family:'Jost'; }
+/* Right: Content */
+.dw-dest-content { flex: 1; padding: 20px; }
+.dw-dest-num { font-size: 14px; color: var(--w-gold); letter-spacing: 4px; margin-bottom: 20px; font-weight: 500; }
+.dw-dest-name { font-size: clamp(3rem, 5vw, 4.5rem); margin: 0 0 10px 0; line-height: 1.1; }
+.dw-dest-tag { font-size: 1.6rem; color: var(--w-olive); margin: 0 0 25px 0; }
+.dw-dest-desc { font-size: 16px; line-height: 1.7; color: #555; margin-bottom: 30px; }
+.dw-venues-list { list-style: none; padding: 0; margin: 0 0 40px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.dw-venues-list li { position: relative; padding-left: 20px; font-size: 14px; color: var(--w-olive-dark); font-weight: 500; }
+.dw-venues-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; background: var(--w-gold); border-radius: 50%; }
 
-/* ─── 4. SERVICES ─── */
-.dw-services { background:#0d0d0d; padding:100px 5%; }
-.dw-sec-label {
-  text-align:center; font-size:11px; letter-spacing:6px; text-transform:uppercase;
-  color:#d4af37; margin-bottom:18px; font-family:'Jost';
-}
-.dw-sec-title {
-  text-align:center; font-family:'Cinzel',serif;
-  font-size:clamp(1.7rem,3vw,2.6rem); letter-spacing:4px; color:#fff; margin:0 0 64px 0;
-}
-.dw-srv-grid {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:2px; background:rgba(255,255,255,0.04); border-radius:12px; overflow:hidden;
-}
+/* Scroll Progress Bar */
+.dw-progress-bar { position: absolute; bottom: 40px; left: 10%; right: 10%; height: 2px; background: rgba(44,53,34,0.1); z-index: 10; }
+.dw-progress-fill { height: 100%; background: var(--w-gold); width: 0%; }
+
+/* ─── 4. SERVICES SECTION ─── */
+.dw-srv-sec { background: var(--w-olive-light); padding: 120px 5%; }
+.dw-srv-head { text-align: center; margin-bottom: 80px; }
+.dw-srv-eyebrow { font-size: 12px; letter-spacing: 6px; text-transform: uppercase; color: var(--w-olive); margin-bottom: 15px; font-weight: 600; }
+.dw-srv-title { font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--w-olive-dark); margin: 0; }
+.dw-srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1300px; margin: 0 auto; }
 .dw-srv-card {
-  background:#0d0d0d; padding:50px 40px;
-  border-top:3px solid transparent;
-  opacity:0; transform:translateY(25px);
-  transition:opacity 0.7s ease, transform 0.7s ease, background 0.3s, border-color 0.3s;
+  background: #fff; padding: 50px 40px; border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative; overflow: hidden;
 }
-.dw-srv-card.visible { opacity:1; transform:translateY(0); }
-.dw-srv-card:hover { background:#141414; border-top-color:#d4af37; }
-.dw-srv-icon { font-size:26px; margin-bottom:18px; }
-.dw-srv-name { font-family:'Cinzel',serif; font-size:1.25rem; letter-spacing:2px; color:#d4af37; margin:0 0 14px 0; }
-.dw-srv-desc { font-family:'Jost'; font-size:14px; color:rgba(255,255,255,0.5); line-height:1.7; margin:0; font-weight:300; }
+.dw-srv-card::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--w-olive-dark), var(--w-gold));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease;
+}
+.dw-srv-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+.dw-srv-card:hover::after { transform: scaleX(1); }
+.dw-srv-num {
+  font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--w-bg);
+  text-shadow: -1px -1px 0 var(--w-gold), 1px -1px 0 var(--w-gold), -1px 1px 0 var(--w-gold), 1px 1px 0 var(--w-gold);
+  margin-bottom: 20px; font-weight: 700;
+}
+.dw-srv-name { font-size: 1.5rem; color: var(--w-olive-dark); margin: 0 0 15px 0; font-weight: 600; }
+.dw-srv-desc { font-size: 15px; color: #666; line-height: 1.6; margin: 0; }
 
 /* ─── 5. FINAL CTA ─── */
 .dw-cta {
-  height:65vh; position:relative; display:flex;
-  align-items:center; justify-content:center; text-align:center; overflow:hidden;
+  padding: 120px 5%; text-align: center; background: var(--w-bg);
+  position: relative; overflow: hidden;
 }
-.dw-cta-bg {
-  position:absolute; inset:0;
-  background:url('images/website_assests/wedding/udaipur.jpg') center/cover;
-  filter:brightness(0.18) saturate(0.5);
+.dw-cta::before, .dw-cta::after {
+  content: ''; position: absolute; width: 400px; height: 400px;
+  background: var(--w-olive-light); border-radius: 50%; z-index: 0; opacity: 0.5;
 }
-.dw-cta-content { position:relative; z-index:2; padding:40px 20px; }
-.dw-cta-content h2 {
-  font-family:'Cinzel',serif; font-size:clamp(2rem,5vw,4rem);
-  letter-spacing:6px; color:#fff; margin:0 0 18px 0; line-height:1.2;
-}
-.dw-cta-content p {
-  font-family:'Cormorant Garamond',serif; font-style:italic;
-  font-size:1.5rem; color:rgba(255,240,200,0.75); margin:0 0 48px 0; font-weight:300;
-}
+.dw-cta::before { top: -200px; left: -100px; }
+.dw-cta::after { bottom: -200px; right: -100px; }
+.dw-cta-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+.dw-cta-cal { font-size: clamp(3.5rem, 6vw, 5.5rem); color: var(--w-gold); margin: 0 0 -10px 0; line-height: 1; }
+.dw-cta-title { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--w-olive-dark); margin: 0 0 30px 0; }
+.dw-cta-sub { font-size: 1.2rem; color: #555; margin: 0 0 40px 0; }
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-  .dw-glass-card{ padding:36px 24px; }
-  .dw-cards-wrap{ right:4%; width:92vw; top:auto; bottom:5%; transform:none; }
-  .dw-bg-name{ font-size:4rem; top:14%; }
-  .dw-nav-dots{ left:10px; }
-  .dw-srv-grid{ grid-template-columns:1fr; }
-  .dw-card-inner{ padding:32px 22px; }
-  .dw-card-title{ font-size:2rem; }
-  .dw-venues-list{ grid-template-columns:1fr; }
+@media(max-width: 900px){
+  .dw-panel-inner { flex-direction: column; gap: 40px; text-align: center; }
+  .dw-circle-wrap { height: 350px; }
+  .dw-circle-main { width: 280px; height: 280px; }
+  .dw-circle-sub { width: 150px; height: 150px; }
+  .dw-venues-list { grid-template-columns: 1fr; text-align: left; display: inline-grid; }
 }
 </style>
 
-<!-- ══ 1. HERO ══ -->
+<!-- 1. HERO -->
 <section class="dw-hero">
   <div class="dw-hero-sticky">
     <canvas id="dw-canvas"></canvas>
-    <div class="dw-hero-grad"></div>
-    <div class="dw-hero-content">
+    <div class="dw-hero-overlay">
       <div class="dw-glass-card" id="dw-glass">
-        <div class="dw-eyebrow">Maru Travel India Presents</div>
-        <h1 class="dw-main-title">DESTINATION<br>WEDDINGS</h1>
-        <div class="dw-title-divider"></div>
-        <p class="dw-subtitle">Where every celebration becomes<br>a story worth remembering.</p>
-        <a href="contact.html" class="dw-btn">Begin Planning &#8594;</a>
+        <div class="dw-eyebrow t-sans">Maru Travel India Presents</div>
+        <h2 class="dw-hero-cal t-cal">Destination</h2>
+        <h1 class="dw-hero-main t-serif t-gradient">WEDDINGS</h1>
+        <p class="dw-subtitle t-serif">Where every celebration becomes a story worth remembering.</p>
+        <a href="contact.html" class="dw-btn">Begin Planning</a>
       </div>
-    </div>
-    <div class="dw-scroll-hint">
-      <div class="dw-scroll-line"></div>
-      <span>Scroll</span>
     </div>
   </div>
 </section>
 
-<!-- ══ 2. QUOTE ══ -->
+<!-- 2. QUOTE -->
 <section class="dw-quote-sec">
-  <p class="dw-quote-text" id="dw-quote">
-    "From royal palaces to lakeside celebrations,<br>
-    India offers a setting for every love story."
+  <p class="dw-quote-text t-serif" id="dw-quote">
+    "From majestic royal palaces to serene lakeside views,<br>India offers a breathtaking canvas for every love story."
   </p>
 </section>
 
-<!-- ══ 3. DESTINATIONS WHEEL ══ -->
+<!-- 3. DESTINATIONS (CIRCLES) -->
 <div class="dw-dest-wrapper" id="dw-dest-wrapper">
   <div class="dw-dest-sticky">
-
-    <div class="dw-dest-bgs">
-      <div class="dw-dest-bg active" style="background-image:url('images/website_assests/wedding/Jaipur(1).jpg')"></div>
-      <div class="dw-dest-bg" style="background-image:url('images/website_assests/wedding/jaisalmer.jpg')"></div>
-      <div class="dw-dest-bg" style="background-image:url('images/website_assests/wedding/wedding_stage.jpg')"></div>
-      <div class="dw-dest-bg" style="background-image:url('images/website_assests/wedding/udaipur.jpg')"></div>
-      <div class="dw-dest-bg" style="background-image:url('images/website_assests/wedding/download.jpg')"></div>
-    </div>
-
-    <div class="dw-dest-ov"></div>
-    <div class="dw-bg-name" id="dw-bgname">JAIPUR</div>
-
-    <div class="dw-cards-wrap">
-
-      <div class="dw-dest-card active">
-        <div class="dw-card-inner">
-          <div class="dw-card-num">01 / 05 &nbsp;&mdash;&nbsp; Rajasthan</div>
-          <h2 class="dw-card-title">JAIPUR</h2>
-          <p class="dw-card-tagline">The Pink City &mdash; A Royal Celebration</p>
-          <p class="dw-card-desc">Accessibility, heritage and convenience make Jaipur India's most compelling wedding destination. Pink palaces, Aravalli backdrops and world-class luxury hotels create settings from intimate to grand.</p>
-          <div class="dw-venues-label">Featured Venues</div>
-          <ul class="dw-venues-list">
+    
+    <!-- JAIPUR -->
+    <div class="dw-dest-panel">
+      <div class="dw-panel-inner">
+        <div class="dw-circle-wrap gs-circle">
+          <img src="images/website_assests/wedding/Jaipur(1).jpg" class="dw-circle-main" alt="Jaipur Wedding">
+          <img src="images/website_assests/wedding/jaipur_fort.jpg" class="dw-circle-sub" alt="Jaipur Fort">
+        </div>
+        <div class="dw-dest-content gs-content">
+          <div class="dw-dest-num t-sans">01 &mdash; RAJASTHAN</div>
+          <h2 class="dw-dest-name t-serif t-gradient">JAIPUR</h2>
+          <p class="dw-dest-tag t-cal">The Pink City — A Royal Celebration</p>
+          <p class="dw-dest-desc t-sans">Accessibility, heritage and convenience make Jaipur India's most compelling wedding destination. Pink palaces, Aravalli backdrops and world-class luxury hotels create stunning settings.</p>
+          <ul class="dw-venues-list t-sans">
             <li>Taj Rambagh Palace</li><li>Jai Mahal Palace</li>
-            <li>Samode Palace &amp; Haveli</li><li>Jaipur Marriott</li>
-            <li>Hari Mahal Palace</li><li>Neemrana Fort</li>
+            <li>Samode Palace</li><li>Jaipur Marriott</li>
           </ul>
-          <a href="contact.html" class="dw-btn">Enquire Now &#8594;</a>
         </div>
       </div>
+    </div>
 
-      <div class="dw-dest-card">
-        <div class="dw-card-inner">
-          <div class="dw-card-num">02 / 05 &nbsp;&mdash;&nbsp; Rajasthan</div>
-          <h2 class="dw-card-title">JODHPUR</h2>
-          <p class="dw-card-tagline">The Blue City &mdash; Where Royalty Lives On</p>
-          <p class="dw-card-desc">Rajasthan's richest royal legacy. Historic palaces, grand havelis and heritage hotels where modern luxury blends seamlessly with centuries of royal tradition.</p>
-          <div class="dw-venues-label">Featured Venues</div>
-          <ul class="dw-venues-list">
+    <!-- JODHPUR -->
+    <div class="dw-dest-panel">
+      <div class="dw-panel-inner">
+        <div class="dw-circle-wrap gs-circle">
+          <img src="images/website_assests/wedding/jaisalmer.jpg" class="dw-circle-main" alt="Jodhpur Wedding">
+          <img src="images/website_assests/wedding/rajput_wedding.jpg" class="dw-circle-sub" alt="Jodhpur Tradition">
+        </div>
+        <div class="dw-dest-content gs-content">
+          <div class="dw-dest-num t-sans">02 &mdash; RAJASTHAN</div>
+          <h2 class="dw-dest-name t-serif t-gradient">JODHPUR</h2>
+          <p class="dw-dest-tag t-cal">Where Royalty Lives On</p>
+          <p class="dw-dest-desc t-sans">Experience Rajasthan's richest royal legacy. Historic palaces and grand havelis where modern luxury blends seamlessly with centuries of tradition for a truly majestic celebration.</p>
+          <ul class="dw-venues-list t-sans">
             <li>Umaid Bhawan</li><li>Ajit Bhawan</li>
             <li>Vivanta Hari Mahal</li><li>Indana Palace</li>
-            <li>Ranbanka Palace</li><li>Samsara Resort</li>
           </ul>
-          <a href="contact.html" class="dw-btn">Enquire Now &#8594;</a>
         </div>
       </div>
-
-      <div class="dw-dest-card">
-        <div class="dw-card-inner">
-          <div class="dw-card-num">03 / 05 &nbsp;&mdash;&nbsp; Rajasthan</div>
-          <h2 class="dw-card-title">KUMBHALGARH</h2>
-          <p class="dw-card-tagline">A Fairytale Within the Aravallis</p>
-          <p class="dw-card-desc">Steeped in royal legacy, an extraordinary setting for unforgettable celebrations. Magnificent fort architecture, rich textiles, traditional cuisine and dramatic Aravalli landscapes.</p>
-          <div class="dw-venues-label">Featured Venues</div>
-          <ul class="dw-venues-list">
-            <li>Devi Palace Resort</li><li>The Aodhi</li>
-            <li>Dera Kumbhalgarh</li><li>Forest Retreat</li>
-            <li>The Haveli Resort</li><li>Tiger Valley Resort</li>
-          </ul>
-          <a href="contact.html" class="dw-btn">Enquire Now &#8594;</a>
-        </div>
-      </div>
-
-      <div class="dw-dest-card">
-        <div class="dw-card-inner">
-          <div class="dw-card-num">04 / 05 &nbsp;&mdash;&nbsp; Rajasthan</div>
-          <h2 class="dw-card-title">UDAIPUR</h2>
-          <p class="dw-card-tagline">City of Lakes &mdash; Romance in Every Frame</p>
-          <p class="dw-card-desc">Shimmering lakes, magnificent palaces and the Aravallis create the world's most naturally romantic wedding backdrop. Udaipur's iconic waterfront settings are unmatched anywhere.</p>
-          <div class="dw-venues-label">Featured Venues</div>
-          <ul class="dw-venues-list">
-            <li>Taj Lake Palace</li><li>Oberoi Udaivilas</li>
-            <li>The Leela Palace</li><li>Lalit Laxmi Vilas</li>
-            <li>Trident Udaipur</li><li>Aurika Udaipur</li>
-          </ul>
-          <a href="contact.html" class="dw-btn">Enquire Now &#8594;</a>
-        </div>
-      </div>
-
-      <div class="dw-dest-card">
-        <div class="dw-card-inner">
-          <div class="dw-card-num">05 / 05 &nbsp;&mdash;&nbsp; Delhi NCR</div>
-          <h2 class="dw-card-title">DELHI</h2>
-          <p class="dw-card-tagline">Where Heritage Meets Contemporary Luxury</p>
-          <p class="dw-card-desc">India's capital delivers exceptional connectivity, luxury hospitality and world-class event infrastructure. Vintage havelis, heritage hotels and Delhi's legendary culinary scene create unforgettable weddings.</p>
-          <div class="dw-venues-label">Featured Venues</div>
-          <ul class="dw-venues-list">
-            <li>Palm Greens</li><li>Victorian Palace</li>
-            <li>Mantram Resort</li><li>Shangri-La Eros</li>
-            <li>The Uppal</li><li>Crowne Plaza</li>
-          </ul>
-          <a href="contact.html" class="dw-btn">Enquire Now &#8594;</a>
-        </div>
-      </div>
-
-    </div><!-- /cards-wrap -->
-
-    <div class="dw-nav-dots" id="dw-dots">
-      <div class="dw-dot active" data-i="0"></div>
-      <div class="dw-dot" data-i="1"></div>
-      <div class="dw-dot" data-i="2"></div>
-      <div class="dw-dot" data-i="3"></div>
-      <div class="dw-dot" data-i="4"></div>
     </div>
 
-    <div class="dw-counter">
-      <span class="cn" id="dw-cnt">01</span>
-      <span class="cs">/</span>
-      <span class="ct">05</span>
+    <!-- KUMBHALGARH -->
+    <div class="dw-dest-panel">
+      <div class="dw-panel-inner">
+        <div class="dw-circle-wrap gs-circle">
+          <img src="images/website_assests/wedding/wedding_stage.jpg" class="dw-circle-main" alt="Kumbhalgarh Stage">
+          <img src="images/website_assests/wedding/groomsmen.jpg" class="dw-circle-sub" alt="Wedding Celebration">
+        </div>
+        <div class="dw-dest-content gs-content">
+          <div class="dw-dest-num t-sans">03 &mdash; RAJASTHAN</div>
+          <h2 class="dw-dest-name t-serif t-gradient">KUMBHALGARH</h2>
+          <p class="dw-dest-tag t-cal">A Fairytale Within the Aravallis</p>
+          <p class="dw-dest-desc t-sans">Steeped in royal legacy, this is an extraordinary setting for unforgettable celebrations. Magnificent fort architecture, traditional cuisine and dramatic landscapes.</p>
+          <ul class="dw-venues-list t-sans">
+            <li>Devi Palace Resort</li><li>The Aodhi</li>
+            <li>Dera Kumbhalgarh</li><li>Forest Retreat</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- UDAIPUR -->
+    <div class="dw-dest-panel">
+      <div class="dw-panel-inner">
+        <div class="dw-circle-wrap gs-circle">
+          <img src="images/website_assests/wedding/udaipur.jpg" class="dw-circle-main" alt="Udaipur Lake">
+          <img src="images/website_assests/wedding/udaipur_haldi.jpg" class="dw-circle-sub" alt="Udaipur Haldi">
+        </div>
+        <div class="dw-dest-content gs-content">
+          <div class="dw-dest-num t-sans">04 &mdash; RAJASTHAN</div>
+          <h2 class="dw-dest-name t-serif t-gradient">UDAIPUR</h2>
+          <p class="dw-dest-tag t-cal">Romance in Every Frame</p>
+          <p class="dw-dest-desc t-sans">Shimmering lakes, magnificent palaces and the Aravallis create the world's most naturally romantic wedding backdrop. The iconic waterfront settings are simply unmatched.</p>
+          <ul class="dw-venues-list t-sans">
+            <li>Taj Lake Palace</li><li>Oberoi Udaivilas</li>
+            <li>The Leela Palace</li><li>Trident Udaipur</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELHI -->
+    <div class="dw-dest-panel">
+      <div class="dw-panel-inner">
+        <div class="dw-circle-wrap gs-circle">
+          <img src="images/website_assests/wedding/wedding_couple.jpg" class="dw-circle-main" alt="Delhi Luxury">
+          <img src="images/website_assests/wedding/wedding_theme.jpg" class="dw-circle-sub" alt="Delhi Decor">
+        </div>
+        <div class="dw-dest-content gs-content">
+          <div class="dw-dest-num t-sans">05 &mdash; DELHI NCR</div>
+          <h2 class="dw-dest-name t-serif t-gradient">DELHI</h2>
+          <p class="dw-dest-tag t-cal">Heritage Meets Contemporary Luxury</p>
+          <p class="dw-dest-desc t-sans">India's capital delivers exceptional connectivity and world-class event infrastructure. Vintage havelis and heritage hotels create unforgettable, grand weddings.</p>
+          <ul class="dw-venues-list t-sans">
+            <li>Palm Greens</li><li>Victorian Palace</li>
+            <li>Shangri-La Eros</li><li>Crowne Plaza</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
   </div>
+  <div class="dw-progress-bar"><div class="dw-progress-fill" id="dw-prog"></div></div>
 </div>
 
-<!-- ══ 4. SERVICES ══ -->
-<section class="dw-services">
-  <div class="dw-sec-label">Our Expertise</div>
-  <h2 class="dw-sec-title">EVERYTHING YOU NEED. BEAUTIFULLY PLANNED.</h2>
+<!-- 4. SERVICES -->
+<section class="dw-srv-sec">
+  <div class="dw-srv-head">
+    <div class="dw-srv-eyebrow t-sans">Our Expertise</div>
+    <h2 class="dw-srv-title t-serif t-gradient">Beautifully Planned, Exquisitely Executed</h2>
+  </div>
   <div class="dw-srv-grid">
-    <div class="dw-srv-card" style="transition-delay:0s"><div class="dw-srv-icon">🏛️</div><h3 class="dw-srv-name">Venue Selection</h3><p class="dw-srv-desc">Find the perfect palace, resort, heritage property or luxury hotel for your celebration.</p></div>
-    <div class="dw-srv-card" style="transition-delay:.1s"><div class="dw-srv-icon">👑</div><h3 class="dw-srv-name">Guest Management</h3><p class="dw-srv-desc">Accommodation, airport transfers and seamless logistics across your entire event.</p></div>
-    <div class="dw-srv-card" style="transition-delay:.2s"><div class="dw-srv-icon">🕯️</div><h3 class="dw-srv-name">Ceremonies</h3><p class="dw-srv-desc">Curate traditional ceremonies, cultural experiences and truly memorable celebrations.</p></div>
-    <div class="dw-srv-card" style="transition-delay:.3s"><div class="dw-srv-icon">🌸</div><h3 class="dw-srv-name">Décor &amp; Styling</h3><p class="dw-srv-desc">A wedding atmosphere entirely authentic to your personality, vision and culture.</p></div>
-    <div class="dw-srv-card" style="transition-delay:.4s"><div class="dw-srv-icon">🍽️</div><h3 class="dw-srv-name">Food &amp; Hospitality</h3><p class="dw-srv-desc">Curate exceptional menus, tastings and hospitality for all your guests.</p></div>
-    <div class="dw-srv-card" style="transition-delay:.5s"><div class="dw-srv-icon">✈️</div><h3 class="dw-srv-name">Travel &amp; Logistics</h3><p class="dw-srv-desc">All transportation, arrivals, departures and complete destination logistics.</p></div>
+    
+    <div class="dw-srv-card gs-up">
+      <div class="dw-srv-num">01</div>
+      <h3 class="dw-srv-name t-serif">Venue Selection</h3>
+      <p class="dw-srv-desc t-sans">Find the perfect palace, resort, heritage property or luxury hotel for your celebration.</p>
+    </div>
+    
+    <div class="dw-srv-card gs-up">
+      <div class="dw-srv-num">02</div>
+      <h3 class="dw-srv-name t-serif">Guest Management</h3>
+      <p class="dw-srv-desc t-sans">Accommodation, airport transfers and seamless logistics across your entire event.</p>
+    </div>
+    
+    <div class="dw-srv-card gs-up">
+      <div class="dw-srv-num">03</div>
+      <h3 class="dw-srv-name t-serif">Ceremonies</h3>
+      <p class="dw-srv-desc t-sans">Curate traditional ceremonies, cultural experiences and truly memorable celebrations.</p>
+    </div>
+    
+    <div class="dw-srv-card gs-up">
+      <div class="dw-srv-num">04</div>
+      <h3 class="dw-srv-name t-serif">Décor &amp; Styling</h3>
+      <p class="dw-srv-desc t-sans">A wedding atmosphere entirely authentic to your personality, vision and culture.</p>
+    </div>
+    
+    <div class="dw-srv-card gs-up">
+      <div class="dw-srv-num">05</div>
+      <h3 class="dw-srv-name t-serif">Food &amp; Hospitality</h3>
+      <p class="dw-srv-desc t-sans">Curate exceptional menus, tastings and world-class hospitality for all your guests.</p>
+    </div>
+    
+    <div class="dw-srv-card gs-up">
+      <div class="dw-srv-num">06</div>
+      <h3 class="dw-srv-name t-serif">Travel &amp; Logistics</h3>
+      <p class="dw-srv-desc t-sans">Complete management of transportation, arrivals, departures and destination logistics.</p>
+    </div>
+
   </div>
 </section>
 
-<!-- ══ 5. FINAL CTA ══ -->
+<!-- 5. CTA -->
 <section class="dw-cta">
-  <div class="dw-cta-bg"></div>
-  <div class="dw-cta-content">
-    <h2>Your Story.<br>Your Destination.<br>Your Celebration.</h2>
-    <p>Let us create a wedding that feels uniquely yours.</p>
-    <a href="contact.html" class="dw-btn dw-btn-solid">Contact Us &#8594;</a>
+  <div class="dw-cta-content gs-up">
+    <h3 class="dw-cta-cal t-cal">Your Story</h3>
+    <h2 class="dw-cta-title t-serif t-gradient">YOUR DESTINATION. YOUR CELEBRATION.</h2>
+    <p class="dw-cta-sub t-sans">Let us create a wedding that feels uniquely yours in every single detail.</p>
+    <a href="contact.html" class="dw-btn">Contact Our Planners</a>
   </div>
 </section>
 
 <script>
-/* ── 1. CANVAS FRAME SCRUB ── */
+/* Header transparency handling */
+document.addEventListener("DOMContentLoaded", () => {
+  const hdr = document.querySelector('.site-header');
+  if(hdr) {
+    hdr.style.background = 'transparent';
+    hdr.style.boxShadow = 'none';
+  }
+});
+
+/* Canvas Frame Scrubbing */
 (function(){
   var canvas = document.getElementById('dw-canvas');
   if(!canvas) return;
@@ -1286,7 +1239,6 @@ body { background:#060202; color:#fffff0; font-family:'Jost',sans-serif; margin:
   var N = 24;
   var glass = document.getElementById('dw-glass');
   var imgs = [];
-  var loaded = 0;
   var curIdx = 0;
 
   function resize(){
@@ -1307,7 +1259,7 @@ body { background:#060202; color:#fffff0; font-family:'Jost',sans-serif; margin:
   for(var i=0;i<N;i++){
     (function(idx){
       var im = new Image();
-      im.onload = function(){ loaded++; if(idx===0) paint(); };
+      im.onload = function(){ if(idx===0) paint(); };
       im.src = 'images/website_assests/wedding/scrollable_video_frames/frame_'+String(idx+1).padStart(3,'0')+'.jpg';
       imgs.push(im);
     })(i);
@@ -1322,7 +1274,7 @@ body { background:#060202; color:#fffff0; font-family:'Jost',sans-serif; margin:
     var fi = Math.min(N-1,Math.round(prog*(N-1)));
     if(fi!==curIdx){ curIdx=fi; paint(); }
     if(glass){
-      if(prog>0.28) glass.classList.add('faded');
+      if(prog>0.15) glass.classList.add('faded');
       else glass.classList.remove('faded');
     }
   }
@@ -1331,72 +1283,55 @@ body { background:#060202; color:#fffff0; font-family:'Jost',sans-serif; margin:
   resize();
 })();
 
-/* ── 2. QUOTE REVEAL ── */
-(function(){
-  var q = document.getElementById('dw-quote');
-  if(!q) return;
-  var ob = new IntersectionObserver(function(e){
-    if(e[0].isIntersecting){ q.classList.add('visible'); ob.disconnect(); }
-  },{threshold:0.3});
-  ob.observe(q);
-})();
+/* Scroll Animations */
+gsap.registerPlugin(ScrollTrigger);
 
-/* ── 3. DESTINATIONS WHEEL ── */
-(function(){
-  var wrapper = document.getElementById('dw-dest-wrapper');
-  if(!wrapper) return;
-  var bgs   = wrapper.querySelectorAll('.dw-dest-bg');
-  var cards = wrapper.querySelectorAll('.dw-dest-card');
-  var dots  = wrapper.querySelectorAll('.dw-dot');
-  var bgName = document.getElementById('dw-bgname');
-  var cnt   = document.getElementById('dw-cnt');
-  var NAMES = ['JAIPUR','JODHPUR','KUMBHALGARH','UDAIPUR','DELHI'];
-  var TOTAL = 5;
-  var cur = 0;
+/* Quote */
+gsap.to(".dw-quote-text", {
+  scrollTrigger: { trigger: ".dw-quote-sec", start: "top 70%" },
+  opacity: 1, y: 0, duration: 1.5, ease: "power3.out"
+});
 
-  function show(idx){
-    if(idx===cur && cards[idx].classList.contains('active')) return;
-    bgs.forEach(function(b,i){ b.classList.toggle('active',i===idx); });
-    cards.forEach(function(c,i){ c.classList.toggle('active',i===idx); });
-    dots.forEach(function(d,i){ d.classList.toggle('active',i===idx); });
-    if(bgName) bgName.textContent = NAMES[idx];
-    if(cnt) cnt.textContent = String(idx+1).padStart(2,'0');
-    cur = idx;
+/* Horizontal Wheel */
+const panels = gsap.utils.toArray(".dw-dest-panel");
+const hTween = gsap.to(panels, {
+  xPercent: -100 * (panels.length - 1),
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".dw-dest-wrapper",
+    pin: ".dw-dest-sticky",
+    start: "top top",
+    end: "+=" + (panels.length * 100) + "%",
+    scrub: 1,
+    onUpdate: self => {
+      document.getElementById('dw-prog').style.width = (self.progress * 100) + "%";
+    }
   }
+});
 
-  function onScroll(){
-    var wt = wrapper.offsetTop;
-    var wh = wrapper.offsetHeight;
-    var sc = window.scrollY - wt;
-    var maxSc = wh - window.innerHeight;
-    var prog = Math.max(0,Math.min(0.9999, sc/maxSc));
-    var idx = Math.min(TOTAL-1, Math.floor(prog*TOTAL));
-    show(idx);
-  }
-
-  window.addEventListener('scroll',onScroll,{passive:true});
-
-  dots.forEach(function(dot,i){
-    dot.addEventListener('click',function(){
-      var wt = wrapper.offsetTop;
-      var wh = wrapper.offsetHeight;
-      var maxSc = wh - window.innerHeight;
-      var target = wt + (i/TOTAL)*maxSc + 5;
-      window.scrollTo({top:target,behavior:'smooth'});
-    });
+/* Animate elements inside panels */
+panels.forEach((panel, i) => {
+  gsap.from(panel.querySelector(".gs-circle"), {
+    opacity: 0, scale: 0.8, x: -50, duration: 1,
+    scrollTrigger: {
+      trigger: panel, containerAnimation: hTween, start: "left center", toggleActions: "play none none reverse"
+    }
   });
+  gsap.from(panel.querySelector(".gs-content"), {
+    opacity: 0, x: 50, duration: 1, delay: 0.2,
+    scrollTrigger: {
+      trigger: panel, containerAnimation: hTween, start: "left center", toggleActions: "play none none reverse"
+    }
+  });
+});
 
-  onScroll();
-})();
-
-/* ── 4. SERVICES REVEAL ── */
-(function(){
-  var cards = document.querySelectorAll('.dw-srv-card');
-  var ob = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
-  },{threshold:0.1});
-  cards.forEach(function(c){ ob.observe(c); });
-})();
+/* Services */
+gsap.utils.toArray(".gs-up").forEach(card => {
+  gsap.from(card, {
+    scrollTrigger: { trigger: card, start: "top 85%" },
+    opacity: 0, y: 40, duration: 0.8, ease: "power2.out"
+  });
+});
 </script>
 
 <footer>
