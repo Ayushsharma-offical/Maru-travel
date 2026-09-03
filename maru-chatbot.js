@@ -57,7 +57,7 @@
     contact: {
       whatsappNumber: "919891587778",
       whatsappDisplay: "+91 98915 87778",
-      email: "tejinder@marutravel.in",
+      email: "info@marutravel.in",
       phoneDisplay: "+91 98915 87778",
       address:
         "6A, First Floor, Uttam Nagar Main Rd, Near Metro Pillar No. 666, " +
@@ -482,9 +482,9 @@
           q: "How can I contact Maru Travel?",
           qKo: "Maru Travel에 어떻게 연락하나요?",
           a: "You can reach us directly via WhatsApp at +91 98915 87778, or email " +
-             "us at tejinder@marutravel.in. There is also a WhatsApp button in " +
+             "us at info@marutravel.in. There is also a WhatsApp button in " +
              "this chat window.",
-          aKo: "WhatsApp(+91 98915 87778)이나 이메일(tejinder@marutravel.in)로 연락하실 " +
+          aKo: "WhatsApp(+91 98915 87778)이나 이메일(info@marutravel.in)로 연락하실 " +
                "수 있고, 이 채팅 창 안에 있는 WhatsApp 버튼을 이용하셔도 됩니다."
         },
         {
@@ -569,8 +569,8 @@
     },
     {
       triggers: ["call", "phone", "number", "contact number"],
-      reply: "You can reach us on WhatsApp at +91 98915 87778 or email tejinder@marutravel.in.",
-      replyKo: "WhatsApp +91 98915 87778 또는 이메일 tejinder@marutravel.in 로 문의하실 수 있습니다."
+      reply: "You can reach us on WhatsApp at +91 98915 87778 or email info@marutravel.in.",
+      replyKo: "WhatsApp +91 98915 87778 또는 이메일 info@marutravel.in 로 문의하실 수 있습니다."
     }
   ];
 
