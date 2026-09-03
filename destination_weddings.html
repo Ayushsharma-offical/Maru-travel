@@ -1024,17 +1024,22 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 .dw-venues-list li::before { content: '✤'; position: absolute; left: 0; top: 0; font-size: 12px; color: var(--w-gold); }
 
 /* Progress bar inside wrapper */
-.dw-progress-bar { position: absolute; bottom: 40px; left: 5%; right: 5%; height: 2px; background: rgba(44,53,34,0.1); z-index: 10; }
-.dw-progress-fill { height: 100%; background: var(--w-gold); width: 0%; transition: width 0.1s; }
+.dw-progress-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(44,53,34,0.1); z-index: 10; }
+.dw-progress-fill { height: 100%; background: linear-gradient(90deg, var(--w-olive), var(--w-gold)); width: 0%; transition: width 0.1s; box-shadow: 0 0 10px rgba(197,160,89,0.5); }
 
 /* ─── 4. SERVICES (Tilt + Olive Hover) ─── */
-.dw-srv-sec { background: var(--w-olive-light); padding: 150px 5%; position: relative; z-index: 2; overflow: hidden; }
+.dw-srv-sec { 
+  background: linear-gradient(to bottom, rgba(250, 249, 246, 1) 0%, rgba(233, 234, 229, 0.92) 15%, rgba(233, 234, 229, 0.92) 85%, rgba(250, 249, 246, 1) 100%), 
+              url('images/website_assests/wedding/wedding_theme.jpg') center/cover fixed;
+  padding: 150px 5%; position: relative; z-index: 2; overflow: hidden;
+}
 
 /* Background Calligraphy */
 .dw-bg-cal {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  font-family: 'Alex Brush', cursive; font-size: clamp(8rem, 20vw, 25rem); color: var(--w-olive-dark);
-  opacity: 0.04; white-space: nowrap; pointer-events: none; z-index: 0;
+  font-family: 'Alex Brush', cursive; font-size: clamp(8rem, 20vw, 25rem); color: var(--w-gold);
+  opacity: 0.15; white-space: nowrap; pointer-events: none; z-index: 0;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .dw-srv-head { text-align: center; margin-bottom: 80px; position: relative; z-index: 2; }
@@ -1566,6 +1571,7 @@ document.querySelectorAll('.we-dropdown').forEach(function(drop) {
 </script>
 </body>
 </html>
+
 
 
 
