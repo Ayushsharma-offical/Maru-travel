@@ -479,7 +479,7 @@ img{max-width:100%}
 
 @media (max-width: 900px) {
   .brand-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .site-header nav { flex-wrap: wrap; justify-content: center; gap: 14px 20px; padding: 10px 28px; background: rgba(20,20,20,0.8); backdrop-filter:blur(10px); }
+  .site-header nav { flex-wrap: wrap; justify-content: center; gap: 14px 20px; padding: 10px 28px; background: rgba(0,0,0,0.6); backdrop-filter:blur(15px); }
   .site-header nav .nav-links { gap: 14px 20px; justify-content: center; flex-wrap: wrap; }
   .site-header nav .marquee-wrap { display: none; }
 }
@@ -1627,7 +1627,6 @@ document.querySelectorAll('.we-dropdown').forEach(function(drop) {
 
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- GSAP for smooth animations -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
@@ -1635,18 +1634,16 @@ document.querySelectorAll('.we-dropdown').forEach(function(drop) {
 :root {
   --w-gold: #d4af37;
   --w-champagne: #f7e7ce;
-  --w-burgundy: #722f37;
-  --w-charcoal: #1a1a1a;
+  --w-charcoal: #111111;
   --w-ivory: #fffff0;
-  --w-bg: #0a0505;
 }
 
-body, html { margin: 0; padding: 0; background: var(--w-bg); color: var(--w-ivory); font-family: 'Jost', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+body, html { margin: 0; padding: 0; background: #050505; color: var(--w-ivory); font-family: 'Jost', sans-serif; overflow-x: hidden; }
 
 /* ─── 1. HERO CANVAS ANIMATION ─── */
 .w-hero {
   position: relative;
-  height: 250vh; /* Scroll length for video */
+  height: 300vh; /* Scroll length for video */
   width: 100%;
 }
 .w-canvas-container {
@@ -1661,53 +1658,62 @@ body, html { margin: 0; padding: 0; background: var(--w-bg); color: var(--w-ivor
 }
 .w-hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, rgba(10,5,5,0.8) 100%);
+  background: rgba(0,0,0,0.25);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; pointer-events: none;
 }
+/* LIQUID FROSTED GLASS ON HERO */
+.w-hero-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 60px 80px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.4), inset 0 0 20px rgba(255,255,255,0.05);
+  display: flex; flex-direction: column; align-items: center;
+  pointer-events: auto;
+  opacity: 0; transform: translateY(40px);
+}
 .w-hero-title {
   font-family: 'Cinzel', serif;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(3rem, 7vw, 5.5rem);
   letter-spacing: 12px;
-  color: var(--w-ivory);
+  color: #fff;
+  margin: 0 0 20px 0;
   text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  margin-bottom: 20px;
-  opacity: 0; transform: translateY(30px);
 }
 .w-hero-subtitle {
   font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
   color: var(--w-champagne);
   letter-spacing: 2px;
-  opacity: 0; transform: translateY(20px);
+  margin-bottom: 40px;
 }
-.w-hero-cta {
-  margin-top: 40px; pointer-events: auto;
-  opacity: 0; transform: translateY(20px);
-}
-
-/* Base button */
 .btn-glass {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 14px 32px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(212,175,55,0.4);
+  padding: 16px 36px;
+  background: rgba(212,175,55,0.1);
+  border: 1px solid rgba(212,175,55,0.5);
   color: var(--w-gold);
-  font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
+  font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500;
   letter-spacing: 4px; text-transform: uppercase; text-decoration: none;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
   transition: all 0.4s ease;
-  border-radius: 2px;
 }
 .btn-glass:hover {
-  background: var(--w-gold); color: var(--w-charcoal);
-  box-shadow: 0 0 20px rgba(212,175,55,0.4);
+  background: var(--w-gold); color: #000;
+  box-shadow: 0 0 25px rgba(212,175,55,0.5);
+  transform: translateY(-2px);
 }
 
 /* ─── 2. CINEMATIC TRANSITION ─── */
 .w-transition {
   height: 150vh; position: relative;
-  background: linear-gradient(to bottom, rgba(10,5,5,1), var(--w-charcoal));
+  background: linear-gradient(to bottom, transparent, var(--w-charcoal));
+  margin-top: -100vh; /* overlap */
+  pointer-events: none;
 }
 .w-trans-content {
   position: sticky; top: 0; height: 100vh;
@@ -1717,176 +1723,120 @@ body, html { margin: 0; padding: 0; background: var(--w-bg); color: var(--w-ivor
 .w-trans-text {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2rem, 4vw, 3.5rem);
-  color: var(--w-ivory);
-  line-height: 1.4;
-  opacity: 0.2;
-  filter: blur(4px);
+  color: var(--w-ivory); line-height: 1.4;
+  opacity: 0; filter: blur(10px);
 }
 
-/* ─── 3. DESTINATION INTRO ─── */
-.w-dest-intro {
-  padding: 100px 5%; text-align: center; background: var(--w-charcoal);
-}
-.w-section-label {
-  font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 6px;
-  color: var(--w-gold); text-transform: uppercase; margin-bottom: 20px;
-}
-.w-section-title {
-  font-family: 'Cinzel', serif; font-size: clamp(2rem, 3.5vw, 3rem);
-  letter-spacing: 4px; margin-bottom: 24px; color: var(--w-ivory);
-}
-.w-section-desc {
-  font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
-  color: rgba(255,255,255,0.7); max-width: 700px; margin: 0 auto; line-height: 1.7;
-}
-
-/* ─── 4. HORIZONTAL DESTINATION WHEEL ─── */
+/* ─── 3. FULL SCREEN HORIZONTAL DESTINATIONS (THE WHEEL) ─── */
 .w-horizontal-wrapper {
-  height: 400vh; /* Space for horizontal scroll */
-  background: var(--w-charcoal);
+  height: 500vh; /* 5 destinations */
+  background: #000;
   position: relative;
 }
 .w-horizontal-container {
   position: sticky; top: 0; height: 100vh;
   display: flex; align-items: center;
-  overflow: hidden;
+  overflow: hidden; width: 100vw;
 }
 .w-dest-panel {
   flex: 0 0 100vw; height: 100vh;
   position: relative;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: flex-end; /* Card on right */
+  padding: 0 10%;
 }
 .w-dest-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  filter: brightness(0.4);
-  transition: filter 0.5s ease, transform 1s ease;
+  filter: brightness(0.4) saturate(0.8);
+  transform: scale(1.1);
+  transition: filter 1s ease, transform 1s ease;
+  z-index: 0;
 }
 .w-dest-panel.is-active .w-dest-bg {
-  filter: brightness(0.65); transform: scale(1.03);
+  filter: brightness(0.7) saturate(1.1); transform: scale(1);
+}
+.w-dest-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
 }
 .w-dest-card {
   position: relative; z-index: 2;
-  background: rgba(20,20,20,0.6);
-  backdrop-filter: blur(15px);
+  background: rgba(15,15,15,0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.1);
+  border-left: 3px solid var(--w-gold);
   padding: 60px 50px;
-  max-width: 500px;
-  text-align: center;
-  opacity: 0; transform: translateY(40px);
+  max-width: 550px; width: 100%;
+  border-radius: 12px;
+  opacity: 0; transform: translateX(50px);
 }
-.w-dest-card h3 { font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 6px; margin-bottom: 15px; }
-.w-dest-card p { font-family: 'Jost', sans-serif; font-size: 15px; color: #ccc; line-height: 1.6; margin-bottom: 30px; }
-
-/* ─── 5. DETAILED DESTINATIONS ─── */
-.w-details { background: var(--w-charcoal); padding: 50px 0; }
-.w-city-row {
-  display: flex; flex-wrap: wrap; align-items: center;
-  min-height: 80vh; padding: 50px 5%;
-  position: relative;
+.w-dest-card h3 { 
+  font-family: 'Cinzel', serif; font-size: 3.5rem; 
+  letter-spacing: 6px; color: var(--w-ivory); margin: 0 0 10px 0; 
 }
-.w-city-row:nth-child(even) { flex-direction: row-reverse; }
-.w-city-img {
-  flex: 1; min-width: 300px; height: 70vh;
-  position: relative; overflow: hidden; border-radius: 4px;
+.w-dest-card h4 {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem;
+  color: var(--w-gold); margin: 0 0 25px 0; font-weight: 400;
 }
-.w-city-img img {
-  width: 100%; height: 100%; object-fit: cover;
+.w-dest-card p { 
+  font-family: 'Jost', sans-serif; font-size: 15px; color: #ccc; 
+  line-height: 1.8; margin-bottom: 30px; font-weight: 300;
 }
-.w-city-info {
-  flex: 1; min-width: 300px; padding: 60px;
+.w-venues-list {
+  list-style: none; padding: 0; margin: 0 0 40px 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
 }
-.w-city-title { font-family: 'Cinzel', serif; font-size: 3rem; letter-spacing: 4px; color: var(--w-gold); margin-bottom: 10px; }
-.w-city-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: #fff; margin-bottom: 30px; }
-.w-city-desc { font-family: 'Jost', sans-serif; font-size: 15px; color: #bbb; line-height: 1.8; margin-bottom: 40px; }
-.w-city-venues h4 { font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--w-gold); margin-bottom: 15px; }
-.w-city-venues ul { list-style: none; padding: 0; margin-bottom: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.w-city-venues li { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #ddd; position: relative; padding-left: 15px; }
-.w-city-venues li::before { content: '•'; position: absolute; left: 0; color: var(--w-gold); }
-
-/* ─── 6. GALLERY ─── */
-.w-gallery {
-  padding: 100px 2%; background: #111;
-  column-count: 3; column-gap: 20px;
+.w-venues-list li {
+  font-family: 'Jost', sans-serif; font-size: 13px; color: #eee;
+  position: relative; padding-left: 15px; letter-spacing: 1px;
 }
-.w-gal-item {
-  margin-bottom: 20px; break-inside: avoid;
-  border-radius: 4px; overflow: hidden; position: relative;
+.w-venues-list li::before {
+  content: '✦'; position: absolute; left: 0; color: var(--w-gold); font-size: 10px; top: 2px;
 }
-.w-gal-item img {
-  width: 100%; display: block; transition: transform 0.8s ease;
-}
-.w-gal-item:hover img { transform: scale(1.05); }
-
-/* ─── 7. GLASS QUOTE ─── */
-.w-quote-sec {
-  height: 80vh; position: relative; display: flex; align-items: center; justify-content: center;
-  background: url('images/website_assests/wedding/Wedding Theme.jpg') center/cover fixed;
-}
-.w-quote-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
-.w-quote-glass {
-  position: relative; z-index: 2;
-  background: rgba(20,10,15,0.45); backdrop-filter: blur(12px);
-  border: 1px solid rgba(212,175,55,0.3); padding: 80px 60px; text-align: center;
-  max-width: 900px; width: 90%;
-}
-.w-quote-glass h2 {
-  font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem);
-  font-style: italic; font-weight: 300; line-height: 1.2; margin-bottom: 20px;
-  color: var(--w-ivory);
-}
-.w-quote-glass p { font-family: 'Jost', sans-serif; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: var(--w-gold); }
 
 /* ─── 8. SERVICES ─── */
 .w-services { padding: 120px 5%; background: var(--w-charcoal); }
-.w-srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
+.w-section-label { text-align:center; font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 6px; color: var(--w-gold); text-transform: uppercase; margin-bottom: 20px; }
+.w-section-title { text-align:center; font-family: 'Cinzel', serif; font-size: clamp(2rem, 3.5vw, 3rem); letter-spacing: 4px; color: var(--w-ivory); margin: 0 0 60px 0; }
+.w-srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 .w-srv-card {
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-  padding: 50px 40px; transition: all 0.4s ease;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+  padding: 50px 40px; transition: all 0.4s ease; border-radius: 8px;
 }
-.w-srv-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(212,175,55,0.4); transform: translateY(-10px); }
-.w-srv-card h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--w-gold); margin-bottom: 15px; letter-spacing: 2px; }
-.w-srv-card p { font-family: 'Jost', sans-serif; font-size: 14px; color: #aaa; line-height: 1.6; }
-
-/* ─── 9. IMAGINE (FOOTER PRE-SECTION) ─── */
-.w-imagine {
-  background: linear-gradient(to top, #000, var(--w-charcoal)); padding: 150px 5%; text-align: center;
-}
-.w-imagine h2 { font-family: 'Cinzel', serif; font-size: clamp(3rem, 6vw, 5rem); color: #fff; margin-bottom: 20px; letter-spacing: 8px; }
-.w-imagine-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.8rem; color: var(--w-champagne); margin-bottom: 60px; }
-.w-imagine-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-.w-imagine-links a { font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: #888; text-decoration: none; transition: color 0.3s; }
-.w-imagine-links a:hover { color: var(--w-gold); }
+.w-srv-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(212,175,55,0.3); transform: translateY(-5px); }
+.w-srv-card h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--w-gold); margin: 0 0 15px 0; letter-spacing: 2px; }
+.w-srv-card p { font-family: 'Jost', sans-serif; font-size: 14px; color: #aaa; line-height: 1.6; margin: 0; }
 
 /* ─── 10. FORM ─── */
 .w-form-sec { padding: 100px 5% 150px; background: #000; display: flex; justify-content: center; }
 .w-form-glass {
-  background: rgba(25,20,20,0.8); backdrop-filter: blur(20px); border: 1px solid rgba(212,175,55,0.2);
-  padding: 60px; max-width: 800px; width: 100%; border-radius: 4px;
+  background: rgba(20,20,20,0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(212,175,55,0.2); border-radius: 16px;
+  padding: 70px; max-width: 900px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-.w-form-glass h3 { font-family: 'Cinzel', serif; font-size: 2rem; color: #fff; text-align: center; margin-bottom: 10px; letter-spacing: 3px; }
-.w-form-glass > p { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #aaa; margin-bottom: 40px; }
-.w-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+.w-form-glass h3 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-align: center; margin: 0 0 15px 0; letter-spacing: 3px; }
+.w-form-glass > p { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #aaa; margin: 0 0 50px 0; font-style: italic; }
+.w-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
 .w-input {
-  width: 100%; background: transparent; border: none; border-bottom: 1px solid #444;
-  padding: 15px 0; color: #fff; font-family: 'Jost', sans-serif; font-size: 14px;
+  width: 100%; background: transparent; border: none; border-bottom: 1px solid #333;
+  padding: 15px 0; color: #fff; font-family: 'Jost', sans-serif; font-size: 15px;
   transition: border-color 0.3s;
 }
 .w-input:focus { outline: none; border-bottom-color: var(--w-gold); }
 .w-input::placeholder { color: #666; }
 select.w-input { color: #888; }
 select.w-input option { background: #111; color: #fff; }
-.w-textarea { width: 100%; background: transparent; border: 1px solid #444; padding: 15px; color: #fff; font-family: 'Jost', sans-serif; font-size: 14px; min-height: 120px; margin-bottom: 40px; resize: none; transition: border-color 0.3s; }
+.w-textarea { width: 100%; background: transparent; border: 1px solid #333; border-radius: 8px; padding: 20px; color: #fff; font-family: 'Jost', sans-serif; font-size: 15px; min-height: 150px; margin-bottom: 40px; resize: none; transition: border-color 0.3s; }
 .w-textarea:focus { outline: none; border-color: var(--w-gold); }
-.w-submit { width: 100%; background: var(--w-gold); color: #000; border: none; padding: 20px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; transition: background 0.3s; }
-.w-submit:hover { background: #fff; }
+.w-submit { width: 100%; background: linear-gradient(135deg, var(--w-gold), #b8860b); color: #000; border: none; border-radius: 50px; padding: 22px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+.w-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(212,175,55,0.4); }
 
-@media(max-width: 768px) {
-  .w-city-row { flex-direction: column !important; padding: 20px 5%; }
-  .w-city-img, .w-city-info { min-width: 100%; }
-  .w-city-info { padding: 40px 0; }
-  .w-gallery { column-count: 1; }
-  .w-row { grid-template-columns: 1fr; gap: 20px; }
+@media(max-width: 900px) {
+  .w-dest-panel { justify-content: center; padding: 0 5%; }
+  .w-dest-overlay { background: rgba(0,0,0,0.6); }
+  .w-row { grid-template-columns: 1fr; gap: 25px; }
+  .w-hero-glass { padding: 40px 20px; width: 90%; }
 }
 </style>
 
@@ -1896,9 +1846,11 @@ select.w-input option { background: #111; color: #fff; }
     <div class="w-canvas-container">
       <canvas id="hero-canvas"></canvas>
       <div class="w-hero-overlay">
-        <h1 class="w-hero-title">DESTINATION WEDDINGS</h1>
-        <p class="w-hero-subtitle">Where every celebration becomes a story worth remembering.</p>
-        <div class="w-hero-cta"><a href="#plan" class="btn-glass">Plan Your Wedding</a></div>
+        <div class="w-hero-glass">
+          <h1 class="w-hero-title">DESTINATION WEDDINGS</h1>
+          <p class="w-hero-subtitle">Where every celebration becomes a story worth remembering.</p>
+          <a href="#plan" class="btn-glass">Plan Your Wedding</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1910,178 +1862,102 @@ select.w-input option { background: #111; color: #fff; }
     </div>
   </section>
 
-  <!-- 3. DESTINATION INTRO -->
-  <section class="w-dest-intro">
-    <div class="w-section-label">Discover</div>
-    <h2 class="w-section-title">Explore the Perfect Setting</h2>
-    <p class="w-section-desc">From regal palaces and historic forts to elegant resorts and romantic lakeside venues, discover destinations designed to make your celebration unforgettable.</p>
-  </section>
-
-  <!-- 4. HORIZONTAL WHEEL -->
+  <!-- 3. FULL SCREEN HORIZONTAL WHEEL -->
   <section class="w-horizontal-wrapper">
     <div class="w-horizontal-container">
       
-      <div class="w-dest-panel" style="background:var(--w-charcoal)">
+      <!-- JAIPUR -->
+      <div class="w-dest-panel">
         <div class="w-dest-bg" style="background-image: url('images/website_assests/wedding/Jaipur(1).jpg');"></div>
+        <div class="w-dest-overlay"></div>
         <div class="w-dest-card">
           <h3>JAIPUR</h3>
-          <p>The Pink City — A Royal Celebration combining royal heritage with contemporary luxury.</p>
-          <a href="#jaipur" class="btn-glass">Explore Venues</a>
+          <h4>The Pink City — A Royal Celebration</h4>
+          <p>Accessibility, heritage value and convenience make Jaipur one of India's most compelling destination-wedding locations. Surrounded by the Aravallis, it perfectly combines royal heritage with contemporary hospitality.</p>
+          <ul class="w-venues-list">
+            <li>Taj Rambagh Palace</li><li>Jai Mahal Palace</li>
+            <li>Samode Palace & Haveli</li><li>Jaipur Marriott</li>
+            <li>Hari Mahal Palace</li><li>Neemrana Fort</li>
+          </ul>
+          <a href="#plan" class="btn-glass">Enquire Now</a>
         </div>
       </div>
 
-      <div class="w-dest-panel" style="background:var(--w-charcoal)">
+      <!-- JODHPUR -->
+      <div class="w-dest-panel">
         <div class="w-dest-bg" style="background-image: url('images/website_assests/wedding/Jaisalmer, Rajasthan.jpg');"></div>
+        <div class="w-dest-overlay"></div>
         <div class="w-dest-card">
           <h3>JODHPUR</h3>
-          <p>The Blue City — Where Royalty Lives On in historic palaces and grand havelis.</p>
-          <a href="#jodhpur" class="btn-glass">Explore Venues</a>
+          <h4>The Blue City — Where Royalty Lives On</h4>
+          <p>Jodhpur offers one of Rajasthan's richest royal settings. Historic palaces, grand havelis and heritage hotels provide spectacular venues for ceremonies and guest stays, blending beautifully with modern luxury.</p>
+          <ul class="w-venues-list">
+            <li>Umaid Bhawan</li><li>Ajit Bhawan</li>
+            <li>Vivanta Hari Mahal</li><li>Indana Palace</li>
+            <li>Ranbanka Palace</li><li>Samsara Resort</li>
+          </ul>
+          <a href="#plan" class="btn-glass">Enquire Now</a>
         </div>
       </div>
 
-      <div class="w-dest-panel" style="background:var(--w-charcoal)">
+      <!-- KUMBHALGARH -->
+      <div class="w-dest-panel">
         <div class="w-dest-bg" style="background-image: url('images/website_assests/wedding/Beautiful Indian Wedding Stage .jpg');"></div>
+        <div class="w-dest-overlay"></div>
         <div class="w-dest-card">
           <h3>KUMBHALGARH</h3>
-          <p>A Fairytale Within the Aravallis, rich in textiles, tradition, and dramatic landscapes.</p>
-          <a href="#kumbhalgarh" class="btn-glass">Explore Venues</a>
+          <h4>A Fairytale Within the Aravallis</h4>
+          <p>Steeped in the legacy of Rajasthan's royal families, Kumbhalgarh offers an extraordinary setting for an unforgettable celebration full of rich textiles, traditional cuisine, and dramatic landscapes.</p>
+          <ul class="w-venues-list">
+            <li>Devi Palace Resort</li><li>The Aodhi</li>
+            <li>Dera Kumbhalgarh</li><li>Forest Retreat</li>
+            <li>The Haveli Resort</li><li>Tiger Valley Resort</li>
+          </ul>
+          <a href="#plan" class="btn-glass">Enquire Now</a>
         </div>
       </div>
 
-      <div class="w-dest-panel" style="background:var(--w-charcoal)">
+      <!-- UDAIPUR -->
+      <div class="w-dest-panel">
         <div class="w-dest-bg" style="background-image: url('images/website_assests/wedding/udaipur.jpg');"></div>
+        <div class="w-dest-overlay"></div>
         <div class="w-dest-card">
           <h3>UDAIPUR</h3>
-          <p>The City of Lakes — Romance in Every Frame with iconic waterfront settings.</p>
-          <a href="#udaipur" class="btn-glass">Explore Venues</a>
+          <h4>Romance in Every Frame</h4>
+          <p>With shimmering lakes, magnificent palaces and the Aravallis surrounding the city, Udaipur offers an extraordinary combination of heritage, luxury and romance for a picture-perfect lakeside wedding.</p>
+          <ul class="w-venues-list">
+            <li>Taj Lake Palace</li><li>The Oberoi Udaivilas</li>
+            <li>The Leela Palace</li><li>Lalit Laxmi Vilas</li>
+            <li>Trident Udaipur</li><li>Aurika Udaipur</li>
+          </ul>
+          <a href="#plan" class="btn-glass">Enquire Now</a>
         </div>
       </div>
 
-      <div class="w-dest-panel" style="background:var(--w-charcoal)">
+      <!-- DELHI -->
+      <div class="w-dest-panel">
         <div class="w-dest-bg" style="background-image: url('images/website_assests/wedding/download.jpg');"></div>
+        <div class="w-dest-overlay"></div>
         <div class="w-dest-card">
           <h3>DELHI</h3>
-          <p>Where Heritage Meets Contemporary Luxury for seamless global celebrations.</p>
-          <a href="#delhi" class="btn-glass">Explore Venues</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 5. DETAILED DESTINATIONS -->
-  <section class="w-details">
-    
-    <div id="jaipur" class="w-city-row">
-      <div class="w-city-img gs-reveal"><img src="images/website_assests/wedding/Jaipur(1).jpg" alt="Jaipur"></div>
-      <div class="w-city-info gs-reveal">
-        <h2 class="w-city-title">JAIPUR</h2>
-        <h3 class="w-city-sub">The Pink City — A Royal Celebration</h3>
-        <p class="w-city-desc">Accessibility, heritage value and convenience make Jaipur one of India's most compelling destination-wedding locations. The city's distinctive pink architecture creates an unforgettable setting, while its palaces, heritage hotels, havelis and modern luxury properties provide the flexibility to host intimate ceremonies as well as grand celebrations.</p>
-        <div class="w-city-venues">
-          <h4>Featured Venues</h4>
-          <ul>
-            <li>Taj Rambagh Palace</li><li>Jai Mahal Palace</li><li>Samode Palace & Haveli</li>
-            <li>Jaipur Marriott Hotel</li><li>Hari Mahal Palace</li><li>Neemrana Fort Palace</li>
+          <h4>Heritage Meets Contemporary Luxury</h4>
+          <p>India's capital brings together exceptional connectivity, luxury hospitality, and heritage architecture. Elegant hotels and vintage havelis create distinctive settings with a diverse culinary scene.</p>
+          <ul class="w-venues-list">
+            <li>Palm Greens</li><li>Victorian Palace</li>
+            <li>Mantram Resort</li><li>Shangri-La Eros</li>
+            <li>Four Points</li><li>Crowne Plaza</li>
           </ul>
+          <a href="#plan" class="btn-glass">Enquire Now</a>
         </div>
       </div>
-    </div>
 
-    <div id="jodhpur" class="w-city-row">
-      <div class="w-city-img gs-reveal"><img src="images/website_assests/wedding/Jaisalmer, Rajasthan.jpg" alt="Jodhpur"></div>
-      <div class="w-city-info gs-reveal">
-        <h2 class="w-city-title">JODHPUR</h2>
-        <h3 class="w-city-sub">The Blue City — Where Royalty Lives On</h3>
-        <p class="w-city-desc">Jodhpur offers one of Rajasthan's richest royal settings. Historic palaces, grand havelis and heritage hotels provide spectacular venues for ceremonies and guest stays. Modern hospitality blends naturally with the city's royal character, making Jodhpur an exceptional choice for an elegant destination wedding.</p>
-        <div class="w-city-venues">
-          <h4>Featured Venues</h4>
-          <ul>
-            <li>Umaid Bhawan</li><li>Ajit Bhawan</li><li>Vivanta – Taj Hari Mahal</li>
-            <li>Indana Palace</li><li>Ranbanka Palace</li><li>Samsara Resort</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div id="kumbhalgarh" class="w-city-row">
-      <div class="w-city-img gs-reveal"><img src="images/website_assests/wedding/Beautiful Indian Wedding Stage .jpg" alt="Kumbhalgarh"></div>
-      <div class="w-city-info gs-reveal">
-        <h2 class="w-city-title">KUMBHALGARH</h2>
-        <h3 class="w-city-sub">A Fairytale Within the Aravallis</h3>
-        <p class="w-city-desc">Steeped in the legacy of Rajasthan's royal families, Kumbhalgarh offers an extraordinary setting for an unforgettable celebration. Imagine traditional ceremonies surrounded by magnificent fort architecture, rich textiles, flowers, traditional cuisine and the dramatic landscape of the Aravallis.</p>
-        <div class="w-city-venues">
-          <h4>Featured Venues</h4>
-          <ul>
-            <li>Devi Palace Resort</li><li>The Aodhi</li><li>Dera Kumbhalgarh</li>
-            <li>Kumbhalgarh Forest Retreat</li><li>Kumbhalgarh Safari Camp</li><li>The Haveli Resort</li>
-            <li>The Kumbha Bagh</li><li>The Wild Retreat</li><li>Tiger Valley Resort</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div id="udaipur" class="w-city-row">
-      <div class="w-city-img gs-reveal"><img src="images/website_assests/wedding/udaipur.jpg" alt="Udaipur"></div>
-      <div class="w-city-info gs-reveal">
-        <h2 class="w-city-title">UDAIPUR</h2>
-        <h3 class="w-city-sub">The City of Lakes — Romance in Every Frame</h3>
-        <p class="w-city-desc">Few destinations create a more naturally romantic wedding backdrop than Udaipur. With shimmering lakes, magnificent palaces and the Aravallis surrounding the city, Udaipur offers an extraordinary combination of heritage, luxury and romance.</p>
-        <div class="w-city-venues">
-          <h4>Featured Venues</h4>
-          <ul>
-            <li>Taj Lake Palace</li><li>The Oberoi Udaivilas</li><li>The Leela Palace</li>
-            <li>The Lalit Laxmi Vilas Palace</li><li>Trident Udaipur</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div id="delhi" class="w-city-row">
-      <div class="w-city-img gs-reveal"><img src="images/website_assests/wedding/download.jpg" alt="Delhi"></div>
-      <div class="w-city-info gs-reveal">
-        <h2 class="w-city-title">DELHI</h2>
-        <h3 class="w-city-sub">Where Heritage Meets Contemporary Luxury</h3>
-        <p class="w-city-desc">India's capital brings together exceptional connectivity, luxury hospitality, heritage architecture and modern event infrastructure. Elegant hotels, historic properties and vintage havelis create distinctive wedding settings, while Delhi's diverse culinary scene provides an exceptional experience for guests.</p>
-        <div class="w-city-venues">
-          <h4>Featured Venues</h4>
-          <ul>
-            <li>Palm Greens</li><li>Victorian Palace</li><li>Mantram Resort</li>
-            <li>Bharatiyam Village</li><li>Shangri-La Eros Hotel</li><li>The Uppal</li>
-            <li>Four Points by Sheraton</li><li>Grand Uniara</li><li>Crowne Plaza</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. GALLERY -->
-  <section class="w-dest-intro" style="padding-bottom:20px;">
-    <h2 class="w-section-title" style="margin-bottom:0;">MOMENTS</h2>
-  </section>
-  <section class="w-gallery">
-    <div class="w-gal-item"><img src="images/website_assests/wedding/A Haldi by the Lake _ Udaipur Destination Wedding.jpg"></div>
-    <div class="w-gal-item"><img src="images/website_assests/wedding/Amer fort pre wedding shoot in jaipur ll A perfect location for royal pre wedding shoot in jaipur.jpg"></div>
-    <div class="w-gal-item"><img src="images/website_assests/wedding/Monica and Suraj Patel, Fairmont Grand Del Mar, San Diego _ WeddinSutra.jpg"></div>
-    <div class="w-gal-item"><img src="images/website_assests/wedding/The Groomsmen Tolli _ Roka.jpg"></div>
-    <div class="w-gal-item"><img src="images/website_assests/wedding/Traditional Rajput g.jpg"></div>
-    <div class="w-gal-item"><img src="images/website_assests/wedding/Udaipur Destination Wedding Locations.jpg"></div>
-  </section>
-
-  <!-- 7. GLASS QUOTE -->
-  <section class="w-quote-sec">
-    <div class="w-quote-overlay"></div>
-    <div class="w-quote-glass gs-reveal">
-      <h2>"Your wedding deserves more than a venue. It deserves a destination."</h2>
-      <p>Let us transform your celebration into an experience your guests will remember forever.</p>
     </div>
   </section>
 
   <!-- 8. SERVICES -->
   <section class="w-services">
-    <div class="w-section-label" style="text-align:center;">Our Expertise</div>
-    <h2 class="w-section-title" style="text-align:center;">Everything You Need. Beautifully Planned.</h2>
-    
+    <div class="w-section-label">Our Expertise</div>
+    <h2 class="w-section-title">Everything You Need. Beautifully Planned.</h2>
     <div class="w-srv-grid">
       <div class="w-srv-card gs-reveal">
         <h3>Venue Selection</h3>
@@ -2107,19 +1983,6 @@ select.w-input option { background: #111; color: #fff; }
         <h3>Travel & Logistics</h3>
         <p>Manage transportation, arrivals, departures and complete destination logistics.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- 9. IMAGINE -->
-  <section class="w-imagine">
-    <h2 class="gs-reveal">Imagine Your Wedding Here</h2>
-    <p class="w-imagine-sub gs-reveal">Royal palaces. Timeless traditions. Unforgettable celebrations.</p>
-    <div class="w-imagine-links gs-reveal">
-      <a href="#jaipur">JAIPUR</a>
-      <a href="#jodhpur">JODHPUR</a>
-      <a href="#kumbhalgarh">KUMBHALGARH</a>
-      <a href="#udaipur">UDAIPUR</a>
-      <a href="#delhi">DELHI</a>
     </div>
   </section>
 
@@ -2160,8 +2023,13 @@ select.w-input option { background: #111; color: #fff; }
 </div>
 
 <script>
-// Prevent scroll on header for this specific immersive page until scrolled past hero
-document.querySelector('.site-header').style.background = 'transparent';
+// Make header transparent over this page until scrolled
+const headerEl = document.querySelector('.site-header');
+if(headerEl) {
+  headerEl.style.background = 'transparent';
+  headerEl.style.border = 'none';
+  headerEl.style.boxShadow = 'none';
+}
 
 // 1. CANVAS VIDEO SCRUBBING
 const canvas = document.getElementById("hero-canvas");
@@ -2173,17 +2041,23 @@ const frameCount = 24;
 const currentFrame = index => `images/website_assests/wedding/scrollable video frames/frame_${(index + 1).toString().padStart(3, '0')}.jpg`;
 const images = [];
 const w_video = { frame: 0 };
+let imagesLoaded = 0;
 
 for (let i = 0; i < frameCount; i++) {
   const img = new Image();
   img.src = currentFrame(i);
+  img.onload = () => {
+    imagesLoaded++;
+    if(imagesLoaded === 1) render(); // render first frame asap
+  };
   images.push(img);
 }
 
-images[0].onload = render;
 function render() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(images[w_video.frame], 0, 0, canvas.width, canvas.height);
+  if(images[w_video.frame]) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(images[w_video.frame], 0, 0, canvas.width, canvas.height);
+  }
 }
 
 gsap.registerPlugin(ScrollTrigger);
@@ -2202,66 +2076,68 @@ gsap.to(w_video, {
   onUpdate: render
 });
 
-// Hero text animations
-gsap.to(".w-hero-title", { opacity: 1, y: 0, duration: 1.5, ease: "power3.out", delay: 0.2 });
-gsap.to(".w-hero-subtitle", { opacity: 1, y: 0, duration: 1.5, ease: "power3.out", delay: 0.5 });
-gsap.to(".w-hero-cta", { opacity: 1, y: 0, duration: 1.5, ease: "power3.out", delay: 0.8 });
+// Animate frosted glass in
+gsap.to(".w-hero-glass", { opacity: 1, y: 0, duration: 1.5, ease: "power3.out", delay: 0.3 });
 
-// Fade out text on scroll
-gsap.to(".w-hero-overlay", {
-  opacity: 0,
+// Fade out glass on scroll
+gsap.to(".w-hero-glass", {
+  opacity: 0, y: -50,
   scrollTrigger: { trigger: ".w-hero", start: "top top", end: "+=50%", scrub: true }
 });
 
 // 2. CINEMATIC TEXT TRANSITION
 gsap.to(".w-trans-text", {
-  opacity: 1,
-  filter: "blur(0px)",
+  opacity: 1, filter: "blur(0px)",
   scrollTrigger: {
-    trigger: ".w-transition",
-    start: "top top",
-    end: "+=100%",
-    scrub: 1,
-    pin: true
+    trigger: ".w-transition", start: "top top", end: "+=100%", scrub: 1, pin: true
   }
 });
 
-// 3. HORIZONTAL SCROLL WHEEL
+// 3. HORIZONTAL SCROLL WHEEL (FULL SCREEN PANELS)
 const panels = gsap.utils.toArray(".w-dest-panel");
 const hTween = gsap.to(panels, {
-  id: "hScroll",
   xPercent: -100 * (panels.length - 1),
   ease: "none",
   scrollTrigger: {
     trigger: ".w-horizontal-wrapper",
     pin: ".w-horizontal-container",
     start: "top top",
-    end: "+=300%",
+    end: "+=" + (panels.length * 100) + "%", // longer scroll for smoother reading
     scrub: 1
   }
 });
 
-// Cards popping up in horizontal section
+// Animate elements inside panels based on container scroll
 panels.forEach((panel, i) => {
-  gsap.to(panel.querySelector(".w-dest-card"), {
-    opacity: 1, y: 0,
+  // BG scale and brighten effect when it comes into view
+  gsap.to(panel, {
     scrollTrigger: {
       trigger: panel,
-      containerAnimation: hTween, // Requires setting ID on horizontal tween, simpler below:
+      containerAnimation: hTween,
       start: "left center",
+      end: "right center",
+      toggleClass: "is-active"
+    }
+  });
+
+  // Card slide in
+  gsap.to(panel.querySelector(".w-dest-card"), {
+    opacity: 1, x: 0,
+    scrollTrigger: {
+      trigger: panel,
+      containerAnimation: hTween,
+      start: "left 60%", // start animating when panel is 60% in view
       toggleActions: "play none none reverse"
     }
   });
 });
 
-// 4. REVEAL ANIMATIONS
+// 4. REVEAL ANIMATIONS for services & form
 gsap.utils.toArray('.gs-reveal').forEach(function(elem) {
   gsap.fromTo(elem, { opacity: 0, y: 50 }, {
     opacity: 1, y: 0, duration: 1.2, ease: "power3.out",
     scrollTrigger: {
-      trigger: elem,
-      start: "top 85%",
-      toggleActions: "play none none reverse"
+      trigger: elem, start: "top 85%", toggleActions: "play none none reverse"
     }
   });
 });
