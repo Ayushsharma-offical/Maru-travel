@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Maru Travel - i18n Translation System
  * Supports: English (en) | Korean (ko)
  */
@@ -684,3 +684,4 @@ const TRANSLATIONS = {
     }).observe(document.body, { childList: true, subtree: true });
   }
 })();
+
