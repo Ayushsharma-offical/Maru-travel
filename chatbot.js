@@ -1,4 +1,4 @@
-/**
+﻿/**
  * =================================================================
  *  MARU TRAVEL — CONCIERGE CHATBOT WIDGET
  * =================================================================
@@ -109,7 +109,7 @@
     contact: {
       whatsappNumber: "919891587778",
       whatsappDisplay: "+91 98915 87778",
-      email: "tejinder@marutravel.in",
+      email: "info@marutravel.in",
       phoneDisplay: "+91 98915 87778",
       addressLine1: "6A, First Floor, Uttam Nagar Main Rd,",
       addressLine2: "Near Metro Pillar No. 666, New Delhi - 110059",
@@ -441,7 +441,7 @@
           {
             q: "How can I contact Maru Travel?",
             a: "You can reach us directly via WhatsApp at " +
-               "" + "+91 9891587778, or email us at tejinder@marutravel.in. " +
+               "" + "+91 9891587778, or email us at info@marutravel.in. " +
                "You can also use the WhatsApp button at the top of this " +
                "chat window."
           },
@@ -453,7 +453,7 @@
           {
             q: "How do I start planning a trip with you?",
             a: "The fastest way is to message us on WhatsApp or email " +
-               "tejinder@marutravel.in with your preferred destination, " +
+               "info@marutravel.in with your preferred destination, " +
                "travel dates, and number of travelers — our team will get " +
                "back to you with a personalized itinerary."
           },
@@ -1612,3 +1612,4 @@
   }
 
 })();
+
