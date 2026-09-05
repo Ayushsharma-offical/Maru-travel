@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="i18n.js"></script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
 /* CSS Reset and Base Styles */
 :root{
   --orange:#ec6707;
@@ -846,6 +848,8 @@ footer{background:var(--dark);color:#ccc;padding:80px 20px 20px;font-family:'Lat
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
 /* ─── FORCE MINIMIZED HEADER ALWAYS ─── */
 .site-header {
   background: rgba(250, 249, 246, 0.95) !important;
@@ -897,15 +901,16 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 .dw-hero-overlay {
   position: absolute; inset: 0; background: rgba(250, 249, 246, 0.25);
   display: flex; align-items: center; justify-content: center; padding: 20px;
+  padding-top: 100px; /* Push down to avoid header cutoff */
 }
 /* Main Glass Card */
 /* ── TRUE LIQUID GLASS CARD ── */
 .dw-glass-card {
   position: relative;
   overflow: hidden;
-  max-width: 800px;
+  max-width: 680px;
   width: 90%;
-  padding: 60px 80px;
+  padding: 45px 50px;
   text-align: center;
   border-radius: 32px;
   background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.10) 40%, rgba(255,255,255,0.25) 60%, rgba(255,255,255,0.55) 100%);
@@ -978,10 +983,20 @@ body { background: var(--w-bg); color: var(--w-text); font-family: 'Jost', sans-
 .fl-3.visible { opacity: 1; transform: translateY(0); }
 
 /* Hero Text Elements */
-.dw-eyebrow { font-size: 13px; letter-spacing: 6px; text-transform: uppercase; color: var(--w-olive); margin-bottom: 10px; font-weight: 600; }
-.dw-hero-cal { font-size: clamp(4rem, 8vw, 6.5rem); color: var(--w-gold); margin: 0; line-height: 0.8; transform: rotate(-3deg) translateY(15px); }
-.dw-hero-main { font-size: clamp(2.8rem, 6vw, 4.8rem); letter-spacing: 10px; margin: 0 0 25px 0; font-weight: 700; color: var(--w-olive-dark); }
-.dw-subtitle { font-size: clamp(1.2rem, 2vw, 1.4rem); color: #555; margin: 0 0 40px 0; font-style: italic; }
+.dw-eyebrow { font-size: 14px; letter-spacing: 7px; text-transform: uppercase; color: #4A5833; margin-bottom: 15px; font-weight: 700; text-shadow: 0 1px 2px rgba(255,255,255,0.8); }
+.dw-hero-cal { font-size: clamp(4.5rem, 8vw, 7rem); color: #D4AF37; margin: 0; line-height: 0.8; transform: rotate(-3deg) translateY(15px); text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3); }
+.dw-hero-main { 
+  font-family: 'Cinzel Decorative', serif; 
+  font-size: clamp(3rem, 6.5vw, 5.2rem); 
+  letter-spacing: 8px; 
+  margin: 0 0 25px 0; 
+  font-weight: 700; 
+  background: linear-gradient(to right, #2C3522, #5B6E41, #2C3522);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.dw-subtitle { font-size: clamp(1.3rem, 2.2vw, 1.5rem); color: #333; margin: 0 0 40px 0; font-style: italic; font-weight: 500; text-shadow: 0 1px 1px rgba(255,255,255,0.9); }
 
 /* Shimmer Button */
 .dw-btn {
