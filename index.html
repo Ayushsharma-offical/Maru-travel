@@ -1022,33 +1022,220 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
   padding-left: 28px !important;
 }
 </style>
+
 <style>
-#testimonials { padding: 100px 5%; background: linear-gradient(135deg, #182013 0%, #293621 100%); position: relative; overflow: hidden; color: #fff; }
-.testi-header { text-align: center; margin-bottom: 50px; }
-.testi-eyebrow { font-size: 14px; letter-spacing: 5px; color: #D4AF37; text-transform: uppercase; margin-bottom: 20px; }
-.testi-title { font-family: 'Cinzel Decorative', serif; font-size: 3.5rem; color: #fff; margin-bottom: 30px; text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-.customer-collage { display: flex; justify-content: center; align-items: center; }
-.customer-collage img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #D4AF37; filter: grayscale(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); margin-left: -20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
-.customer-collage img:first-child { margin-left: 0; }
-.customer-collage:hover img { filter: grayscale(0%); }
-.customer-collage img:hover { transform: scale(1.3) translateY(-10px); z-index: 10; border-color: #fff; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
-.testi-slider-wrap { position: relative; max-width: 900px; margin: 0 auto; }
-.testi-slider { display: flex; overflow: hidden; border-radius: 32px; }
-.testi-card { flex: 0 0 100%; padding: 60px 80px; box-sizing: border-box; text-align: center; position: relative; background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 40%, rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.08) 100%); backdrop-filter: blur(24px) saturate(160%) brightness(1.1); -webkit-backdrop-filter: blur(24px) saturate(160%) brightness(1.1); border-top: 1.5px solid rgba(255,255,255,0.3); border-left: 1.5px solid rgba(255,255,255,0.2); border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.02); box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 2px 0 rgba(255,255,255,0.2); display: none; animation: fadeScaleIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-.testi-card.active { display: block; }
-@keyframes fadeScaleIn { 0% { opacity: 0; transform: scale(0.95) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
-.testi-card::before { content: ''; position: absolute; top: 0; left: -50%; right: -50%; height: 1.5px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); }
-.testi-quote { font-size: 1.35rem; line-height: 1.8; font-style: italic; margin-bottom: 40px; color: rgba(255,255,255,0.95); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-.testi-author { display: flex; align-items: center; justify-content: center; gap: 20px; }
-.testi-author img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid #D4AF37; box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin-left: 0 !important; filter: none !important; }
-.testi-author-info { text-align: left; }
-.testi-author-info h4 { margin: 0 0 5px 0; font-size: 1.2rem; color: #D4AF37; font-weight: 600; }
-.testi-author-info p { margin: 0; font-size: 0.95rem; color: rgba(255,255,255,0.7); }
-.testi-nav { display: flex; justify-content: center; gap: 20px; margin-top: 40px; }
-.testi-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); width: 55px; height: 55px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(10px); font-size: 1.2rem; }
-.testi-btn:hover { background: #D4AF37; border-color: #D4AF37; color: #1a2210; transform: scale(1.1); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
-@media(max-width: 768px) { .testi-card { padding: 40px 30px; } .testi-quote { font-size: 1.1rem; } .testi-title { font-size: 2.5rem; } }
+/* ═══════════ TESTIMONIALS — BABY PINK LUXURY ═══════════ */
+#testimonials {
+  position: relative;
+  background: linear-gradient(160deg, #1a0a0f 0%, #2d0e1a 50%, #1a0a0f 100%);
+  overflow: hidden;
+}
+
+/* Mouse Trail Canvas */
+#trailCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ── Collage Wrap ── */
+.tc-collage-wrap {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.tc-collage-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: calc(80vh / 4);
+  width: 100%; height: 100%;
+  gap: 3px;
+}
+.tc-collage-grid img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.6) brightness(0.7);
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+.tc-collage-grid img:hover {
+  filter: saturate(1.2) brightness(0.9);
+  transform: scale(1.05);
+  z-index: 2;
+}
+.tc-collage-grid img:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.tc-collage-grid img:nth-child(6) { grid-column: span 2; }
+.tc-collage-grid img:nth-child(9) { grid-row: span 2; }
+.tc-collage-grid img:nth-child(14) { grid-column: span 2; grid-row: span 2; }
+
+/* Dark gradient overlay on collage */
+.tc-collage-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(26,10,15,0.2) 0%, rgba(26,10,15,0.7) 100%),
+    linear-gradient(to bottom, rgba(26,10,15,0.1) 0%, rgba(26,10,15,0.6) 70%, rgba(26,10,15,1) 100%);
+  z-index: 1;
+}
+
+/* Title overlaid on collage */
+.tc-title-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+.tc-main-title {
+  font-family: 'Alex Brush', cursive;
+  font-size: clamp(5rem, 12vw, 12rem);
+  line-height: 1;
+  margin: 0;
+  background: linear-gradient(135deg, #FF85A1 0%, #FFB6C1 30%, #fff 50%, #FFB6C1 70%, #E75480 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 30px rgba(231,84,128,0.5));
+  animation: titleGlow 4s ease-in-out infinite alternate;
+}
+@keyframes titleGlow {
+  0% { filter: drop-shadow(0 4px 30px rgba(231,84,128,0.4)); }
+  100% { filter: drop-shadow(0 4px 60px rgba(255,182,193,0.8)) drop-shadow(0 0 80px rgba(231,84,128,0.4)); }
+}
+.tc-sub-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: rgba(255, 182, 193, 0.85);
+  letter-spacing: 3px;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+/* ── Review Cards ── */
+.tc-cards-wrap {
+  padding: 80px 5% 100px;
+  position: relative;
+  z-index: 2;
+}
+.tc-cards-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.tc-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 50px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition-delay: var(--delay, 0s);
+}
+.tc-card.tc-visible { opacity: 1; transform: translateY(0); }
+.tc-card:nth-child(even) {
+  grid-template-columns: 1fr 220px;
+}
+.tc-card:nth-child(even) .tc-photo-wrap { order: 2; }
+.tc-card:nth-child(even) .tc-text { order: 1; text-align: right; }
+.tc-card:nth-child(even) .tc-author { justify-content: flex-end; }
+
+/* Heart Frame Photo */
+.tc-photo-wrap {
+  flex-shrink: 0;
+  position: relative;
+}
+.tc-heart-svg {
+  width: 200px;
+  height: 190px;
+  filter: drop-shadow(0 10px 30px rgba(231,84,128,0.4));
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+.tc-heart-svg:hover {
+  filter: drop-shadow(0 15px 40px rgba(255,105,180,0.7));
+  transform: scale(1.06) rotate(-3deg);
+}
+.tc-heart-border {
+  stroke: url(#heartGrad);
+}
+
+/* Text */
+.tc-text {
+  position: relative;
+}
+.tc-text::before {
+  content: '"';
+  font-family: 'Alex Brush', cursive;
+  font-size: 8rem;
+  line-height: 0.5;
+  color: rgba(255,182,193,0.15);
+  position: absolute;
+  top: -10px; left: -20px;
+}
+.tc-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  line-height: 1.9;
+  color: rgba(255,235,238,0.92);
+  font-style: italic;
+  margin: 0 0 25px 0;
+  position: relative;
+  z-index: 1;
+}
+.tc-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tc-author h4 {
+  margin: 0;
+  font-family: 'Jost', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFB6C1;
+  letter-spacing: 1px;
+}
+.tc-author span {
+  font-size: 0.88rem;
+  color: rgba(255,182,193,0.6);
+  font-style: italic;
+}
+.tc-author::before {
+  content: '';
+  display: inline-block;
+  width: 30px; height: 1px;
+  background: linear-gradient(90deg, #FF85A1, #FFB6C1);
+}
+
+/* Divider between cards */
+.tc-card + .tc-card {
+  border-top: 1px solid rgba(255,182,193,0.1);
+  padding-top: 60px;
+}
+
+/* SVG heart gradient */
+svg defs { display: none; }
+
+/* Responsive */
+@media(max-width: 768px) {
+  .tc-card, .tc-card:nth-child(even) { grid-template-columns: 1fr; text-align: center; }
+  .tc-card:nth-child(even) .tc-photo-wrap { order: 0; }
+  .tc-card:nth-child(even) .tc-text { order: 1; text-align: center; }
+  .tc-card:nth-child(even) .tc-author { justify-content: center; }
+  .tc-photo-wrap { display: flex; justify-content: center; }
+  .tc-collage-grid { grid-template-columns: repeat(3, 1fr); }
+  .tc-main-title { font-size: 5rem; }
+}
 </style>
+
 </head>
 <body>
 
@@ -1437,152 +1624,246 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 
 <!-- TESTIMONIALS SECTION -->
 <section id="testimonials">
-  <div class="testi-header">
-    <p class="testi-eyebrow">The Maru Experience</p>
-    <h2 class="testi-title">Happy Customers</h2>
-    <div class="customer-collage">
-      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg" alt="Customer">
-      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg" alt="Customer">
-      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg" alt="Customer">
-      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg" alt="Customer">
-      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg" alt="Customer">
-      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg" alt="Customer">
-      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg" alt="Customer">
+
+  <!-- Mouse Trail Canvas -->
+  <canvas id="trailCanvas"></canvas>
+
+  <!-- PART 1: Full-bleed Collage + Title -->
+  <div class="tc-collage-wrap">
+    <div class="tc-collage-grid">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.36.59.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.02.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.17.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.20.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.22.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.24.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.26.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.29.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.30.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (2).jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31.jpeg" alt="Happy Customer">
+<img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg" alt="Happy Customer">
+    </div>
+    <div class="tc-collage-overlay"></div>
+    <div class="tc-title-wrap">
+      <h2 class="tc-main-title">Happy Customers</h2>
+      <p class="tc-sub-title">Stories from the hearts of those who travelled with us</p>
     </div>
   </div>
 
-  <div class="testi-slider-wrap">
-    <div class="testi-slider" id="testiSlider">
-      
-      <div class="testi-card active">
-        <p class="testi-quote">"We were initially worried about the food and logistics in Rajasthan, but Maru Travel handled everything flawlessly. The heritage hotels were breathtaking, and our guide felt like family. Highly recommended."</p>
-        <div class="testi-author">
-          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg" alt="Ji-woo Kim">
-          <div class="testi-author-info">
+  <!-- PART 2: Review Cards -->
+  <div class="tc-cards-wrap">
+    <div class="tc-cards-inner">
+
+      <div class="tc-card" style="animation-delay:0.0s">
+        <div class="tc-photo-wrap">
+          <svg class="tc-heart-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="heartClip0">
+                <path d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z"/>
+              </clipPath>
+            </defs>
+            <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg" width="200" height="190" clip-path="url(#heartClip0)" preserveAspectRatio="xMidYMid slice"/>
+            <path class="tc-heart-border" d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z" fill="none" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="tc-text">
+          <p class="tc-quote">"Every moment was pure magic. The heritage palaces of Rajasthan took our breath away and Maru Travel made every detail feel effortless. Absolutely unforgettable."</p>
+          <div class="tc-author">
             <h4>Ji-woo Kim</h4>
-            <p>South Korea • Rajasthan Tour</p>
+            <span>Seoul, South Korea</span>
           </div>
         </div>
       </div>
-
-      <div class="testi-card">
-        <p class="testi-quote">"Our honeymoon in Udaipur was straight out of a movie. They surprised us with a private boat ride at sunset. Every detail was meticulously planned. We didn't have to worry about a single thing."</p>
-        <div class="testi-author">
-          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg" alt="Min-ho Choi">
-          <div class="testi-author-info">
+      <div class="tc-card" style="animation-delay:0.15s">
+        <div class="tc-photo-wrap">
+          <svg class="tc-heart-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="heartClip1">
+                <path d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z"/>
+              </clipPath>
+            </defs>
+            <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg" width="200" height="190" clip-path="url(#heartClip1)" preserveAspectRatio="xMidYMid slice"/>
+            <path class="tc-heart-border" d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z" fill="none" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="tc-text">
+          <p class="tc-quote">"Our honeymoon in Udaipur was a dream. Private sunset boat ride, lakeside palace dinner — we felt like royalty. Thank you Maru Travel for the most beautiful week of our lives."</p>
+          <div class="tc-author">
             <h4>Min-ho Choi</h4>
-            <p>South Korea • Golden Triangle</p>
+            <span>Busan, South Korea</span>
           </div>
         </div>
       </div>
-
-      <div class="testi-card">
-        <p class="testi-quote">"Traveling with my elderly parents can be challenging, but the team ensured absolute comfort. The tempo traveler was spotless, and the pacing of the tour in Jaipur and Agra was perfect."</p>
-        <div class="testi-author">
-          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg" alt="Seo-yeon Park">
-          <div class="testi-author-info">
+      <div class="tc-card" style="animation-delay:0.3s">
+        <div class="tc-photo-wrap">
+          <svg class="tc-heart-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="heartClip2">
+                <path d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z"/>
+              </clipPath>
+            </defs>
+            <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg" width="200" height="190" clip-path="url(#heartClip2)" preserveAspectRatio="xMidYMid slice"/>
+            <path class="tc-heart-border" d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z" fill="none" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="tc-text">
+          <p class="tc-quote">"Traveling with elderly parents is never easy, but the team ensured absolute comfort at every step. The pace was perfect and each hotel was stunning."</p>
+          <div class="tc-author">
             <h4>Seo-yeon Park</h4>
-            <p>South Korea • Classic India</p>
+            <span>Incheon, South Korea</span>
           </div>
         </div>
       </div>
-
-      <div class="testi-card">
-        <p class="testi-quote">"As someone who loves photography, the itinerary was incredibly well thought out. They knew exactly what time to visit the Taj Mahal and Varanasi ghats for the best light. A truly premium experience."</p>
-        <div class="testi-author">
-          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg" alt="Hyun-woo Lee">
-          <div class="testi-author-info">
+      <div class="tc-card" style="animation-delay:0.44999999999999996s">
+        <div class="tc-photo-wrap">
+          <svg class="tc-heart-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="heartClip3">
+                <path d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z"/>
+              </clipPath>
+            </defs>
+            <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg" width="200" height="190" clip-path="url(#heartClip3)" preserveAspectRatio="xMidYMid slice"/>
+            <path class="tc-heart-border" d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z" fill="none" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="tc-text">
+          <p class="tc-quote">"As a photographer, the itinerary was perfectly timed. Golden hour at the Taj Mahal, Varanasi at dawn — they knew exactly where to take us. Masterfully planned."</p>
+          <div class="tc-author">
             <h4>Hyun-woo Lee</h4>
-            <p>South Korea • Varanasi Heritage</p>
+            <span>Daegu, South Korea</span>
           </div>
         </div>
       </div>
-
-      <div class="testi-card">
-        <p class="testi-quote">"We booked the luxury train journey. The local experiences, like the authentic Rajasthani dinner, were spectacular. It felt very safe and luxurious throughout the entire week."</p>
-        <div class="testi-author">
-          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg" alt="Soo-jin Kang">
-          <div class="testi-author-info">
+      <div class="tc-card" style="animation-delay:0.6s">
+        <div class="tc-photo-wrap">
+          <svg class="tc-heart-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="heartClip4">
+                <path d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z"/>
+              </clipPath>
+            </defs>
+            <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg" width="200" height="190" clip-path="url(#heartClip4)" preserveAspectRatio="xMidYMid slice"/>
+            <path class="tc-heart-border" d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z" fill="none" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="tc-text">
+          <p class="tc-quote">"The luxury train journey was spectacular. Watching the Thar desert pass by from a royal cabin while having authentic Rajasthani cuisine — nothing compares."</p>
+          <div class="tc-author">
             <h4>Soo-jin Kang</h4>
-            <p>South Korea • Luxury Rail</p>
+            <span>Gwangju, South Korea</span>
           </div>
         </div>
       </div>
-
-      <div class="testi-card">
-        <p class="testi-quote">"The attention to detail was impressive. From airport pick-up to the final drop-off, the hospitality was warm and professional. Maru Travel truly understands high-end service."</p>
-        <div class="testi-author">
-          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg" alt="Dong-hyun Yoon">
-          <div class="testi-author-info">
+      <div class="tc-card" style="animation-delay:0.75s">
+        <div class="tc-photo-wrap">
+          <svg class="tc-heart-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="heartClip5">
+                <path d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z"/>
+              </clipPath>
+            </defs>
+            <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg" width="200" height="190" clip-path="url(#heartClip5)" preserveAspectRatio="xMidYMid slice"/>
+            <path class="tc-heart-border" d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z" fill="none" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="tc-text">
+          <p class="tc-quote">"From airport pick-up to final drop-off, the warmth and professionalism were consistent. Maru Travel truly understands what luxury service means."</p>
+          <div class="tc-author">
             <h4>Dong-hyun Yoon</h4>
-            <p>South Korea • Rajasthan Heritage</p>
+            <span>Daejeon, South Korea</span>
           </div>
         </div>
       </div>
-
-      <div class="testi-card">
-        <p class="testi-quote">"A life-changing trip. Staying at the Taj palaces was a dream, but the way our trip coordinator checked in on us daily made it feel truly personalized. I will definitely book with them again."</p>
-        <div class="testi-author">
-          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg" alt="Eun-ji Jung">
-          <div class="testi-author-info">
+      <div class="tc-card" style="animation-delay:0.8999999999999999s">
+        <div class="tc-photo-wrap">
+          <svg class="tc-heart-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="heartClip6">
+                <path d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z"/>
+              </clipPath>
+            </defs>
+            <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg" width="200" height="190" clip-path="url(#heartClip6)" preserveAspectRatio="xMidYMid slice"/>
+            <path class="tc-heart-border" d="M100,170 C100,170 10,110 10,55 C10,25 30,5 60,5 C78,5 92,15 100,28 C108,15 122,5 140,5 C170,5 190,25 190,55 C190,110 100,170 100,170 Z" fill="none" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="tc-text">
+          <p class="tc-quote">"The Taj palaces were a dream, but what made it special was our coordinator checking in on us every single day. I will definitely come back and book with them again."</p>
+          <div class="tc-author">
             <h4>Eun-ji Jung</h4>
-            <p>South Korea • Golden Triangle</p>
+            <span>Ulsan, South Korea</span>
           </div>
         </div>
       </div>
-
-    </div>
-
-    <div class="testi-nav">
-      <button class="testi-btn" id="testiPrev"><i class="fas fa-arrow-left"></i></button>
-      <button class="testi-btn" id="testiNext"><i class="fas fa-arrow-right"></i></button>
     </div>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.testi-card');
-      const btnNext = document.getElementById('testiNext');
-      const btnPrev = document.getElementById('testiPrev');
-      if(cards.length === 0) return;
-      
-      let currentIdx = 0;
-      let autoPlayInterval;
+  (function() {
+    const canvas = document.getElementById('trailCanvas');
+    const ctx = canvas.getContext('2d');
+    const section = document.getElementById('testimonials');
+    let particles = [];
+    const colors = ['#FFB6C1','#FF85A1','#FFC0CB','#FFD1DC','#E75480','#FF69B4','#C2185B','#F8BBD0'];
 
-      function showCard(idx) {
-        cards.forEach((c, i) => {
-          if(i === idx) {
-            c.classList.add('active');
-          } else {
-            c.classList.remove('active');
-          }
+    function resize() {
+      canvas.width = section.offsetWidth;
+      canvas.height = section.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    section.addEventListener('mousemove', (e) => {
+      const rect = section.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      for (let k = 0; k < 3; k++) {
+        particles.push({
+          x, y,
+          r: Math.random() * 12 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2 - 1,
+          alpha: 0.8,
+          decay: Math.random() * 0.03 + 0.015
         });
       }
-
-      function nextCard() {
-        currentIdx = (currentIdx + 1) % cards.length;
-        showCard(currentIdx);
-      }
-
-      function prevCard() {
-        currentIdx = (currentIdx - 1 + cards.length) % cards.length;
-        showCard(currentIdx);
-      }
-
-      function startAutoPlay() {
-        autoPlayInterval = setInterval(nextCard, 5000);
-      }
-
-      function resetAutoPlay() {
-        clearInterval(autoPlayInterval);
-        startAutoPlay();
-      }
-
-      if(btnNext) btnNext.addEventListener('click', () => { nextCard(); resetAutoPlay(); });
-      if(btnPrev) btnPrev.addEventListener('click', () => { prevCard(); resetAutoPlay(); });
-
-      startAutoPlay();
     });
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles = particles.filter(p => p.alpha > 0);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color + Math.round(p.alpha * 255).toString(16).padStart(2, '0');
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        p.r *= 0.97;
+        p.alpha -= p.decay;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('tc-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.tc-card').forEach(c => observer.observe(c));
+  })();
   </script>
 </section>
 
