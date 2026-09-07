@@ -1406,6 +1406,159 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
   </div>
 </section>
 
+
+
+<!-- TESTIMONIALS SECTION -->
+<section id="testimonials">
+  <div class="testi-header">
+    <p class="testi-eyebrow">The Maru Experience</p>
+    <h2 class="testi-title">Happy Customers</h2>
+    <div class="customer-collage">
+      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg" alt="Customer">
+      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg" alt="Customer">
+      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg" alt="Customer">
+      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg" alt="Customer">
+      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg" alt="Customer">
+      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg" alt="Customer">
+      <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg" alt="Customer">
+    </div>
+  </div>
+
+  <div class="testi-slider-wrap">
+    <div class="testi-slider" id="testiSlider">
+      
+      <div class="testi-card active">
+        <p class="testi-quote">"We were initially worried about the food and logistics in Rajasthan, but Maru Travel handled everything flawlessly. The heritage hotels were breathtaking, and our guide felt like family. Highly recommended."</p>
+        <div class="testi-author">
+          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg" alt="Ji-woo Kim">
+          <div class="testi-author-info">
+            <h4>Ji-woo Kim</h4>
+            <p>South Korea • Rajasthan Tour</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <p class="testi-quote">"Our honeymoon in Udaipur was straight out of a movie. They surprised us with a private boat ride at sunset. Every detail was meticulously planned. We didn't have to worry about a single thing."</p>
+        <div class="testi-author">
+          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg" alt="Min-ho Choi">
+          <div class="testi-author-info">
+            <h4>Min-ho Choi</h4>
+            <p>South Korea • Golden Triangle</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <p class="testi-quote">"Traveling with my elderly parents can be challenging, but the team ensured absolute comfort. The tempo traveler was spotless, and the pacing of the tour in Jaipur and Agra was perfect."</p>
+        <div class="testi-author">
+          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg" alt="Seo-yeon Park">
+          <div class="testi-author-info">
+            <h4>Seo-yeon Park</h4>
+            <p>South Korea • Classic India</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <p class="testi-quote">"As someone who loves photography, the itinerary was incredibly well thought out. They knew exactly what time to visit the Taj Mahal and Varanasi ghats for the best light. A truly premium experience."</p>
+        <div class="testi-author">
+          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg" alt="Hyun-woo Lee">
+          <div class="testi-author-info">
+            <h4>Hyun-woo Lee</h4>
+            <p>South Korea • Varanasi Heritage</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <p class="testi-quote">"We booked the luxury train journey. The local experiences, like the authentic Rajasthani dinner, were spectacular. It felt very safe and luxurious throughout the entire week."</p>
+        <div class="testi-author">
+          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg" alt="Soo-jin Kang">
+          <div class="testi-author-info">
+            <h4>Soo-jin Kang</h4>
+            <p>South Korea • Luxury Rail</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <p class="testi-quote">"The attention to detail was impressive. From airport pick-up to the final drop-off, the hospitality was warm and professional. Maru Travel truly understands high-end service."</p>
+        <div class="testi-author">
+          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg" alt="Dong-hyun Yoon">
+          <div class="testi-author-info">
+            <h4>Dong-hyun Yoon</h4>
+            <p>South Korea • Rajasthan Heritage</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <p class="testi-quote">"A life-changing trip. Staying at the Taj palaces was a dream, but the way our trip coordinator checked in on us daily made it feel truly personalized. I will definitely book with them again."</p>
+        <div class="testi-author">
+          <img src="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg" alt="Eun-ji Jung">
+          <div class="testi-author-info">
+            <h4>Eun-ji Jung</h4>
+            <p>South Korea • Golden Triangle</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="testi-nav">
+      <button class="testi-btn" id="testiPrev"><i class="fas fa-arrow-left"></i></button>
+      <button class="testi-btn" id="testiNext"><i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.testi-card');
+      const btnNext = document.getElementById('testiNext');
+      const btnPrev = document.getElementById('testiPrev');
+      if(cards.length === 0) return;
+      
+      let currentIdx = 0;
+      let autoPlayInterval;
+
+      function showCard(idx) {
+        cards.forEach((c, i) => {
+          if(i === idx) {
+            c.classList.add('active');
+          } else {
+            c.classList.remove('active');
+          }
+        });
+      }
+
+      function nextCard() {
+        currentIdx = (currentIdx + 1) % cards.length;
+        showCard(currentIdx);
+      }
+
+      function prevCard() {
+        currentIdx = (currentIdx - 1 + cards.length) % cards.length;
+        showCard(currentIdx);
+      }
+
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(nextCard, 5000);
+      }
+
+      function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+      }
+
+      if(btnNext) btnNext.addEventListener('click', () => { nextCard(); resetAutoPlay(); });
+      if(btnPrev) btnPrev.addEventListener('click', () => { prevCard(); resetAutoPlay(); });
+
+      startAutoPlay();
+    });
+  </script>
+</section>
+
 <!-- Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â AFFILIATIONS Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â -->
 <section id="affiliations">
   <div class="sec-title">
