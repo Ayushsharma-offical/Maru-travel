@@ -1554,6 +1554,570 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 }
 </style>
 
+<style>
+/* ═══════════════════════════════════════════════════════════
+   LIGHT-LUXURY TESTIMONIALS (BABY PINK & ROSE AMBIENT GLASS)
+   ═══════════════════════════════════════════════════════════ */
+#testimonials {
+  position: relative;
+  background: #180a13;
+  overflow: hidden;
+  color: #fff;
+  font-family: 'Jost', sans-serif;
+}
+
+/* ─── 1. B&W COLLAGE ZONE ─── */
+.tc-collage-zone {
+  position: relative;
+  height: 75vh;
+  min-height: 480px;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+#tcCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tc-ambient-glow {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.28) 0%, rgba(255, 117, 151, 0.12) 50%, transparent 75%);
+  filter: blur(55px);
+  pointer-events: none;
+}
+
+.tc-collage-title {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  padding: 30px 20px;
+}
+
+.tc-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 16px;
+  border-radius: 30px;
+  background: rgba(255, 240, 245, 0.15);
+  border: 1px solid rgba(255, 192, 203, 0.45);
+  backdrop-filter: blur(12px);
+  font-size: 10.5px;
+  letter-spacing: 3.5px;
+  font-weight: 700;
+  color: #FFC0CB;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 18px rgba(255, 133, 161, 0.25);
+}
+
+.tc-main-cal {
+  font-family: 'Alex Brush', 'Great Vibes', 'Pinyon Script', cursive;
+  font-size: clamp(4rem, 8.5vw, 8.5rem);
+  line-height: 1.05;
+  margin: 0;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFE4E8 25%, #FFB6C1 55%, #FFA6C9 80%, #FF6584 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 25px rgba(255, 105, 180, 0.5));
+  animation: tcTitlePulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes tcTitlePulse {
+  0% { filter: drop-shadow(0 4px 25px rgba(255, 105, 180, 0.45)); }
+  100% { filter: drop-shadow(0 4px 45px rgba(255, 182, 193, 0.85)) drop-shadow(0 0 65px rgba(255, 105, 180, 0.4)); }
+}
+
+.tc-main-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+  color: rgba(255, 230, 235, 0.9);
+  letter-spacing: 2.5px;
+  margin: 10px 0 0;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+.tc-scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  opacity: 0.8;
+}
+.tc-scroll-cue span {
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  color: #FFC0CB;
+  text-transform: uppercase;
+}
+.tc-mouse-icon {
+  width: 18px;
+  height: 28px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255, 192, 203, 0.6);
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.tc-mouse-wheel {
+  width: 3px;
+  height: 5px;
+  background: #FFC0CB;
+  border-radius: 2px;
+  margin-top: 5px;
+  animation: tcWheel 1.5s infinite;
+}
+@keyframes tcWheel {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(10px); opacity: 0; }
+}
+
+/* ─── 2. TESTIMONIAL SLIDER ZONE (LIGHTER LUXURY PALETTE) ─── */
+.tc-slider-section {
+  position: relative;
+  padding: 50px 4% 95px;
+  background: linear-gradient(165deg, #1c0c16 0%, #2a1221 45%, #180a13 100%);
+  overflow: hidden;
+}
+
+.tc-bg-blob-1 {
+  position: absolute;
+  top: 10%;
+  left: 2%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.18) 0%, rgba(255, 105, 180, 0.08) 50%, transparent 70%);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.tc-bg-blob-2 {
+  position: absolute;
+  bottom: 8%;
+  right: 2%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(255, 218, 225, 0.2) 0%, rgba(255, 133, 161, 0.08) 50%, transparent 70%);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.tc-showcase-container {
+  max-width: 1220px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── 3. ULTRA LIGHT FROSTED LIQUID GLASS STAGE ─── */
+.tc-glass-stage {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 228, 235, 0.05) 45%, rgba(255, 255, 255, 0.07) 100%);
+  backdrop-filter: blur(35px) saturate(180%);
+  -webkit-backdrop-filter: blur(35px) saturate(180%);
+  border: 1.5px solid rgba(255, 218, 225, 0.35);
+  border-top: 2px solid rgba(255, 255, 255, 0.65);
+  border-left: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 36px;
+  padding: 45px 55px 35px;
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(255, 182, 193, 0.12),
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    inset 0 0 25px rgba(255, 218, 225, 0.08);
+  overflow: hidden;
+}
+
+.tc-glass-edge-shine {
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), rgba(255, 192, 203, 0.95), transparent);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ─── 4. SLIDES & GRID LAYOUT ─── */
+.tc-slides-wrapper {
+  position: relative;
+  min-height: 420px;
+}
+
+.tc-slide {
+  display: none;
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.tc-slide.tc-active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* DYNAMIC BACKDROP IMAGE INSIDE THE BOX */
+.tc-slide-bg-art {
+  position: absolute;
+  inset: -60px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(45px) brightness(0.65) saturate(1.45);
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.8s ease;
+}
+
+.tc-slide-bg-tint {
+  position: absolute;
+  inset: -60px;
+  background: radial-gradient(circle at 35% 50%, rgba(255, 182, 193, 0.15) 0%, rgba(24, 10, 19, 0.6) 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tc-slide-grid {
+  display: grid;
+  grid-template-columns: 440px 1fr;
+  gap: 50px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── 5. MASSIVE HEART PHOTO (PROMINENT & EXPANDED) ─── */
+.tc-heart-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tc-heart-container {
+  position: relative;
+  width: 420px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: tcHeartFloat 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes tcHeartFloat {
+  0% { transform: translateY(0) rotate(-0.8deg); }
+  100% { transform: translateY(-9px) rotate(1.2deg); }
+}
+
+.tc-heart-glow-bg {
+  position: absolute;
+  inset: 15px;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.4) 0%, rgba(255, 117, 151, 0.15) 60%, transparent 80%);
+  filter: blur(30px);
+  z-index: 0;
+}
+
+.tc-heart-svg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 18px 40px rgba(255, 105, 180, 0.4));
+}
+
+.tc-floating-badge {
+  position: absolute;
+  bottom: 18px;
+  right: 25px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 240, 245, 0.88);
+  border: 1px solid rgba(255, 182, 193, 0.6);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1a0812;
+  box-shadow: 0 4px 16px rgba(255, 105, 180, 0.35);
+}
+.tc-badge-star {
+  color: #FF1493;
+  font-size: 14px;
+}
+
+/* ─── 6. RIGHT COLUMN: COMPACT & REFINED DETAILS ─── */
+.tc-text-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-card-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tc-stars {
+  display: flex;
+  gap: 3px;
+  color: #FFB6C1;
+  font-size: 15px;
+  text-shadow: 0 0 8px rgba(255, 182, 193, 0.7);
+}
+
+.tc-tour-tag {
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #FFE4E8;
+  background: rgba(255, 240, 245, 0.12);
+  border: 1px solid rgba(255, 192, 203, 0.35);
+  padding: 3px 12px;
+  border-radius: 16px;
+}
+
+.tc-quote-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.tc-quote-icon {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.8rem;
+  line-height: 0.3;
+  color: rgba(255, 192, 203, 0.35);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tc-quote-body {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.8;
+  color: #FFFFFF;
+  font-style: italic;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tc-author-box {
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 218, 225, 0.22);
+  padding-top: 16px;
+}
+
+.tc-author-name {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #FFB6C1;
+  letter-spacing: 0.8px;
+  margin: 0 0 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tc-verified-pill {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  background: rgba(255, 240, 245, 0.2);
+  border: 1px solid rgba(255, 192, 203, 0.5);
+  color: #FFFFFF;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.tc-author-loc {
+  font-size: 0.9rem;
+  color: rgba(255, 228, 235, 0.8);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ─── 7. STAGE FOOTER CONTROLS ─── */
+.tc-stage-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 218, 225, 0.18);
+  flex-wrap: wrap;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.tc-thumbs-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tc-thumb-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 0;
+  border: 2px solid rgba(255, 218, 225, 0.35);
+  background: #200d1a;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+.tc-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(70%) brightness(0.75);
+  transition: filter 0.35s ease;
+}
+
+.tc-thumb-btn:hover img,
+.tc-thumb-btn.tc-thumb-active img {
+  filter: grayscale(0%) brightness(1);
+}
+
+.tc-thumb-btn.tc-thumb-active {
+  border-color: #FFB6C1;
+  transform: scale(1.18);
+  box-shadow: 0 0 16px rgba(255, 182, 193, 0.8);
+}
+
+.tc-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tc-counter-pill {
+  font-size: 12.5px;
+  letter-spacing: 2.5px;
+  color: rgba(255, 228, 235, 0.8);
+  font-weight: 600;
+}
+.tc-counter-pill span:first-child {
+  color: #FFB6C1;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.tc-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 240, 245, 0.12);
+  border: 1px solid rgba(255, 218, 225, 0.4);
+  color: #FFB6C1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+.tc-nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+.tc-nav-btn:hover {
+  background: rgba(255, 182, 193, 0.4);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  transform: scale(1.1);
+  box-shadow: 0 0 18px rgba(255, 182, 193, 0.6);
+}
+
+/* ─── 8. AUTOPLAY PROGRESS BAR ─── */
+.tc-autoplay-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 218, 225, 0.15);
+  z-index: 10;
+}
+.tc-autoplay-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FFFFFF, #FFB6C1, #FF6584);
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.9);
+  transition: width 0.05s linear;
+}
+
+/* ─── 9. RESPONSIVE OPTIMIZATIONS ─── */
+@media(max-width: 1024px) {
+  .tc-slide-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  .tc-card-top-bar {
+    justify-content: center;
+  }
+  .tc-author-name {
+    justify-content: center;
+  }
+  .tc-stage-footer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .tc-heart-container {
+    width: 350px;
+    height: 320px;
+  }
+  .tc-glass-stage {
+    padding: 35px 25px 25px;
+  }
+}
+
+@media(max-width: 576px) {
+  .tc-heart-container {
+    width: 290px;
+    height: 260px;
+  }
+  .tc-main-cal {
+    font-size: 3.5rem;
+  }
+  .tc-quote-body {
+    font-size: 1rem;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1955,7 +2519,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       <p class="tc-main-sub">Real moments from travellers across the Indian subcontinent</p>
       
       <div class="tc-scroll-cue">
-        <span>Hover to reveal colors & scroll down</span>
+        <span>Hover to reveal colors • Scroll down</span>
         <div class="tc-mouse-icon">
           <div class="tc-mouse-wheel"></div>
         </div>
@@ -1963,15 +2527,15 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
     </div>
   </div>
 
-  <!-- PART 2: ULTRA LUXURY LIQUID GLASS TESTIMONIAL SLIDER -->
+  <!-- PART 2: ULTRA LUXURY LIGHT ROSE LIQUID GLASS TESTIMONIAL SLIDER -->
   <div class="tc-slider-section">
-    <!-- Ambient backlights -->
+    <!-- Ambient Rose Backlights -->
     <div class="tc-bg-blob-1"></div>
     <div class="tc-bg-blob-2"></div>
 
     <div class="tc-showcase-container">
       
-      <!-- Liquid Glass Main Stage -->
+      <!-- Liquid Glass Main Stage with Inner Glow -->
       <div class="tc-glass-stage">
         
         <!-- Specular Highlight Top Edge -->
@@ -1981,32 +2545,35 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
         <div class="tc-slides-wrapper" id="tcSlidesWrap">
           
       <div class="tc-slide tc-active" data-index="0">
+        <!-- DYNAMIC BLURRED BACKGROUND OF THIS CUSTOMER'S PHOTO -->
+        <div class="tc-slide-bg-art" style="background-image: url('images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg');"></div>
+        <div class="tc-slide-bg-tint"></div>
+
         <div class="tc-slide-grid">
-          <!-- LEFT: 100% ALIGNED SVG HEART FRAME -->
+          <!-- LEFT: MASSIVE LUXURY HEART PHOTO -->
           <div class="tc-heart-col">
             <div class="tc-heart-container">
               <div class="tc-heart-glow-bg"></div>
-              <svg class="tc-heart-svg" viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tc-heart-svg" viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <clipPath id="tcHeartClip_0">
-                    <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"/>
+                    <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"/>
                   </clipPath>
                   <linearGradient id="tcHeartGrad_0" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFD1DC"/>
-                    <stop offset="35%" stop-color="#FFA6C9"/>
-                    <stop offset="70%" stop-color="#FF6584"/>
-                    <stop offset="100%" stop-color="#F02A71"/>
+                    <stop offset="0%" stop-color="#FFF0F5"/>
+                    <stop offset="30%" stop-color="#FFB6C1"/>
+                    <stop offset="70%" stop-color="#FF7597"/>
+                    <stop offset="100%" stop-color="#FF3366"/>
                   </linearGradient>
-                  <filter id="tcGlow_0" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#FF4D80" flood-opacity="0.4"/>
+                  <filter id="tcGlow_0" x="-25%" y="-25%" width="150%" height="150%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#FF6B97" flood-opacity="0.45"/>
                   </filter>
                 </defs>
-                <!-- Cliped Image + Matching Stroke In Same Coordinate System -->
-                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg" width="360" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_0)"/>
-                <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"
-                      fill="none" stroke="url(#tcHeartGrad_0)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_0)"/>
+                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.35.52.jpeg" width="440" height="400" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_0)"/>
+                <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"
+                      fill="none" stroke="url(#tcHeartGrad_0)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_0)"/>
               </svg>
-              <!-- Floating Sparkle Badge -->
+              <!-- Floating Glass Rating Badge -->
               <div class="tc-floating-badge">
                 <span class="tc-badge-star">★</span>
                 <span>5.0</span>
@@ -2014,7 +2581,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
             </div>
           </div>
 
-          <!-- RIGHT: LUXURY TEXT CONTENT -->
+          <!-- RIGHT: COMPACT, HIGH-END ELEGANT REVIEW DETAILS -->
           <div class="tc-text-col">
             <div class="tc-card-top-bar">
               <div class="tc-stars">
@@ -2030,7 +2597,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 
             <div class="tc-author-box">
               <div class="tc-author-details">
-                <h4 class="tc-author-name">Ji-woo Kim <span class="tc-verified-pill">✓ Verified</span></h4>
+                <h4 class="tc-author-name">Ji-woo Kim <span class="tc-verified-pill">✓ Verified Traveler</span></h4>
                 <p class="tc-author-loc">🇰🇷 Seoul, South Korea</p>
               </div>
             </div>
@@ -2039,32 +2606,35 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       </div>
     
       <div class="tc-slide" data-index="1">
+        <!-- DYNAMIC BLURRED BACKGROUND OF THIS CUSTOMER'S PHOTO -->
+        <div class="tc-slide-bg-art" style="background-image: url('images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg');"></div>
+        <div class="tc-slide-bg-tint"></div>
+
         <div class="tc-slide-grid">
-          <!-- LEFT: 100% ALIGNED SVG HEART FRAME -->
+          <!-- LEFT: MASSIVE LUXURY HEART PHOTO -->
           <div class="tc-heart-col">
             <div class="tc-heart-container">
               <div class="tc-heart-glow-bg"></div>
-              <svg class="tc-heart-svg" viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tc-heart-svg" viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <clipPath id="tcHeartClip_1">
-                    <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"/>
+                    <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"/>
                   </clipPath>
                   <linearGradient id="tcHeartGrad_1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFD1DC"/>
-                    <stop offset="35%" stop-color="#FFA6C9"/>
-                    <stop offset="70%" stop-color="#FF6584"/>
-                    <stop offset="100%" stop-color="#F02A71"/>
+                    <stop offset="0%" stop-color="#FFF0F5"/>
+                    <stop offset="30%" stop-color="#FFB6C1"/>
+                    <stop offset="70%" stop-color="#FF7597"/>
+                    <stop offset="100%" stop-color="#FF3366"/>
                   </linearGradient>
-                  <filter id="tcGlow_1" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#FF4D80" flood-opacity="0.4"/>
+                  <filter id="tcGlow_1" x="-25%" y="-25%" width="150%" height="150%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#FF6B97" flood-opacity="0.45"/>
                   </filter>
                 </defs>
-                <!-- Cliped Image + Matching Stroke In Same Coordinate System -->
-                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg" width="360" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_1)"/>
-                <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"
-                      fill="none" stroke="url(#tcHeartGrad_1)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_1)"/>
+                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.01.jpeg" width="440" height="400" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_1)"/>
+                <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"
+                      fill="none" stroke="url(#tcHeartGrad_1)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_1)"/>
               </svg>
-              <!-- Floating Sparkle Badge -->
+              <!-- Floating Glass Rating Badge -->
               <div class="tc-floating-badge">
                 <span class="tc-badge-star">★</span>
                 <span>5.0</span>
@@ -2072,7 +2642,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
             </div>
           </div>
 
-          <!-- RIGHT: LUXURY TEXT CONTENT -->
+          <!-- RIGHT: COMPACT, HIGH-END ELEGANT REVIEW DETAILS -->
           <div class="tc-text-col">
             <div class="tc-card-top-bar">
               <div class="tc-stars">
@@ -2088,7 +2658,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 
             <div class="tc-author-box">
               <div class="tc-author-details">
-                <h4 class="tc-author-name">Min-ho Choi <span class="tc-verified-pill">✓ Verified</span></h4>
+                <h4 class="tc-author-name">Min-ho Choi <span class="tc-verified-pill">✓ Verified Traveler</span></h4>
                 <p class="tc-author-loc">🇰🇷 Busan, South Korea</p>
               </div>
             </div>
@@ -2097,32 +2667,35 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       </div>
     
       <div class="tc-slide" data-index="2">
+        <!-- DYNAMIC BLURRED BACKGROUND OF THIS CUSTOMER'S PHOTO -->
+        <div class="tc-slide-bg-art" style="background-image: url('images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg');"></div>
+        <div class="tc-slide-bg-tint"></div>
+
         <div class="tc-slide-grid">
-          <!-- LEFT: 100% ALIGNED SVG HEART FRAME -->
+          <!-- LEFT: MASSIVE LUXURY HEART PHOTO -->
           <div class="tc-heart-col">
             <div class="tc-heart-container">
               <div class="tc-heart-glow-bg"></div>
-              <svg class="tc-heart-svg" viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tc-heart-svg" viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <clipPath id="tcHeartClip_2">
-                    <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"/>
+                    <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"/>
                   </clipPath>
                   <linearGradient id="tcHeartGrad_2" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFD1DC"/>
-                    <stop offset="35%" stop-color="#FFA6C9"/>
-                    <stop offset="70%" stop-color="#FF6584"/>
-                    <stop offset="100%" stop-color="#F02A71"/>
+                    <stop offset="0%" stop-color="#FFF0F5"/>
+                    <stop offset="30%" stop-color="#FFB6C1"/>
+                    <stop offset="70%" stop-color="#FF7597"/>
+                    <stop offset="100%" stop-color="#FF3366"/>
                   </linearGradient>
-                  <filter id="tcGlow_2" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#FF4D80" flood-opacity="0.4"/>
+                  <filter id="tcGlow_2" x="-25%" y="-25%" width="150%" height="150%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#FF6B97" flood-opacity="0.45"/>
                   </filter>
                 </defs>
-                <!-- Cliped Image + Matching Stroke In Same Coordinate System -->
-                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg" width="360" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_2)"/>
-                <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"
-                      fill="none" stroke="url(#tcHeartGrad_2)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_2)"/>
+                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.19.jpeg" width="440" height="400" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_2)"/>
+                <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"
+                      fill="none" stroke="url(#tcHeartGrad_2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_2)"/>
               </svg>
-              <!-- Floating Sparkle Badge -->
+              <!-- Floating Glass Rating Badge -->
               <div class="tc-floating-badge">
                 <span class="tc-badge-star">★</span>
                 <span>5.0</span>
@@ -2130,7 +2703,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
             </div>
           </div>
 
-          <!-- RIGHT: LUXURY TEXT CONTENT -->
+          <!-- RIGHT: COMPACT, HIGH-END ELEGANT REVIEW DETAILS -->
           <div class="tc-text-col">
             <div class="tc-card-top-bar">
               <div class="tc-stars">
@@ -2146,7 +2719,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 
             <div class="tc-author-box">
               <div class="tc-author-details">
-                <h4 class="tc-author-name">Seo-yeon Park <span class="tc-verified-pill">✓ Verified</span></h4>
+                <h4 class="tc-author-name">Seo-yeon Park <span class="tc-verified-pill">✓ Verified Traveler</span></h4>
                 <p class="tc-author-loc">🇰🇷 Incheon, South Korea</p>
               </div>
             </div>
@@ -2155,32 +2728,35 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       </div>
     
       <div class="tc-slide" data-index="3">
+        <!-- DYNAMIC BLURRED BACKGROUND OF THIS CUSTOMER'S PHOTO -->
+        <div class="tc-slide-bg-art" style="background-image: url('images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg');"></div>
+        <div class="tc-slide-bg-tint"></div>
+
         <div class="tc-slide-grid">
-          <!-- LEFT: 100% ALIGNED SVG HEART FRAME -->
+          <!-- LEFT: MASSIVE LUXURY HEART PHOTO -->
           <div class="tc-heart-col">
             <div class="tc-heart-container">
               <div class="tc-heart-glow-bg"></div>
-              <svg class="tc-heart-svg" viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tc-heart-svg" viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <clipPath id="tcHeartClip_3">
-                    <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"/>
+                    <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"/>
                   </clipPath>
                   <linearGradient id="tcHeartGrad_3" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFD1DC"/>
-                    <stop offset="35%" stop-color="#FFA6C9"/>
-                    <stop offset="70%" stop-color="#FF6584"/>
-                    <stop offset="100%" stop-color="#F02A71"/>
+                    <stop offset="0%" stop-color="#FFF0F5"/>
+                    <stop offset="30%" stop-color="#FFB6C1"/>
+                    <stop offset="70%" stop-color="#FF7597"/>
+                    <stop offset="100%" stop-color="#FF3366"/>
                   </linearGradient>
-                  <filter id="tcGlow_3" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#FF4D80" flood-opacity="0.4"/>
+                  <filter id="tcGlow_3" x="-25%" y="-25%" width="150%" height="150%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#FF6B97" flood-opacity="0.45"/>
                   </filter>
                 </defs>
-                <!-- Cliped Image + Matching Stroke In Same Coordinate System -->
-                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg" width="360" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_3)"/>
-                <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"
-                      fill="none" stroke="url(#tcHeartGrad_3)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_3)"/>
+                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.23.jpeg" width="440" height="400" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_3)"/>
+                <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"
+                      fill="none" stroke="url(#tcHeartGrad_3)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_3)"/>
               </svg>
-              <!-- Floating Sparkle Badge -->
+              <!-- Floating Glass Rating Badge -->
               <div class="tc-floating-badge">
                 <span class="tc-badge-star">★</span>
                 <span>5.0</span>
@@ -2188,7 +2764,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
             </div>
           </div>
 
-          <!-- RIGHT: LUXURY TEXT CONTENT -->
+          <!-- RIGHT: COMPACT, HIGH-END ELEGANT REVIEW DETAILS -->
           <div class="tc-text-col">
             <div class="tc-card-top-bar">
               <div class="tc-stars">
@@ -2204,7 +2780,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 
             <div class="tc-author-box">
               <div class="tc-author-details">
-                <h4 class="tc-author-name">Hyun-woo Lee <span class="tc-verified-pill">✓ Verified</span></h4>
+                <h4 class="tc-author-name">Hyun-woo Lee <span class="tc-verified-pill">✓ Verified Traveler</span></h4>
                 <p class="tc-author-loc">🇰🇷 Daegu, South Korea</p>
               </div>
             </div>
@@ -2213,32 +2789,35 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       </div>
     
       <div class="tc-slide" data-index="4">
+        <!-- DYNAMIC BLURRED BACKGROUND OF THIS CUSTOMER'S PHOTO -->
+        <div class="tc-slide-bg-art" style="background-image: url('images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg');"></div>
+        <div class="tc-slide-bg-tint"></div>
+
         <div class="tc-slide-grid">
-          <!-- LEFT: 100% ALIGNED SVG HEART FRAME -->
+          <!-- LEFT: MASSIVE LUXURY HEART PHOTO -->
           <div class="tc-heart-col">
             <div class="tc-heart-container">
               <div class="tc-heart-glow-bg"></div>
-              <svg class="tc-heart-svg" viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tc-heart-svg" viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <clipPath id="tcHeartClip_4">
-                    <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"/>
+                    <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"/>
                   </clipPath>
                   <linearGradient id="tcHeartGrad_4" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFD1DC"/>
-                    <stop offset="35%" stop-color="#FFA6C9"/>
-                    <stop offset="70%" stop-color="#FF6584"/>
-                    <stop offset="100%" stop-color="#F02A71"/>
+                    <stop offset="0%" stop-color="#FFF0F5"/>
+                    <stop offset="30%" stop-color="#FFB6C1"/>
+                    <stop offset="70%" stop-color="#FF7597"/>
+                    <stop offset="100%" stop-color="#FF3366"/>
                   </linearGradient>
-                  <filter id="tcGlow_4" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#FF4D80" flood-opacity="0.4"/>
+                  <filter id="tcGlow_4" x="-25%" y="-25%" width="150%" height="150%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#FF6B97" flood-opacity="0.45"/>
                   </filter>
                 </defs>
-                <!-- Cliped Image + Matching Stroke In Same Coordinate System -->
-                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg" width="360" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_4)"/>
-                <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"
-                      fill="none" stroke="url(#tcHeartGrad_4)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_4)"/>
+                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.28 (1).jpeg" width="440" height="400" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_4)"/>
+                <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"
+                      fill="none" stroke="url(#tcHeartGrad_4)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_4)"/>
               </svg>
-              <!-- Floating Sparkle Badge -->
+              <!-- Floating Glass Rating Badge -->
               <div class="tc-floating-badge">
                 <span class="tc-badge-star">★</span>
                 <span>5.0</span>
@@ -2246,7 +2825,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
             </div>
           </div>
 
-          <!-- RIGHT: LUXURY TEXT CONTENT -->
+          <!-- RIGHT: COMPACT, HIGH-END ELEGANT REVIEW DETAILS -->
           <div class="tc-text-col">
             <div class="tc-card-top-bar">
               <div class="tc-stars">
@@ -2262,7 +2841,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 
             <div class="tc-author-box">
               <div class="tc-author-details">
-                <h4 class="tc-author-name">Soo-jin Kang <span class="tc-verified-pill">✓ Verified</span></h4>
+                <h4 class="tc-author-name">Soo-jin Kang <span class="tc-verified-pill">✓ Verified Traveler</span></h4>
                 <p class="tc-author-loc">🇰🇷 Gwangju, South Korea</p>
               </div>
             </div>
@@ -2271,32 +2850,35 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       </div>
     
       <div class="tc-slide" data-index="5">
+        <!-- DYNAMIC BLURRED BACKGROUND OF THIS CUSTOMER'S PHOTO -->
+        <div class="tc-slide-bg-art" style="background-image: url('images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg');"></div>
+        <div class="tc-slide-bg-tint"></div>
+
         <div class="tc-slide-grid">
-          <!-- LEFT: 100% ALIGNED SVG HEART FRAME -->
+          <!-- LEFT: MASSIVE LUXURY HEART PHOTO -->
           <div class="tc-heart-col">
             <div class="tc-heart-container">
               <div class="tc-heart-glow-bg"></div>
-              <svg class="tc-heart-svg" viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tc-heart-svg" viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <clipPath id="tcHeartClip_5">
-                    <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"/>
+                    <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"/>
                   </clipPath>
                   <linearGradient id="tcHeartGrad_5" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFD1DC"/>
-                    <stop offset="35%" stop-color="#FFA6C9"/>
-                    <stop offset="70%" stop-color="#FF6584"/>
-                    <stop offset="100%" stop-color="#F02A71"/>
+                    <stop offset="0%" stop-color="#FFF0F5"/>
+                    <stop offset="30%" stop-color="#FFB6C1"/>
+                    <stop offset="70%" stop-color="#FF7597"/>
+                    <stop offset="100%" stop-color="#FF3366"/>
                   </linearGradient>
-                  <filter id="tcGlow_5" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#FF4D80" flood-opacity="0.4"/>
+                  <filter id="tcGlow_5" x="-25%" y="-25%" width="150%" height="150%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#FF6B97" flood-opacity="0.45"/>
                   </filter>
                 </defs>
-                <!-- Cliped Image + Matching Stroke In Same Coordinate System -->
-                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg" width="360" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_5)"/>
-                <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"
-                      fill="none" stroke="url(#tcHeartGrad_5)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_5)"/>
+                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.31 (1).jpeg" width="440" height="400" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_5)"/>
+                <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"
+                      fill="none" stroke="url(#tcHeartGrad_5)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_5)"/>
               </svg>
-              <!-- Floating Sparkle Badge -->
+              <!-- Floating Glass Rating Badge -->
               <div class="tc-floating-badge">
                 <span class="tc-badge-star">★</span>
                 <span>5.0</span>
@@ -2304,7 +2886,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
             </div>
           </div>
 
-          <!-- RIGHT: LUXURY TEXT CONTENT -->
+          <!-- RIGHT: COMPACT, HIGH-END ELEGANT REVIEW DETAILS -->
           <div class="tc-text-col">
             <div class="tc-card-top-bar">
               <div class="tc-stars">
@@ -2320,7 +2902,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 
             <div class="tc-author-box">
               <div class="tc-author-details">
-                <h4 class="tc-author-name">Dong-hyun Yoon <span class="tc-verified-pill">✓ Verified</span></h4>
+                <h4 class="tc-author-name">Dong-hyun Yoon <span class="tc-verified-pill">✓ Verified Traveler</span></h4>
                 <p class="tc-author-loc">🇰🇷 Daejeon, South Korea</p>
               </div>
             </div>
@@ -2329,32 +2911,35 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
       </div>
     
       <div class="tc-slide" data-index="6">
+        <!-- DYNAMIC BLURRED BACKGROUND OF THIS CUSTOMER'S PHOTO -->
+        <div class="tc-slide-bg-art" style="background-image: url('images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg');"></div>
+        <div class="tc-slide-bg-tint"></div>
+
         <div class="tc-slide-grid">
-          <!-- LEFT: 100% ALIGNED SVG HEART FRAME -->
+          <!-- LEFT: MASSIVE LUXURY HEART PHOTO -->
           <div class="tc-heart-col">
             <div class="tc-heart-container">
               <div class="tc-heart-glow-bg"></div>
-              <svg class="tc-heart-svg" viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tc-heart-svg" viewBox="0 0 440 400" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <clipPath id="tcHeartClip_6">
-                    <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"/>
+                    <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"/>
                   </clipPath>
                   <linearGradient id="tcHeartGrad_6" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#FFD1DC"/>
-                    <stop offset="35%" stop-color="#FFA6C9"/>
-                    <stop offset="70%" stop-color="#FF6584"/>
-                    <stop offset="100%" stop-color="#F02A71"/>
+                    <stop offset="0%" stop-color="#FFF0F5"/>
+                    <stop offset="30%" stop-color="#FFB6C1"/>
+                    <stop offset="70%" stop-color="#FF7597"/>
+                    <stop offset="100%" stop-color="#FF3366"/>
                   </linearGradient>
-                  <filter id="tcGlow_6" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#FF4D80" flood-opacity="0.4"/>
+                  <filter id="tcGlow_6" x="-25%" y="-25%" width="150%" height="150%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#FF6B97" flood-opacity="0.45"/>
                   </filter>
                 </defs>
-                <!-- Cliped Image + Matching Stroke In Same Coordinate System -->
-                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg" width="360" height="330" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_6)"/>
-                <path d="M180,305 C180,305 25,195 25,98 C25,44 60,8 112,8 C144,8 168,26 180,48 C192,26 216,8 248,8 C300,8 335,44 335,98 C335,195 180,305 180,305 Z"
-                      fill="none" stroke="url(#tcHeartGrad_6)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_6)"/>
+                <image href="images/Customer feedback/WhatsApp Image 2026-09-05 at 19.37.32.jpeg" width="440" height="400" preserveAspectRatio="xMidYMid slice" clip-path="url(#tcHeartClip_6)"/>
+                <path d="M220,370 C220,370 30,235 30,120 C30,55 72,10 135,10 C175,10 205,32 220,58 C235,32 265,10 305,10 C368,10 410,55 410,120 C410,235 220,370 220,370 Z"
+                      fill="none" stroke="url(#tcHeartGrad_6)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#tcGlow_6)"/>
               </svg>
-              <!-- Floating Sparkle Badge -->
+              <!-- Floating Glass Rating Badge -->
               <div class="tc-floating-badge">
                 <span class="tc-badge-star">★</span>
                 <span>5.0</span>
@@ -2362,7 +2947,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
             </div>
           </div>
 
-          <!-- RIGHT: LUXURY TEXT CONTENT -->
+          <!-- RIGHT: COMPACT, HIGH-END ELEGANT REVIEW DETAILS -->
           <div class="tc-text-col">
             <div class="tc-card-top-bar">
               <div class="tc-stars">
@@ -2378,7 +2963,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
 
             <div class="tc-author-box">
               <div class="tc-author-details">
-                <h4 class="tc-author-name">Eun-ji Jung <span class="tc-verified-pill">✓ Verified</span></h4>
+                <h4 class="tc-author-name">Eun-ji Jung <span class="tc-verified-pill">✓ Verified Traveler</span></h4>
                 <p class="tc-author-loc">🇰🇷 Ulsan, South Korea</p>
               </div>
             </div>
@@ -2426,13 +3011,13 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
           <!-- Navigation Arrows & Auto Timer -->
           <div class="tc-controls-group">
             <button class="tc-nav-btn tc-prev-btn" id="tcPrevBtn" aria-label="Previous Review">
-              <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="tc-counter-pill">
               <span id="tcCurrentNum">01</span> / <span>07</span>
             </div>
             <button class="tc-nav-btn tc-next-btn" id="tcNextBtn" aria-label="Next Review">
-              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </div>
         </div>
@@ -2524,8 +3109,8 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
         ctx.rect(x, y, cellW, cellH);
         ctx.clip();
 
-        // High contrast dramatic B&W
-        ctx.filter = 'grayscale(100%) brightness(0.5) contrast(1.15)';
+        // Artistic B&W
+        ctx.filter = 'grayscale(100%) brightness(0.55) contrast(1.15)';
         ctx.drawImage(img, x, y, cellW, cellH);
         ctx.filter = 'none';
 
@@ -2539,8 +3124,8 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
           ctx.beginPath();
           ctx.arc(mouseX, mouseY, currentRadius, 0, Math.PI * 2);
           ctx.clip();
-          // Full color saturated
-          ctx.filter = 'brightness(0.95) saturate(1.35) contrast(1.05)';
+          // Vibrant color
+          ctx.filter = 'brightness(0.98) saturate(1.35) contrast(1.05)';
           ctx.drawImage(img, x, y, cellW, cellH);
           ctx.filter = 'none';
           ctx.restore();
@@ -2549,11 +3134,11 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
         ctx.restore();
       });
 
-      // Moody gradient overlay for text readability
+      // Soft luminous overlay
       const gradient = ctx.createLinearGradient(0, 0, 0, H);
-      gradient.addColorStop(0, 'rgba(12, 4, 8, 0.4)');
-      gradient.addColorStop(0.5, 'rgba(12, 4, 8, 0.65)');
-      gradient.addColorStop(1, 'rgba(12, 4, 8, 0.98)');
+      gradient.addColorStop(0, 'rgba(30, 12, 22, 0.35)');
+      gradient.addColorStop(0.5, 'rgba(30, 12, 22, 0.6)');
+      gradient.addColorStop(1, 'rgba(30, 12, 22, 0.95)');
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, W, H);
     }
@@ -2586,7 +3171,7 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
     let autoPlayTimer = null;
     let autoProgressInterval = null;
     let progressStartTime = 0;
-    const slideDuration = 6000; // 6 seconds
+    const slideDuration = 6000;
 
     function goToSlide(index) {
       slides[currentSlide].classList.remove('tc-active');
