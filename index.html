@@ -1022,6 +1022,33 @@ footer{background:var(--dark);color:#fff;padding:80px 0 0;font-family:'Lato',san
   padding-left: 28px !important;
 }
 </style>
+<style>
+#testimonials { padding: 100px 5%; background: linear-gradient(135deg, #182013 0%, #293621 100%); position: relative; overflow: hidden; color: #fff; }
+.testi-header { text-align: center; margin-bottom: 50px; }
+.testi-eyebrow { font-size: 14px; letter-spacing: 5px; color: #D4AF37; text-transform: uppercase; margin-bottom: 20px; }
+.testi-title { font-family: 'Cinzel Decorative', serif; font-size: 3.5rem; color: #fff; margin-bottom: 30px; text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.customer-collage { display: flex; justify-content: center; align-items: center; }
+.customer-collage img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #D4AF37; filter: grayscale(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); margin-left: -20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
+.customer-collage img:first-child { margin-left: 0; }
+.customer-collage:hover img { filter: grayscale(0%); }
+.customer-collage img:hover { transform: scale(1.3) translateY(-10px); z-index: 10; border-color: #fff; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+.testi-slider-wrap { position: relative; max-width: 900px; margin: 0 auto; }
+.testi-slider { display: flex; overflow: hidden; border-radius: 32px; }
+.testi-card { flex: 0 0 100%; padding: 60px 80px; box-sizing: border-box; text-align: center; position: relative; background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 40%, rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.08) 100%); backdrop-filter: blur(24px) saturate(160%) brightness(1.1); -webkit-backdrop-filter: blur(24px) saturate(160%) brightness(1.1); border-top: 1.5px solid rgba(255,255,255,0.3); border-left: 1.5px solid rgba(255,255,255,0.2); border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.02); box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 2px 0 rgba(255,255,255,0.2); display: none; animation: fadeScaleIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.testi-card.active { display: block; }
+@keyframes fadeScaleIn { 0% { opacity: 0; transform: scale(0.95) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+.testi-card::before { content: ''; position: absolute; top: 0; left: -50%; right: -50%; height: 1.5px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); }
+.testi-quote { font-size: 1.35rem; line-height: 1.8; font-style: italic; margin-bottom: 40px; color: rgba(255,255,255,0.95); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.testi-author { display: flex; align-items: center; justify-content: center; gap: 20px; }
+.testi-author img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid #D4AF37; box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin-left: 0 !important; filter: none !important; }
+.testi-author-info { text-align: left; }
+.testi-author-info h4 { margin: 0 0 5px 0; font-size: 1.2rem; color: #D4AF37; font-weight: 600; }
+.testi-author-info p { margin: 0; font-size: 0.95rem; color: rgba(255,255,255,0.7); }
+.testi-nav { display: flex; justify-content: center; gap: 20px; margin-top: 40px; }
+.testi-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); width: 55px; height: 55px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(10px); font-size: 1.2rem; }
+.testi-btn:hover { background: #D4AF37; border-color: #D4AF37; color: #1a2210; transform: scale(1.1); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+@media(max-width: 768px) { .testi-card { padding: 40px 30px; } .testi-quote { font-size: 1.1rem; } .testi-title { font-size: 2.5rem; } }
+</style>
 </head>
 <body>
 
